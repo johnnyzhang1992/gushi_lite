@@ -18,6 +18,9 @@ Page({
     })
   },
   onLoad: function () {
+    wx.showLoading({
+      title: '加载中',
+    });
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -56,6 +59,25 @@ Page({
           this.setData({
             poems: res.data
           });
+          wx.hideLoading();
+        }
+      }
+    })
+  },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function(){
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/getRandomPoem',
+      success: res =>{
+        if(res.data){
+          console.log('----------success------------');
+          wx.setStorageSync('user',res.data);
+          this.setData({
+            poems: res.data
+          });
+          wx.stopPullDownRefresh()
         }
       }
     })

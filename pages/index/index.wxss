@@ -19,3 +19,6 @@
 .usermotto {
   margin-top: 200px;
 }
+.page.list{
+  width: 100%;
+}

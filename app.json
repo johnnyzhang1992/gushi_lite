@@ -7,6 +7,31 @@
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "古诗文小助手",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"black",
+      "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "selectedColor": "#43ce7b",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icon/apps.png",
+        "selectedIconPath": "images/icon/apps_active.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "发现",
+        "iconPath": "images/icon/edit_light.png",
+        "selectedIconPath": "images/icon/edit_light_active.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "我",
+        "iconPath": "images/icon/people.png",
+        "selectedIconPath": "images/icon/people_active.png"
+      }
+    ]
   }
 }
