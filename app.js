@@ -39,8 +39,7 @@ App({
                 },
                 success: function (res) {
                   if(res.data){
-                    console.log('---------UserInfo----success------------');
-                    console.log(res.data);
+                    console.log('----------success------------');
                     wx.setStorageSync('user',res.data);
                   }
                 }

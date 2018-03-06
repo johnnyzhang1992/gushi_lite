@@ -8,7 +8,8 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     user: wx.getStorageSync('user'),
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    poems: null
   },
   //事件处理函数
   bindViewTap: function() {
@@ -43,6 +44,21 @@ Page({
         }
       })
     }
+  },
+  onReady: function() {
+    // Do something when page ready.
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/getRandomPoem',
+      success: res =>{
+        if(res.data){
+          console.log('----------success------------');
+          wx.setStorageSync('user',res.data);
+          this.setData({
+            poems: res.data
+          });
+        }
+      }
+    })
   },
   getUserInfo: function(e) {
     console.log(e);
