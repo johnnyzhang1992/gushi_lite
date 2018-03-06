@@ -7,6 +7,7 @@ Page({
     motto: '古诗文小助手',
     userInfo: {},
     hasUserInfo: false,
+    user: wx.getStorageSync('user'),
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
@@ -64,8 +65,10 @@ Page({
     return {
       title: '古诗文小助手',
       path: '/page/user?id=123',
+      imageUrl:'/images/poem.png',
       success: function(res) {
         // 转发成功
+        console.log('转发成功！')
       },
       fail: function(res) {
         // 转发失败

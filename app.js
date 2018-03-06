@@ -13,6 +13,12 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     });
+    // 获取用户手机信息
+    wx.getSystemInfo({
+      success: res => {
+        this.globalData.systemInfo = res;
+      }
+    });
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -29,11 +35,12 @@ App({
                   code: this.globalData.code,
                   iv: res.iv,
                   encryptedData: res.encryptedData,
+                  systemInfo:this.globalData.systemInfo
                 },
                 success: function (res) {
                   if(res.data){
                     console.log('---------UserInfo----success------------');
-                    console.log('statusaCode:' + res.statusCode);
+                    console.log(res.data);
                     wx.setStorageSync('user',res.data);
                   }
                 }
@@ -51,6 +58,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    code:null
+    code:null,
+    systemInfo:null,
+    user:null
   }
 });
