@@ -4,7 +4,7 @@
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
      <block wx:else> 
       <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> -->
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
     </block>
   </view>
     <view class="page list">
@@ -13,10 +13,12 @@
             <!--<view class="page__desc">列表</view>-->
         </view>
         <view class="page__bd">
-            <view class="weui-cells__title">随机获取5首古诗</view>
+            <!-- <view class="weui-cells__title">随机获取5首古诗</view> -->
             <view class="weui-cells weui-cells_after-title">
                 <view class="weui-cell" wx:for="{{poems}}" wx:key="unique">
-                    <view class="weui-cell__bd">{{ item.title }}</view>
+                    <view class="weui-cell__bd">
+                        <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover">{{ item.title }}</navigator>
+                    </view>
                     <view class="weui-cell__ft">{{ '['+item.dynasty+']'+item.author }}</view>
                 </view>
             </view>

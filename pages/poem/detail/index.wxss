@@ -1,0 +1,13 @@
+/* pages/poem/detail/index.wxss */
+.weui-media-box__title{
+  white-space:initial;
+}
+.poem-content{
+  padding-bottom: 10px;
+}
+.badge-list{
+  padding-top: 0;
+}
+.badge-list .weui-badge{
+  margin-right: 5px;
+}
