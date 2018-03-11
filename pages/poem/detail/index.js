@@ -18,9 +18,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      poem_id: options.id
-    });
     wx.showLoading({
       title: '页面加载中...',
       mask: true
@@ -30,13 +27,14 @@ Page({
       success: res => {
         if (res.data) {
           console.log('----------success------------');
-          console.log(res.data);
-          console.log(JSON.parse(res.data.poem.content).content);
+          // console.log(res.data);
+          // console.log(JSON.parse(res.data.poem.content).content);
           this.setData({
+            poem_id: options.id,
             poem: res.data.poem,
             detail: res.data.detail,
             poems_count: res.data.poems_count,
-            author:res.data.author,
+            // author:res.data.author,
             content:JSON.parse(res.data.poem.content),
             tags: res.data.poem.tags && res.data.poem.tags !='' ? res.data.poem.tags.split(',') : []
           });
@@ -86,18 +84,18 @@ Page({
       url: 'https://xuegushi.cn/wxxcx/poem/'+this.data.poem_id,
       success: res => {
         if (res.data) {
-          wx.hideLoading();
-          console.log('----------success------------');
-          console.log(res.data);
-          console.log(JSON.parse(res.data.poem.content).content);
+          console.log('----------refresh-success------------');
+          // console.log(res.data);
+          // console.log(JSON.parse(res.data.poem.content).content);
           this.setData({
             poem: res.data.poem,
             detail: res.data.detail,
             poems_count: res.data.poems_count,
-            author:res.data.author,
+            // author:res.data.author,
             content:JSON.parse(res.data.poem.content),
             tags: res.data.poem.tags && res.data.poem.tags !='' ? res.data.poem.tags.split(',') : []
           });
+          wx.hideLoading();
         }
       }
     })
@@ -114,6 +112,18 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    let that = this;
+    return {
+      title: that.data.poem.title,
+      path: '/pages/poem/detail/index?id='+that.data.poem.id,
+      // imageUrl:'/images/poem.png',
+      success: function(res) {
+        // 转发成功
+        console.log('转发成功！')
+      },
+      fail: function(res) {
+        // 转发失败
+      }
+    }
   }
-})
+});

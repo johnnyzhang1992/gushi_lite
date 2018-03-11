@@ -1,0 +1,17 @@
+<!--pages/poem/sentence/index.wxml-->
+<view class="section">
+  <!-- <view class="section__title">多列选择器</view> -->
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="picker">当前选择：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}</view>
+  </picker>
+</view>
+<view class="page list">
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+      <view  class="poem-item" wx:for="{{poems}}" wx:key="id">
+          <view class="poem-title">{{item.title}}</view>
+          <navigator url="/pages/poem/detail/index?id={{item.poem_id}}" hover-class="navigator-hover" class="poem-author">{{'《'+item.poem_title +'》 | '+item.author}}</navigator>
+      </view>
+    </view>
+  </view>
+</view>

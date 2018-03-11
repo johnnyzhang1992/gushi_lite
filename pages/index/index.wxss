@@ -1,24 +1,117 @@
 /**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
 .page.list{
   width: 100%;
+  background-color: inherit
+}
+.home-content{
+  padding: 0
+}
+.home-header{
+  width:100%;
+  height:120px;
+  background:url('https://xuegushi.cn/static/wx/h_bg.jpg') center center no-repeat;
+  background-size:cover;
+}
+.h-content{
+  margin:10px 10px;
+  color:#666;
+  /* border:1px solid #337ab7; */
+  padding:10px;
+}
+.h-time{
+  font-size:12px;
+  writing-mode:vertical-rl;
+  direction:rtl;
+  float:right;
+  letter-spacing:2px;
+}
+.day{
+  font-size: 30px;
+}
+.h-poem{
+  font-size: 14px;
+}
+.h-p-content{
+  font-size: 14px;
+}
+.searchbar-result{
+    margin-top: 0;
+    font-size: 14px;
+}
+.searchbar-result:before{
+    display: none;
+}
+/* .weui-cell{
+    padding: 12px 15px 12px 35px;
+} */
+.weui-search-bar{
+  border: none;
+  width: 100%;
+  background-color: #fff; 
+}
+.weui-search-bar__label,.weui-search-bar__form {
+  border-radius: 20px;
+}
+.weui-search-bar__text{
+  letter-spacing:2px;
+  font-size: 12px;
+}
+.nav-list{
+  /* background: #ededed; */
+  width: 100%;
+}
+.nav-list .weui-flex__item{
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  padding:8px 10px;
+  color: #666;
+}
+.nav-list image{
+  width: 20px;
+  height: 20px;
+  vertical-align:middle;
+}
+.navigator-hover{
+  background-color: #fff;
+  color: #337ab7;
+}
+.weui-cells {
+  font-size: 14px;
+  color: #666;
+}
+.weui-cell {
+  padding:8px 15px;
+}
+.list weui-cell_access{
+  font-size: 12px;
+}
+.poem-item{
+  display: block;
+}
+.poem-item view{
+  width:100%;
+  display: block;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+}
+.poem-item .poem-title{
+  color: #333;
+  font-size: 14px;
+}
+.poem-item .poem-author{
+  color: #999;
+  font-size: 12px;
+  padding: 5px 0;
+}
+.poem-item .poem-content{
+  font-size: 14px;
+  color: #454545;
+}
+.section{
+  width: 100%;
+}
+.section .picker{
+  color: #337ab7;
 }

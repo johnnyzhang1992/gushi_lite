@@ -1,13 +1,26 @@
 /* pages/poem/detail/index.wxss */
 .weui-media-box__title{
   white-space:initial;
+  font-size: 14px;
+  text-align: center;
+  /* padding: 0 10px; */
 }
 .poem-content{
   padding-bottom: 10px;
 }
 .badge-list{
   padding-top: 0;
+  text-align: center;
 }
 .badge-list .weui-badge{
   margin-right: 5px;
+  margin-bottom: 5px;
+}
+.page__title{
+  font-size: 16px;
+  color: #454545;
+  text-align: center;
+}
+.page__desc{
+  text-align: center;
 }

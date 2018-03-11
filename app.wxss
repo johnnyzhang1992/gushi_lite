@@ -11,11 +11,12 @@
 @import 'style/weui.wxss';
 
 page{
-  background-color: #F8F8F8;
+  background-color: #fff; 
   font-size: 16px;
   font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
   /*border-bottom:1px solid #ddd;*/
   margin-bottom:10px;
+  color: #666;
 }
 .page__hd {
   padding: 20px;
@@ -73,4 +74,9 @@ textarea{
 }
 .white-padding {
   border-bottom: 3px solid #fff;
+}
+.divide{
+  height:5px;
+  width:100%;
+  background:#ebebeb;
 }

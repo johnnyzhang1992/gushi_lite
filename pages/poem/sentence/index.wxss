@@ -1,0 +1,50 @@
+/* pages/poem/sentence/index.wxss */
+.page.list{
+    width: 100%;
+    background-color: #ebebeb;
+}
+.home-content{
+    padding: 0
+}
+.navigator-hover{
+    background-color: #fff;
+    color: #337ab7;
+}
+.weui-cells{
+  background-color: inherit;
+  padding-top: 15px;
+}
+.poem-item{
+  display: block;
+  background-color: #fff;
+  padding:8px 10px;
+  margin:8px 10px;
+  border-radius:5px;
+  border:none;
+  position:relative;
+  -webkit-box-align:center;
+  -webkit-align-items:center;
+  align-items:center;
+}
+.poem-item view{
+    width:100%;
+    display: block;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+}
+.poem-item .poem-title{
+    color: #333;
+    font-size: 14px;
+}
+.poem-item .poem-author{
+    color: #337ab7;
+    font-size: 12px;
+    /* padding: 5px 0; */
+    text-align: right;
+    margin-top: 5px;
+}
+.poem-item .poem-content{
+    font-size: 14px;
+    color: #454545;
+}

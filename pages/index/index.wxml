@@ -1,27 +1,63 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-     <block wx:else> 
-      <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> -->
-      <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
-    </block>
-  </view>
-    <view class="page list">
-        <view class="page__hd">
-            <view class="page__title">古诗五首</view>
-            <!--<view class="page__desc">列表</view>-->
-        </view>
-        <view class="page__bd">
-            <!-- <view class="weui-cells__title">随机获取5首古诗</view> -->
-            <view class="weui-cells weui-cells_after-title">
-                <view class="weui-cell" wx:for="{{poems}}" wx:key="unique">
-                    <view class="weui-cell__bd">
-                        <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover">{{ item.title }}</navigator>
-                    </view>
-                    <view class="weui-cell__ft">{{ '['+item.dynasty+']'+item.author }}</view>
-                </view>
-            </view>
-        </view>
+<view class="container home-content">
+  <view class="home-header">
+    <view class="h-content">
+      <view class="h-time y">{{date[0]}}</view>
+      <view class="h-time m">{{date[1]}}</view>
+      <view class="h-poem">每日一诗</view>
+      <view class="day">{{date[2]}}</view>
+      <navigator url="../poem/detail/index?id={{hot.id}}" hover-class="navigator-hover"  class="h-p-content">{{hot.title}}</navigator>
     </view>
+  </view>
+  <view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索"  focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+              <icon type="clear" size="14"></icon>
+          </view>
+      </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui-icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar__text">搜索诗词/诗人</view>
+        </label>
+    </view>
+  </view>
+  <view class="weui-flex nav-list">
+      <navigator url="../poem/index/index" hover-class="navigator-hover" class="weui-flex__item">
+          <image class="" src="../../images/icon/poem.png"></image> 诗词
+      </navigator>
+      <navigator url="../poem/sentence/index" hover-class="navigator-hover" class="weui-flex__item">
+          <image class="" src="../../images/icon/sentence.png"></image> 名句
+      </navigator>
+      <navigator url="../poem/poet/index/index" hover-class="navigator-hover" class="weui-flex__item">
+          <image class="" src="../../images/icon/poet.png"></image> 诗人
+      </navigator>
+  </view>
+  <view class="divide"></view>
+  <view class="section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+              筛选：{{array[index]}}
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+              <view class="picker">{{array[index]}}</view>
+            </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="page list">
+    <view class="page__bd">
+      <!-- <view class="weui-cells__title">随机获取5首古诗</view> -->
+        <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="id">
+          <view class="poem-title">{{item.title}}</view>
+          <view class="poem-author">{{item.dynasty+' | '+item.author}}</view>
+          <view class="poem-title">{{item.content}}</view>
+        </navigator>
+    </view>
+  </view>
 </view>

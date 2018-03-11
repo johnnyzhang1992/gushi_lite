@@ -2,36 +2,42 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/poem/detail/index"
+    "pages/poem/detail/index",
+    "pages/me/index",
+    "pages/search/index",
+    "pages/poem/index/index",
+    "pages/poem/sentence/index",
+    "pages/poem/poet/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#337ab7",
     "navigationBarTitleText": "古诗文小助手",
-    "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle": "#fff",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 40
   },
   "tabBar": {
-    "selectedColor": "#43ce7b",
+    "selectedColor": "#337ab7",
     "position": "bottom",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "images/icon/apps.png",
-        "selectedIconPath": "images/icon/apps_active.png"
+        "iconPath": "images/icon/home.png",
+        "selectedIconPath": "images/icon/home_active.png"
       },
       {
         "pagePath": "pages/index/index",
         "text": "发现",
-        "iconPath": "images/icon/edit_light.png",
-        "selectedIconPath": "images/icon/edit_light_active.png"
+        "iconPath": "images/icon/find.png",
+        "selectedIconPath": "images/icon/find_active.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/me/index",
         "text": "我",
-        "iconPath": "images/icon/people.png",
-        "selectedIconPath": "images/icon/people_active.png"
+        "iconPath": "images/icon/my.png",
+        "selectedIconPath": "images/icon/my_active.png"
       }
     ]
   }

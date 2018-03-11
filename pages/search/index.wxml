@@ -1,0 +1,63 @@
+<!--pages/search/index.wxml-->
+<view class="container">
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="搜索"  focus="{{inputShowed}}" bindinput="inputTyping" />
+                <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                <icon class="weui-icon-search" type="search" size="14"></icon>
+                <view class="weui-search-bar__text">搜索</view>
+            </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="toSearch">去搜索</view>
+    </view>
+    <view class="weui-cells searchbar-result" wx:if="{{searchResult}}">
+        <view class="weui-cell" hover-class="weui-cell_active" wx:for="{{books}}" wx:key="id">
+            <view class="weui-cell__bd" bindtap="choseOne" id="{{ index}}" >
+                <view>{{item.title}} | {{ item.author[0]}} | {{item.publisher}} | {{item.pubdate}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="searchbar-result"  wx:if="{{showDetail}}">
+        <view class="page__hd">
+            <view class="weui-article__p book_cover_image">
+                <image class="weui-article__img" src="{{ book.image}}" mode="aspectFit" />
+            </view>
+            <view class="page__title">书名：{{ book.title}}</view>
+            <view class="page__title">作者：{{ book.author[0]}}</view>
+            <view class="page__desc">出版商：{{ book.publisher}}</view>
+            <view class="page__desc">出版时间：{{ book.pubdate}}</view>
+        </view>
+        <view class="page__bd">
+            <view class="weui-article">
+                <!--<view class="weui-article__h1">大标题</view>-->
+                <view class="weui-article__section">
+                    <!--<view class="weui-article__title">章标题</view>-->
+                    <view class="weui-article__section">
+                        <view class="weui-article__h3" style="border-bottom:1px solid #ddd">作者介绍</view>
+                        <view class="weui-article__p">
+                            {{ book.author_intro}}
+                        </view>
+                    </view>
+                    <view class="weui-article__section">
+                        <view class="weui-article__h3" style="border-bottom:1px solid #ddd">作品介绍</view>
+                        <view class="weui-article__p">
+                            {{ book.summary }}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="page__bd page__bd_spacing">
+            <view class="weui-cell__bd">
+                <button id="bookSave" type="primary" bindtap="saveBook" class="weui-btn">保存</button>
+            </view>
+        </view>
+    </view>
+</view>
