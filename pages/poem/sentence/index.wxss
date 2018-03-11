@@ -2,6 +2,7 @@
 .page.list{
     width: 100%;
     background-color: #ebebeb;
+    padding-top: 0;
 }
 .home-content{
     padding: 0
@@ -12,7 +13,7 @@
 }
 .weui-cells{
   background-color: inherit;
-  padding-top: 15px;
+  padding-top: 5px;
 }
 .poem-item{
   display: block;
@@ -47,4 +48,28 @@
 .poem-item .poem-content{
     font-size: 14px;
     color: #454545;
+}
+.nav-list{
+     background: #fff; 
+    width: 100%;
+}
+.nav-list .weui-flex__item{
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    padding:8px 0;
+    color: #666;
+}
+.nav-list image{
+    width: 20px;
+    height: 20px;
+    vertical-align:middle;
+}
+.nav-list .left{
+  min-width: 60px;
+  text-align: right;
+}
+.nav-list .right{
+  text-align: left;
+  color: #337ab7;
 }

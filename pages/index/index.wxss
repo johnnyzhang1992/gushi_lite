@@ -8,7 +8,7 @@
 }
 .home-header{
   width:100%;
-  height:120px;
+  min-height:120px;
   background:url('https://xuegushi.cn/static/wx/h_bg.jpg') center center no-repeat;
   background-size:cover;
 }
