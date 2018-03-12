@@ -1,2 +1,35 @@
 <!--pages/poem/index/index.wxml-->
-<text>pages/poem/index/index.wxml</text>
+<view class="container home-content">
+    <view class="weui-flex nav-list">
+        <view class="weui-flex__item weui-flex">
+            <view class="weui-flex__item left">
+                <image class="" src="../../../images/icon/theme.png"></image>  朝代 ：
+            </view>
+            <view class="weui-flex__item right">
+                <picker bindchange="bindPickerDynastyChange" value="{{d_index}}" range="{{dynasty}}">
+                    <view class="picker">{{dynasty[d_index]}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="weui-flex__item weui-flex">
+            <view class="weui-flex__item left">
+                <image class="" src="../../../images/icon/type.png"></image>  类型 ：
+            </view>
+            <view class="weui-flex__item right">
+                <picker bindchange="bindPickerTypeChange" value="{{t_index}}" range="{{types}}">
+                    <view class="picker">{{types[t_index]}}</view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="page list">
+        <view class="page__bd">
+            <!-- <view class="weui-cells__title">随机获取5首古诗</view> -->
+            <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="id">
+                <view class="poem-title">{{item.title}}</view>
+                <view class="poem-author">{{item.dynasty+' | '+item.author}}</view>
+                <view class="poem-title">{{item.content}}</view>
+            </navigator>
+        </view>
+    </view>
+</view>

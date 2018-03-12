@@ -64,11 +64,11 @@ Page({
     wx.stopPullDownRefresh()
   },
   onReachBottom: function() {
-    wx.showNavigationBarLoading();
+
     let that = this;
     // Do something when page reach bottom.
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getHomeData',
+      url: 'https://xuegushi.cn/wxxcx/getHomeData?name=' + that.data.objectArray[that.data.index],
       data: {
         page: that.data.current_page+1
       },
@@ -100,7 +100,7 @@ Page({
     return {
       title: '古诗文小助手',
       path: '/pages/index/index',
-      imageUrl:'/images/poem.png',
+      // imageUrl:'/images/poem.png',
       success: function(res) {
         // 转发成功
         console.log('转发成功！')

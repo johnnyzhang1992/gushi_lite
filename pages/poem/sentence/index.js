@@ -90,7 +90,7 @@ Page({
     let that = this;
     // Do something when page reach bottom.
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getSentenceData',
+      url: 'https://xuegushi.cn/wxxcx/getSentenceData?theme=' + that.data.themes[that.data.th_index] + '&type=' + that.data.types[that.data.ty_index],
       data: {
         page: that.data.current_page+1
       },
