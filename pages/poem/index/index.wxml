@@ -22,6 +22,7 @@
             </view>
         </view>
     </view>
+    <view class="divide"></view>
     <view class="page list">
         <view class="page__bd">
             <!-- <view class="weui-cells__title">随机获取5首古诗</view> -->
