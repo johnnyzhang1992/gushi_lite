@@ -80,3 +80,18 @@ textarea{
   width:100%;
   background:#ebebeb;
 }
+.nav-breadcrumb{
+  background-color: #fff;
+  padding: 5px 15px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.nav-breadcrumb .item:before{
+  padding: 0 7px;
+  color: #ccc;
+  content: "/\00a0";
+}
+.nav-breadcrumb .item:first-child::before{
+  content: '';
+  padding-left: 0;
+}

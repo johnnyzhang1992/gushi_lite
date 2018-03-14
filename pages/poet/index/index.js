@@ -1,5 +1,4 @@
-// pages/poem/index/index.js
-const app = getApp();
+// pages/poem/poet/index/index.js
 Page({
 
   /**
@@ -7,13 +6,11 @@ Page({
    */
   data: {
     motto: '古诗文小助手',
-    poems: null,
+    poets: null,
     current_page: 1,
     last_page: 1,
-    types:[],
     dynasty:[],
-    d_index:0,
-    t_index:0,
+    index:0,
     total: 0
   },
 
@@ -26,19 +23,18 @@ Page({
       title: '加载中',
     });
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoemData',
+      url: 'https://xuegushi.cn/wxxcx/getPoetData',
       success: res =>{
         if(res.data){
           console.log('----------success------------');
           // wx.setStorageSync('user',res.data);
           // console.log(res.data);
           this.setData({
-            poems: res.data.poems.data,
-            current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page,
-            types: res.data.types,
+            poets: res.data.poets.data,
+            current_page: res.data.poets.current_page,
+            last_page: res.data.poets.last_page,
             dynasty: res.data.dynasty,
-            total: res.data.poems.total
+            total: res.data.poets.total
           });
           wx.hideLoading();
         }
@@ -51,7 +47,7 @@ Page({
    */
   onReady: function () {
     wx.setNavigationBarTitle({
-      title: '古诗文'
+      title: '古代诗人'
     });
   },
 
@@ -90,19 +86,17 @@ Page({
     let that = this;
     wx.showNavigationBarLoading();
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoemData?dynasty='+that.data.dynasty[that.data.d_index]+'&type='+that.data.types[that.data.t_index],
+      url: 'https://xuegushi.cn/wxxcx/getPoetData?dynasty='+that.data.dynasty[that.data.index],
       data: {
         page: that.data.current_page+1
       },
       success: res =>{
         if(res.data){
           console.log('----------success------------');
-          // wx.setStorageSync('user',res.data);
-          // console.log(res.data);
           this.setData({
-            poems: that.data.poems.concat(res.data.poems.data),
-            current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page
+            poets: that.data.poets.concat(res.data.poets.data),
+            current_page: res.data.poets.current_page,
+            last_page: res.data.poets.last_page
           });
           wx.hideNavigationBarLoading()
         }
@@ -115,8 +109,8 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '古诗文',
-      path: '/pages/poem/index/index',
+      title: '古代诗人一览',
+      path: '/pages/poet/index/index',
       // imageUrl:'/images/poem.png',
       success: function(res) {
         // 转发成功
@@ -130,15 +124,14 @@ Page({
   bindPickerDynastyChange: function(e) {
     let that = this;
     this.setData({
-      d_index: e.detail.value,
-      t_index: 0
+      index: e.detail.value,
     });
     wx.setNavigationBarTitle({
       title: that.data.dynasty[e.detail.value]
     });
     wx.showNavigationBarLoading();
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoemData?dynasty='+that.data.dynasty[e.detail.value],
+      url: 'https://xuegushi.cn/wxxcx/getPoetData?dynasty='+that.data.dynasty[e.detail.value],
       data: {
         page: 1
       },
@@ -148,40 +141,10 @@ Page({
           // wx.setStorageSync('user',res.data);
           // console.log(res.data);
           that.setData({
-            poems: res.data.poems.data,
-            current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page,
-            total: res.data.poems.total
-          });
-          wx.hideNavigationBarLoading()
-        }
-      }
-    })
-  },
-  bindPickerTypeChange: function (e) {
-    let that = this;
-    this.setData({
-      t_index: e.detail.value
-    });
-    wx.setNavigationBarTitle({
-      title: that.data.dynasty[that.data.d_index] + ' | ' + that.data.types[e.detail.value]
-    });
-    wx.showNavigationBarLoading();
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoemData?dynasty='+that.data.dynasty[that.data.d_index]+'&type='+that.data.types[e.detail.value],
-      data: {
-        page: 1
-      },
-      success: res =>{
-        if(res.data){
-          console.log('----------success------------');
-          // wx.setStorageSync('user',res.data);
-          // console.log(res.data);
-          that.setData({
-            poems: res.data.poems.data,
-            current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page,
-            total: res.data.poems.total
+            poets: res.data.poets.data,
+            current_page: res.data.poets.current_page,
+            last_page: res.data.poets.last_page,
+            total: res.data.poets.total
           });
           wx.hideNavigationBarLoading()
         }

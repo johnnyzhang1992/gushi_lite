@@ -1,0 +1,33 @@
+<!--pages/poem/poet/index/index.wxml-->
+<!--pages/poem/index/index.wxml-->
+<view class="home-content">
+    <view class="weui-flex nav-list">
+        <view class="weui-flex__item weui-flex">
+            <view class="weui-flex__item left">
+                <image class="" src="../../../images/icon/theme.png"></image>  朝代 ：
+            </view>
+            <view class="weui-flex__item right">
+                <picker bindchange="bindPickerDynastyChange" value="{{index}}" range="{{dynasty}}">
+                    <view class="picker">{{dynasty[index]}}</view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="divide"></view>
+    <view class="nav-breadcrumb weui-flex">
+        <view class="item theme">{{dynasty[index]}}</view>
+        <view class="item total">共 {{total}} 条结果</view>
+    </view>
+    <view class="divide"></view>
+    <view class="page list">
+        <view class="page__bd">
+            <!-- <view class="weui-cells__title">随机获取5首古诗</view> -->
+            <navigator url="/pages/poet/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poets}}" wx:key="id">
+                <view class="poem-title">{{item.author_name}}</view>
+                <view class="poem-author">{{item.dynasty}}</view>
+                <view class="poem-title">{{item.profile}}</view>
+            </navigator>
+        </view>
+    </view>
+</view>
+

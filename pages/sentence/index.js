@@ -13,7 +13,8 @@ Page({
     types:[],
     _types:[],
     th_index:0,
-    ty_index:0
+    ty_index:0,
+    total: 0
   },
 
   /**
@@ -39,7 +40,8 @@ Page({
             last_page: res.data.poems.last_page,
             themes: res.data.themes,
             _types: res.data.types,
-            types: res.data.types[0].types
+            types: res.data.types[0].types,
+            total: res.data.poems.total
           });
           wx.hideLoading();
         }
@@ -129,10 +131,21 @@ Page({
   },
   bindPickerThemeChange: function(e) {
     let that = this;
-    this.setData({
-      th_index: e.detail.value,
-      types: that.data._types[e.detail.value].types,
-      ty_index: 0
+    if(e.detail.value>0){
+      this.setData({
+        th_index: e.detail.value,
+        types: that.data._types[e.detail.value - 1].types,
+        ty_index: 0
+      });
+    }else{
+      this.setData({
+        th_index: e.detail.value,
+        types: that.data._types[e.detail.value].types,
+        ty_index: 0
+      });
+    }
+    wx.setNavigationBarTitle({
+      title: that.data.themes[e.detail.value]
     });
     wx.showNavigationBarLoading();
     wx.request({
@@ -148,7 +161,8 @@ Page({
           that.setData({
             poems: res.data.poems.data,
             current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page
+            last_page: res.data.poems.last_page,
+            total: res.data.poems.total
           });
           wx.hideNavigationBarLoading()
         }
@@ -159,6 +173,9 @@ Page({
     let that = this;
     this.setData({
       ty_index: e.detail.value
+    });
+    wx.setNavigationBarTitle({
+      title: that.data.themes[that.data.th_index] + ' | ' + that.data.types[e.detail.value]
     });
     wx.showNavigationBarLoading();
     wx.request({
@@ -174,7 +191,8 @@ Page({
           that.setData({
             poems: res.data.poems.data,
             current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page
+            last_page: res.data.poems.last_page,
+            total: res.data.poems.total
           });
           wx.hideNavigationBarLoading()
         }

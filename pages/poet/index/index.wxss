@@ -1,4 +1,4 @@
-/* pages/poem/index/index.wxss */
+/* pages/poem/poet/index/index.wxss */
 .page.list{
     width: 100%;
     background-color: inherit;
@@ -69,5 +69,5 @@
     color: #337ab7;
 }
 .nav-breadcrumb{
-  margin-top: 0
+    margin-top: 0
 }

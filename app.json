@@ -6,8 +6,9 @@
     "pages/me/index",
     "pages/search/index",
     "pages/poem/index/index",
-    "pages/poem/sentence/index",
-    "pages/poem/poet/index/index"
+    "pages/sentence/index",
+    "pages/poet/index/index",
+    "pages/poet/detail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

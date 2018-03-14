@@ -1,5 +1,5 @@
 <!--pages/poem/index/index.wxml-->
-<view class="container home-content">
+<view class="home-content">
     <view class="weui-flex nav-list">
         <view class="weui-flex__item weui-flex">
             <view class="weui-flex__item left">
@@ -21,6 +21,12 @@
                 </picker>
             </view>
         </view>
+    </view>
+    <view class="divide"></view>
+    <view class="nav-breadcrumb weui-flex">
+      <view class="item theme">{{dynasty[d_index]}}</view>
+      <view class="item type">{{types[t_index]}}</view>
+      <view class="item total">共 {{total}} 条结果</view>
     </view>
     <view class="divide"></view>
     <view class="page list">

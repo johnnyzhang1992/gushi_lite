@@ -3,7 +3,7 @@
   <view class="weui-flex nav-list">
     <view class="weui-flex__item weui-flex">
         <view class="weui-flex__item left">
-            <image class="" src="../../../images/icon/theme.png"></image>  主题 ：
+            <image class="" src="../../images/icon/theme.png"></image>  主题 ：
         </view>
         <view class="weui-flex__item right">
             <picker bindchange="bindPickerThemeChange" value="{{th_index}}" range="{{themes}}">
@@ -13,7 +13,7 @@
     </view>
       <view class="weui-flex__item weui-flex">
           <view class="weui-flex__item left">
-              <image class="" src="../../../images/icon/type.png"></image>  类型 ：
+              <image class="" src="../../images/icon/type.png"></image>  类型 ：
           </view>
           <view class="weui-flex__item right">
               <picker bindchange="bindPickerTypeChange" value="{{ty_index}}" range="{{types}}">
@@ -21,6 +21,11 @@
               </picker>
           </view>
       </view>
+  </view>
+  <view class="nav-breadcrumb weui-flex">
+      <view class="item theme">{{themes[th_index]}}</view>
+      <view class="item type">{{types[ty_index]}}</view>
+      <view class="item total">共 {{total}} 条结果</view>
   </view>
   <view class="page__bd">
     <view class="weui-cells weui-cells_after-title">

@@ -28,10 +28,10 @@
       <navigator url="../poem/index/index" hover-class="navigator-hover" class="weui-flex__item">
           <image class="" src="../../images/icon/poem.png"></image> 诗词
       </navigator>
-      <navigator url="../poem/sentence/index" hover-class="navigator-hover" class="weui-flex__item">
+      <navigator url="../sentence/index" hover-class="navigator-hover" class="weui-flex__item">
           <image class="" src="../../images/icon/sentence.png"></image> 名句
       </navigator>
-      <navigator url="../poem/poet/index/index" hover-class="navigator-hover" class="weui-flex__item">
+      <navigator url="../poet/index/index" hover-class="navigator-hover" class="weui-flex__item">
           <image class="" src="../../images/icon/poet.png"></image> 诗人
       </navigator>
   </view>
