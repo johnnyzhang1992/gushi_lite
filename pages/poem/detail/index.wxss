@@ -1,8 +1,9 @@
 /* pages/poem/detail/index.wxss */
 .weui-media-box__title{
   white-space:initial;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
+  color:#666;
   /* padding: 0 10px; */
 }
 .poem-content{
@@ -23,4 +24,21 @@
 }
 .page__desc{
   text-align: center;
+}
+.author-name{
+  display:inline-block;
+  color:#337ab7;
+}
+.title{
+  padding:5px 20px;
+  color:#333;
+  font-size:14px;
+}
+.poem-bg{
+  padding:10px 15px 0 15px;
+  font-size:13px;
+  color:#999;
+  text-align:justify;
+  display:block;
+  text-indent:30px;
 }

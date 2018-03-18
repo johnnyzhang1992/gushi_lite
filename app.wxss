@@ -17,6 +17,7 @@ page{
   /*border-bottom:1px solid #ddd;*/
   margin-bottom:10px;
   color: #666;
+  letter-spacing:.5px;
 }
 .page__hd {
   padding: 20px;
@@ -94,4 +95,17 @@ textarea{
 .nav-breadcrumb .item:first-child::before{
   content: '';
   padding-left: 0;
+}
+.share{
+  background-color:#337ab7;
+  position:fixed;
+  right:15px;
+  padding:8px;
+  border-radius:100%;
+  bottom: 30px;
+}
+.share image{
+  width:22px;
+  height:22px;
+  display:block;
 }
