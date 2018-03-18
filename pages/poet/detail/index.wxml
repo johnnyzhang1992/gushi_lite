@@ -1,5 +1,8 @@
 <!--pages/poem/poet/detail/index.wxml-->
 <view class="home-content">
+    <view class='author_avatar' wx:if="poet.avatar">
+      <image src="{{poet.avatar}}"></image>
+    </view>
     <view class='author_name'>{{poet.author_name}}</view>
     <view class="divide"></view>
     <view class='title'>简介</view>

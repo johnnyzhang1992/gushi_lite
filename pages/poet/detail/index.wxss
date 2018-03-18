@@ -80,3 +80,12 @@
   color: #999;
   text-align: justify;
 }
+.author_avatar{
+  text-align:center;
+  margin:0 auto;
+  margin-top:15px
+}
+.author_avatar image{
+  width:105px;
+  height:150px;
+}

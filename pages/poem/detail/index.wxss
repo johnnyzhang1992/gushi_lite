@@ -27,6 +27,8 @@
 }
 .author-name{
   display:inline-block;
+}
+.author-name.active{
   color:#337ab7;
 }
 .title{
