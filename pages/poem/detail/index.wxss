@@ -4,7 +4,13 @@
   font-size: 12px;
   text-align: center;
   color:#666;
+  display: block;
   /* padding: 0 10px; */
+}
+.wyw{
+  text-align: justify;
+  text-indent: 24px;
+  margin-bottom: 10px;
 }
 .poem-content{
   padding-bottom: 10px;
