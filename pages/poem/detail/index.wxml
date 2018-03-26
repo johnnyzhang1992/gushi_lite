@@ -5,7 +5,7 @@
         <view class="page__desc" wx:if='{{ poem.author_id>0}}'>{{(author.dynasty ? author.dynasty : poem.dynasty)+' | '}}<navigator url='../../poet/detail/index?id={{poem.author_id}}' class="author-name active">{{(author.author_name ? author.author_name : poem.author)}}</navigator></view>
         <view class="page__desc" wx:if='{{ poem.author_id<0}}'>{{(author.dynasty ? author.dynasty : poem.dynasty)+' | '}}<view class="author-name">{{(author.author_name ? author.author_name : poem.author)}}</view></view>
     </view>
-    <view class="page__bd">
+    <view class="page__bd page__content">
         <view class="weui-panel">
             <view class="weui-panel__bd">
                 <view class="weui-media-box weui-media-box_text">
@@ -18,8 +18,27 @@
                 </view>
             </view>
         </view>
-        <view class='title' wx:if='{{poem.background && poem.background.length>0}}'>创作背景</view>
-        <text class='poem-bg' wx:if='{{poem.background && poem.background.length>0}}'>{{poem.background}}</text>
     </view>
+    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+        <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">创作背景</view>
+        <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">翻译</view>
+        <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">注释</view>
+        <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">赏析</view>
+        <view class="tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="swichNav">其它</view>
+    </scroll-view>
+    <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab"
+            style="height:{{winHeight}}rpx">
+        <swiper-item wx:for="{{[0,1,2,3,4]}}" wx:key='*this'>
+            <scroll-view scroll-y="true" class="scoll-h tab-list-content" >
+                <block wx:for="{{tab_lists}}" wx:key="*this" wx:if="{{currentTab > 0}}">
+                    <text decode='true' class='item yi' wx:if='{{ currentTab == 2}}'>{{item}}</text>
+                    <text decode='true' class='item' wx:if='{{ currentTab != 2}}'>{{item}}</text>
+                </block>
+                <block wx:if="{{currentTab< 1 }}">
+                    <text decode="true" class="item">{{poem.background }}</text>
+                </block>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+    <button class='share' open-type="share"><image src='../../../images/icon/share.png'></image></button>
 </view>
-<button class='share' open-type="share"><image src='../../../images/icon/share.png'></image></button>
