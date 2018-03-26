@@ -46,7 +46,11 @@ Page({
     }else if (cur ==1){
       data = that.data.detail.yi.content
     }else if (cur == 2) {
-      data = that.data.detail.zhu.content
+      data = that.data.detail.zhu.content;
+      // for(let i = 0;i<data.length;i++){
+      //   let _data = data[i].toString();
+      //   data[i] = [_data.substr(0,_data.indexOf("：")),_data.substr(_data.indexOf("：")+1,_data.length)];
+      // }
     }else if (cur == 3) {
       data = that.data.detail.shangxi.content
     }else if(cur == 4){

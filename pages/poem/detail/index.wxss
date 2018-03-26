@@ -60,7 +60,7 @@
   text-indent:2em;
 }
 .page__content{
-  padding-bottom: 10px;
+  padding-bottom: 0;
 }
 .tab-h{
   height: 80rpx;
@@ -89,8 +89,8 @@
 .tab-content{margin-top: 40rpx;}
 .scoll-h{height: 100%;}
 .tab-list-content{
-  padding: 0 2%;
-  width:96%;
+  padding: 0 3%;
+  width:94%;
 }
 .tab-list-content .item{
   font-size:13px;
@@ -98,7 +98,7 @@
   text-align:justify;
   display:block;
   text-indent:2em;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 .tab-list-content .yi{
   text-indent: 0;
