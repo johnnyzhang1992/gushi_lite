@@ -7,9 +7,21 @@ Page({
     motto: '古诗文小助手',
     userInfo: {},
     hasUserInfo: false,
-    user: wx.getStorageSync('user'),
+    user_id: 0,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    poems: null
+    poems: null,
+    authors: null,
+    p_current_page:0,
+    p_last_page:0,
+    p_total:0
+  },
+  // 获取用户id
+  getUserId: function(){
+    let user = wx.getStorageSync('user');
+    let user_id = user ? user.user_id: 0;
+    this.setData({
+      user_id: user_id
+    });
   },
   //事件处理函数
   bindViewTap: function() {
@@ -18,9 +30,26 @@ Page({
     })
   },
   onLoad: function () {
-    // wx.showLoading({
-    //   title: '加载中',
-    // });
+    let that = this;
+    this.getUserId();
+    wx.showLoading({
+      title: '加载中',
+    });
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/getCollect/'+this.data.user_id+'/poem',
+      success: res => {
+        console.log(res.data);
+        if (res.data) {
+          that.setData({
+            poems: res.data.data.data,
+            p_current_page:res.data.data.current_page,
+            p_last_page:res.data.data.last_page,
+            p_total:res.data.data.total
+          })
+        }
+        wx.hideLoading();
+        }
+    });
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -57,6 +86,32 @@ Page({
   onPullDownRefresh: function(){
 
   },
+  onReachBottom: function() {
+    if(this.data.p_last_page<this.data.p_current_page){
+      return false;
+    }
+    let that = this;
+    // Do something when page reach bottom.
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/getCollect/'+this.data.user_id+'/poem',
+      data: {
+        page: that.data.p_current_page+1
+      },
+      success: res =>{
+        if(res.data){
+          console.log('----------success------------');
+          // wx.setStorageSync('user',res.data);
+          // console.log(res.data);
+          this.setData({
+            poems: that.data.poems.concat(res.data.data.data),
+            p_current_page:res.data.data.current_page,
+            p_last_page:res.data.data.last_page,
+          });
+          wx.hideNavigationBarLoading()
+        }
+      }
+    })
+  },
   getUserInfo: function(e) {
     // console.log(e);
     app.globalData.userInfo = e.detail.userInfo;
@@ -76,8 +131,8 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '古诗文小助手',
-      path: '/page/user?id=123',
+      title: '个人中心',
+      path: '/page/me/index',
       imageUrl:'/images/poem.png',
       success: function(res) {
         // 转发成功

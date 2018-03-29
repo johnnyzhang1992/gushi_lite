@@ -216,7 +216,7 @@ Page({
             collect_status: res.data.poem.collect_status
           });
           wx.hideLoading();
-          wx.stopPullDownRefresh()
+          // wx.stopPullDownRefresh()
         }
       }
     })

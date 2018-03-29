@@ -64,7 +64,10 @@ Page({
     wx.stopPullDownRefresh()
   },
   onReachBottom: function() {
-
+    if(this.data.last_page<this.data.current_page){
+      return false;
+    }
+    wx.showNavigationBarLoading();
     let that = this;
     // Do something when page reach bottom.
     wx.request({
