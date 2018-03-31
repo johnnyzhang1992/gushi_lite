@@ -12,7 +12,8 @@
     "pages/me/poem/index",
     "pages/me/author/index",
     "pages/discover/index",
-    "pages/discover/detail/index"
+    "pages/discover/detail/index",
+    "pages/me/about/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

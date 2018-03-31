@@ -1,0 +1,7 @@
+/* pages/discover/detail/index.wxss */
+page{
+    background-color: #FFFFFF;
+}
+image{
+    margin: 4px 0;
+}

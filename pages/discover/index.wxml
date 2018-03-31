@@ -1,0 +1,13 @@
+<!--pages/discover/index.wxml-->
+<view class="page list">
+    <view class="page__bd">
+         <view class="weui-cells__title">【古诗专栏】 最新文章</view>
+         <view class="weui-cells weui-cells_after-title">
+            <navigator url="/pages/discover/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{posts}}" wx:key="id">
+              <view class="poem-title">{{item.title}}</view>
+              <!-- <view class="poem-content">{{item.content}}</view> -->
+              <view class="poem-author">{{item.author_name}} | {{item.updated_at}}</view>
+            </navigator>
+         </view>
+    </view>
+</view>
