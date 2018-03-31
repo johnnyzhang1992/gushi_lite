@@ -56,6 +56,11 @@
     font-size: 14px;
     color: #454545;
 }
+.poem-item .collect{
+  color:#999;
+  font-size:12px;
+  padding-top:5px;
+}
 .weui-cells__title {
     margin-top:.77em;
     margin-bottom:1em;

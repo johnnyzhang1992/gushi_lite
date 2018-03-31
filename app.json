@@ -10,7 +10,9 @@
     "pages/poet/index/index",
     "pages/poet/detail/index",
     "pages/me/poem/index",
-    "pages/me/author/index"
+    "pages/me/author/index",
+    "pages/discover/index",
+    "pages/discover/detail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,7 +33,7 @@
         "selectedIconPath": "images/icon/home_active.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/discover/index",
         "text": "发现",
         "iconPath": "images/icon/find.png",
         "selectedIconPath": "images/icon/find_active.png"
