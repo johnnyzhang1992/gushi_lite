@@ -1,33 +1,13 @@
-/**index.wxss**/
+/* pages/me/author/index.wxss */
+/* pages/me/poem/index.wxss */
 .container{
-  padding: 20px 0 0 0;
+    padding: 10px 0 0 0;
 }
 .page__bd{
-  padding-bottom: 0
-}
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.userinfo-avatar {
-  width: 80px;
-  height: 80px;
-  margin: 20px;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
+    padding-bottom: 0
 }
 .page.list{
-  width: 100%;
+    width: 100%;
 }
 .page.list{
     width: 100%;
@@ -78,11 +58,11 @@
     color: #454545;
 }
 .weui-cells__title {
-  margin-top:.77em;
-  margin-bottom:1em;
-  padding-left:15px;
-  padding-right:15px;
-  color:#333;
-  font-size:12px;
-  text-align:center;
+    margin-top:.77em;
+    margin-bottom:1em;
+    padding-left:15px;
+    padding-right:15px;
+    color:#333;
+    font-size:12px;
+    text-align:center;
 }

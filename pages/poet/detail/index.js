@@ -9,9 +9,18 @@ Page({
     poems: null,
     total: 0,
     current_page: 1,
-    last_page: 1
+    last_page: 1,
+    collect_status: false,
+    user_id: 0
   },
-
+  // 获取用户id
+  getUserId: function () {
+    let user = wx.getStorageSync('user');
+    let user_id = user ? user.user_id : 0;
+    this.setData({
+      user_id: user_id
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -20,19 +29,21 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    this.getUserId();
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoetDetailData/'+options.id,
+      url: 'https://xuegushi.cn/wxxcx/getPoetDetailData/'+options.id+'?user_id=' + that.data.user_id,
       success: res =>{
         if(res.data){
           console.log('----------success------------');
           // wx.setStorageSync('user',res.data);
-          console.log(res.data);
+          // console.log(res.data);
           this.setData({
             poet: res.data.poet,
             poems: res.data.poems.data,
             current_page: res.data.poems.data.length>0 ? res.data.poems.current_page : 0,
             last_page: res.data.poems.data.length>0 ? res.data.poems.last_page : 0,
-            total: res.data.poems.data.length>0 ? res.data.poems.total : 0
+            total: res.data.poems.data.length>0 ? res.data.poems.total : 0,
+            collect_status: res.data.poet.collect_status
           });
           wx.setNavigationBarTitle({
             title: that.data.poet.author_name
@@ -42,7 +53,28 @@ Page({
       }
     })
   },
-
+  // 更新收藏情况
+  updateCollect: function () {
+    let that = this;
+    if (that.data.user_id < 1) {
+      https.userLogin(that.data.author.id);
+    } else {
+      wx.request({
+        url: 'https://xuegushi.cn/wxxcx/' + that.data.poet.id + '/collect/author?user_id=' + that.data.user_id,
+        success: res => {
+          if (res.data) {
+            that.setData({
+              collect_status: res.data.status
+            })
+          } else {
+            that.setData({
+              collect_status: res.data.status
+            })
+          }
+        }
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

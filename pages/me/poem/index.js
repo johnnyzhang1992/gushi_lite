@@ -1,16 +1,16 @@
-//index.js
+// pages/me/poem/index.js
 //获取应用实例
 const app = getApp();
-
 Page({
   data: {
-    motto: '古诗文小助手',
-    userInfo: null,
+    userInfo: {},
     hasUserInfo: false,
     user_id: 0,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    p_count: 0,
-    a_count: 0,
+    poems: null,
+    p_current_page:0,
+    p_last_page:0,
+    p_total:0
   },
   // 获取用户id
   getUserId: function(){
@@ -20,12 +20,6 @@ Page({
       user_id: user_id
     });
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   onLoad: function () {
     let that = this;
     this.getUserId();
@@ -33,7 +27,7 @@ Page({
       title: '加载中',
     });
     wx.setNavigationBarTitle({
-      title: '个人中心'
+      title: '诗词收藏'
     });
     if (app.globalData.userInfo) {
       this.setData({
@@ -57,43 +51,96 @@ Page({
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
-          });
-          
+          })
         }
       })
     }
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getUserInfo/'+this.data.user_id,
+      url: 'https://xuegushi.cn/wxxcx/getCollect/'+this.data.user_id+'/poem',
       success: res => {
+        // console.log(res.data);
+        wx.hideLoading();
         if (res.data) {
           that.setData({
-            p_count: res.data.p_count,
-            a_count: res.data.a_count
+            poems: res.data.data.data,
+            p_current_page:res.data.data.current_page,
+            p_last_page:res.data.data.last_page,
+            p_total:res.data.data.total
+          })
+        }else{
+          wx.showModal({
+            title: '温馨提示',
+            content: '数据加载失败，请下拉刷新重试加载。',
+            showCancel: false,
+            success: function(res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              }
+            }
           })
         }
-        wx.hideLoading();
       }
     });
   },
   onReady: function() {
     // Do something when page ready.
   },
+  onReachBottom: function() {
+    if(this.data.p_last_page<this.data.p_current_page){
+      return false;
+    }
+    let that = this;
+    // Do something when page reach bottom.
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/getCollect/'+this.data.user_id+'/poem',
+      data: {
+        page: that.data.p_current_page+1
+      },
+      success: res =>{
+        if(res.data){
+          console.log('----------success------------');
+          // wx.setStorageSync('user',res.data);
+          // console.log(res.data);
+          this.setData({
+            poems: that.data.poems.concat(res.data.data.data),
+            p_current_page:res.data.data.current_page,
+            p_last_page:res.data.data.last_page,
+          });
+          wx.hideNavigationBarLoading()
+        }
+      }
+    })
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function(){
-    wx.showNavigationBarLoading();
     let that = this;
+    wx.showNavigationBarLoading();
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getUserInfo/'+this.data.user_id,
+      url: 'https://xuegushi.cn/wxxcx/getCollect/'+this.data.user_id+'/poem',
       success: res => {
+        // console.log(res.data);
         if (res.data) {
           that.setData({
-            p_count: res.data.p_count,
-            a_count: res.data.a_count
+            poems: res.data.data.data,
+            p_current_page:res.data.data.current_page,
+            p_last_page:res.data.data.last_page,
+            p_total:res.data.data.total
           });
           wx.hideNavigationBarLoading();
           wx.stopPullDownRefresh()
+        }else{
+          wx.showModal({
+            title: '温馨提示',
+            content: '数据加载失败，请下拉刷新重试加载。',
+            showCancel: false,
+            success: function(res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              }
+            }
+          })
         }
       }
     });
@@ -106,11 +153,6 @@ Page({
       hasUserInfo: true
     })
   },
-  getPhoneNumber: function(e) {
-    console.log(e.detail.errMsg);
-    console.log(e.detail.iv);
-    console.log(e.detail.encryptedData)
-   },
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮

@@ -1,5 +1,6 @@
 // pages/poem/detail/index.js
 const app = getApp();
+let https = require('../../../utils/http.js');
 Page({
   /**
    * 页面的初始数据
@@ -138,20 +139,24 @@ Page({
   // 更新收藏情况
   updateCollect: function () {
     let that = this;
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/'+that.data.poem.id+'/collect/poem?user_id='+that.data.user_id,
-      success: res => {
-        if(res.data){
-          that.setData({
-            collect_status: res.data.status
-          })
-        }else{
-          that.setData({
-            collect_status: res.data.status
-          })
+    if(that.data.user_id<1){
+      https.userLogin(that.data.poem.id);
+    }else{
+      wx.request({
+        url: 'https://xuegushi.cn/wxxcx/'+that.data.poem.id+'/collect/poem?user_id='+that.data.user_id,
+        success: res => {
+          if(res.data){
+            that.setData({
+              collect_status: res.data.status
+            })
+          }else{
+            that.setData({
+              collect_status: res.data.status
+            })
+          }
         }
-      }
-    })
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -189,6 +194,8 @@ Page({
       title: '刷新中...',
       mask: true
     });
+    let that = this;
+    this.getUserId();
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/poem/'+this.data.poem.id+'?user_id='+that.data.user_id,
       success: res => {

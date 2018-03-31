@@ -16,7 +16,7 @@
     color: #666;
 }
 .weui-cell {
-    padding:8px 15px;
+    padding:4px 10px;
 }
 .list weui-cell_access{
     font-size: 12px;
@@ -34,6 +34,10 @@
 .poem-item .poem-title{
     color: #333;
     font-size: 14px;
+}
+.poem-item .poem-profile{
+    color: #666;
+    font-size: 12px;
 }
 .poem-item .poem-title:first-child{
     overflow: inherit;

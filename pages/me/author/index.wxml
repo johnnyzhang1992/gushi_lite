@@ -1,0 +1,12 @@
+<!--pages/me/author/index.wxml-->
+<view class="container">
+    <view class="page list">
+        <view class="page__bd">
+            <view class="weui-cells__title">{{a_total}} 收藏</view>
+            <navigator url="/pages/poet/detail/index?id={{item.author_id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poets}}" wx:key="id">
+                <view class="poem-title">{{item.author_name}} <view class="poem-author">{{'['+item.dynasty+']'}}</view></view>
+                <view class="poem-title">{{item.content}}</view>
+            </navigator>
+        </view>
+    </view>
+</view>

@@ -1,19 +1,30 @@
 <!--index.wxml-->
 <view class="container">
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-     <block wx:else>
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 马上登录 </button>
+     <block wx:else="">
        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
    <view class="page list">
         <view class="page__bd">
-             <view class="weui-cells__title">{{p_total}} 收藏</view> 
-            <navigator url="/pages/poem/detail/index?id={{item.poem_id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="id">
-                <view class="poem-title">{{item.title}} <view class="poem-author">{{'['+item.dynasty+'] '+item.author}}</view></view>
-                <view class="poem-title">{{item.content}}</view>
-            </navigator>
+            <view class="weui-cells weui-cells_after-title">
+                <navigator url="poem/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__hd">
+
+                    </view>
+                    <view class="weui-cell__bd">诗词收藏</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{p_count}}</view>
+                </navigator>
+                <navigator url="author/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__hd">
+
+                    </view>
+                    <view class="weui-cell__bd">诗人收藏</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{a_count}}</view>
+                </navigator>
+            </view>
         </view>
     </view>
 </view>

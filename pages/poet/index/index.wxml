@@ -24,7 +24,7 @@
             <!-- <view class="weui-cells__title">随机获取5首古诗</view> -->
             <navigator url="/pages/poet/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poets}}" wx:key="id">
                 <view class="poem-title">{{item.author_name}} | <view class="poem-author">{{item.dynasty}}</view></view>
-                <view class="poem-title">{{item.profile}}</view>
+                <view class="poem-profile">{{item.profile}}</view>
             </navigator>
         </view>
     </view>
