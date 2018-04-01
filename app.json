@@ -11,8 +11,6 @@
     "pages/poet/detail/index",
     "pages/me/poem/index",
     "pages/me/author/index",
-    "pages/discover/index",
-    "pages/discover/detail/index",
     "pages/me/about/index"
   ],
   "window": {
@@ -29,12 +27,6 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "images/icon/home.png",
-        "selectedIconPath": "images/icon/home_active.png"
-      },
-      {
-        "pagePath": "pages/discover/index",
         "text": "发现",
         "iconPath": "images/icon/find.png",
         "selectedIconPath": "images/icon/find_active.png"
