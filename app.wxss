@@ -104,8 +104,16 @@ textarea{
   border-radius:100%;
   bottom: 50px;
 }
-.share image{
+.share image,.return image{
   width:22px;
   height:22px;
   display:block;
+}
+.return{
+  background-color:#337ab7;
+  position:fixed;
+  left:15px;
+  padding:8px;
+  border-radius:100%;
+  bottom: 50px; 
 }

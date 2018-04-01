@@ -19,14 +19,15 @@
         </view>
     </view>
     <button class='share' open-type="share"><image src='../../../images/icon/share.png'></image></button>
-        <view class="collect" bindtap="updateCollect">
-        <view class="collect-img" wx:if="{{!collect_status}}">
-            <image src="../../../images/icon/collect.png"></image>
-            <view class="text">收藏</view>
-        </view>
-        <view class="collect-img" wx:if="{{collect_status}}">
-            <image src="../../../images/icon/collect_active.png"></image>
-            <view class="text">已收藏</view>
-        </view>
+    <button class='return' bindtap="return"><image src='../../../images/icon/return.png'></image></button>
+    <view class="collect" bindtap="updateCollect">
+      <view class="collect-img" wx:if="{{!collect_status}}">
+        <image src="../../../images/icon/collect.png"></image>
+          <view class="text">收藏</view>
+      </view>
+      <view class="collect-img" wx:if="{{collect_status}}">
+        <image src="../../../images/icon/collect_active.png"></image>
+          <view class="text">已收藏</view>
+      </view>
     </view>
 </view>

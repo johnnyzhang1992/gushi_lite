@@ -21,6 +21,17 @@ Page({
       user_id: user_id
     });
   },
+  return: function(){
+    if(this.data.user_id>0){
+      wx.navigateBack({
+        delta: 1
+      })
+    }else{
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -57,7 +68,7 @@ Page({
   updateCollect: function () {
     let that = this;
     if (that.data.user_id < 1) {
-      https.userLogin(that.data.author.id);
+      https.userLogin(that.data.author.id,'poet');
     } else {
       wx.request({
         url: 'https://xuegushi.cn/wxxcx/' + that.data.poet.id + '/collect/author?user_id=' + that.data.user_id,

@@ -11,7 +11,7 @@ function compare(property){
         return value2 - value1;
     }
 }
-function login(id) {
+function login(id,type) {
   let app = getApp();
   let code = null;
   let systemInfo = null;
@@ -35,7 +35,7 @@ function login(id) {
           // 未授权
         wx.openSetting({
           success: res => {
-            console.log(res);
+            // console.log(res);
             if (res.authSetting['scope.userInfo']) {
               wx.authorize({
                 scope: 'scope.userInfo',
@@ -57,9 +57,19 @@ function login(id) {
                           if(res.data){
                             console.log('----------success------------');
                             wx.setStorageSync('user',res.data);
-                            wx.redirectTo({
-                              url: '/pages/poem/detail/index?id='+id
-                            })
+                            if(type=='me'){
+                              wx.reLaunch({
+                                url: '/pages/me/index'
+                              })
+                            }else if(type =='poet'){
+                              wx.reLaunch({
+                                url: '/pages/poet/detail/index?id=' + id
+                              })
+                            }else{
+                              wx.reLaunch({
+                                url: '/pages/poem/detail/index?id=' + id
+                              })
+                            }
                           }
                         }
                       });
@@ -77,9 +87,19 @@ function login(id) {
         })
       }else{
           // 已授权
-        wx.redirectTo({
-          url: '/pages/poem/detail/index?id='+id
-        })
+        if (type == 'me') {
+          wx.reLaunch({
+            url: '/pages/me/index'
+          })
+        } else if (type == 'poet') {
+          wx.reLaunch({
+            url: '/pages/poet/detail/index?id=' + id
+          })
+        } else {
+          wx.reLaunch({
+            url: '/pages/poem/detail/index?id=' + id
+          })
+        }
       }
     }
   });

@@ -85,8 +85,11 @@
 .avatar .doyen{width: 40px;height: 40px;position: absolute;bottom: -2px;right: 20px;}
 .expertInfo{font-size: 12px;flex-grow: 2;color: #B0B0B0;line-height: 1.5em;}
 .expertInfo .name{font-size: 16px;color:#000;margin-bottom: 6px;}
-.tab-content{margin-top: 15px;}
+.tab-content{margin-top: 5px;}
 .scoll-h{height: 100%;}
+.tab-content{
+  padding-bottom: 40px;
+}
 .tab-list-content{
   padding: 0 3%;
   width:94%;

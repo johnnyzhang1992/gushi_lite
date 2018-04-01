@@ -26,6 +26,17 @@ Page({
       user_id: user_id
     });
   },
+  return: function () {
+    if (this.data.user_id > 0) {
+      wx.navigateBack({
+        delta: 1
+      })
+    } else {
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    }
+  },
   // 滚动切换标签样式
   switchTab: function (e) {
     this.setData({
