@@ -61,13 +61,9 @@ function login(id,type) {
                               wx.reLaunch({
                                 url: '/pages/me/index'
                               })
-                            }else if(type =='poet'){
-                              wx.reLaunch({
-                                url: '/pages/poet/detail/index?id=' + id
-                              })
                             }else{
                               wx.reLaunch({
-                                url: '/pages/poem/detail/index?id=' + id
+                                url: '/pages/index/index'
                               })
                             }
                           }
@@ -91,13 +87,9 @@ function login(id,type) {
           wx.reLaunch({
             url: '/pages/me/index'
           })
-        } else if (type == 'poet') {
-          wx.reLaunch({
-            url: '/pages/poet/detail/index?id=' + id
-          })
         } else {
           wx.reLaunch({
-            url: '/pages/poem/detail/index?id=' + id
+            url: '/pages/index/index'
           })
         }
       }
