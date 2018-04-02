@@ -1,5 +1,6 @@
 // pages/search/index.js
 const app = getApp();
+let WxSearch = require('../../wxSearchView/wxSearchView.js');
 let _inputVal = '';
 Page({
 
@@ -8,58 +9,49 @@ Page({
    */
   data: {
     motto: '搜索古诗文',
-    inputShowed: false,
-    inputVal: "",
-  },
-  showInput: function () {
-    this.setData({
-      inputShowed: true
-    });
-  },
-  hideInput: function () {
-    this.setData({
-      inputVal: "",
-      inputShowed: false,
-      searchResult: false
-    });
-  },
-  clearInput: function () {
-    this.setData({
-      inputVal: ""
-    });
-  },
-  inputTyping: function (e) {
-    _inputVal = e.detail.value;
-    this.setData({
-      inputVal: e.detail.value
-    });
-  },
-  toSearch: function () {
-    let that = this;
-    // 搜索数据相关内容
-    wx.request({
-      url: "https://api.douban.com/v2/book/search",
-      header: { 'Content-Type': 'json' },
-      data:{
-        q: _inputVal,
-        start:0,
-        count:10
-      },
-      success: function (re) {
-        _books = re.data.books;
-        that.setData({
-          books: re.data.books,
-          searchResult: true
-        })
-      }
-    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function () {
     wx.setNavigationBarTitle({
-      title: this.data.motto
+      title: '搜索'
+    })
+    // 2 搜索栏初始化
+    var that = this;
+    WxSearch.init(
+      that,  // 本页面一个引用
+      [], // 热点搜索推荐，[]表示不使用
+      [],// 搜索匹配，[]表示不使用
+      that.mySearchFunction, // 提供一个搜索回调函数
+      that.myGobackFunction //提供一个返回回调函数
+    );
+  
+  },
+  
+  // 3 转发函数，固定部分，直接拷贝即可
+  wxSearchInput: WxSearch.wxSearchInput,  // 输入变化时的操作
+  wxSearchKeyTap: WxSearch.wxSearchKeyTap,  // 点击提示或者关键字、历史记录时的操作
+  wxSearchDeleteAll: WxSearch.wxSearchDeleteAll, // 删除所有的历史记录
+  wxSearchConfirm: WxSearch.wxSearchConfirm,  // 搜索函数
+  wxSearchClear: WxSearch.wxSearchClear,  // 清空函数
+  
+  // 4 搜索回调函数
+  mySearchFunction: function (value) {
+    // do your job here
+    console.log(value);
+    // 示例：跳转
+    wx.redirectTo({
+      url: '../index/index?searchValue='+value
+    })
+  },
+  
+  // 5 返回回调函数
+  myGobackFunction: function () {
+    // do your job here
+    // 示例：返回
+    wx.redirectTo({
+      url: '../index/index?searchValue=返回'
     })
   },
 
