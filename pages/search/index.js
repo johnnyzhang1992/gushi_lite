@@ -9,6 +9,10 @@ Page({
    */
   data: {
     motto: '搜索古诗文',
+    poems:null,
+    poets: null,
+    sentences:null,
+    keyWord: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -40,10 +44,25 @@ Page({
   mySearchFunction: function (value) {
     // do your job here
     console.log(value);
-    // 示例：跳转
-    wx.redirectTo({
-      url: '../index/index?searchValue='+value
+    let that = this;
+    this.setData({
+      'keyWord': value
     })
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/search/'+value,
+      success: res =>{
+        console.log(res.data);
+        that.setData({
+          poems: res.data.poems,
+          poets: res.data.poets,
+          sentences: res.data.sentences
+        })
+      }
+    })
+    // 示例：跳转
+    // wx.redirectTo({
+    //   url: '../index/index?searchValue='+value
+    // })
   },
   
   // 5 返回回调函数

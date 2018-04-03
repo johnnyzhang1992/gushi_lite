@@ -14,7 +14,7 @@
      </view>
 </view>
 
-<view class="wxSearch" style="'block';height:{{wxSearchData.view.seachHeight}}px;top:{{wxSearchData.view.barHeight}}px;">
+<view class="wxSearch" style="height:{{wxSearchData.view.seachHeight}}px;top:{{wxSearchData.view.barHeight}}px;">
 
   <view class="wxSearchInner">
     <!-- 搜索提示部分 -->
@@ -46,6 +46,44 @@
           <view class="wxSearchKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
         </block>
       </view>
+    </view>
+    <view class='search-result' style='display:block'>
+        <view class='sentence item' wx-if='{{sentences.length>0}}'>
+            <view class='title'>名句</view>
+            <view class='content'>
+                <view class="weui-cells weui-cells_after-title">
+                    <navigator url="poem/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__hd"></view>
+                        <view class="weui-cell__bd">查看更多结果</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{p_count}}</view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+        <view class='poem item' wx-if='{{poems.length>0}}'>
+            <view class='title'>诗词</view>
+            <view class='content'>
+                <view class="weui-cells weui-cells_after-title">
+                    <navigator url="poem/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__hd"></view>
+                        <view class="weui-cell__bd">查看更多结果</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{p_count}}</view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+        <view class='poet item' wx:if='{{poets.length>0}}'>
+            <view class='title'>诗人</view>
+            <view class='content'>
+                <view class="weui-cells weui-cells_after-title">
+                    <navigator url="poem/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__hd"></view>
+                        <view class="weui-cell__bd">查看更多结果</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{p_count}}</view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
     </view>
   </view>
 </view>

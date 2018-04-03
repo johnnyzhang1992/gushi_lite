@@ -3,3 +3,16 @@
   padding: 10px 0;
 }
 @import "../../wxSearchView/wxSearchView.wxss";
+page{
+  background-color: #efeff4;
+}
+.item{
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+.item .title{
+  padding-left: 15px;
+}
+.search-result{
+  background-color: #efeff4;
+}
