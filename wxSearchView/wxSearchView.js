@@ -86,7 +86,10 @@ function wxSearchClear() {
   temData.tipKeys = [];
   // 更新视图
   __that.setData({
-    wxSearchData: temData
+    wxSearchData: temData,
+    poems: [],
+    poets: [],
+    sentences: []
   });
 }
 

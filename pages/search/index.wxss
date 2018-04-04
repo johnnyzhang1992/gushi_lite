@@ -7,12 +7,62 @@ page{
   background-color: #efeff4;
 }
 .item{
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   background-color: #fff;
+  padding-top: 10px;
 }
 .item .title{
-  padding-left: 15px;
+  padding-left: 10px;
+  color: #999;
+  border-bottom:1px solid #ddd;
 }
 .search-result{
   background-color: #efeff4;
+}
+.item .weui-cell__bd{
+  position: relative;
+  padding-left: 25px;
+  font-size: 14px;
+  color: #337ab7;
+}
+.item .weui-cell .weui-icon-search_in-box{
+  top: 3px;
+  left: 0;
+}
+.poem-item{
+  display: block;
+  padding: 5px 10px;
+}
+.poem-item.sentence .poem-author{
+  display: block;
+  text-align: right;
+}
+.poem-item view{
+    width:100%;
+    display: block;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+}
+.poem-item .poem-title{
+    color: #333;
+    font-size: 14px;
+}
+.poem-item .poem-profile{
+    color: #666;
+    font-size: 12px;
+}
+.poem-item .poem-title:first-child{
+    overflow: inherit;
+}
+.poem-item .poem-author{
+    color: #999;
+    font-size: 12px;
+    display: inline-block;
+    overflow: inherit;
+    /* padding: 5px 0; */
+}
+.poem-item .poem-content{
+    font-size: 14px;
+    color: #454545;
 }

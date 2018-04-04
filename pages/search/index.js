@@ -25,7 +25,7 @@ Page({
     var that = this;
     WxSearch.init(
       that,  // 本页面一个引用
-      [], // 热点搜索推荐，[]表示不使用
+      ['李白','苏轼','李煜'], // 热点搜索推荐，[]表示不使用
       [],// 搜索匹配，[]表示不使用
       that.mySearchFunction, // 提供一个搜索回调函数
       that.myGobackFunction //提供一个返回回调函数
@@ -51,7 +51,7 @@ Page({
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/search/'+value,
       success: res =>{
-        console.log(res.data);
+        // console.log(res.data);
         that.setData({
           poems: res.data.poems,
           poets: res.data.poets,
@@ -69,8 +69,8 @@ Page({
   myGobackFunction: function () {
     // do your job here
     // 示例：返回
-    wx.redirectTo({
-      url: '../index/index?searchValue=返回'
+    wx.switchTab({
+      url: '/pages/index/index'
     })
   },
 

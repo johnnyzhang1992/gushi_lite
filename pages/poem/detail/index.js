@@ -48,7 +48,7 @@ Page({
   // 点击标题切换当前页时改变样式
   swichNav: function (e) {
     let cur = e.target.dataset.current;
-    console.log(cur);
+    // console.log(cur);
     if (this.data.currentTaB == cur) { return false; }
     else {
       this.setData({
@@ -64,15 +64,15 @@ Page({
     if(cur == 0){
       data = that.data.poem.background
     }else if (cur ==1){
-      data = that.data.detail.yi.content
+      data = (that.data.detail && that.data.detail.yi) ? that.data.detail.yi.content : null
     }else if (cur == 2) {
-      data = that.data.detail.zhu.content;
+      data = (that.data.detail && that.data.detail.zhu) ? that.data.detail.zhu.content: null;
       // for(let i = 0;i<data.length;i++){
       //   let _data = data[i].toString();
       //   data[i] = [_data.substr(0,_data.indexOf("：")),_data.substr(_data.indexOf("：")+1,_data.length)];
       // }
     }else if (cur == 3) {
-      data = that.data.detail.shangxi.content
+      data = (that.data.detail && that.data.detail.shangxi) ? that.data.detail.shangxi.content:null
     }else if(cur == 4){
       data = that.data.detail.more_infos ? that.data.detail.more_infos.content : []
     }
@@ -121,16 +121,16 @@ Page({
         if (res.data) {
           console.log('----------success------------');
           // console.log(res.data);
-          if(res.data.detail.yi){
+          if (res.data.detail && res.data.detail.yi){
             res.data.detail.yi = JSON.parse(res.data.detail.yi)
           }
-          if (res.data.detail.zhu) {
+          if (res.data.detail && res.data.detail.zhu) {
             res.data.detail.zhu = JSON.parse(res.data.detail.zhu)
           }
-          if (res.data.detail.shangxi) {
+          if (res.data.detail && res.data.detail.shangxi) {
             res.data.detail.shangxi = JSON.parse(res.data.detail.shangxi)
           }
-          if (res.data.detail.more_infos) {
+          if (res.data.detail && res.data.detail.more_infos) {
             res.data.detail.more_infos = JSON.parse(res.data.detail.more_infos)
           }
           this.setData({
@@ -138,8 +138,8 @@ Page({
             detail: res.data.detail,
             poems_count: res.data.poems_count,
             content:JSON.parse(res.data.poem.content),
-            tags: res.data.poem.tags && res.data.poem.tags !='' ? res.data.poem.tags.split(',') : [],
-            tab_lists: res.data.detail.yi.content,
+            tags: (res.data.poem.tags && res.data.poem.tags !='') ? res.data.poem.tags.split(',') : [],
+            tab_lists: (res.data.detail && res.data.detail.yi) ? res.data.detail.yi.content : null,
             collect_status: res.data.poem.collect_status
           });
           wx.hideLoading();
