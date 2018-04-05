@@ -8,6 +8,7 @@
   border-top: 1px #eee solid;
   background-color: rgba(200, 200, 200, 0.1);
   z-index: 9999;
+  overflow-y: scroll;
 }
 
 /** 搜索框下面的提示区域 */

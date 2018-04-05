@@ -71,3 +71,16 @@
 .nav-breadcrumb{
   margin-top: 0
 }
+.poem-item .badge-list{
+  padding-top: 0;
+  text-align: left;
+  margin-top: 5px;
+  white-space: initial;
+  overflow: initial;
+}
+.badge-list .weui-badge{
+  margin-right: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+  width: auto;
+}

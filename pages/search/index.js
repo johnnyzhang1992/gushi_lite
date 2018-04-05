@@ -11,6 +11,7 @@ Page({
     poems:null,
     poets: null,
     sentences:null,
+    tags: null,
     keyWord: ''
   },
   /**
@@ -19,9 +20,9 @@ Page({
   onLoad: function () {
     wx.setNavigationBarTitle({
       title: '搜索'
-    })
+    });
     // 2 搜索栏初始化
-    var that = this;
+    let that = this;
     WxSearch.init(
       that,  // 本页面一个引用
       ['李白','苏轼','李煜'], // 热点搜索推荐，[]表示不使用
@@ -31,14 +32,12 @@ Page({
     );
   
   },
-  
   // 3 转发函数，固定部分，直接拷贝即可
   wxSearchInput: WxSearch.wxSearchInput,  // 输入变化时的操作
   wxSearchKeyTap: WxSearch.wxSearchKeyTap,  // 点击提示或者关键字、历史记录时的操作
   wxSearchDeleteAll: WxSearch.wxSearchDeleteAll, // 删除所有的历史记录
   wxSearchConfirm: WxSearch.wxSearchConfirm,  // 搜索函数
   wxSearchClear: WxSearch.wxSearchClear,  // 清空函数
-  
   // 4 搜索回调函数
   mySearchFunction: function (value) {
     // do your job here
@@ -46,7 +45,7 @@ Page({
     let that = this;
     this.setData({
       'keyWord': value
-    })
+    });
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/search/'+value,
       success: res =>{
@@ -54,7 +53,8 @@ Page({
         that.setData({
           poems: res.data.poems,
           poets: res.data.poets,
-          sentences: res.data.sentences
+          sentences: res.data.sentences,
+          tags: res.data.tags
         })
       }
     })
@@ -105,7 +105,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    wx.stopPullDownRefresh()
   },
 
   /**

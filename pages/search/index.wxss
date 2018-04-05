@@ -9,12 +9,12 @@ page{
   clear:both;
   position:relative;
   min-height:100%;
-  transition: none 0.3s linear!important;
 }
 .item{
   margin-bottom: 10px;
   background-color: #fff;
   padding-top: 10px;
+  overflow: hidden;
 }
 .item .title{
   padding-left: 10px;
@@ -34,9 +34,20 @@ page{
   top: 3px;
   left: 0;
 }
+.item .poem-item.tag .poem-title{
+  color: #fff;
+}
 .poem-item{
   display: block;
   padding: 5px 10px;
+}
+.item .poem-item.tag {
+  display: inline-block;
+  background-color: #09bb07;
+  color: #fff;
+  border-radius: 12px;
+  padding: 2px 10px;
+  margin: 5px 5px;
 }
 .poem-item.sentence .poem-author{
   display: block;

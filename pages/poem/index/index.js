@@ -14,31 +14,45 @@ Page({
     dynasty:[],
     d_index:0,
     t_index:0,
-    total: 0
+    total: 0,
+    is_search: false,
+    _type: null,
+    _keyWord: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this;
+    let that = this;let _url = '';
     wx.showLoading({
       title: '加载中',
     });
+    if(options.type){
+      _url = 'https://xuegushi.cn/wxxcx/getPoemData?_type=' + options.type + '&keyWord=' + options.keyWord
+    }else{
+      _url = 'https://xuegushi.cn/wxxcx/getPoemData'
+    }
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoemData',
+      url: _url,
+      data: {
+        type: '全部'
+      },
       success: res =>{
         if(res.data){
           console.log('----------success------------');
           // wx.setStorageSync('user',res.data);
           // console.log(res.data);
           this.setData({
+            is_search: options.keyWord ? true:false,
             poems: res.data.poems.data,
             current_page: res.data.poems.current_page,
             last_page: res.data.poems.last_page,
             types: res.data.types,
             dynasty: res.data.dynasty,
-            total: res.data.poems.total
+            total: res.data.poems.total,
+            _type: options.type ? options.type : null,
+            _keyWord: options.keyWord ? options.keyWord : null
           });
           wx.hideLoading();
         }
@@ -88,12 +102,26 @@ Page({
    */
   onReachBottom: function () {
     let that = this;
+    let _data = {};
     wx.showNavigationBarLoading();
+    if(that.data._type){
+      _data = {
+        page: that.data.current_page + 1,
+        _type: that.data._type,
+        keyWord: that.data._keyWord
+      }
+    }else{
+      _data = {
+        page: that.data.current_page + 1,
+      }
+    }
+    if(that.data.current_page> that.data.last_page){
+      wx.hideNavigationBarLoading()
+      return false;
+    }
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/getPoemData?dynasty='+that.data.dynasty[that.data.d_index]+'&type='+that.data.types[that.data.t_index],
-      data: {
-        page: that.data.current_page+1
-      },
+      data: _data,
       success: res =>{
         if(res.data){
           console.log('----------success------------');

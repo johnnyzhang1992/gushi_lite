@@ -1,6 +1,6 @@
 <!--pages/poem/index/index.wxml-->
 <view class="home-content">
-    <view class="weui-flex nav-list">
+    <view class="weui-flex nav-list" wx-if='{{!is_search}}'>
         <view class="weui-flex__item weui-flex">
             <view class="weui-flex__item left">
                 <image class="" src="../../../images/icon/theme.png"></image>  朝代 ：
@@ -24,8 +24,10 @@
     </view>
     <view class="divide"></view>
     <view class="nav-breadcrumb weui-flex">
-      <view class="item theme">{{dynasty[d_index]}}</view>
-      <view class="item type">{{types[t_index]}}</view>
+      <view class="item theme" wx-if='{{!is_search}}'>{{dynasty[d_index]}}</view>
+      <view class="item type" wx-if='{{!is_search}}'>{{types[t_index]}}</view>
+      <view class="item type" wx-if='{{is_search && _type =="tag"}}'>类型</view>
+      <view class="item type" wx-if='{{is_search}}'>{{_keyWord}}</view>
       <view class="item total">共 {{total}} 条结果</view>
     </view>
     <view class="divide"></view>
@@ -36,6 +38,9 @@
                 <view class="poem-title">{{item.title}}</view>
                 <view class="poem-author">{{item.dynasty+' | '+item.author}}</view>
                 <view class="poem-title">{{item.content}}</view>
+                <view class="weui-media-box__info badge-list" wx:if="{{is_search && item.tags.length>0}}"> 
+                    <view class="weui-badge" wx:for="{{item.tags}}" wx:key="unique" wx-if='{{item ==_keyWord}}'>{{item}}</view>
+                </view> 
             </navigator>
         </view>
     </view>
