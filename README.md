@@ -19,4 +19,4 @@
 
 ## 小程序二维码
 
-![Image text](https://github.com/johnnyzhang1992/gushi_lite/tree/master/images/xcx.jpg)
+![古诗文小助手](https://github.com/johnnyzhang1992/gushi_lite/blob/master/images/xcx.jpg)
