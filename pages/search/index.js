@@ -1,7 +1,6 @@
 // pages/search/index.js
 const app = getApp();
 let WxSearch = require('../../wxSearchView/wxSearchView.js');
-let _inputVal = '';
 Page({
 
   /**

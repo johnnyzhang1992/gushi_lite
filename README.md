@@ -16,3 +16,7 @@
 如果有什么不解，可以联系本人微信（zq19920306），大家可以共同学习进步。
 
 谢谢。
+
+## 小程序二维码
+
+![Image text](https://github.com/johnnyzhang1992/gushi_lite/tree/master/images/xcx.jpg)

@@ -5,6 +5,11 @@
 @import "../../wxSearchView/wxSearchView.wxss";
 page{
   background-color: #efeff4;
+  overflow:hidden;
+  clear:both;
+  position:relative;
+  min-height:100%;
+  transition: none 0.3s linear!important;
 }
 .item{
   margin-bottom: 10px;
