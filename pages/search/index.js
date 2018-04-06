@@ -28,7 +28,7 @@ Page({
       url: 'https://xuegushi.cn/wxxcx/getsHotSearch',
       success: res =>{
         console.log(res.data);
-        hotKey = res.data,
+        hotKey = res.data;
         WxSearch.init(
           that,  // 本页面一个引用
           hotKey ? hotKey : [], // 热点搜索推荐，[]表示不使用
