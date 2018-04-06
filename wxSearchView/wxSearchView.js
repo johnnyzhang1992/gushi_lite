@@ -35,7 +35,7 @@ function init(that, hotKeys, tipKeys, searchFunction, goBackFunction) {
   let barHeight = 43;
   let view = {
     barHeight: barHeight
-  }
+  };
   temData.hotKeys = hotKeys;
 
   wx.getSystemInfo({

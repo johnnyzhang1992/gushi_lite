@@ -23,14 +23,32 @@ Page({
     });
     // 2 搜索栏初始化
     let that = this;
-    WxSearch.init(
-      that,  // 本页面一个引用
-      ['李白','苏轼','李煜'], // 热点搜索推荐，[]表示不使用
-      [],// 搜索匹配，[]表示不使用
-      that.mySearchFunction, // 提供一个搜索回调函数
-      that.myGobackFunction //提供一个返回回调函数
-    );
+    let hotKey = null;
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/getsHotSearch',
+      success: res =>{
+        console.log(res.data);
+        hotKey = res.data,
+        WxSearch.init(
+          that,  // 本页面一个引用
+          hotKey ? hotKey : [], // 热点搜索推荐，[]表示不使用
+          hotKey ? hotKey : [],// ,// 搜索匹配，[]表示不使用
+          that.mySearchFunction, // 提供一个搜索回调函数
+          that.myGobackFunction //提供一个返回回调函数
+        );
+      },
+      error: ()=>{
+        WxSearch.init(
+          that,  // 本页面一个引用
+          hotKey ? hotKey : [], // 热点搜索推荐，[]表示不使用
+          hotKey ? hotKey : [],// ,// 搜索匹配，[]表示不使用
+          that.mySearchFunction, // 提供一个搜索回调函数
+          that.myGobackFunction //提供一个返回回调函数
+        );
+      }
+    });
   
+ 
   },
   // 3 转发函数，固定部分，直接拷贝即可
   wxSearchInput: WxSearch.wxSearchInput,  // 输入变化时的操作
@@ -58,10 +76,6 @@ Page({
         })
       }
     })
-    // 示例：跳转
-    // wx.redirectTo({
-    //   url: '../index/index?searchValue='+value
-    // })
   },
   
   // 5 返回回调函数
