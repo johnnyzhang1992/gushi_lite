@@ -1,6 +1,6 @@
 <!--pages/poem/sentence/index.wxml-->
 <view class="page list">
-  <view class="weui-flex nav-list">
+  <view class="weui-flex nav-list" wx-if='{{!isSearch}}'>
     <view class="weui-flex__item weui-flex">
         <view class="weui-flex__item left">
             <image class="" src="../../images/icon/theme.png"></image>  主题 ：
@@ -23,8 +23,9 @@
       </view>
   </view>
   <view class="nav-breadcrumb weui-flex">
-      <view class="item theme">{{themes[th_index]}}</view>
-      <view class="item type">{{types[ty_index]}}</view>
+      <view class="item theme" wx-if='{{!isSearch}}'>{{themes[th_index]}}</view>
+      <view class="item type" wx-if='{{!isSearch}}'>{{types[ty_index]}}</view>
+      <view class="item type" wx-if='{{isSearch}}'>{{_keyWord}}</view>
       <view class="item total">共 {{total}} 条结果</view>
   </view>
   <view class="page__bd">

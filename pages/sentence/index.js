@@ -14,21 +14,36 @@ Page({
     _types:[],
     th_index:0,
     ty_index:0,
-    total: 0
+    total: 0,
+    isSearch: false,
+    _keyWord: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this;
+    let _url = '';
     wx.showLoading({
       title: '加载中',
     });
-    wx.setNavigationBarTitle({
-      title: '热门名句'
-    });
+    if(options.type){
+      wx.setNavigationBarTitle({
+        title: options.keyWord
+      });
+    }else{
+      wx.setNavigationBarTitle({
+        title: '热门名句'
+      });
+    }
+    if (options.type) {
+      _url = 'https://xuegushi.cn/wxxcx/getSentenceData?keyWord=' + options.keyWord;
+    } else {
+      _url = 'https://xuegushi.cn/wxxcx/getSentenceData'
+    }
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getSentenceData',
+      url: _url,
       success: res =>{
         if(res.data){
           console.log('----------success------------');
@@ -41,7 +56,9 @@ Page({
             themes: res.data.themes,
             _types: res.data.types,
             types: res.data.types[0].types,
-            total: res.data.poems.total
+            total: res.data.poems.total,
+            isSearch: options.type ? true :false,
+            _keyWord: options.keyWord ? options.keyWord: null
           });
           wx.hideLoading();
         }
@@ -90,12 +107,24 @@ Page({
   onReachBottom: function () {
     wx.showNavigationBarLoading();
     let that = this;
-    // Do something when page reach bottom.
+    let _data = {};
+    if (that.data.isSearch) {
+      _data = {
+        page: that.data.current_page + 1,
+        keyWord: that.data._keyWord
+      }
+    } else {
+      _data = {
+        page: that.data.current_page + 1,
+      }
+    }
+    if (that.data.current_page > that.data.last_page) {
+      wx.hideNavigationBarLoading()
+      return false;
+    }
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/getSentenceData?theme=' + that.data.themes[that.data.th_index] + '&type=' + that.data.types[that.data.ty_index],
-      data: {
-        page: that.data.current_page+1
-      },
+      data: _data,
       success: res =>{
         if(res.data){
           console.log('----------success------------');

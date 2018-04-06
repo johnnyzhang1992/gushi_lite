@@ -89,7 +89,8 @@ function wxSearchClear() {
     wxSearchData: temData,
     poems: [],
     poets: [],
-    sentences: []
+    sentences: [],
+    tags:[]
   });
 }
 

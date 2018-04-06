@@ -1,7 +1,7 @@
 <!--pages/poem/poet/index/index.wxml-->
 <!--pages/poem/index/index.wxml-->
 <view class="home-content">
-    <view class="weui-flex nav-list">
+    <view class="weui-flex nav-list" wx-if='{{!is_search}}'>
         <view class="weui-flex__item weui-flex">
             <view class="weui-flex__item left">
                 <image class="" src="../../../images/icon/theme.png"></image>  朝代 ：
@@ -15,7 +15,8 @@
     </view>
     <view class="divide"></view>
     <view class="nav-breadcrumb weui-flex">
-        <view class="item theme">{{dynasty[index]}}</view>
+        <view class="item theme" wx-if='{{!is_search}}'>{{dynasty[index]}}</view>
+        <view class="item theme" wx-if='{{is_search}}'>{{_keyWord}}</view>
         <view class="item total">共 {{total}} 条结果</view>
     </view>
     <view class="divide"></view>

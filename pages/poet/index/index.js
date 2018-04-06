@@ -11,7 +11,9 @@ Page({
     last_page: 1,
     dynasty:[],
     index:0,
-    total: 0
+    total: 0,
+    is_search: false,
+    _keyWord: null
   },
 
   /**
@@ -19,11 +21,26 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+    let _url = '';
     wx.showLoading({
       title: '加载中',
     });
+    if(options.type){
+      wx.setNavigationBarTitle({
+        title: options.keyWord
+      });
+    }else{
+      wx.setNavigationBarTitle({
+        title: '古代诗人'
+      });
+    }
+    if (options.type) {
+      _url = 'https://xuegushi.cn/wxxcx/getPoetData?keyWord=' + options.keyWord;
+    } else {
+      _url = 'https://xuegushi.cn/wxxcx/getPoetData'
+    }
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoetData',
+      url: _url,
       success: res =>{
         if(res.data){
           console.log('----------success------------');
@@ -34,7 +51,9 @@ Page({
             current_page: res.data.poets.current_page,
             last_page: res.data.poets.last_page,
             dynasty: res.data.dynasty,
-            total: res.data.poets.total
+            total: res.data.poets.total,
+            is_search: options.type ? true: false,
+            _keyWord: options.keyWord ? options.keyWord :null
           });
           wx.hideLoading();
         }
@@ -46,9 +65,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wx.setNavigationBarTitle({
-      title: '古代诗人'
-    });
+   
   },
 
   /**
@@ -84,12 +101,25 @@ Page({
    */
   onReachBottom: function () {
     let that = this;
+    let _data = [];
     wx.showNavigationBarLoading();
+    if (that.data.is_search) {
+      _data = {
+        page: that.data.current_page + 1,
+        keyWord: that.data._keyWord
+      }
+    } else {
+      _data = {
+        page: that.data.current_page + 1,
+      }
+    }
+    if (that.data.current_page > that.data.last_page) {
+      wx.hideNavigationBarLoading()
+      return false;
+    }
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/getPoetData?dynasty='+that.data.dynasty[that.data.index],
-      data: {
-        page: that.data.current_page+1
-      },
+      data: _data,
       success: res =>{
         if(res.data){
           console.log('----------success------------');

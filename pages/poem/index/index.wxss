@@ -16,7 +16,7 @@
     color: #666;
 }
 .weui-cell {
-    padding:8px 15px;
+    padding:6px 15px;
 }
 .list weui-cell_access{
     font-size: 12px;
@@ -74,13 +74,14 @@
 .poem-item .badge-list{
   padding-top: 0;
   text-align: left;
-  margin-top: 5px;
+  margin-top: 2px;
   white-space: initial;
   overflow: initial;
+  padding-bottom: 0;
 }
 .badge-list .weui-badge{
   margin-right: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
   display: inline-block;
   width: auto;
 }

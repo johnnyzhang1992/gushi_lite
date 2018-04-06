@@ -25,11 +25,20 @@ Page({
    */
   onLoad: function (options) {
     let that = this;let _url = '';
+    if (options.type) {
+      wx.setNavigationBarTitle({
+        title: options.keyWord
+      });
+    } else {
+      wx.setNavigationBarTitle({
+        title: '古诗文'
+      });
+    }
     wx.showLoading({
       title: '加载中',
     });
     if(options.type){
-      _url = 'https://xuegushi.cn/wxxcx/getPoemData?_type=' + options.type + '&keyWord=' + options.keyWord
+      _url = 'https://xuegushi.cn/wxxcx/getPoemData?_type=' + options.type + '&keyWord=' + options.keyWord;
     }else{
       _url = 'https://xuegushi.cn/wxxcx/getPoemData'
     }
@@ -64,9 +73,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wx.setNavigationBarTitle({
-      title: '古诗文'
-    });
+ 
   },
 
   /**
