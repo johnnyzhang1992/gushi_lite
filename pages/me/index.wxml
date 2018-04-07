@@ -3,7 +3,7 @@
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 马上登录 </button>
      <block wx:else="">
-       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
@@ -29,8 +29,8 @@
     </view>
     <view class='weui-footer weui-footer_fixed-bottom'>
       <view class='weui-footer-links'>
-        <navigator url='about/index' class='weui-footer__link'>关于我们</navigator>
-        <!-- <navigator url='' class='weui-footer__link'>关于我们</navigator> -->
+        <navigator url='about/index' class='weui-footer__link'>关于</navigator>
+        <!--<navigator url='zs/index' class='weui-footer__link'>赞赏</navigator> -->
       </view>
       <view class='weui-footer__text'>Copyright © 2018 xuegushi.cn</view>
     </view>
