@@ -6,6 +6,8 @@
 ## 样式
 使用微信官方的[WeUi](https://weui.io)
 
+## 搜索部分
+搜索部分是在[天未](https://github.com/mindawei)的[wsSearchView](https://github.com/mindawei/wsSearchView)的基础上进行的改造和优化。
 ## 声明
 此处代码为微信小程序的所有代码（包含小程序的appId），里面的api接口也是使用的正式接口。
 
