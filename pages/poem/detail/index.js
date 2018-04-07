@@ -16,7 +16,8 @@ Page({
     currentTab: 0, //预设当前项的值
     scrollLeft: 0, //tab标题的滚动条位置
     tab_lists: null,
-    collect_status: false
+    collect_status: false,
+    _audio: null
   },
   // 获取用户id
   getUserId: function(){
@@ -91,6 +92,12 @@ Page({
         scrollLeft: 0
       })
     }
+  },
+  audio: function(){
+    wx.navigateTo({
+      url: '/pages/poem/audio/index?id='+this.data.poem.id+'&title='+this.data.poem.title,
+    })
+  
   },
   /**
    * 生命周期函数--监听页面加载

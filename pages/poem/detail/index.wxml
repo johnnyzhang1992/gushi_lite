@@ -41,6 +41,7 @@
         </swiper-item>
     </swiper>
     <button class='share' open-type="share"><image src='../../../images/icon/share.png'></image></button>
+    <button class='audio'  bindtap="audio"><image src='../../../images/icon/audio.png'></image></button>
     <button class='return' bindtap="return"><image src='../../../images/icon/return.png'></image></button>
     <view class="collect" bindtap="updateCollect">
         <view class="collect-img" wx:if="{{!collect_status}}">

@@ -22,7 +22,7 @@
                     </view>
                 </view>
             </view>
-              <view class="weui-article__section">
+            <view class="weui-article__section">
                 <view class="weui-article__title">2 搜索功能</view> 
                 <view class="weui-article__section">
                     <view class="weui-article__h3">2.1 搜索记录</view>  
@@ -52,6 +52,17 @@
                     </view>
                     <view class="weui-article__p">
                       诗词是指，标题中包含搜索词的诗词，此处并没有对诗词的原文内容进行检索。
+                    </view>
+                </view>
+            </view>
+            <view class="weui-article__section">
+                <view class="weui-article__title">3 朗读功能</view> 
+                <view class="weui-article__section">
+                    <view class="weui-article__p">
+                      朗读功能使用的是百度AI的语音合成技术。首先将文字合成为MP3格式的音频，然后来下载到本地播放。
+                    </view>
+                     <view class="weui-article__p">
+                      由于功能限制，合成的语音对诗词的字数有限制。只能合成诗词的前512个字（包括标点符号），暂时没有做相关的分批合成优化。
                     </view>
                 </view>
             </view>
