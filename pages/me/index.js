@@ -11,6 +11,8 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     p_count: 0,
     a_count: 0,
+    u_count: 0,
+    u_t_count: 0
   },
   // 获取用户id
   getUserId: function(){
@@ -71,7 +73,9 @@ Page({
           if (res.data) {
             that.setData({
               p_count: res.data.p_count,
-              a_count: res.data.a_count
+              a_count: res.data.a_count,
+              u_count: res.data.u_count,
+              u_t_count: res.data.u_t_count
             })
           }
           wx.hideLoading();
