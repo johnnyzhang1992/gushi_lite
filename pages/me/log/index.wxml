@@ -1,0 +1,40 @@
+<!--pages/me/about/index.wxml -->
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">古诗文小助手</view>
+        <!-- <view class="page__desc">关于我们</view> -->
+    </view>
+    <view class="page__bd">
+        <view class="weui-article">
+            <!-- <view class="weui-article__h1">大标题</view> -->
+            <view class="weui-article__section">
+                <view class="weui-article__title">版本一(2018-04-05)</view>
+                <view class="weui-article__section">
+                    <!--<view class="weui-article__h3">1.1 关于</view>-->
+                    <view class="weui-article__p">诗词，诗人，名句列表页</view>
+                    <view class="weui-article__p">诗人，诗词详情详情页</view>
+                    <view class="weui-article__p">诗人、诗词收藏功能</view>
+                    <view class="weui-article__p">个人中心</view>
+                </view>
+            </view>
+            <view class="weui-article__section">
+                <view class="weui-article__title">版本二(2018-04-08)</view>
+                <view class="weui-article__section">
+                    <!--<view class="weui-article__h3">1.1 关于</view>-->
+                    <view class="weui-article__p">新增搜索页面</view>
+                    <view class="weui-article__p">新增诗词朗读</view>
+                    <view class="weui-article__p">优化诗词诗人列表页</view>
+                </view>
+            </view>
+            <view class="weui-article__section">
+                <view class="weui-article__title">版本三(2018-05-18)</view>
+                <view class="weui-article__section">
+                    <!--<view class="weui-article__h3">1.1 关于</view>-->
+                    <view class="weui-article__p">更改登录授权方式</view>
+                    <view class="weui-article__p">新增诗词复制</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+

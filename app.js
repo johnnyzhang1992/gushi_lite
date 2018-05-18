@@ -54,45 +54,45 @@ App({
           })
         }else{
           // 登录
-          wx.login({
-            success: res => {
-              that.globalData.code = res.code
-              // 发送 res.code 到后台换取 openId, sessionKey, unionId
-            }
-          });
-          wx.authorize({
-            scope: 'scope.userInfo',
-            success() {
-              wx.getUserInfo({
-                success: res => {
-                  // 可以将 res 发送给后台解码出 unionId
-                  that.globalData.userInfo = res.userInfo;
-                  // 向关联网站发送请求，解密、存储数据
-                  wx.request({
-                    url: 'https://xuegushi.cn/wxxcx/userInfo',
-                    data: {
-                      code: that.globalData.code,
-                      iv: res.iv,
-                      encryptedData: res.encryptedData,
-                      systemInfo:that.globalData.systemInfo
-                    },
-                    success: function (res) {
-                      if(res.data){
-                        console.log('----------success------------');
-                        wx.setStorageSync('user',res.data);
-                        that.globalData.userInfo = res.data;
-                      }
-                    }
-                  });
-                  // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                  // 所以此处加入 callback 以防止这种情况
-                  if (that.userInfoReadyCallback) {
-                    that.userInfoReadyCallback(res)
-                  }
-                }
-              })
-            }
-          })
+          // wx.login({
+          //   success: res => {
+          //     that.globalData.code = res.code
+          //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          //   }
+          // });
+          // wx.authorize({
+          //   scope: 'scope.userInfo',
+          //   success() {
+          //     wx.getUserInfo({
+          //       success: res => {
+          //         // 可以将 res 发送给后台解码出 unionId
+          //         that.globalData.userInfo = res.userInfo;
+          //         // 向关联网站发送请求，解密、存储数据
+          //         wx.request({
+          //           url: 'https://xuegushi.cn/wxxcx/userInfo',
+          //           data: {
+          //             code: that.globalData.code,
+          //             iv: res.iv,
+          //             encryptedData: res.encryptedData,
+          //             systemInfo:that.globalData.systemInfo
+          //           },
+          //           success: function (res) {
+          //             if(res.data){
+          //               console.log('----------success------------');
+          //               wx.setStorageSync('user',res.data);
+          //               that.globalData.userInfo = res.data;
+          //             }
+          //           }
+          //         });
+          //         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+          //         // 所以此处加入 callback 以防止这种情况
+          //         if (that.userInfoReadyCallback) {
+          //           that.userInfoReadyCallback(res)
+          //         }
+          //       }
+          //     })
+          //   }
+          // })
         }
       }
     })

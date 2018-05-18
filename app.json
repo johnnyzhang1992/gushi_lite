@@ -13,7 +13,8 @@
     "pages/me/author/index",
     "pages/me/about/index",
     "pages/poem/audio/index",
-    "pages/me/user/index"
+    "pages/me/user/index",
+    "pages/me/log/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

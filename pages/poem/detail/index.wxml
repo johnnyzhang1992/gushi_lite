@@ -10,8 +10,8 @@
             <view class="weui-panel__bd">
                 <view class="weui-media-box weui-media-box_text">
                     <view class="weui-media-box__desc xu" wx:if="{{content.xu}}">{{content.xu}}</view>
-                    <text decode='true' class="weui-media-box__title " wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type =="诗"}}'>{{item}}</text>
-                    <text decode='true' class="weui-media-box__title wyw" wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type !="诗"}}'>{{item}}</text>
+                    <text decode='true' selectable='true' class="weui-media-box__title " wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type =="诗"}}'>{{item}}</text>
+                    <text decode='true' selectable='true' class="weui-media-box__title wyw" wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type !="诗"}}'>{{item}}</text>
                      <view class="weui-media-box__info badge-list" wx:if="{{tags.length>0}}"> 
                          <view class="weui-badge" wx:for="{{tags}}" wx:key="unique">{{item}}</view>
                      </view> 
@@ -41,6 +41,7 @@
         </swiper-item>
     </swiper>
     <button class='share' open-type="share"><image src='../../../images/icon/share.png'></image></button>
+    <button class='copy' bindtap="copy"><image src='../../../images/icon/copy.png'></image></button>
     <button class='audio'  bindtap="audio"><image src='../../../images/icon/audio.png'></image></button>
     <button class='return' bindtap="return"><image src='../../../images/icon/return.png'></image></button>
     <view class="collect" bindtap="updateCollect">

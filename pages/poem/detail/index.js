@@ -1,6 +1,6 @@
 // pages/poem/detail/index.js
 const app = getApp();
-let https = require('../../../utils/http.js');
+// let https = require('../../../utils/http.js');
 Page({
   /**
    * 页面的初始数据
@@ -99,6 +99,24 @@ Page({
     })
   
   },
+  copy: function(){
+    let poem = this.data.poem;
+    let _data = '《'+poem.title+'》'+poem.dynasty+'|'+poem.author+'\n'+poem.text_content;
+    wx.setClipboardData({
+      data: _data,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            wx.showToast({
+              title: '诗词复制成功',
+              icon: 'success',
+              duration: 2000
+            })
+          }
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -158,7 +176,20 @@ Page({
   updateCollect: function () {
     let that = this;
     if(that.data.user_id<1){
-      https.userLogin(that.data.poem.id);
+      // https.userLogin(that.data.poem.id);
+      wx.showModal({
+        title: '提示',
+        content: '登录后才可以收藏哦！',
+        success: function(res) {
+          if (res.confirm) {
+            wx.reLaunch({
+              url: '/pages/me/index'
+            });
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
     }else{
       wx.request({
         url: 'https://xuegushi.cn/wxxcx/'+that.data.poem.id+'/collect/poem?user_id='+that.data.user_id,

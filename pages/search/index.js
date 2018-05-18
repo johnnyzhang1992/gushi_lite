@@ -27,12 +27,12 @@ Page({
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/getsHotSearch',
       success: res =>{
-        console.log(res.data);
+        // console.log(res.data);
         hotKey = res.data;
         WxSearch.init(
           that,  // 本页面一个引用
           hotKey ? hotKey : [], // 热点搜索推荐，[]表示不使用
-          hotKey ? hotKey : [],// ,// 搜索匹配，[]表示不使用
+          [],// ,// 搜索匹配，[]表示不使用
           that.mySearchFunction, // 提供一个搜索回调函数
           that.myGobackFunction //提供一个返回回调函数
         );
@@ -41,7 +41,7 @@ Page({
         WxSearch.init(
           that,  // 本页面一个引用
           hotKey ? hotKey : [], // 热点搜索推荐，[]表示不使用
-          hotKey ? hotKey : [],// ,// 搜索匹配，[]表示不使用
+          [],// ,// 搜索匹配，[]表示不使用
           that.mySearchFunction, // 提供一个搜索回调函数
           that.myGobackFunction //提供一个返回回调函数
         );
@@ -59,7 +59,8 @@ Page({
   // 4 搜索回调函数
   mySearchFunction: function (value) {
     // do your job here
-    console.log(value);
+    // console.log(value);
+    wx.showNavigationBarLoading();
     let that = this;
     this.setData({
       'keyWord': value
@@ -74,6 +75,7 @@ Page({
           sentences: res.data.sentences,
           tags: res.data.tags
         })
+        wx.hideNavigationBarLoading()
       }
     })
   },

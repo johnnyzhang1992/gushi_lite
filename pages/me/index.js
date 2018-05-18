@@ -32,7 +32,19 @@ Page({
     let that = this;
     this.getUserId();
     if (that.data.user_id < 1) {
-      https.userLogin(0,'me');
+      // https.userLogin(0,'me');
+      wx.getSetting({
+        success: function (res) {
+          if (res.authSetting['scope.userInfo']) {
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+            wx.getUserInfo({
+              success: function (res) {
+                console(res.userInfo)
+              }
+            })
+          }
+        }
+      })
     } else {
       wx.showLoading({
         title: '加载中',
@@ -54,18 +66,6 @@ Page({
             hasUserInfo: true
           })
         }
-      } else {
-        // 在没有 open-type=getUserInfo 版本的兼容处理
-        wx.getUserInfo({
-          success: res => {
-            app.globalData.userInfo = res.userInfo;
-            this.setData({
-              userInfo: res.userInfo,
-              hasUserInfo: true
-            });
-
-          }
-        })
       }
       wx.request({
         url: 'https://xuegushi.cn/wxxcx/getUserInfo/' + this.data.user_id,
@@ -106,13 +106,66 @@ Page({
       }
     });
   },
-  getUserInfo: function(e) {
-    // console.log(e);
-    app.globalData.userInfo = e.detail.userInfo;
-    this.setData({
+  // getUserInfo: function(e) {
+  //   // console.log(e);
+  //   app.globalData.userInfo = e.detail.userInfo;
+  //   this.setData({
+  //     userInfo: e.detail.userInfo,
+  //     hasUserInfo: true
+  //   })
+  // },
+  bindGetUserInfo: function(e) {
+    console.log('---this');
+    let that = this;
+    console.log(e.detail);
+    that.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
-    })
+    });
+    wx.login({
+      success: res => {
+        app.globalData.code = res.code
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      }
+    });
+    // 可以将 res 发送给后台解码出 unionId
+    app.globalData.userInfo = e.detail.userInfo;
+    // 向关联网站发送请求，解密、存储数据
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/userInfo',
+      data: {
+        code: app.globalData.code,
+        iv: e.detail.iv,
+        encryptedData: e.detail.encryptedData,
+        systemInfo:app.globalData.systemInfo
+      },
+      success: function (res) {
+        if(res.data){
+          console.log('----------success------------');
+          wx.setStorageSync('user',res.data);
+          app.globalData.userInfo = res.data;
+          wx.request({
+            url: 'https://xuegushi.cn/wxxcx/getUserInfo/'+res.data.user_id,
+            success: _res => {
+              if (_res.data) {
+                that.setData({
+                  user_id: res.data.user_id,
+                  p_count: _res.data.p_count,
+                  a_count: _res.data.a_count,
+                  u_count: _res.data.u_count,
+                  u_t_count: _res.data.u_t_count
+                });
+              }
+            }
+          });
+        }
+      }
+    });
+    // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    // 所以此处加入 callback 以防止这种情况
+    if (that.userInfoReadyCallback) {
+      that.userInfoReadyCallback(res)
+    }
   },
   getPhoneNumber: function(e) {
     console.log(e.detail.errMsg);

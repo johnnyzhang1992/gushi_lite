@@ -68,7 +68,20 @@ Page({
   updateCollect: function () {
     let that = this;
     if (that.data.user_id < 1) {
-      https.userLogin(that.data.author.id,'poet');
+      // https.userLogin(that.data.author.id,'poet');
+      wx.showModal({
+        title: '提示',
+        content: '登录后才可以收藏哦！',
+        success: function(res) {
+          if (res.confirm) {
+            wx.reLaunch({
+              url: '/pages/me/index'
+            });
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
     } else {
       wx.request({
         url: 'https://xuegushi.cn/wxxcx/' + that.data.poet.id + '/collect/author?user_id=' + that.data.user_id,
