@@ -1,5 +1,4 @@
 /* pages/me/author/index.wxss */
-/* pages/me/poem/index.wxss */
 .container{
     padding: 10px 0 0 0;
 }

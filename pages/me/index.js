@@ -13,7 +13,8 @@ Page({
     p_count: 0,
     a_count: 0,
     u_count: 0,
-    u_t_count: 0
+    u_t_count: 0,
+    s_count: 0
   },
   // 获取用户id
   getUserId: function(){
@@ -83,7 +84,8 @@ Page({
               p_count: res.data.p_count,
               a_count: res.data.a_count,
               u_count: res.data.u_count,
-              u_t_count: res.data.u_t_count
+              u_t_count: res.data.u_t_count,
+              s_count: res.data.s_count
             })
           }
           wx.hideLoading();
@@ -158,7 +160,8 @@ Page({
                     p_count: _res.data.p_count,
                     a_count: _res.data.a_count,
                     u_count: _res.data.u_count,
-                    u_t_count: _res.data.u_t_count
+                    u_t_count: _res.data.u_t_count,
+                    s_count: res.data.s_count
                   });
                 }
               }
