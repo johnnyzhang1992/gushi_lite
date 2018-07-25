@@ -117,3 +117,7 @@ textarea{
   border-radius:100%;
   bottom: 50px; 
 }
+ad{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

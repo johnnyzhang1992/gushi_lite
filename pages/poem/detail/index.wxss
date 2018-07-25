@@ -109,7 +109,7 @@
   position: fixed;
   bottom: 0;
   left:0;
-  padding:5px 0 5px 15px;
+  padding:8px 0 8px 15px;
   font-size:14px;
   border-top:1px solid #f5f5f5;
   width:100%;

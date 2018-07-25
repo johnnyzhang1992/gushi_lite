@@ -36,6 +36,12 @@
                     <view class="weui-article__p">解决初次请求授权失败之后无法再次登录的bug</view>
                 </view>
             </view>
+            <view class="weui-article__section">
+                <view class="weui-article__title">版本五(2018-07-11)</view>
+                <view class="weui-article__section">
+                    <view class="weui-article__p">添加广告插件</view>
+                </view>
+            </view>
         </view>
     </view>
 </view>

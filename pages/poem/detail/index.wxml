@@ -19,22 +19,23 @@
             </view>
         </view>
     </view>
+    <ad unit-id="adunit-1dc705dba430e05c"></ad>
     <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
-        <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">创作背景</view>
+        <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">注释</view>
         <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">翻译</view>
-        <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">注释</view>
-        <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">赏析</view>
+        <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">赏析</view>
+        <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">创作背景</view>
         <!-- <view class="tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="swichNav">其它</view> -->
     </scroll-view>
     <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab"
             style="height:{{winHeight}}rpx">
         <swiper-item wx:for="{{[0,1,2,3]}}" wx:key='*this'>
             <scroll-view scroll-y="true" class="scoll-h tab-list-content" >
-                <block wx:for="{{tab_lists}}" wx:key="*this" wx:if="{{currentTab > 0}}">
-                    <text decode='true' class='item yi' wx:if='{{ currentTab == 2}}'> {{item}}</text>
-                    <text decode='true' class='item' wx:if='{{ currentTab != 2}}'>{{item}}</text>
+                <block wx:for="{{tab_lists}}" wx:key="*this" wx:if="{{currentTab < 3}}">
+                    <text decode='true' class='item yi' wx:if='{{ currentTab == 0}}'> {{item}}</text>
+                    <text decode='true' class='item' wx:if='{{ currentTab != 0}}'>{{item}}</text>
                 </block>
-                <block wx:if="{{currentTab< 1 }}">
+                <block wx:if="{{currentTab > 2 }}">
                     <text decode="true" class="item">{{poem.background }}</text>
                 </block>
             </scroll-view>

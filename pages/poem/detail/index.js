@@ -62,17 +62,17 @@ Page({
   changeTabContent: function(cur){
     let that = this;
     let data = null;
-    if(cur == 0){
+    if(cur == 3){
       data = that.data.poem.background
     }else if (cur ==1){
       data = (that.data.detail && that.data.detail.yi) ? that.data.detail.yi.content : null
-    }else if (cur == 2) {
+    }else if (cur == 0) {
       data = (that.data.detail && that.data.detail.zhu) ? that.data.detail.zhu.content: null;
       // for(let i = 0;i<data.length;i++){
       //   let _data = data[i].toString();
       //   data[i] = [_data.substr(0,_data.indexOf("：")),_data.substr(_data.indexOf("：")+1,_data.length)];
       // }
-    }else if (cur == 3) {
+    }else if (cur == 2) {
       data = (that.data.detail && that.data.detail.shangxi) ? that.data.detail.shangxi.content:null
     }else if(cur == 4){
       data = that.data.detail.more_infos ? that.data.detail.more_infos.content : []
@@ -164,7 +164,7 @@ Page({
             poems_count: res.data.poems_count,
             content:JSON.parse(res.data.poem.content),
             tags: (res.data.poem.tags && res.data.poem.tags !='') ? res.data.poem.tags.split(',') : [],
-            tab_lists: (res.data.detail && res.data.detail.yi) ? res.data.detail.yi.content : null,
+            tab_lists: (res.data.detail && res.data.detail.zhu) ? res.data.detail.zhu.content : null,
             collect_status: res.data.poem.collect_status
           });
           wx.hideLoading();
@@ -268,7 +268,7 @@ Page({
             poems_count: res.data.poems_count,
             content:JSON.parse(res.data.poem.content),
             tags: res.data.poem.tags && res.data.poem.tags !='' ? res.data.poem.tags.split(',') : [],
-            tab_lists: res.data.detail.yi.content,
+            tab_lists: (res.data.detail && $res.data.detail.zhu) ? res.data.detail.zhu.content : null,
             collect_status: res.data.poem.collect_status
           });
           wx.hideLoading();

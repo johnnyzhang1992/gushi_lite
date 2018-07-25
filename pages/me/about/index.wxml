@@ -66,6 +66,14 @@
                     </view>
                 </view>
             </view>
+                 <view class="weui-article__section">
+                <view class="weui-article__title">4 广告功能</view> 
+                <view class="weui-article__section">
+                    <view class="weui-article__p">
+                    因为小程序需要后台服务器支持，而域名和服务器都是需要花费的，所以暂时在搜索页面、个人页面以及诗文详情页添加了广告插件。希望大家能够理解。
+                    </view>
+                </view>
+            </view>
         </view>
     </view>
 </view>
