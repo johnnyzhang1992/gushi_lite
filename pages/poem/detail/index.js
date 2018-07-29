@@ -1,5 +1,6 @@
 // pages/poem/detail/index.js
 const app = getApp();
+let _detail = null;
 // let https = require('../../../utils/http.js');
 Page({
   /**
@@ -117,6 +118,25 @@ Page({
       }
     })
   },
+  // 渲染tagList
+  renderTagList: function () {
+    if (_detail && _detail.yi) {
+      _detail.yi = JSON.parse(_detail.yi)
+    }
+    if (_detail && _detail.zhu) {
+      _detail.zhu = JSON.parse(_detail.zhu)
+    }
+    if (_detail && _detail.shangxi) {
+      _detail.shangxi = JSON.parse(_detail.shangxi)
+    }
+    if (_detail && _detail.more_infos) {
+      _detail.more_infos = JSON.parse(_detail.more_infos)
+    }
+    this.setData({
+      detail: _detail,
+      tab_lists: (_detail && _detail.zhu) ? _detail.zhu.content : null,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -146,28 +166,20 @@ Page({
         if (res.data) {
           console.log('----------success------------');
           // console.log(res.data);
-          if (res.data.detail && res.data.detail.yi){
-            res.data.detail.yi = JSON.parse(res.data.detail.yi)
-          }
-          if (res.data.detail && res.data.detail.zhu) {
-            res.data.detail.zhu = JSON.parse(res.data.detail.zhu)
-          }
-          if (res.data.detail && res.data.detail.shangxi) {
-            res.data.detail.shangxi = JSON.parse(res.data.detail.shangxi)
-          }
-          if (res.data.detail && res.data.detail.more_infos) {
-            res.data.detail.more_infos = JSON.parse(res.data.detail.more_infos)
-          }
+          _detail = res.data.detail;
           this.setData({
             poem: res.data.poem,
-            detail: res.data.detail,
+            // detail: res.data.detail,
             poems_count: res.data.poems_count,
             content:JSON.parse(res.data.poem.content),
             tags: (res.data.poem.tags && res.data.poem.tags !='') ? res.data.poem.tags.split(',') : [],
-            tab_lists: (res.data.detail && res.data.detail.zhu) ? res.data.detail.zhu.content : null,
+            // tab_lists: (res.data.detail && res.data.detail.zhu) ? res.data.detail.zhu.content : null,
             collect_status: res.data.poem.collect_status
           });
           wx.hideLoading();
+          setTimeout(()=>{
+            this.renderTagList();
+          },800)
         }
       }
     });
@@ -213,7 +225,6 @@ Page({
   onReady: function () {
     wx.hideLoading();
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
@@ -250,29 +261,21 @@ Page({
       success: res => {
         if (res.data) {
           console.log('----------refresh-success------------');
-          if(res.data.detail.yi){
-            res.data.detail.yi = JSON.parse(res.data.detail.yi)
-          }
-          if (res.data.detail.zhu) {
-            res.data.detail.zhu = JSON.parse(res.data.detail.zhu)
-          }
-          if (res.data.detail.shangxi) {
-            res.data.detail.shangxi = JSON.parse(res.data.detail.shangxi)
-          }
-          if (res.data.detail.more_infos) {
-            res.data.detail.more_infos = JSON.parse(res.data.detail.more_infos)
-          }
+          _detail = res.data.detail;
           this.setData({
             poem: res.data.poem,
-            detail: res.data.detail,
+            // detail: res.data.detail,
             poems_count: res.data.poems_count,
             content:JSON.parse(res.data.poem.content),
             tags: res.data.poem.tags && res.data.poem.tags !='' ? res.data.poem.tags.split(',') : [],
-            tab_lists: (res.data.detail && $res.data.detail.zhu) ? res.data.detail.zhu.content : null,
+            // tab_lists: (res.data.detail && $res.data.detail.zhu) ? res.data.detail.zhu.content : null,
             collect_status: res.data.poem.collect_status
           });
           wx.hideLoading();
-          // wx.stopPullDownRefresh()
+          wx.stopPullDownRefresh();
+          setTimeout(() => {
+            that.renderTagList();
+          }, 800)
         }
       }
     })

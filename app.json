@@ -15,7 +15,10 @@
     "pages/poem/audio/index",
     "pages/me/user/index",
     "pages/me/log/index",
-    "pages/me/search/index"
+    "pages/me/search/index",
+    "pages/find/index",
+    "pages/find/detail/index",
+    "pages/find/new/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,6 +34,12 @@
     "list": [
       {
         "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icon/home.png",
+        "selectedIconPath": "images/icon/home_active.png"
+      },
+      {
+        "pagePath": "pages/find/index",
         "text": "发现",
         "iconPath": "images/icon/find.png",
         "selectedIconPath": "images/icon/find_active.png"

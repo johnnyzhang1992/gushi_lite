@@ -1,0 +1,27 @@
+/* pages/find/index.wxss */
+.page{
+  padding-top: 0
+}
+.notices{
+  color:#ccc;
+  font-size: 15px;
+}
+.tag-lists{
+  margin-top: 0
+}
+.tagList{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #eee;
+}
+.tagItem{
+  flex: 0 0 15%;
+  font-size: 13px;
+  text-align: center;
+  border: 1px solid #eee;
+  margin: 5px;
+  padding: 2px 3px 2px 3px;
+  border-radius: 0px;
+  background-color: rgba(200, 200, 200, 0.1);
+}
