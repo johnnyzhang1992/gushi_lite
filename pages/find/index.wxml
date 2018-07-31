@@ -15,7 +15,7 @@
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">0</view>
     </navigator>
-    <view class="weui-panel tag-lists">
+    <!-- <view class="weui-panel tag-lists">
         <view class="weui-panel__bd">
             <view class="tagList">
                 <block wx:for="{{tags}}" wx:key='*.this'>
@@ -23,7 +23,7 @@
                 </block>
             </view>
         </view>
-    </view>
+    </view> -->
     <view class="weui-panel">
         <view class="weui-panel__bd">
             <view class="weui-media-box weui-media-box_text" wx:for="{{pois}}" wx:key="updated_at">

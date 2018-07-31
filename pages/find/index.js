@@ -23,6 +23,11 @@ Page({
     interval: 5000,
     duration: 1000
   },
+  addNew: function () {
+    wx.navigateTo({
+      url: '/pages/find/detail/index'
+    })
+  },
   // 获取用户id
   getUserId: function () {
     let user = wx.getStorageSync('user');
