@@ -1,2 +1,28 @@
-<!--pages/find/new/index.wxml-->
-<text>pages/find/new/index.wxml</text>
+<!--pages/find/detail/index.wxml-->
+<view class="page">
+    <form bindsubmit="bindFormSubmit">
+        <view class="section">
+            <textarea class="textarea" placeholder="写点什么吧" name="mind" auto-focus auto-height bindfocus='keyBoardUp' bindblur='keyBoardDown' adjust-position />
+        </view>
+        <view class="page__bd content-section" wx-if="{{type && type =='poem'}}">
+            <navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
+                <view class="poem-title">{{poem.title}}</view>
+                <view class="poem-author">{{poem.dynasty+' | '+poem.author}}</view>
+                <view class="poem-content">{{poem.text_content}}</view>
+            </navigator>
+        </view>
+        <view class="page__bd content-section" wx-if="{{type && type =='poet'}}">
+            <navigator url="/pages/poet/detail/index?id={{poet.id}}" hover-class="navigator-hover" class="weui-cell poet-item">
+                <view class="poem-title">{{poet.author_name}} | <view class="poem-author">{{poet.dynasty}}</view></view>
+                <view class="poem-profile">{{poet.profile}}</view>
+            </navigator>
+        </view>
+        <view class="section bottom-section">
+            <view class="location" bindtap='getLocation'>
+                <image src='{{location_img}}'></image>
+                <text>{{location.name}}</text>
+            </view>
+            <button class="weui-btn  weui-btn_primary submit-btn" form-type="submit" type="primary" size="mini"> 发布 </button>
+        </view>
+    </form>
+</view>

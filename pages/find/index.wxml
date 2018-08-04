@@ -2,19 +2,19 @@
 <view class="page">
     <swiper indicator-dots="{{indicatorDots}}"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-        <block wx:for="{{imgUrls}}" wk:key="*.this">
+        <block wx:for="{{imgUrls}}" wk:key="item.index">
             <swiper-item>
                 <image src="{{item}}" class="slide-image" width="355" height="150"/>
             </swiper-item>
         </block>
     </swiper>
     <!-- 320*150px -->
-    <navigator url="../me/pois/new/index" class="weui-cell weui-cell_access notices" hover-class="weui-cell_active">
+    <!-- <navigator url="../me/pois/new/index" class="weui-cell weui-cell_access notices" hover-class="weui-cell_active">
         <view class="weui-cell__bd">
             0 条未读提醒
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">0</view>
-    </navigator>
+    </navigator> -->
     <!-- <view class="weui-panel tag-lists">
         <view class="weui-panel__bd">
             <view class="tagList">
@@ -45,5 +45,5 @@
             </view>
         </view>
     </view>
-    <button class='share add' bindtap='addNew'><image src='../../images/icon/add.png'></image></button>
+    <button class='share add' bindtap='addNew' animation="{{animationData}}"><image src='../../images/icon/add.png'></image></button>
 </view>

@@ -18,7 +18,8 @@ Page({
     scrollLeft: 0, //tab标题的滚动条位置
     tab_lists: null,
     collect_status: false,
-    _audio: null
+    _audio: null,
+    animation: {}
   },
   // 获取用户id
   getUserId: function(){
@@ -36,6 +37,28 @@ Page({
     } else {
       wx.switchTab({
         url: '/pages/index/index'
+      })
+    }
+  },
+  addNew: function () {
+    let that = this;
+    if (that.data.user_id < 1) {
+      wx.showModal({
+        title: '提示',
+        content: '登录后才可以收藏哦！',
+        success: function (res) {
+          if (res.confirm) {
+            wx.reLaunch({
+              url: '/pages/me/index'
+            });
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/find/new/index?type=poem&id='+that.data.poem.id
       })
     }
   },
@@ -229,7 +252,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    let animation = wx.createAnimation({
+      transformOrigin: "50% 50%",
+      duration: 500,
+      timingFunction: "ease",
+      delay: 0
+    })
+    animation.scale(1.3, 1.3).step();
+    this.setData({
+      animationData: animation.export()
+    })
+    setTimeout(function () {
+      animation.scale(1, 1).step()
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 500)
   },
 
   /**

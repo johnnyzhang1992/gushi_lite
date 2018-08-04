@@ -1,10 +1,22 @@
 <!--pages/find/detail/index.wxml-->
 <view class="page">
+ <form bindsubmit="bindFormSubmit">
   <view class="section">
-    <form bindsubmit="bindFormSubmit">
-      <textarea class="textarea" placeholder="这是一个可以自动聚焦的textarea" name="mind" auto-focus auto-height='' />
-      <view class="location"><image src='/images/icon/location_fill.png'></image> <text>添加地点</text></view>
-      <button class="submit-btn" form-type="submit"> 提交 </button>
-    </form>
+      <textarea class="textarea" placeholder="分享你喜欢的古诗词" name="mind" auto-focus auto-height bindfocus='keyBoardUp' bindblur='keyBoardDown' adjust-position />
   </view>
+  <view class="page__bd content-section" wx-if="{{type && type !=''}}">
+        <navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
+          <view class="poem-title">{{poem.title}}</view>
+          <view class="poem-author">{{poem.dynasty+' | '+poem.author}}</view>
+          <view class="poem-content">{{poem.text_content}}</view>
+        </navigator>
+  </view>
+  <view class="section bottom-section">
+      <view class="location" bindtap='getLocation'>
+        <image src='{{location_img}}'></image>
+        <text>{{location.name}}</text>
+      </view>
+      <button class="weui-btn  weui-btn_primary submit-btn" form-type="submit" type="primary" size="mini"> 提交 </button>
+  </view>
+ </form>
 </view>
