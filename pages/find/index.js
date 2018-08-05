@@ -82,7 +82,7 @@ Page({
       success: res => {
         if (res.data) {
           console.log('----------get PIns------------');
-          console.log(res.data);
+          // console.log(res.data);
           that.setData({
             pins: res.data.data,
             current_page: res.data.current_page,
@@ -143,7 +143,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getPins();
+    this.getPins(this);
+    wx.stopPullDownRefresh();
   },
 
   /**

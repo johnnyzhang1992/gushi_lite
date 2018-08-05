@@ -75,7 +75,7 @@
   display: block;
 }
 .poet-item view{
-  width:100%;
+  /* width:100%; */
   display: block;
   text-overflow:ellipsis;
   /* white-space:nowrap; */
@@ -89,7 +89,8 @@
 .poet-item .poem-profile{
     color: #666;
     font-size: 12px;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 3;
+    text-overflow:ellipsis;
 }
 .poet-item .poem-title:first-child{
     overflow: inherit;
