@@ -56,6 +56,12 @@
                                 <view class="poem-profile">{{item.poet.profile}}</view>
                             </navigator>
                         </view>
+                        <view class="page__bd bottom-section weui-flex">
+                          <view class="weui-flex__item"><image src="../../images/icon/repost.png"></image> 转发</view>
+                          <view class="weui-flex__item"><image src="../../images/icon/review.png"></image> 评论</view>
+                          <view class="weui-flex__item"><image src="../../images/icon/good.png"></image> 0</view>
+                          <view class="weui-flex__item" bindtap='deletePin' data-id="{{item.id}}" wx-if="{{user_id && user_id == 10}}"> 删除</view>
+                        </view>
                     </view>
                 </view>
             </view>

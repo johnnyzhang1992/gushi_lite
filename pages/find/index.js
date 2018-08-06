@@ -52,6 +52,34 @@ Page({
       })
     }
   },
+  deletePin: (e)=>{
+    console.log(e);
+    let id = e.target.dataset.id;
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/pin/'+id+'/update',
+      success: (res)=>{
+        console.log(res);
+        if(res.data && res.data.status){
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1000
+          })
+          setTimeout(() => {
+            wx.reLaunch({
+              url: '/pages/find/index'
+            });
+          }, 1000)
+        }else if(!res.data || (res && !res.data.status)){
+          wx.showToast({
+            title: '删除失败',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

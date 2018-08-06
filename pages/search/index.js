@@ -68,11 +68,11 @@ Page({
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/search/'+value,
       success: res =>{
-        // console.log(res.data);
+        console.log(res.data);
         that.setData({
-          poems: res.data.poems,
-          poets: res.data.poets,
-          sentences: res.data.sentences,
+          poems: res.data ? res.data.poems : null,
+          poets: res.data ? res.data.poets : null,
+          sentences: res.data ? res.data.sentences : null,
           tags: res.data.tags
         })
         wx.hideNavigationBarLoading()

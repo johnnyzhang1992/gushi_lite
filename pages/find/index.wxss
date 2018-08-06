@@ -134,3 +134,19 @@
 .right-top{
   margin-top:0;
 }
+.bottom-section{
+  margin-top: 10px;
+  padding: 0 10px;
+}
+.bottom-section image{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 0;
+}
+.bottom-section .weui-flex__item{
+  font-size: 12px;
+  line-height: 20px;
+  position: relative;
+  padding-left:23px;
+}
