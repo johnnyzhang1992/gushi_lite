@@ -150,6 +150,7 @@ Page({
           if(res.data){
             console.log('----------success------------');
             wx.setStorageSync('user',res.data);
+            wx.setStorageSync('wx_token', res.data.wx_token);
             app.globalData.userInfo = res.data;
             wx.request({
               url: 'https://xuegushi.cn/wxxcx/getUserInfo/'+res.data.user_id,

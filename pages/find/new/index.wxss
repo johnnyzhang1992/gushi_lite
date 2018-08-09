@@ -6,6 +6,8 @@
 .textarea{
   border: none;
   min-height: 200rpx;
+  max-height: 250px;
+  overflow-y: scroll;
 }
 form{
   clear: both;

@@ -227,7 +227,7 @@ Page({
       })
     }else{
       wx.request({
-        url: 'https://xuegushi.cn/wxxcx/'+that.data.poem.id+'/collect/poem?user_id='+that.data.user_id,
+        url: 'https://xuegushi.cn/wxxcx/' + that.data.poem.id + '/collect/poem?user_id=' + that.data.user_id + '&wx_token=' + wx.getStorageSync('wx_token'),
         success: res => {
           if(res.data){
             that.setData({

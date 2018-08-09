@@ -14,7 +14,12 @@
   height: 1px;
   border-top: 1rpx solid #E5E5E5;
   color: #E5E5E5;
-  left: 0;
+}
+.slide-image{
+  width: 100%;
+  /* height: auto; */
+  min-height: 200px;
+  display: block
 }
 .notices{
   color:#ccc;
@@ -111,6 +116,7 @@
   -webkit-line-clamp: 5;
   color: #333;
   font-size: 14px;
+  display: block;
 }
 .pin-author,.pin-time{
   float: none;

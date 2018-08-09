@@ -18,7 +18,8 @@ Page({
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    animationData:{}
+    animationData:{},
+    userInfo: app.globalData.userInfo
   },
   // 获取用户id
   getUserId: function () {
@@ -56,7 +57,7 @@ Page({
     console.log(e);
     let id = e.target.dataset.id;
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/pin/'+id+'/update',
+      url: 'https://xuegushi.cn/wxxcx/pin/' + id + '/update' + '?user_id=' + wx.getStorageSync('user').user_id+'&wx_token=' + wx.getStorageSync('wx_token'),
       success: (res)=>{
         console.log(res);
         if(res.data && res.data.status){

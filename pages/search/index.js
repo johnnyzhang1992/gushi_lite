@@ -66,9 +66,9 @@ Page({
       'keyWord': value
     });
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/search/'+value,
+      url: 'https://xuegushi.cn/wxxcx/search/' + value + '?wx_token=' +wx.getStorageSync('wx_token'),
       success: res =>{
-        console.log(res.data);
+        // console.log(res.data);
         that.setData({
           poems: res.data ? res.data.poems : null,
           poets: res.data ? res.data.poets : null,

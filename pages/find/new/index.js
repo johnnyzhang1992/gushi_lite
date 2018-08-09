@@ -106,9 +106,10 @@ Page({
         'address':e.detail.value.l_address,
         'lat':e.detail.value.l_latitude,
         'lon':e.detail.value.l_longitude,
-      }
+      },
+      wx_token: wx.getStorageSync('wx_token')
     };
-    console.log(data);
+    // console.log(data);
     // create pin
     if (user && user.user_id < 1) {
       wx.showModal({
@@ -129,7 +130,7 @@ Page({
         url: 'https://xuegushi.cn/wxxcx/createPin/'+user.user_id,
         data: data,
         success: (res)=>{
-          console.log(res);
+          // console.log(res);
           if(res.data && res.data.pin_id && res.data.pin_id>0){
             wx.showToast({
               title: '发布成功',

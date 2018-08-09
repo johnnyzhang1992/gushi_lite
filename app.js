@@ -41,6 +41,7 @@ App({
                   if(res.data){
                     console.log('----------success------------');
                     wx.setStorageSync('user',res.data);
+                    wx.setStorageSync('wx_token', res.data.wx_token);
                     that.globalData.userInfo = res.data;
                   }
                 }
