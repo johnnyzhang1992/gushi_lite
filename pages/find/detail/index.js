@@ -5,13 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    location : {
-      name : '添加地点',
+    location: {
+      name: '添加地点',
     },
     location_img: '/images/icon/location_fill.png',
     type: null,
     poem: null,
-    author: null,
+    poet: null,
+    pin: null,
+    p_pin:null,
+    t_id: 0
   },
   // 获取用户id
   getUserId: function () {
@@ -23,28 +26,61 @@ Page({
       });
     }
   },
+  addNew: function (event) {
+    let pin_id = event.currentTarget.dataset.id ? event.currentTarget.dataset.id : 0;
+    let that = this;
+    if (that.data.user_id < 1) {
+      wx.showModal({
+        title: '提示',
+        content: '登录后才可以操作哦！',
+        success: function (res) {
+          if (res.confirm) {
+            wx.reLaunch({
+              url: '/pages/me/index'
+            });
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    } else {
+      let _url = '/pages/find/new/index';
+      if (pin_id > 0) {
+        _url = _url + '?type=pin&id=' + pin_id;
+      }
+      wx.navigateTo({
+        url: _url
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let that = this;
-    console.log(options.id,options.type)
+    console.log(options.id, options.type);
     wx.setNavigationBarTitle({
-      title: '写想法'
+      title: '想法'
     });
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/poem/' + options.id + '?user_id=' + that.data.user_id,
-      success: res => {
-        if (res.data) {
-          console.log('----------success------------');
-          this.setData({
-            poem: res.data.poem,
-            type: 'poem'
-          });
-          wx.hideLoading();
+
+      wx.request({
+        url: 'https://xuegushi.cn/wxxcx/getPinDetail/' + options.id + '?user_id=' + that.data.user_id,
+        success: res => {
+          if (res.data) {
+            // console.log(res.data);
+            console.log('----------success------------');
+            this.setData({
+              pin: res.data.pin,
+              poem: res.data.poem ? res.data.poem : null,
+              poet: res.data.poet ? res.data.poet : null,
+              type: 'pin',
+              t_id: res.data.pin.id
+            });
+            // wx.hideLoading();
+          }
         }
-      }
-    });
+      });
+    
   },
   getLocation: function(){
     wx.chooseLocation({

@@ -1,22 +1,61 @@
 <!--pages/find/detail/index.wxml-->
 <view class="page">
- <form bindsubmit="bindFormSubmit">
-  <view class="section">
-      <textarea class="textarea" placeholder="分享你喜欢的古诗词" name="mind" auto-focus auto-height bindfocus='keyBoardUp' bindblur='keyBoardDown' adjust-position />
-  </view>
-  <view class="page__bd content-section" wx-if="{{type && type !=''}}">
-        <navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
-          <view class="poem-title">{{poem.title}}</view>
-          <view class="poem-author">{{poem.dynasty+' | '+poem.author}}</view>
-          <view class="poem-content">{{poem.text_content}}</view>
-        </navigator>
-  </view>
-  <view class="section bottom-section">
-      <view class="location" bindtap='getLocation'>
-        <image src='{{location_img}}'></image>
-        <text>{{location.name}}</text>
-      </view>
-      <button class="weui-btn  weui-btn_primary submit-btn" form-type="submit" type="primary" size="mini"> 提交 </button>
-  </view>
- </form>
+    <view class="weui-panel">
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_text">
+                <view class="weui-flex pins-content">
+                    <view class="pin-avatar">
+                        <image src="{{pin.user.avatarUrl}}" mode="aspectFit" style="width:35px;height:35px;background-color:#ddd"/>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="weui-media-box__info right-top" >
+                            <view class="weui-media-box__info__meta pin-author">{{ pin.user.name}}</view>
+                            <view class="weui-media-box__info__meta pin-time">{{ pin.updated_at}}</view>
+                        </view>
+                        <text class="weui-media-box__desc pin-content" decode='true'>{{ item.content}}</text>
+                        <view class="page__bd content-section" wx-if="{{pin.t_type && pin.t_type =='poem'}}">
+                            <navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
+                                <view class="poem-title">{{poem.title}}</view>
+                                <view class="poem-author">{{poem.dynasty+' | '+poem.author}}</view>
+                                <view class="poem-content">{{poem.content}}</view>
+                            </navigator>
+                        </view>
+                        <view class="page__bd content-section" wx-if="{{pin.t_type && pin.t_type =='poet'}}">
+                            <navigator url="/pages/poet/detail/index?id={{poet.id}}" hover-class="navigator-hover" class="weui-cell poet-item">
+                                <view class="poem-title">{{poet.author_name}} | <view class="poem-author">{{poet.dynasty}}</view></view>
+                                <view class="poem-profile">{{poet.profile}}</view>
+                            </navigator>
+                        </view>
+                        <view class="page__bd content-section pinSection" wx-if="{{pin.t_type && pin.t_type =='pin' && pin.p_id>0}}">
+                            <view class="weui-cell poet-item pin-item">
+                                <view class="poem-title">
+                                    <view class="pin-title">{{'@'+ pin.pin.user.name}} :</view>
+                                    <text class="pin-content">{{pin.pin.content}}</text>
+                                </view>
+                            </view>
+                            <view class="page__bd content-section pin-section" wx-if="{{pin.pin && pin.pin.t_type == 'poem'}}">
+                                <navigator url="/pages/poem/detail/index?id={{pin.pin.poem.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
+                                    <view class="poem-title">{{pin.pin.poem.title}}</view>
+                                    <view class="poem-author">{{pin.pin.poem.dynasty+' | '+pin.pin.poem.author}}</view>
+                                    <view class="poem-content">{{pin.pin.poem.content}}</view>
+                                </navigator>
+                            </view>
+                            <view class="page__bd content-section pin-section" wx-if="{{pin.pin && pin.pin.t_type == 'poet'}}">
+                                <navigator url="/pages/poet/detail/index?id={{pin.pin.poet.id}}" hover-class="navigator-hover" class="weui-cell poet-item">
+                                    <view class="poem-title">{{pin.pin.poet.author_name}} | <view class="poem-author">{{pin.pin.poet.dynasty}}</view></view>
+                                    <view class="poem-profile">{{pin.pin.poet.profile}}</view>
+                                </navigator>
+                            </view>
+                        </view>
+                        <view class="page__bd bottom-section weui-flex">
+                          <view class="weui-flex__item" data-id='{{pin.id}}' bindtap='addNew'><image src="../../../images/icon/repost.png"></image> 转发</view>
+                          <view class="weui-flex__item"><image src="../../../images/icon/review.png"></image> 评论</view>
+                          <view class="weui-flex__item"><image src="../../../images/icon/good.png"></image> 0</view>
+                          <view class="weui-flex__item" bindtap='deletePin' data-id="{{pin.id}}" wx-if="{{user_id && user_id == 10}}"> 删除</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
 </view>

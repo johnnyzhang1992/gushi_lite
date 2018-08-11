@@ -31,7 +31,8 @@ Page({
       });
     }
   },
-  addNew: function () {
+  addNew: function (event) {
+    let pin_id = event.currentTarget.dataset.id ? event.currentTarget.dataset.id : 0;
     let that = this;
     if (that.data.user_id < 1) {
       wx.showModal({
@@ -48,13 +49,17 @@ Page({
         }
       })
     } else {
+      let _url = '/pages/find/new/index';
+      if(pin_id>0){
+        _url = _url +'?type=pin&id='+pin_id;
+      }
       wx.navigateTo({
-        url: '/pages/find/new/index'
+        url: _url
       })
     }
   },
   deletePin: (e)=>{
-    console.log(e);
+    // console.log(e);
     let id = e.target.dataset.id;
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/pin/' + id + '/update' + '?user_id=' + wx.getStorageSync('user').user_id+'&wx_token=' + wx.getStorageSync('wx_token'),
@@ -80,6 +85,13 @@ Page({
         }
       }
     })
+  },
+  pinDetail: (e)=>{
+    let id = e.currentTarget.dataset.id;
+    let type = e.currentTarget.dataset.type;
+    wx.navigateTo({
+      url: '/pages/find/detail/index?id='+id+'&type='+type
+    });
   },
   /**
    * 生命周期函数--监听页面加载

@@ -11,6 +11,7 @@ Page({
     type: null,
     poem: null,
     poet: null,
+    pin:null,
     t_id: 0
   },
   // 获取用户id
@@ -64,6 +65,24 @@ Page({
           }
         }
       })
+    }else if(options.type && options.type =='pin'){
+      wx.request({
+        url: 'https://xuegushi.cn/wxxcx/getPinDetail/' + options.id + '?user_id=' + that.data.user_id,
+        success: res => {
+          if (res.data) {
+            // console.log(res.data);
+            console.log('----------success------------');
+            this.setData({
+              pin: res.data.pin,
+              poem: res.data.poem ? res.data.poem : null,
+              poet: res.data.poet ? res.data.poet : null,
+              type: 'pin',
+              t_id: res.data.pin.id
+            });
+            // wx.hideLoading();
+          }
+        }
+      });
     }
   },
   getLocation: function(){
@@ -101,6 +120,7 @@ Page({
       content: e.detail.value.mind,
       t_id: e.detail.value.t_id,
       t_type: e.detail.value.t_type,
+      p_id: e.detail.value.p_id,
       location: {
         'name':e.detail.value.l_name,
         'address':e.detail.value.l_address,
@@ -136,7 +156,7 @@ Page({
               title: '发布成功',
               icon: 'success',
               duration: 1000
-            })
+            });
             setTimeout(()=>{
               wx.reLaunch({
                 url: '/pages/find/index'

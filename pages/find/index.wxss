@@ -156,3 +156,27 @@
   position: relative;
   padding-left:23px;
 }
+.pinSection{
+  padding-bottom: 8px
+}
+.pin-item{
+  line-height: 22px;
+  padding: 5px 15px;
+}
+.pin-item .pin-title{
+  /* display: inline-block; */
+  font-weight: bold;
+  width: auto;
+}
+.pin-item .pin-content{
+  /* display: inline-block; */
+  padding-left: 0;
+  line-height: 22px;
+  /* width:auto; */
+   text-overflow:ellipsis;
+  -webkit-line-clamp: 5;
+}
+.pin-section{
+  margin-top: 0;
+  background-color: #fff;
+}
