@@ -4,11 +4,11 @@
         <view class="weui-panel__bd">
             <view class="weui-media-box weui-media-box_text">
                 <view class="weui-flex pins-content">
-                    <view class="pin-avatar">
+                    <view class="pin-avatar" bindtap='userPins' data-id="{{pin.u_id}}">
                         <image src="{{pin.user.avatarUrl}}" mode="aspectFit" style="width:35px;height:35px;background-color:#ddd"/>
                     </view>
                     <view class="weui-flex__item">
-                        <view class="weui-media-box__info right-top" >
+                        <view class="weui-media-box__info right-top" bindtap='userPins' data-id="{{pin.u_id}}">
                             <view class="weui-media-box__info__meta pin-author">{{ pin.user.name}}</view>
                             <view class="weui-media-box__info__meta pin-time">{{ pin.updated_at}}</view>
                         </view>
@@ -17,7 +17,7 @@
                             <navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
                                 <view class="poem-title">{{poem.title}}</view>
                                 <view class="poem-author">{{poem.dynasty+' | '+poem.author}}</view>
-                                <view class="poem-content">{{poem.content}}</view>
+                                <view class="poem-content">{{poem.text_content}}</view>
                             </navigator>
                         </view>
                         <view class="page__bd content-section" wx-if="{{pin.t_type && pin.t_type =='poet'}}">
@@ -37,7 +37,7 @@
                                 <navigator url="/pages/poem/detail/index?id={{pin.pin.poem.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
                                     <view class="poem-title">{{pin.pin.poem.title}}</view>
                                     <view class="poem-author">{{pin.pin.poem.dynasty+' | '+pin.pin.poem.author}}</view>
-                                    <view class="poem-content">{{pin.pin.poem.content}}</view>
+                                    <view class="poem-content">{{pin.pin.poem.text_content}}</view>
                                 </navigator>
                             </view>
                             <view class="page__bd content-section pin-section" wx-if="{{pin.pin && pin.pin.t_type == 'poet'}}">
@@ -51,7 +51,6 @@
                           <view class="weui-flex__item" data-id='{{pin.id}}' bindtap='addNew'><image src="../../../images/icon/repost.png"></image> 转发</view>
                           <view class="weui-flex__item"><image src="../../../images/icon/review.png"></image> 评论</view>
                           <view class="weui-flex__item"><image src="../../../images/icon/good.png"></image> 0</view>
-                          <view class="weui-flex__item" bindtap='deletePin' data-id="{{pin.id}}" wx-if="{{user_id && user_id == 10}}"> 删除</view>
                         </view>
                     </view>
                 </view>
@@ -68,11 +67,12 @@
                             <image src="{{item.avatarUrl}}" mode="aspectFit" style="width:35px;height:35px;background-color:#ddd"/>
                         </view>
                         <view class="weui-flex__item">
-                            <view class="weui-media-box__info right-top" bindtap='pinDetail' data-id="{{item.id}}" data-type="{{item.t_type}}">
-                                <view class="weui-media-box__info__meta pin-author">{{ item.name}}</view>
+                            <view class="weui-media-box__info right-top" data-id="{{item.id}}" data-type="{{item.t_type}}">
+                                <view class="weui-media-box__info__meta pin-author " data-id="{{item.u_id}}" bindtap='userPins'>{{ item.name}}</view>
+                                <view class="weui-media-box__info__meta pin-time" wx-if="{{ user_id ==pin.u_id || user_id ==10 || user_id == item.u_id}}" data-id="{{item.id}}" data-pinId="{{item.t_id}}" bindtap='deleteReview'>删除</view>
                                 <view class="weui-media-box__info__meta pin-time">{{ item.updated_at}}</view>
                             </view>
-                            <text class="weui-media-box__desc pin-content" decode='true' bindtap='pinDetail' data-id="{{item.id}}" data-type="{{item.t_type}}">{{ item.content}}</text>
+                            <text class="weui-media-box__desc pin-content" decode='true' data-id="{{item.id}}" data-type="{{item.t_type}}">{{ item.content}}</text>
                         </view>
                     </view>
                 </view>
