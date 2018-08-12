@@ -1,10 +1,7 @@
+/* pages/find/user/index.wxss */
 /* pages/find/index.wxss */
 .page{
   padding-top: 0
-}
-.weui-panel:after{
-  border-bottom: none;
-  color: #fff;
 }
 .weui-panel:before {
   border-top: none;
@@ -183,36 +180,4 @@
 .pin-section{
   margin-top: 0;
   background-color: #fff;
-}
-page{
-  position: relative;
-  min-height: 100%;
-}
-.pin-review{
-  background: #f6f7f8;
-  position: absolute;
-  left: 0;
-  width: 100%;
-}
-.pin-review .weui-cell{
-  padding: 5px 15px;
-  align-items: inherit;
-}
-.pin-review .weui-cell__bd{
-  padding-right: 10px;
-}
-.pin-review input{
-  background-color: #fff;
-  padding: 2px 0 2px 5px;
-  font-size: 14px;
-  border-radius:6px; 
-}
-.review-content .weui-media-box{
-  padding: 10px 15px;
-}
-.review-content .pin-author,.review-content .pin-time{
-  display: inline-block;
-}
-.review-content .pin-time{
-  float: right;
 }

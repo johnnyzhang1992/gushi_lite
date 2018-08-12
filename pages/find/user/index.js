@@ -1,6 +1,6 @@
 // pages/find/index.js
 const app = getApp();
-let https = require('../../utils/http.js');
+let https = require('../../../utils/http.js');
 Page({
 
   /**
@@ -9,16 +9,16 @@ Page({
   data: {
     motto: '古诗文小助手',
     user_id: 0,
-    current_page:1,
-    total_page:0,
-    tags: ['科普','故事','问与答'],
+    current_page: 1,
+    total_page: 0,
+    tags: ['科普', '故事', '问与答'],
     pins: null,
-    imgUrls: null,
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    animationData:{},
+    animationData: {},
+    pin_u_id: 0,
     userInfo: app.globalData.userInfo
   },
   // 获取用户id
@@ -50,22 +50,22 @@ Page({
       })
     } else {
       let _url = '/pages/find/new/index';
-      if(pin_id>0){
-        _url = _url +'?type=pin&id='+pin_id;
+      if (pin_id > 0) {
+        _url = _url + '?type=pin&id=' + pin_id;
       }
       wx.navigateTo({
         url: _url
       })
     }
   },
-  deletePin: (e)=>{
+  deletePin: (e) => {
     // console.log(e);
     let id = e.target.dataset.id;
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/pin/' + id + '/update' + '?user_id=' + wx.getStorageSync('user').user_id+'&wx_token=' + wx.getStorageSync('wx_token'),
-      success: (res)=>{
+      url: 'https://xuegushi.cn/wxxcx/pin/' + id + '/update' + '?user_id=' + wx.getStorageSync('user').user_id + '&wx_token=' + wx.getStorageSync('wx_token'),
+      success: (res) => {
         console.log(res);
-        if(res.data && res.data.status){
+        if (res.data && res.data.status) {
           wx.showToast({
             title: '删除成功',
             icon: 'success',
@@ -76,7 +76,7 @@ Page({
               url: '/pages/find/index'
             });
           }, 1000)
-        }else if(!res.data || (res && !res.data.status)){
+        } else if (!res.data || (res && !res.data.status)) {
           wx.showToast({
             title: '删除失败',
             icon: 'none',
@@ -86,93 +86,68 @@ Page({
       }
     })
   },
-  pinDetail: (e)=>{
+  pinDetail: (e) => {
     let id = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
     wx.navigateTo({
-      url: '/pages/find/detail/index?id='+id+'&type='+type
+      url: '/pages/find/detail/index?id=' + id + '&type=' + type
     });
-  },
-  userPins: (e)=>{
-    let id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: '/pages/find/user/index?id=' + id
-    });
-  },
-  pinLike: (e,th)=>{
-    let id = e.currentTarget.dataset.id;
-    let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
-    let wx_token = wx.getStorageSync('wx_token');
-    console.log(e);
-    console.log(th);
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getUserId();
-    wx.showLoading({
-      title: '加载中',
+    this.setData({
+      pin_u_id: options.id
     });
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getSliderImages',
-      success: res =>{
-        if(res.data){
-          console.log('----------success------------');
-          this.setData({
-            imgUrls: res.data
-          });
-          wx.hideLoading();
-          this.getPins(this);
-        }
-      }
-    })
+    this.getUserId();
+    this.getPins(this);
   },
-  getPins: (th)=>{
-    let that = th;
-    wx.showNavigationBarLoading();
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPins',
-      success: res => {
-        if (res.data) {
-          console.log('----------get PIns------------');
-          // console.log(res.data);
-          that.setData({
-            pins: res.data.data,
-            current_page: res.data.current_page,
-            total_page: res.data.last_page
-          });
-          wx.hideNavigationBarLoading();
+  getPins: (th) => {
+      let that = th;
+      wx.showNavigationBarLoading();
+      wx.request({
+        url: 'https://xuegushi.cn/wxxcx/getPins?id='+that.data.pin_u_id,
+        success: res => {
+          if (res.data) {
+            console.log('----------get PIns------------');
+            // console.log(res.data);
+            that.setData({
+              pins: res.data.data,
+              current_page: res.data.current_page,
+              total_page: res.data.last_page
+            });
+            wx.setNavigationBarTitle({
+              title: that.data.pins[0].user.name
+            });
+            wx.hideNavigationBarLoading();
+          }
         }
-      }
-    })
-  },
+      })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+   
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.setNavigationBarTitle({
-      title: '想法'
-    });
     let animation = wx.createAnimation({
       transformOrigin: "50% 50%",
       duration: 500,
       timingFunction: "ease",
       delay: 0
     });
-    animation.scale(1.3,1.3).step();
+    animation.scale(1.3, 1.3).step();
     this.setData({
       animationData: animation.export()
     });
     setTimeout(function () {
-      animation.scale(1,1).step();
+      animation.scale(1, 1).step();
       this.setData({
         animationData: animation.export()
       })
@@ -183,14 +158,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-   
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
@@ -205,19 +180,19 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(this.data.last_page<this.data.current_page){
+    if (this.data.last_page < this.data.current_page) {
       return false;
     }
     wx.showNavigationBarLoading();
     let that = this;
     // Do something when page reach bottom.
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPins',
+      url: 'https://xuegushi.cn/wxxcx/getPins?id=' + that.data.pin_u_id,
       data: {
-        page: that.data.current_page+1
+        page: that.data.current_page + 1
       },
-      success: res =>{
-        if(res.data){
+      success: res => {
+        if (res.data) {
           console.log('----------success------------');
           this.setData({
             pins: that.data.pins.concat(res.data.data),
@@ -235,14 +210,14 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '发现',
-      path: '/pages/find/index',
+      title: this.data.pins[0].user.name,
+      path: '/pages/find/user/index?id='+this.data.pin_u_id,
       // imageUrl:'/images/poem.png',
-      success: function(res) {
+      success: function (res) {
         // 转发成功
         console.log('转发成功！')
       },
-      fail: function(res) {
+      fail: function (res) {
         // 转发失败
       }
     }

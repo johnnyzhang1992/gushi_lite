@@ -1,29 +1,5 @@
 <!--pages/find/index.wxml-->
 <view class="page">
-    <swiper indicator-dots="{{indicatorDots}}"
-            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-        <block wx:for="{{imgUrls}}" wk:key="item.index">
-            <swiper-item>
-                <image src="{{item}}" class="slide-image"  height="200"/>
-            </swiper-item>
-        </block>
-    </swiper>
-    <!-- 320*150px -->
-    <!-- <navigator url="../me/pois/new/index" class="weui-cell weui-cell_access notices" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-            0 条未读提醒
-        </view>
-        <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">0</view>
-    </navigator> -->
-    <!-- <view class="weui-panel tag-lists">
-        <view class="weui-panel__bd">
-            <view class="tagList">
-                <block wx:for="{{tags}}" wx:key='*.this'>
-                    <view class="tagItem" bindtap="tagTap" data-key="{{item}}">{{item}}</view>
-                </block>
-            </view>
-        </view>
-    </view> -->
     <view class="weui-panel">
         <view class="weui-panel__bd">
             <view class="weui-media-box weui-media-box_text" wx:for="{{pins}}" wx:key="id">
@@ -34,7 +10,7 @@
                 <!--</view>-->
                 <!--<view class="weui-media-box__desc" wx:if="{{ item.description == NULL || item.description == ''}}">暂无简介</view>-->
                 <view class="weui-flex pins-content">
-                    <view class="pin-avatar" data-id="{{item.u_id}}" bindtap='userPins'>
+                    <view class="pin-avatar">
                         <image src="{{item.user.avatarUrl}}" mode="aspectFit" style="width:35px;height:35px;background-color:#ddd"/>
                     </view>
                     <view class="weui-flex__item">
@@ -78,9 +54,9 @@
                             </view>
                         </view>
                         <view class="page__bd bottom-section weui-flex">
-                          <view class="weui-flex__item" data-id='{{item.id}}' bindtap='addNew'><image src="../../images/icon/repost.png"></image> 转发</view>
-                          <view class="weui-flex__item" bindtap='pinDetail' data-id="{{item.id}}" data-type="{{item.t_type}}"><image src="../../images/icon/review.png"></image> 评论</view>
-                          <view class="weui-flex__item" bindtap='pinLike' data-id="{{item.id}}" data-count="{{item.like_count}}"><image src="../../images/icon/good.png"></image> {{item.like_count}}</view>
+                          <view class="weui-flex__item" data-id='{{item.id}}' bindtap='addNew'><image src="../../../images/icon/repost.png"></image> 转发</view>
+                          <view class="weui-flex__item"><image src="../../../images/icon/review.png"></image> 评论</view>
+                          <view class="weui-flex__item"><image src="../../../images/icon/good.png"></image> 0</view>
                           <view class="weui-flex__item" bindtap='deletePin' data-id="{{item.id}}" wx-if="{{user_id && user_id == 10}}"> 删除</view>
                         </view>
                     </view>
@@ -88,5 +64,5 @@
             </view>
         </view>
     </view>
-    <button class='share add' bindtap='addNew' animation="{{animationData}}"><image src='../../images/icon/add.png'></image></button>
+    <button class='share add' bindtap='addNew' animation="{{animationData}}"><image src='../../../images/icon/add.png'></image></button>
 </view>
