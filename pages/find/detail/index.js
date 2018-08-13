@@ -156,7 +156,8 @@ Page({
             let reviews = that.data.reviews.concat(review);
             that.setData({
               reviews: reviews,
-              show_load: false
+              show_load: false,
+              content: ''
             })
           }
         }
@@ -213,7 +214,13 @@ Page({
           setTimeout(() => {
             wx.startPullDownRefresh({ })
           }, 1000)
-        } else if (!res.data || (res && !res.data.status)) {
+        } else if (res.data && res.data.status== 500) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 1000
+          })
+        }else{
           wx.showToast({
             title: '删除失败',
             icon: 'none',

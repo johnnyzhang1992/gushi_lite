@@ -159,7 +159,7 @@ Page({
    */
   onShow: function () {
     wx.setNavigationBarTitle({
-      title: '想法'
+      title: '广场'
     });
     let animation = wx.createAnimation({
       transformOrigin: "50% 50%",
