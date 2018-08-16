@@ -21,7 +21,7 @@ Page({
     show_load: true,
     reviews: [],
     current_page: 0,
-    total: 0
+    total: 1
   },
   // 获取用户id
   getUserId: function () {
@@ -175,6 +175,9 @@ Page({
     let that = th;
     let id = that.data.pin.id;
     let page = that.data.current_page +1;
+    if(that.data.total<page){
+      return false;
+    }
     that.setData({
       show_load: true
     })
@@ -184,7 +187,7 @@ Page({
         // console.log(res);
         if(res.data){
           that.setData({
-            reviews: res.data.data,
+            reviews: that.data.reviews.concat(res.data.data),
             current_page: res.data.current_page,
             total: res.data.last_page,
             show_load: false
@@ -198,7 +201,8 @@ Page({
       content: e.detail.value
     })
   },
-  deleteReview: (e)=>{
+  deleteReview: function(e){
+    let that =this;
     let id = e.currentTarget.dataset.id;
     let t_id = e.currentTarget.dataset.pinId;
     wx.request({
@@ -212,6 +216,10 @@ Page({
             duration: 1000
           })
           setTimeout(() => {
+            that.setData({
+              current_page: 0,
+              reviews: []
+            })
             wx.startPullDownRefresh({ })
           }, 1000)
         } else if (res.data && res.data.status== 500) {
@@ -223,6 +231,56 @@ Page({
         }else{
           wx.showToast({
             title: '删除失败',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      }
+    })
+  },
+  pinLike: function (e) {
+    let id = e.currentTarget.dataset.id;
+    let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
+    let wx_token = wx.getStorageSync('wx_token');
+    let pins = this.data.pins;
+    let that = this;
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/pin/' + id + '/like',
+      data: {
+        user_id: user_id,
+        wx_token: wx_token
+      },
+      success: (res) => {
+        // console.log(res);
+        if (res.data && res.data.status == 'active') {
+          pins.map((item, index) => {
+            if (item.id == id) {
+              item.like_count = item.like_count + 1;
+              item.like_status = res.data.status;
+              return item;
+            } else {
+              return item;
+            }
+          })
+          that.setData({
+            pins: pins
+          })
+        } else if (res.data.status == 'delete') {
+          pins.map((item, index) => {
+            if (item.id == id) {
+              item.like_count = item.like_count - 1;
+              item.like_status = res.data.status;
+              return item;
+            } else {
+              return item;
+            }
+          })
+          that.setData({
+            pins: pins
+          })
+        } else {
+          wx.showToast({
+            title: res.data.msg,
             icon: 'none',
             duration: 1000
           })
@@ -263,7 +321,8 @@ Page({
    */
   onPullDownRefresh: function () {
     this.setData({
-      current_page: 0
+      current_page: 0,
+      reviews: []
     })
     this.getPinReviews(this);
     wx.stopPullDownRefresh();

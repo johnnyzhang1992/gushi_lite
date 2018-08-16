@@ -99,12 +99,57 @@ Page({
       url: '/pages/find/user/index?id=' + id
     });
   },
-  pinLike: (e,th)=>{
+  pinLike: function(e){
     let id = e.currentTarget.dataset.id;
     let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
     let wx_token = wx.getStorageSync('wx_token');
-    console.log(e);
-    console.log(th);
+    let pins = this.data.pins;
+    let that = this;
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/pin/'+id+'/like',
+      data:{
+        user_id:user_id,
+        wx_token:wx_token
+      },
+      success:(res)=>{
+        console.log(res);
+        if(res.data && res.data.status=='active'){
+          pins.map((item, index) => {
+            if (item.id == id) {
+              item.like_count = item.like_count + 1;
+              item.like_status = res.data.status;
+              return item;
+            } else {
+              return item;
+            }
+          })
+          that.setData({
+            pins: pins
+          })
+        }else if(res.data.status =='delete'){
+          pins.map((item, index) => {
+            if (item.id == id) {
+              item.like_count = item.like_count - 1;
+              item.like_status = res.data.status;
+              return item;
+            } else {
+              return item;
+            }
+          })
+          that.setData({
+            pins: pins
+          })
+        }else{
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 1000
+          })
+        }
+
+      }
+    })
+  
   },
   /**
    * 生命周期函数--监听页面加载
@@ -130,9 +175,10 @@ Page({
   },
   getPins: (th)=>{
     let that = th;
+    let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
     wx.showNavigationBarLoading();
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPins',
+      url: 'https://xuegushi.cn/wxxcx/getPins?id='+user_id,
       success: res => {
         if (res.data) {
           console.log('----------get PIns------------');

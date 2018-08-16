@@ -49,8 +49,9 @@
                         </view>
                         <view class="page__bd bottom-section weui-flex">
                           <view class="weui-flex__item" data-id='{{pin.id}}' bindtap='addNew'><image src="../../../images/icon/repost.png"></image> 转发</view>
-                          <view class="weui-flex__item"><image src="../../../images/icon/review.png"></image> 评论</view>
-                          <view class="weui-flex__item"><image src="../../../images/icon/good.png"></image> 0</view>
+                          <view class="weui-flex__item" bindtap='pinDetail' data-id="{{pin.id}}" data-type="{{pin.t_type}}"><image src="../../../images/icon/review.png"></image> 评论</view>
+                          <view class="weui-flex__item" bindtap='pinLike' data-id="{{pin.id}}" data-count="{{pin.like_count}}"><image src="{{pin.like_status =='active' ? '../../../images/icon/good_active.png' : '../../../images/icon/good.png'}}"></image> {{pin.like_count}}</view>
+                          <!-- <view class="weui-flex__item"><image src="../../../images/icon/good.png"></image> 0</view> -->
                         </view>
                     </view>
                 </view>

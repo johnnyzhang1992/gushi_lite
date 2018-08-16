@@ -1,6 +1,11 @@
 /* pages/find/index.wxss */
 .page{
-  padding-top: 0
+  padding-top: 0;
+  overflow-y: scroll;
+}
+.weui-panel{
+  overflow-y: scroll;
+  padding-bottom: 50px;
 }
 .weui-panel:after{
   border-bottom: none;
@@ -190,7 +195,7 @@ page{
 }
 .pin-review{
   background: #f6f7f8;
-  position: absolute;
+  position: fixed;
   left: 0;
   width: 100%;
 }
