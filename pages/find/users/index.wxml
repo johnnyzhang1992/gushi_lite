@@ -1,0 +1,17 @@
+<!--pages/find/users/index.wxml-->
+<view class="page">
+    <view class="review-content">
+        <view class="weui-media-box weui-media-box_text" wx:for="{{users}}" wx:key="id">
+            <view class="weui-flex pins-content">
+                <view class="pin-avatar" data-id="{{item.u_id}}" bindtap='userPins'>
+                    <image src="{{item.avatarUrl}}" mode="aspectFit" style="width:35px;height:35px;background-color:#ddd"/>
+                </view>
+                <view class="weui-flex__item">
+                    <view class="weui-media-box__info right-top">
+                        <view class="weui-media-box__info__meta pin-author " data-id="{{item.u_id}}" bindtap='userPins'>{{ item.name}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

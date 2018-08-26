@@ -5,7 +5,7 @@
             <view class="weui-media-box weui-media-box_text">
                 <view class="weui-flex pins-content">
                     <view class="pin-avatar" bindtap='userPins' data-id="{{pin.u_id}}">
-                        <image src="{{pin.user.avatarUrl}}" mode="aspectFit" style="width:35px;height:35px;background-color:#ddd"/>
+                        <image src="{{pin.user.avatarUrl}}" mode="aspectFit" style="width:35px;height:35px"/>
                     </view>
                     <view class="weui-flex__item">
                         <view class="weui-media-box__info right-top" bindtap='userPins' data-id="{{pin.u_id}}">
@@ -62,10 +62,19 @@
                     <view class="weui-loading"></view>
                     <view class="weui-loadmore__tips">正在加载</view>
                 </view>
+                <view class="weui-cell weui-cell_access count-section" wx-if="{{!show_load}}">
+                    <view class="weui-cell__bd review-count">
+                        {{review_count}} 条评论
+                    </view>
+                    <view class="weui-cell__hd review-count-text"> 鼓掌</view>
+                    <view class="weui-cell__ft review-count-users" bindtap='pinLikeUsers' data-id="{{pin.id}}">
+                        <image src="{{item.avatarUrl}}" mode="aspectFit" style="width:20px;height:20px;" wx:for="{{review_users}}" wx:key="id"></image>
+                    </view>
+                </view>
                 <view class="weui-media-box weui-media-box_text" wx:for="{{reviews}}" wx:key="id">
                     <view class="weui-flex pins-content">
                         <view class="pin-avatar" data-id="{{item.u_id}}" bindtap='userPins'>
-                            <image src="{{item.avatarUrl}}" mode="aspectFit" style="width:35px;height:35px;background-color:#ddd"/>
+                            <image src="{{item.avatarUrl}}" mode="aspectFit" style="width:35px;height:35px;"/>
                         </view>
                         <view class="weui-flex__item">
                             <view class="weui-media-box__info right-top" data-id="{{item.id}}" data-type="{{item.t_type}}">

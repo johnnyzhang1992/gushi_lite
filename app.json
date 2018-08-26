@@ -19,7 +19,8 @@
     "pages/find/index",
     "pages/find/detail/index",
     "pages/find/new/index",
-    "pages/find/user/index"
+    "pages/find/user/index",
+    "pages/find/users/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

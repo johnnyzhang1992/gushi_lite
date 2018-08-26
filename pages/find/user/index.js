@@ -10,7 +10,7 @@ Page({
     motto: '古诗文小助手',
     user_id: 0,
     current_page: 1,
-    total_page: 0,
+    last_page: 1,
     tags: ['科普', '故事', '问与答'],
     pins: null,
     indicatorDots: true,
@@ -70,7 +70,7 @@ Page({
             title: '删除成功',
             icon: 'success',
             duration: 1000
-          })
+          });
           setTimeout(() => {
             wx.reLaunch({
               url: '/pages/find/index'
@@ -107,7 +107,7 @@ Page({
       let that = th;
       wx.showNavigationBarLoading();
       wx.request({
-        url: 'https://xuegushi.cn/wxxcx/getPins?id='+that.data.pin_u_id,
+        url: 'https://xuegushi.cn/wxxcx/getPins?id='+that.data.pin_u_id+'&type=list',
         success: res => {
           if (res.data) {
             console.log('----------get PIns------------');
@@ -115,7 +115,7 @@ Page({
             that.setData({
               pins: res.data.data,
               current_page: res.data.current_page,
-              total_page: res.data.last_page
+              last_page: res.data.last_page
             });
             wx.setNavigationBarTitle({
               title: that.data.pins[0].user.name
@@ -187,7 +187,7 @@ Page({
     let that = this;
     // Do something when page reach bottom.
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPins?id=' + that.data.pin_u_id,
+      url: 'https://xuegushi.cn/wxxcx/getPins?id=' + that.data.pin_u_id + '&type=list',
       data: {
         page: that.data.current_page + 1
       },

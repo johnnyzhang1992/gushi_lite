@@ -70,7 +70,7 @@ Page({
             title: '删除成功',
             icon: 'success',
             duration: 1000
-          })
+          });
           setTimeout(() => {
             wx.reLaunch({
               url: '/pages/find/index'
@@ -159,19 +159,21 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getSliderImages',
-      success: res =>{
-        if(res.data){
-          console.log('----------success------------');
-          this.setData({
-            imgUrls: res.data
-          });
-          wx.hideLoading();
-          this.getPins(this);
-        }
-      }
-    })
+    wx.hideLoading();
+    this.getPins(this);
+    // wx.request({
+    //   url: 'https://xuegushi.cn/wxxcx/getSliderImages',
+    //   success: res =>{
+    //     if(res.data){
+    //       console.log('----------success------------');
+    //       this.setData({
+    //         imgUrls: res.data
+    //       });
+    //       wx.hideLoading();
+    //       this.getPins(this);
+    //     }
+    //   }
+    // })
   },
   getPins: (th)=>{
     let that = th;

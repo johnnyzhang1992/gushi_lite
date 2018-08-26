@@ -1,13 +1,13 @@
 <!--pages/find/index.wxml-->
 <view class="page">
-    <swiper indicator-dots="{{indicatorDots}}"
+    <!-- <swiper indicator-dots="{{indicatorDots}}"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
         <block wx:for="{{imgUrls}}" wk:key="item.index">
             <swiper-item>
                 <image src="{{item}}" class="slide-image"  height="200"/>
             </swiper-item>
         </block>
-    </swiper>
+    </swiper> -->
     <!-- 320*150px -->
     <!-- <navigator url="../me/pois/new/index" class="weui-cell weui-cell_access notices" hover-class="weui-cell_active">
         <view class="weui-cell__bd">

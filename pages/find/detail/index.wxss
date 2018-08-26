@@ -3,6 +3,10 @@
   padding-top: 0;
   overflow-y: scroll;
 }
+image{
+  width: 35px;
+  height: 35px;
+}
 .weui-panel{
   overflow-y: scroll;
   padding-bottom: 50px;
@@ -220,4 +224,27 @@ page{
 }
 .review-content .pin-time{
   float: right;
+}
+.review-count{
+  color: #333;
+  font-size: 14px;
+}
+.review-count-text{
+  color: #cecece;
+  font-size: 14px;
+}
+.review-count-users{
+  padding-left: 10px;
+  line-height: 20px;
+}
+.review-count-users image{
+  border-radius:100%;
+  /* border-color:#ddd; */
+  /* border-width:1px;  */
+  margin-left: -8px; 
+  /* z-index: 1; */
+}
+.review-count-users image:first-child{
+  margin-left: 0;
+  /* z-index: 2; */
 }

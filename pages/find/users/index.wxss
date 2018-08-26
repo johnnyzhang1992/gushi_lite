@@ -1,0 +1,61 @@
+/* pages/find/users/index.wxss */
+.page{
+    padding-top: 10px;
+    overflow-y: scroll;
+}
+.pins-content{
+    width: 100%;
+    overflow: hidden;
+}
+.pin-content{
+    padding: 5px 15px;
+    -webkit-line-clamp: 5;
+    color: #333;
+    font-size: 14px;
+    display: block;
+}
+.pin-author,.pin-time{
+    float: none;
+    padding-left: 10px;
+}
+.pin-author{
+    font-size: 14px;
+    color: #333;
+    margin-bottom:6px;
+}
+.pin-time{
+    font-size: 12px;
+}
+.pin-avatar{
+    width:40px;
+    max-width: 40px;
+}
+.pin-avatar image{
+    border-radius: 100%;
+}
+.right-top{
+    margin-top:0;
+}
+.bottom-section{
+    margin-top: 10px;
+    padding: 0 10px;
+}
+.bottom-section image {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+}
+.weui-media-box{
+  padding: 6px 15px;
+}
+.weui-media-box:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: none;
+  color: #E5E5E5;
+}

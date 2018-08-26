@@ -1,4 +1,5 @@
 // pages/find/detail/index.js
+const app = getApp();
 Page({
 
   /**
@@ -18,6 +19,8 @@ Page({
     user_id: 0,
     content: '',
     review_bottom: 0,
+    review_count:0,
+    review_users: null,
     show_load: true,
     reviews: [],
     current_page: 0,
@@ -136,7 +139,7 @@ Page({
               console.log('用户点击取消')
             }
           }
-        })
+        });
         return false;
       }
       let data = {
@@ -145,7 +148,7 @@ Page({
         content: that.data.content,
         t_id: that.data.pin.id,
         t_type: 'pin'
-      }
+      };
       wx.request({
         url: 'https://xuegushi.cn/wxxcx/createPinReview',
         data: data,
@@ -154,10 +157,12 @@ Page({
           if (res.data.status == 200) {
             let review = res.data.review;
             let reviews = that.data.reviews.concat(review);
+            let review_count = that.data.review_count+1;
             that.setData({
               reviews: reviews,
               show_load: false,
-              content: ''
+              content: '',
+              review_count: review_count
             })
           }
         }
@@ -180,25 +185,34 @@ Page({
     }
     that.setData({
       show_load: true
-    })
+    });
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/getPinReviews/'+id+'?page='+page,
       success: (res)=>{
         // console.log(res);
         if(res.data){
           that.setData({
-            reviews: that.data.reviews.concat(res.data.data),
-            current_page: res.data.current_page,
-            total: res.data.last_page,
-            show_load: false
+            reviews: that.data.reviews.concat(res.data.reviews.data),
+            current_page: res.data.reviews.current_page,
+            total: res.data.reviews.last_page,
+            show_load: false,
+            review_count: res.data.reviews.total,
+            review_users: res.data.users.data
           })
         }
       }
-    })
+    })  
   },
   bindKeyInput: function (e) {
     this.setData({
       content: e.detail.value
+    })
+  },
+  pinLikeUsers: function (e) {
+    let that = this;
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/find/users/index?id='+id
     })
   },
   deleteReview: function(e){
@@ -214,12 +228,12 @@ Page({
             title: '删除成功',
             icon: 'success',
             duration: 1000
-          })
+          });
           setTimeout(() => {
             that.setData({
               current_page: 0,
               reviews: []
-            })
+            });
             wx.startPullDownRefresh({ })
           }, 1000)
         } else if (res.data && res.data.status== 500) {
@@ -242,7 +256,7 @@ Page({
     let id = e.currentTarget.dataset.id;
     let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
     let wx_token = wx.getStorageSync('wx_token');
-    let pins = this.data.pins;
+    let pin = this.data.pin;
     let that = this;
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/pin/' + id + '/like',
@@ -253,30 +267,14 @@ Page({
       success: (res) => {
         // console.log(res);
         if (res.data && res.data.status == 'active') {
-          pins.map((item, index) => {
-            if (item.id == id) {
-              item.like_count = item.like_count + 1;
-              item.like_status = res.data.status;
-              return item;
-            } else {
-              return item;
-            }
-          })
-          that.setData({
-            pins: pins
-          })
+            pin.like_count = pin.like_count + 1;
+            that.setData({
+              pin: pin
+            })
         } else if (res.data.status == 'delete') {
-          pins.map((item, index) => {
-            if (item.id == id) {
-              item.like_count = item.like_count - 1;
-              item.like_status = res.data.status;
-              return item;
-            } else {
-              return item;
-            }
-          })
+          pin.like_count = pin.like_count - 1;
           that.setData({
-            pins: pins
+            pin: pin
           })
         } else {
           wx.showToast({
@@ -323,7 +321,7 @@ Page({
     this.setData({
       current_page: 0,
       reviews: []
-    })
+    });
     this.getPinReviews(this);
     wx.stopPullDownRefresh();
   },
@@ -352,4 +350,4 @@ Page({
       }
     }
   }
-})
+});
