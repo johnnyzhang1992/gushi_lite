@@ -65,7 +65,7 @@ App({
       if(!res.hasUpdate){
         console.log('-----无更新---');
       }
-    })
+    });
 
     updateManager.onUpdateReady(function () {
       wx.showModal({
