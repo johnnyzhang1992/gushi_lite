@@ -19,7 +19,7 @@
             </view>
         </view>
     </view>
-    <ad unit-id="adunit-1dc705dba430e05c"></ad>
+    <!-- <ad unit-id="adunit-1dc705dba430e05c"></ad> -->
     <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
         <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">注释</view>
         <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">翻译</view>

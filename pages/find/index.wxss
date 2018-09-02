@@ -129,6 +129,7 @@
 }
 .pin-time{
   font-size: 12px;
+  display: inline-block;
 }
 .pin-avatar{
   width:40px;
@@ -139,6 +140,22 @@
 }
 .right-top{
   margin-top:0;
+}
+.right-top .pin-location{
+  display: inline-block;
+  position: relative;
+}
+.pin-location .pin-location-img{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position:absolute;
+  left:0;
+  top:-5px;
+}
+.pin-location .location-name{
+  display: inline-block;
+  margin-left: 10px;
 }
 .bottom-section{
   margin-top: 10px;

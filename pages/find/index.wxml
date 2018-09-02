@@ -41,6 +41,10 @@
                         <view class="weui-media-box__info right-top" bindtap='pinDetail' data-id="{{item.id}}" data-type="{{item.t_type}}">
                             <view class="weui-media-box__info__meta pin-author">{{ item.user.name}}</view>
                             <view class="weui-media-box__info__meta pin-time">{{ item.updated_at}}</view>
+                            <view class="weui-media-box__info__meta pin-time pin-location" wx-if="{{item.location.name && item.location.name !='添加地点'}}">
+                                <image src="../../images/icon/location.png" class="pin-location-img"></image>
+                                <view class="location-name">{{ item.location.name }}</view>
+                            </view>
                         </view>
                         <text class="weui-media-box__desc pin-content" decode='true' bindtap='pinDetail' data-id="{{item.id}}" data-type="{{item.t_type}}">{{ item.content}}</text>
                         <view class="page__bd content-section" wx-if="{{item.t_type && item.t_type =='poem'}}">

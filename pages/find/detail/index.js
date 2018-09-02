@@ -268,11 +268,13 @@ Page({
         // console.log(res);
         if (res.data && res.data.status == 'active') {
             pin.like_count = pin.like_count + 1;
+            pin.like_status = 'active';
             that.setData({
               pin: pin
             })
         } else if (res.data.status == 'delete') {
           pin.like_count = pin.like_count - 1;
+          pin.like_status = 'delete';
           that.setData({
             pin: pin
           })

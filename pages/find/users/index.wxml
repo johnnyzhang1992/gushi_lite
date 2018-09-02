@@ -9,6 +9,7 @@
                 <view class="weui-flex__item">
                     <view class="weui-media-box__info right-top">
                         <view class="weui-media-box__info__meta pin-author " data-id="{{item.u_id}}" bindtap='userPins'>{{ item.name}}</view>
+                        <view class="weui-media-box__info__meta pin-time">{{ item.updated_at}}</view>
                     </view>
                 </view>
             </view>
