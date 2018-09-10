@@ -1,0 +1,82 @@
+<!--pages/find/topic/index.wxml-->
+<view>
+    <view class="weui-flex  topic-content">
+        <view class="topic-img">
+            <image src="{{userInfo.avatarUrl}}" mode="aspectFit" style="width:50px;height:50px;background-color:#ddd" />
+        </view>
+        <view class="weui-flex__item">
+            <view class="page__bd " wx-if="{{topic}}">
+                <navigator url="/pages/find/topic/index?keyWord={{topic.name}}" hover-class="navigator-hover" class="weui-cell poet-item">
+                    <view class="poem-title">{{topic.name}}</view>
+                    <view class="poem-profile">{{topic.description}}</view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view class="wxSearch" style="min-height:{{wxSearchData.view.seachHeight}}px;top:0px;">
+        <!--result-->
+        <view class='search-result' style='display:block'>
+            <view class='tag item' wx-if='{{tags.length>0}}'>
+                <view class='title'>类型</view>
+                <view class='content'>
+                    <navigator url="/pages/poem/index/index?type=tag&keyWord={{item}}" hover-class="navigator-hover" class="poem-item tag" wx:for="{{tags}}" wx:key="*.this">
+                        <view class="poem-title">{{item}}</view>
+                    </navigator>
+                </view>
+            </view>
+            <view class='poet item' wx:if='{{poets.total>0}}'>
+                <view class='title'>诗人</view>
+                <view class='content'>
+                    <navigator url="/pages/poet/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poets.data}}" wx:key="id">
+                        <view class="poem-title">{{item.author_name}} | <view class="poem-author">{{item.dynasty}}</view></view>
+                        <view class="poem-profile">{{item.profile}}</view>
+                    </navigator>
+                    <view class="weui-cells weui-cells_after-title" wx-if='{{poets.total>3}}'>
+                        <navigator url="/pages/poet/index/index?type=poet&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__hd"></view>
+                            <view class="weui-cell__bd"><icon class="weui-icon-search_in-box" type="search" size="14"></icon>查看更多结果</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{p_count}}</view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+            <view class='sentence item' wx-if='{{sentences.total>0}}'>
+                <view class='title'>名句</view>
+                <view class='content'>
+                    <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="poem-item sentence" wx:for="{{sentences.data}}" wx:key="id">
+                        <view class="poem-title">{{item.title}}</view>
+                        <view class="poem-author">{{'《'+item.poem_title +'》 | '+item.author}}</view>
+                    </navigator>
+                    <view class="weui-cells weui-cells_after-title" wx-if='{{sentences.total>3}}'>
+                        <navigator url="/pages/sentence/index?type=sentence&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__hd"></view>
+                            <view class="weui-cell__bd"><icon class="weui-icon-search_in-box" type="search" size="14"></icon>查看更多结果</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{p_count}}</view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+            <view class='poem item' wx-if='{{poems.total>0}}'>
+                <view class='title'>诗词</view>
+                <view class='content'>
+                    <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems.data}}" wx:key="id">
+                        <view class="poem-title">{{item.title}}</view>
+                        <view class="poem-author">{{item.dynasty+' | '+item.author}}</view>
+                        <view class="poem-title">{{item.content}}</view>
+                    </navigator>
+                    <view class="weui-cells weui-cells_after-title" wx-if='{{poems.total>3}}'>
+                        <navigator url="/pages/poem/index/index?type=poem&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__hd"></view>
+                            <view class="weui-cell__bd"><icon class="weui-icon-search_in-box" type="search" size="14"></icon>查看更多结果</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{p_count}}</view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- <ad unit-id="adunit-271379a2a27890de"></ad> -->
+    </view>
+</view>
+
+
+

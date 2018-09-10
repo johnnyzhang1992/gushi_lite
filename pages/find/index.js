@@ -13,13 +13,10 @@ Page({
     total_page:0,
     tags: ['科普','故事','问与答'],
     pins: null,
-    imgUrls: null,
     indicatorDots: true,
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
     animationData:{},
-    userInfo: app.globalData.userInfo
+    userInfo: wx.getStorageSync('user'),
+    topic: null
   },
   // 获取用户id
   getUserId: function () {
@@ -122,7 +119,7 @@ Page({
             } else {
               return item;
             }
-          })
+          });
           that.setData({
             pins: pins
           })
@@ -135,7 +132,7 @@ Page({
             } else {
               return item;
             }
-          })
+          });
           that.setData({
             pins: pins
           })
@@ -159,21 +156,21 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    wx.hideLoading();
-    this.getPins(this);
-    // wx.request({
-    //   url: 'https://xuegushi.cn/wxxcx/getSliderImages',
-    //   success: res =>{
-    //     if(res.data){
-    //       console.log('----------success------------');
-    //       this.setData({
-    //         imgUrls: res.data
-    //       });
-    //       wx.hideLoading();
-    //       this.getPins(this);
-    //     }
-    //   }
-    // })
+    // wx.hideLoading();
+    // this.getPins(this);
+    wx.request({
+      url: 'https://xuegushi.cn/wxxcx/getRecentTopic',
+      success: res =>{
+        if(res.data){
+          console.log('----------success------------');
+          this.setData({
+            topic: res.data
+          });
+          wx.hideLoading();
+          this.getPins(this);
+        }
+      }
+    })
   },
   getPins: (th)=>{
     let that = th;

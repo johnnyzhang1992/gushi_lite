@@ -197,3 +197,21 @@
   margin-top: 0;
   background-color: #fff;
 }
+.topic-content{
+  padding: 0 15px 10px  15px;
+}
+.topic-img{
+  width: 50px;
+  height: auto;
+  padding-top: 15px;
+}
+.topic-content .poem-profile{
+   overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.topic-content .page__bd{
+  padding-bottom: 0;
+}

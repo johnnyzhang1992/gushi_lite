@@ -14,16 +14,19 @@ Page({
     tags: null,
     keyWord: ''
   },
-  /**
+  /**x
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: '搜索'
     });
     // 2 搜索栏初始化
     let that = this;
     let hotKey = null;
+    that.setData({
+      keyWord: options && options.keyWord ? options.keyWord : ''
+    });
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/getsHotSearch',
       success: res =>{
@@ -63,7 +66,7 @@ Page({
     wx.showNavigationBarLoading();
     let that = this;
     this.setData({
-      'keyWord': value
+      keyWord: value
     });
     wx.request({
       url: 'https://xuegushi.cn/wxxcx/search/' + value + '?wx_token=' +wx.getStorageSync('wx_token'),
@@ -74,7 +77,7 @@ Page({
           poets: res.data ? res.data.poets : null,
           sentences: res.data ? res.data.sentences : null,
           tags: res.data.tags
-        })
+        });
         wx.hideNavigationBarLoading()
       }
     })
@@ -137,4 +140,4 @@ Page({
   onShareAppMessage: function () {
   
   }
-})
+});
