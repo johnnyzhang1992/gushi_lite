@@ -165,8 +165,8 @@ Page({
             },1000)
           }else{
             wx.showToast({
-              title: '发布失败,请重试',
-              icon: none,
+              title: res.data.msg ? res.data.msg :'发布失败,请重试',
+              icon: 'fail',
               duration: 2000
             })
           }

@@ -181,6 +181,7 @@ Page({
     let id = that.data.pin.id;
     let page = that.data.current_page +1;
     if(that.data.total<page){
+      console.log(page,that.data.total);
       return false;
     }
     that.setData({
@@ -192,9 +193,9 @@ Page({
         // console.log(res);
         if(res.data){
           that.setData({
-            reviews: that.data.reviews.concat(res.data.reviews.data),
+            reviews: page == 1 ? res.data.reviews.data : that.data.reviews.concat(res.data.reviews.data),
             current_page: res.data.reviews.current_page,
-            total: res.data.reviews.last_page,
+            total: res.data.reviews.last_page ? res.data.reviews.last_page : 1,
             show_load: false,
             review_count: res.data.reviews.total,
             review_users: res.data.users.data
@@ -322,7 +323,8 @@ Page({
   onPullDownRefresh: function () {
     this.setData({
       current_page: 0,
-      reviews: []
+      reviews: [],
+      total:1
     });
     this.getPinReviews(this);
     wx.stopPullDownRefresh();
