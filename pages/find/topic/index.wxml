@@ -1,15 +1,15 @@
 <!--pages/find/topic/index.wxml-->
 <view>
     <view class="weui-flex  topic-content">
-        <view class="topic-img">
-            <image src="{{userInfo.avatarUrl}}" mode="aspectFit" style="width:50px;height:50px;background-color:#ddd" />
-        </view>
+        <!-- <view class="topic-img"> -->
+            <!-- <image src="{{userInfo.avatarUrl}}" mode="aspectFit" style="width:50px;height:50px;background-color:#ddd" /> -->
+        <!-- </view> -->
         <view class="weui-flex__item">
             <view class="page__bd " wx-if="{{topic}}">
-                <navigator url="/pages/find/topic/index?keyWord={{topic.name}}" hover-class="navigator-hover" class="weui-cell poet-item">
+                <view class="weui-cell poet-item">
                     <view class="poem-title">{{topic.name}}</view>
                     <view class="poem-profile">{{topic.description}}</view>
-                </navigator>
+                </view>
             </view>
         </view>
     </view>

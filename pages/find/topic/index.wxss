@@ -292,3 +292,6 @@ page{
 .topic-content .page__bd{
     padding-bottom: 0;
 }
+.topic-content .poet-item{
+    padding: 10px 0 10px 15px;
+}
