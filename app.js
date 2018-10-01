@@ -21,43 +21,43 @@ App({
       }
     });
     // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              that.globalData.userInfo = res.userInfo;
-              // 向关联网站发送请求，解密、存储数据
-              wx.request({
-                url: 'https://xuegushi.cn/wxxcx/userInfo',
-                data: {
-                  code: this.globalData.code,
-                  iv: res.iv,
-                  encryptedData: res.encryptedData,
-                  systemInfo:this.globalData.systemInfo
-                },
-                success: function (res) {
-                  if(res.data){
-                    console.log('----------success------------');
-                    wx.setStorageSync('user',res.data);
-                    wx.setStorageSync('wx_token', res.data.wx_token);
-                    that.globalData.userInfo = res.data;
-                  }
-                }
-              });
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
-      }
-    })
-    const updateManager = wx.getUpdateManager()
+    // wx.getSetting({
+    //   success: res => {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+    //       wx.getUserInfo({
+    //         success: res => {
+    //           // 可以将 res 发送给后台解码出 unionId
+    //           that.globalData.userInfo = res.userInfo;
+    //           // 向关联网站发送请求，解密、存储数据
+    //           wx.request({
+    //             url: 'https://xuegushi.cn/wxxcx/userInfo',
+    //             data: {
+    //               code: this.globalData.code,
+    //               iv: res.iv,
+    //               encryptedData: res.encryptedData,
+    //               systemInfo:this.globalData.systemInfo
+    //             },
+    //             success: function (res) {
+    //               if(res.data){
+    //                 console.log('----------success------------');
+    //                 wx.setStorageSync('user',res.data);
+    //                 wx.setStorageSync('wx_token', res.data.wx_token);
+    //                 that.globalData.userInfo = res.data;
+    //               }
+    //             }
+    //           });
+    //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //           // 所以此处加入 callback 以防止这种情况
+    //           if (this.userInfoReadyCallback) {
+    //             this.userInfoReadyCallback(res)
+    //           }
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
+    const updateManager = wx.getUpdateManager();
 
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
@@ -79,7 +79,7 @@ App({
         }
       })
 
-    })
+    });
 
     updateManager.onUpdateFailed(function () {
       // 新的版本下载失败

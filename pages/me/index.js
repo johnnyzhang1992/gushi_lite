@@ -162,7 +162,7 @@ Page({
                     a_count: _res.data.a_count,
                     u_count: _res.data.u_count,
                     u_t_count: _res.data.u_t_count,
-                    s_count: res.data.s_count
+                    s_count: _res.data.s_count
                   });
                 }
               }
