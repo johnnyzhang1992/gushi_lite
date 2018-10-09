@@ -142,20 +142,27 @@
   margin-top:0;
 }
 .right-top .pin-location{
-  display: inline-block;
+  display: block;
   position: relative;
+  margin-top: 5px;
+  padding-left: 10px;
 }
 .pin-location .pin-location-img{
   display: inline-block;
   width: 20px;
   height: 20px;
   position:absolute;
-  left:0;
+  left:5px;
   top:-5px;
 }
 .pin-location .location-name{
-  display: inline-block;
-  margin-left: 10px;
+  /*display: inline-block;*/
+  margin-left: 12px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .bottom-section{
   margin-top: 10px;

@@ -7,19 +7,35 @@ App({
     let that = this;
     logs.unshift(Date.now());
     wx.setStorageSync('logs', logs);
-    // 登录
-    wx.login({
-      success: res => {
-        this.globalData.code = res.code
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    });
     // 获取用户手机信息
     wx.getSystemInfo({
       success: res => {
         this.globalData.systemInfo = res;
       }
     });
+    // 登录
+    wx.login({
+      success: res => {
+        this.globalData.code = res.code;
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        wx.request({
+          url: 'https://xuegushi.cn/wxxcx/userInfo',
+          data: {
+            code: this.globalData.code,
+            systemInfo:this.globalData.systemInfo
+          },
+          success: function (res) {
+            if(res.data){
+              console.log('----------success------------');
+              wx.setStorageSync('user',res.data);
+              wx.setStorageSync('wx_token', res.data.wx_token);
+              that.globalData.userInfo = res.data;
+            }
+          }
+        });
+      }
+    });
+
     // 获取用户信息
     // wx.getSetting({
     //   success: res => {
