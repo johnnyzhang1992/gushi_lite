@@ -32,7 +32,7 @@ Page({
       title: '加载中',
     });
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getHomeData',
+      url: app.globalData.domain+'/getHomeData',
       success: res =>{
         if(res.data){
           console.log('----------success------------');
@@ -71,7 +71,7 @@ Page({
     let that = this;
     // Do something when page reach bottom.
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getHomeData?name=' + that.data.objectArray[that.data.index],
+      url: app.globalData.domain+'/getHomeData?name=' + that.data.objectArray[that.data.index],
       data: {
         page: that.data.current_page+1
       },
@@ -120,7 +120,7 @@ Page({
     });
     wx.showNavigationBarLoading();
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getHomeData?name='+that.data.objectArray[that.data.index],
+      url: app.globalData.domain+'/getHomeData?name='+that.data.objectArray[that.data.index],
       success: res =>{
         if(res.data){
           console.log('----------success------------');

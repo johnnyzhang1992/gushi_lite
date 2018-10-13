@@ -111,7 +111,8 @@ App({
     code:null,
     systemInfo:null,
     user:null,
-    hot:null
+    hot:null,
+    domain: 'https://xuegushi.cn/wxxcx'
   },
   func: {
     // getPosts:https.getPosts,
