@@ -37,7 +37,17 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    that.getPoemData(options.type,options.keyWord);
+    that.getPoemData(options.type,options.keyWord).then((res)=>{
+      if(res && res.succeeded){
+        wx.hideNavigationBarLoading()
+      }else{
+        wx.showToast({
+          title: '加载数据失败，请下拉重试。',
+          icon: 'none',
+          mask: true
+        });
+      }
+    });
   },
   getPoemData: function(type,keyWord,_type,page){
     let that = this;
@@ -50,7 +60,7 @@ Page({
           type: _type ? _type : '全部',
           _type: type ? type : null,
           keyWord: keyWord ? keyWord : null,
-          dynasty: that.data.dynasty[that.data.d_index],
+          dynasty: that.data.dynasty[that.data.d_index] ? that.data.dynasty[that.data.d_index] : '全部',
         },
         success: res =>{
           if(res.data){
@@ -59,7 +69,7 @@ Page({
             // console.log(res.data);
             that.setData({
               is_search: keyWord ? true:false,
-              poems: that.data.poems.concat(res.data.poems.data),
+              poems:  page >1 ? that.data.poems.concat(res.data.poems.data) : res.data.poems.data,
               current_page: res.data.poems.current_page,
               last_page: res.data.poems.last_page,
               types: res.data.types,
@@ -130,7 +140,7 @@ Page({
         wx.hideNavigationBarLoading()
       }else{
         wx.showToast({
-          title: '加载数据失败，请重试。',
+          title: '加载数据失败，请下拉重试。',
           icon: 'none',
           mask: true
         });
@@ -165,27 +175,17 @@ Page({
       title: that.data.dynasty[e.detail.value]
     });
     wx.showNavigationBarLoading();
-    wx.request({
-      url: app.globalData.domain+'/getPoemData',
-      data: {
-        page: 1,
-        dynasty: that.data.dynasty[that.data.d_index],
-      },
-      success: res =>{
-        if(res.data){
-          console.log('----------success------------');
-          // wx.setStorageSync('user',res.data);
-          // console.log(res.data);
-          that.setData({
-            poems: res.data.poems.data,
-            current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page,
-            total: res.data.poems.total
-          });
-          wx.hideNavigationBarLoading()
-        }
+    that.getPoemData(that.data._type,that.data.keyWord,that.data.types[that.data.t_index],1).then((res)=>{
+      if(res && res.succeeded){
+        wx.hideNavigationBarLoading()
+      }else{
+        wx.showToast({
+          title: '加载数据失败，请下拉重试。',
+          icon: 'none',
+          mask: true
+        });
       }
-    })
+    });
   },
   bindPickerTypeChange: function (e) {
     let that = this;
@@ -196,27 +196,16 @@ Page({
       title: that.data.dynasty[that.data.d_index] + ' | ' + that.data.types[e.detail.value]
     });
     wx.showNavigationBarLoading();
-    wx.request({
-      url: app.globalData.domain+'/getPoemData',
-      data: {
-        page: 1,
-        dynasty: that.data.dynasty[that.data.d_index],
-        type:that.data.types[e.detail.value]
-      },
-      success: res =>{
-        if(res.data){
-          console.log('----------success------------');
-          // wx.setStorageSync('user',res.data);
-          // console.log(res.data);
-          that.setData({
-            poems: res.data.poems.data,
-            current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page,
-            total: res.data.poems.total
-          });
-          wx.hideNavigationBarLoading()
-        }
+    that.getPoemData(that.data._type,that.data.keyWord,that.data.types[e.detail.value],1).then((res)=>{
+      if(res && res.succeeded){
+        wx.hideNavigationBarLoading()
+      }else{
+        wx.showToast({
+          title: '加载数据失败，请下拉重试。',
+          icon: 'none',
+          mask: true
+        });
       }
-    })
+    });
   }
 });
