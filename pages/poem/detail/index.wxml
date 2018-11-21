@@ -6,6 +6,7 @@
         <view class="page__desc" wx:if='{{ poem.author_id<0}}'>{{(author.dynasty ? author.dynasty : poem.dynasty)+' | '}}<view class="author-name">{{(author.author_name ? author.author_name : poem.author)}}</view></view>
     </view>
     <view class="page__bd page__content">
+        <official-account></official-account>
         <view class="weui-panel">
             <view class="weui-panel__bd">
                 <view class="weui-media-box weui-media-box_text">

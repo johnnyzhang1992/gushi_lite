@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/canvas/index",
         "pages/logs/logs",
         "pages/poem/detail/index",
         "pages/me/index",
