@@ -1,7 +1,8 @@
 // pages/poem/detail/index.js
 const app = getApp();
 let _detail = null;
-// let https = require('../../../utils/http.js');
+let until = require('../../../utils/util');
+const canvas = require('../../../utils/canvas');
 Page({
     /**
      * 页面的初始数据
@@ -19,7 +20,16 @@ Page({
         tab_lists: null,
         collect_status: false,
         _audio: null,
-        animation: {}
+        is_loading: true,
+        animation: {},
+        filePath: null,
+        bg_image: null,
+        codePath: null,
+        pixelRatio: 1,
+        canvas_img: null,
+        is_show: 'visible',
+        is_load: false,
+        show_canvas: false
     },
     // 获取用户id
     getUserId: function(){
@@ -31,15 +41,9 @@ Page({
     },
     // 返回启动页
     return: function () {
-        if (this.data.user_id > 0) {
-            wx.navigateBack({
-                delta: 1
-            })
-        } else {
-            wx.switchTab({
-                url: '/pages/index/index'
-            })
-        }
+        wx.switchTab({
+            url: '/pages/index/index'
+        });
     },
     addNew: function () {
         let that = this;
@@ -118,6 +122,7 @@ Page({
             })
         }
     },
+    // 跳转到音频页面
     audio: function(){
         wx.navigateTo({
             url: '/pages/poem/audio/index?id='+this.data.poem.id+'&title='+this.data.poem.title,
@@ -163,6 +168,7 @@ Page({
             tab_lists: (_detail && _detail.zhu) ? _detail.zhu.content : null,
         })
     },
+    // 获取诗词详情
     getPoemDetail: function(poem_id,user_id){
         let that = this;
         return new Promise((resolve,reject)=> { //结果以Promise形式返回
@@ -180,7 +186,9 @@ Page({
                             content:JSON.parse(res.data.poem.content),
                             tags: (res.data.poem.tags && res.data.poem.tags !='') ? res.data.poem.tags.split(',') : [],
                             // tab_lists: (_detail && _detail.zhu) ? _detail.zhu.content : null,
-                            collect_status: res.data.poem.collect_status
+                            collect_status: res.data.poem.collect_status,
+                            bg_image: res.data.bg_image,
+                            is_loading: false
                         });
                         resolve(Object.assign(res.data, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
                     }else{
@@ -191,6 +199,221 @@ Page({
                     resolve(Object.assign(error, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
                 }
             });
+        });
+    },
+    // 下载图片
+    downImage: function(url){
+        let that = this;
+        return new Promise((resolve,reject)=> { //结果以Promise形式返回
+            // const downloadTask = wx.downloadFile({
+            wx.downloadFile({
+                url: url,//仅为示例，并非真实的资源
+                success (res) {
+                    // console.log(res);
+                    // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+                    if (res.statusCode === 200) {
+                        // that.setData({
+                        //     filePath: res.tempFilePath
+                        // });
+                        resolve(Object.assign(res, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
+                    }
+                },
+                fail: error=>{
+                    resolve(Object.assign(error, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
+                }
+            });
+            // downloadTask.onProgressUpdate((res) => {
+            //     console.log('下载进度', res.progress);
+            //     console.log('已经下载的数据长度', res.totalBytesWritten);
+            //     console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
+            // });
+        });
+    },
+    // context.font="italic small-caps bold 12px arial";
+    // canvas 画图
+    drawImage: function(file_oath){
+        let that = this;
+        let content = that.data.content.content;
+        let pixelRatio = that.data.pixelRatio;
+        let winWidth = that.data.winWidth;
+        let winHeight = that.data.winHeight;
+        let filePath = file_oath ? file_oath : that.data.filePath;
+        let date = until.formatDate();
+        const ctx = wx.createCanvasContext('myCanvas');
+        // 全局设置
+        // ctx.setGlobalAlpha(0.8);
+        let font_size = 18*pixelRatio+'px';
+        ctx.font="normal normal normal "+font_size+" Microsoft YaHei";
+        // 背景图
+        ctx.drawImage(filePath, 0, 0,winWidth * pixelRatio, winHeight * pixelRatio);
+        // 左上角文字框
+        canvas.drawRect(ctx,20 * pixelRatio, 0, 80 * pixelRatio, 50 * pixelRatio,'rgba(0,0,0,0.4)');
+        // 日期
+        font_size = 16*pixelRatio+'px';
+        canvas.drawText(ctx,date[0],60 * pixelRatio,20 * pixelRatio,'center','#fff',60*pixelRatio,'normal normal normal '+font_size+' sans-serif');
+        canvas.drawText(ctx,date[1]+'/'+date[2],60 * pixelRatio,40 * pixelRatio,'center','#fff',60*pixelRatio,'normal normal normal '+font_size+' sans-serif');
+        // 正文
+        let result = [];
+        font_size = 14*pixelRatio+'px';
+        console.log('normal normal normal '+font_size+' "Microsoft YaHei""');
+        content.forEach((item,index)=>{
+            result.push(canvas.breakLinesForCanvas(ctx,item,(winWidth-80)*pixelRatio,'normal normal normal '+font_size+' sans-serif'))
+        });
+        // 诗词内容
+        let text_y = 40+20+15;
+        let line_number = 0;
+        result.forEach((item)=>{
+            if(line_number<13){
+                item.map((_item)=>{
+                    line_number = line_number+1;
+                    text_y = text_y+17;
+                });
+                text_y = text_y+6;
+            }
+        });
+        // 底部白框
+        canvas.drawRect(ctx,0, (winHeight-145-text_y/2) * pixelRatio, winWidth * pixelRatio, winHeight * pixelRatio,'rgba(255,255,255,0.6)');
+        // 正文框
+        canvas.drawRect(ctx,20 * pixelRatio, (winHeight-140-text_y) * pixelRatio, (winWidth-40) * pixelRatio, (text_y) * pixelRatio,'rgba(255,255,255,0.9)');
+        // 标题
+        font_size = 18*pixelRatio+'px';
+        canvas.drawText(ctx,'《'+that.data.poem.title+'》',winWidth * pixelRatio/2,(winHeight-110-text_y)*pixelRatio,'center',
+            '#333',(winWidth-80)*pixelRatio,'normal normal bold '+font_size+' sans-serif');
+        // 作者
+        font_size = 14*pixelRatio+'px';
+        let author = that.data.poem.author + ' | ' + that.data.poem.dynasty;
+        canvas.drawText(ctx,author,winWidth * pixelRatio/2,(winHeight-85-text_y)*pixelRatio,'center',
+            '#808080',(winWidth-90)*pixelRatio,'normal normal bold '+font_size+' sans-serif');
+        // 古诗词正文
+        line_number = 0;
+        result.forEach((item)=>{
+            if(line_number<13){
+                item.forEach((_item,index)=>{
+                    line_number = line_number+1;
+                    if(index<item.length-1 || item.length<2){
+                        canvas.drawText(ctx,_item,(winWidth/2) * pixelRatio,(winHeight-60-text_y)*pixelRatio,'center', '#808080',(winWidth-80)*pixelRatio,'normal normal bold '+font_size+' sans-serif');
+                    }else{
+                        canvas.drawText(ctx,_item,40 * pixelRatio,(winHeight-60-text_y)*pixelRatio,'left', '#808080',(winWidth-80)*pixelRatio,'normal normal bold '+font_size+' sans-serif');
+                    }
+                    text_y = text_y-16;
+                });
+                text_y = text_y -5
+            }
+        });
+        // 二维码左侧文字
+        ctx.setFontSize(15*pixelRatio);
+        ctx.setFillStyle('#333');
+        ctx.setTextAlign('center');
+        ctx.fillText("更多古诗词内容",(winWidth-130)/2*pixelRatio,(winHeight-85)*pixelRatio);
+        ctx.fillText("长按二维码进入",(winWidth-130)/2*pixelRatio,(winHeight-65)*pixelRatio);
+        // 二维码
+        let codePath = that.data.codePath ? that.data.codePath : '/images/xcx1.jpg';
+        let img_width = 30;
+        let img_x = winWidth-135;
+        let img_y = winHeight -110;
+        canvas.drawCircleImage(ctx,(img_width+5) * pixelRatio,img_width*2 * pixelRatio,(img_x + 30) * pixelRatio,
+            (img_y + 30) * pixelRatio,img_x * pixelRatio, img_y * pixelRatio,codePath);
+        ctx.draw(true,()=>{
+            console.log('画图结束，生成临时图...');
+            wx.canvasToTempFilePath({
+                x: 0,
+                y: 0,
+                width: winWidth * pixelRatio,
+                height: winHeight * pixelRatio,
+                destWidth: winWidth*2,
+                destHeight: winHeight*2,
+                canvasId: 'myCanvas',
+                success(res) {
+                    console.log(res);
+                    that.setData({
+                        is_show: 'hidden',
+                        show_canvas: 'visible',
+                        canvas_img: res.tempFilePath,
+                        is_load: true
+                    });
+                    wx.hideLoading();
+                    console.log(res.tempFilePath)
+                }
+            });
+        })
+    },
+    // canvas 生成临时图
+    canvasToImage: function(){
+        console.log('---click---me');
+        let that = this;
+        that.setData({
+            show_canvas: true
+        });
+        wx.showLoading({
+            title: '图片生成中...',
+        });
+        that.downImage(that.data.bg_image,).then(res=>{
+            console.log('背景图片下载完成---');
+            if(res && res.succeeded){
+                that.setData({
+                    file_path: res.tempFilePath
+                });
+                console.log('canvas 画图中...');
+                that.drawImage(res.tempFilePath);
+               
+            }
+        });
+  
+    },
+    // 保存图片到本地
+    saveImage: function(){
+        let that = this;
+        let file_path = this.data.canvas_img;
+        wx.saveImageToPhotosAlbum({
+            filePath: file_path,
+            success(res) {
+                console.log(res);
+                wx.showToast({
+                    title: '保存成功，现在去分享吧！',
+                    icon: 'none',
+                    duration: 2000
+                });
+                setTimeout(()=>{
+                    that.setData({
+                        show_canvas: false
+                    })
+                },2000)
+            }
+        });
+    },
+    // 获取小程序码
+    getCodeImage: function(type,id){
+        let that = this;
+        let _type = type ? type : 'poem';
+        let path = '';
+        if(_type == 'poem'){
+            path = '/pages/poem/detail/index?id='+id;
+        }
+        wx.request({
+            url: app.globalData.url+'/wxxcx/getWXACode/',
+            data: {
+                type: type,
+                target_id: id,
+                path: path,
+                width: 300
+            },
+            success: res => {
+                if (res.data) {
+                    console.log('----------success------------');
+                    // console.log(res.data);
+                    that.downImage(res.data.file_name).then(res1=>{
+                        console.log(res1);
+                        if(res1 && res1.succeeded){
+                            that.setData({
+                                codePath: res1.tempFilePath
+                            });
+                        }
+                    })
+                }
+            },
+            fail:error=>{
+                console.log(error)
+            }
         });
     },
     /**
@@ -212,7 +435,10 @@ Page({
                 let calc = clientHeight * rpxR - 180;
                 // console.log(calc)
                 that.setData({
-                    winHeight: calc
+                    winHeight1: calc,
+                    pixelRatio: res.pixelRatio,
+                    winHeight: clientHeight,
+                    winWidth: clientWidth
                 });
             }
         });
@@ -220,6 +446,7 @@ Page({
             if(res && res.succeeded){
                 wx.hideLoading();
                 that.renderTagList();
+                that.getCodeImage('poem',options.id);
             }
         });
     },
@@ -310,6 +537,9 @@ Page({
         });
         let that = this;
         this.getUserId();
+        that.setData({
+            is_loading: true
+        });
         that.getPoemDetail(that.data.poem.id,that.data.user_id).then((res)=>{
             if(res && res.succeeded){
                 wx.hideLoading();

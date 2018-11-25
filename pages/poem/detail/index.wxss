@@ -169,3 +169,45 @@
     height:22px;
     display:block;
 }
+/*
+canvas content
+ */
+.canvas-content{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #000;
+    /*opacity: 0.3;*/
+    z-index: 99;
+}
+canvas{
+  padding-top: 0;
+  transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  /* display: none; */
+}
+.save_image{
+    position: fixed;
+    bottom: 20px;
+    right: 50%;
+    margin-right: -70px;
+    background: #43ce7b;
+    color: #fff;
+    border-radius:8px;
+    padding: 6px 12px;
+    z-index: 9999
+}
+.canvas{
+  /*visibility:hidden;*/
+  overflow:hidden;
+  width:100%;
+  height:100%;
+}
+.canvas-image{
+  z-index:99;
+  position:absolute;
+  top:15px;
+  left:15px;
+}
