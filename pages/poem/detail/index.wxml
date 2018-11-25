@@ -72,6 +72,7 @@
         </view>
         <view class="canvas-bottom" wx-if="{{is_load}}">
             <view class="save_image" bindtap="saveImage"> 保存图片到本地</view>
+            <view class="save_image not" bindtap="notSaveImage"> 退出</view>
         </view>
     </view>
 </view>

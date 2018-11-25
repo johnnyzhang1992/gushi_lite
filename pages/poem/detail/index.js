@@ -201,43 +201,16 @@ Page({
             });
         });
     },
-    // 下载图片
-    downImage: function(url){
-        let that = this;
-        return new Promise((resolve,reject)=> { //结果以Promise形式返回
-            // const downloadTask = wx.downloadFile({
-            wx.downloadFile({
-                url: url,//仅为示例，并非真实的资源
-                success (res) {
-                    // console.log(res);
-                    // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
-                    if (res.statusCode === 200) {
-                        // that.setData({
-                        //     filePath: res.tempFilePath
-                        // });
-                        resolve(Object.assign(res, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
-                    }
-                },
-                fail: error=>{
-                    resolve(Object.assign(error, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
-                }
-            });
-            // downloadTask.onProgressUpdate((res) => {
-            //     console.log('下载进度', res.progress);
-            //     console.log('已经下载的数据长度', res.totalBytesWritten);
-            //     console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
-            // });
-        });
-    },
+
     // context.font="italic small-caps bold 12px arial";
     // canvas 画图
-    drawImage: function(file_oath){
+    drawImage: function(file_path){
         let that = this;
         let content = that.data.content.content;
         let pixelRatio = that.data.pixelRatio;
         let winWidth = that.data.winWidth;
         let winHeight = that.data.winHeight;
-        let filePath = file_oath ? file_oath : that.data.filePath;
+        let filePath = file_path ? file_path : that.data.filePath;
         let date = until.formatDate();
         const ctx = wx.createCanvasContext('myCanvas');
         // 全局设置
@@ -344,21 +317,22 @@ Page({
         that.setData({
             show_canvas: true
         });
-        wx.showLoading({
-            title: '图片生成中...',
-        });
-        that.downImage(that.data.bg_image,).then(res=>{
-            console.log('背景图片下载完成---');
-            if(res && res.succeeded){
-                that.setData({
-                    file_path: res.tempFilePath
-                });
-                console.log('canvas 画图中...');
-                that.drawImage(res.tempFilePath);
-               
-            }
-        });
-  
+        if(!that.data.canvas_img){
+            wx.showLoading({
+                title: '图片生成中...',
+            });
+            until.downImage(that.data.bg_image,).then(res=>{
+                console.log('背景图片下载完成---');
+                if(res && res.succeeded){
+                    that.setData({
+                        file_path: res.tempFilePath
+                    });
+                    console.log('canvas 画图中...');
+                    that.drawImage(res.tempFilePath);
+            
+                }
+            });
+        }
     },
     // 保存图片到本地
     saveImage: function(){
@@ -381,6 +355,11 @@ Page({
             }
         });
     },
+    notSaveImage: function(){
+        this.setData({
+            show_canvas: false
+        })
+    },
     // 获取小程序码
     getCodeImage: function(type,id){
         let that = this;
@@ -401,7 +380,7 @@ Page({
                 if (res.data) {
                     console.log('----------success------------');
                     // console.log(res.data);
-                    that.downImage(res.data.file_name).then(res1=>{
+                    until.downImage(res.data.file_name).then(res1=>{
                         console.log(res1);
                         if(res1 && res1.succeeded){
                             that.setData({

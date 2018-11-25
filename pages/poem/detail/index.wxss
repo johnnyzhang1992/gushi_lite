@@ -191,13 +191,19 @@ canvas{
 .save_image{
     position: fixed;
     bottom: 20px;
-    right: 50%;
-    margin-right: -70px;
+    /* left: 30px; */
+    /* margin-right: -70px; */
     background: #43ce7b;
     color: #fff;
     border-radius:8px;
     padding: 6px 12px;
     z-index: 9999
+}
+.save_image:first-child{
+    left: 30px;
+}
+.save_image.not{
+    right: 30px;
 }
 .canvas{
   /*visibility:hidden;*/
