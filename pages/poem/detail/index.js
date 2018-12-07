@@ -245,7 +245,7 @@ Page({
             }
         });
         // 底部白框
-        canvas.drawRect(ctx,0, (winHeight-145-text_y/2) * pixelRatio, winWidth * pixelRatio, winHeight * pixelRatio,'rgba(255,255,255,0.6)');
+        canvas.drawRect(ctx,0, (winHeight-145-text_y/2) * pixelRatio, winWidth * pixelRatio, winHeight * pixelRatio,'rgba(255,255,255,0.8)');
         // 正文框
         canvas.drawRect(ctx,20 * pixelRatio, (winHeight-140-text_y) * pixelRatio, (winWidth-40) * pixelRatio, (text_y) * pixelRatio,'rgba(255,255,255,0.9)');
         // 标题
@@ -277,13 +277,13 @@ Page({
         ctx.setFontSize(15*pixelRatio);
         ctx.setFillStyle('#333');
         ctx.setTextAlign('center');
-        ctx.fillText("更多古诗词内容",(winWidth-130)/2*pixelRatio,(winHeight-85)*pixelRatio);
-        ctx.fillText("长按二维码进入",(winWidth-130)/2*pixelRatio,(winHeight-65)*pixelRatio);
+        ctx.fillText("更多古诗词内容",(winWidth-130)/2*pixelRatio,(winHeight-55)*pixelRatio);
+        ctx.fillText("长按二维码进入",(winWidth-130)/2*pixelRatio,(winHeight-35)*pixelRatio);
         // 二维码
         let codePath = that.data.codePath ? that.data.codePath : '/images/xcx1.jpg';
         let img_width = 30;
         let img_x = winWidth-135;
-        let img_y = winHeight -110;
+        let img_y = winHeight -80;
         canvas.drawCircleImage(ctx,(img_width+5) * pixelRatio,img_width*2 * pixelRatio,(img_x + 30) * pixelRatio,
             (img_y + 30) * pixelRatio,img_x * pixelRatio, img_y * pixelRatio,codePath);
         ctx.draw(true,()=>{
@@ -338,10 +338,15 @@ Page({
     saveImage: function(){
         let that = this;
         let file_path = this.data.canvas_img;
+        wx.showLoading({
+            title: '正在保存图片...',
+        });
         wx.saveImageToPhotosAlbum({
             filePath: file_path,
             success(res) {
                 console.log(res);
+                console.log('图片保存完成');
+                wx.hideLoading();
                 wx.showToast({
                     title: '保存成功，现在去分享吧！',
                     icon: 'none',

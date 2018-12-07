@@ -218,3 +218,22 @@ canvas{
   top:15px;
   left:15px;
 }
+.canvas-bottom .wechat{
+    position: fixed;
+    bottom: 20px;
+    /*background: #fff;*/
+    /*color: #fff;*/
+    border-radius:8px;
+    padding: 4px 10px;
+    z-index: 9999;
+    left: 40px;
+    border: none;
+    line-height: 0;
+}
+.canvas-bottom image{
+    width: 35px;
+    height: 35px;
+}
+.canvas-bottom .quan{
+    left: 85px;
+}
