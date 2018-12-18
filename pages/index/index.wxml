@@ -13,12 +13,9 @@
     <view class="weui-search-bar__form">
       <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="搜索"  focus="{{inputShowed}}" bindinput="inputTyping" />
-          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-              <icon type="clear" size="14"></icon>
-          </view>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索"  focus="false" />
       </view>
-        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+        <label class="weui-search-bar__label" bindtap="ngToSearch">
             <icon class="weui-icon-search" type="search" size="14"></icon>
             <view class="weui-search-bar__text">搜索诗词/诗人</view>
         </label>

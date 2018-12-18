@@ -1,13 +1,12 @@
 //index.js
 //获取应用实例
+const app = getApp();
 let util = require('../../utils/util.js');
 let http = require('../../utils/http.js');
-const app = getApp();
 Page({
     data: {
         motto: '古诗文小助手',
         poems: [],
-        inputShowed: false,
         current_page: 1,
         last_page: 1,
         array: ['诗经','楚辞','乐府','小学古诗','初中古诗','高中古诗','宋词精选','古诗十九','唐诗三百首','宋词三百首','古诗三百首'],
@@ -16,16 +15,11 @@ Page({
         date: util.formatDateToMb(),
         hot: app.globalData.hot
     },
-    showInput: function () {
+    // 跳转到搜索页面
+    ngToSearch: function () {
         wx.navigateTo({
             url: '/pages/search/index'
         });
-    },
-    //事件处理函数
-    bindViewTap: function() {
-        wx.navigateTo({
-            url: '../logs/logs'
-        })
     },
     // 获取首页数据
     getHomeData: function(name,type){
@@ -40,9 +34,8 @@ Page({
                 return false;
             }
             data = {page: that.data.current_page+1};
-            wx.showNavigationBarLoading();
-            
         }
+        wx.showNavigationBarLoading();
         http.request(url,data).then(res=>{
             if(res.data && res.succeeded){
                 if(!app.globalData.hot){
@@ -66,6 +59,14 @@ Page({
             wx.hideNavigationBarLoading();
         });
     },
+    // 监控筛选变化
+    bindPickerChange: function(e) {
+        let that = this;
+        this.setData({
+            index: e.detail.value
+        });
+        that.getHomeData(that.data.objectArray[that.data.index]);
+    },
     onLoad: function () {
         let that = this;
         wx.showLoading({
@@ -83,16 +84,13 @@ Page({
     onPullDownRefresh: function(){
         wx.stopPullDownRefresh()
     },
+    // 滚动到底部
     onReachBottom: function() {
-        wx.showNavigationBarLoading();
         let that = this;
         this.getHomeData(that.data.objectArray[that.data.index],'more');
     },
+    // 分享
     onShareAppMessage: function (res) {
-        // if (res.from === 'button') {
-        //   // 来自页面内转发按钮
-        //   console.log(res.target)
-        // }
         return {
             title: '古诗文小助手',
             path: '/pages/index/index',
@@ -106,13 +104,4 @@ Page({
             }
         }
     },
-    bindPickerChange: function(e) {
-        let that = this;
-        this.setData({
-            index: e.detail.value
-        });
-        wx.showNavigationBarLoading();
-        that.getHomeData(that.data.objectArray[that.data.index]);
-    }
 });
-
