@@ -1,6 +1,5 @@
 // pages/poem/detail/index.js
 const app = getApp();
-let _detail = null;
 let until = require('../../../utils/util');
 const canvas = require('../../../utils/canvas');
 Page({

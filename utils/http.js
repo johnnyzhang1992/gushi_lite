@@ -15,91 +15,30 @@ function login(id,type) {
   wx.reLaunch({
     url: '/pages/me/index'
   });
-  // let app = getApp();
-  // let code = null;
-  // let systemInfo = null;
-  // // 登录
-  // wx.login({
-  //   success: res => {
-  //     code = res.code
-  //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
-  //   }
-  // });
-  // // 获取用户手机信息
-  // wx.getSystemInfo({
-  //   success: res => {
-  //     systemInfo = res;
-  //   }
-  // });
-  // // 获取用户信息
-  // wx.getSetting({
-  //   success(res) {
-  //     if (!res.authSetting['scope.userInfo']) {
-  //         // 未授权
-  //       wx.openSetting({
-  //         success: res => {
-  //           // console.log(res);
-  //           if (res.authSetting['scope.userInfo']) {
-  //             wx.authorize({
-  //               scope: 'scope.userInfo',
-  //               complete(res) {
-  //                 wx.getUserInfo({
-  //                   success: res => {
-  //                     // 可以将 res 发送给后台解码出 unionId
-  //                     app.globalData.userInfo = res.userInfo;
-  //                     // 向关联网站发送请求，解密、存储数据
-  //                     wx.request({
-  //                       url: 'https://xuegushi.cn/wxxcx/userInfo',
-  //                       data: {
-  //                         code: code,
-  //                         iv: res.iv,
-  //                         encryptedData: res.encryptedData,
-  //                         systemInfo: systemInfo
-  //                       },
-  //                       success: function (res) {
-  //                         if(res.data){
-  //                           console.log('----------success------------');
-  //                           wx.setStorageSync('user',res.data);
-  //                           if(type=='me'){
-  //                             wx.reLaunch({
-  //                               url: '/pages/me/index'
-  //                             })
-  //                           }else{
-  //                             wx.reLaunch({
-  //                               url: '/pages/index/index'
-  //                             })
-  //                           }
-  //                         }
-  //                       }
-  //                     });
-  //                     // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-  //                     // 所以此处加入 callback 以防止这种情况
-  //                     if (app.userInfoReadyCallback) {
-  //                       app.userInfoReadyCallback(res)
-  //                     }
-  //                   }
-  //                 })
-  //               }
-  //             })
-  //           }
-  //         }
-  //       })
-  //     }else{
-  //         // 已授权
-  //       if (type == 'me') {
-  //         wx.reLaunch({
-  //           url: '/pages/me/index'
-  //         })
-  //       } else {
-  //         wx.reLaunch({
-  //           url: '/pages/index/index'
-  //         })
-  //       }
-  //     }
-  //   }
-  // });
- 
+}
+// 封装小程序远程请求函数
+function request(url,data,type){
+    return new Promise((resolve,reject)=> { //结果以Promise形式返回
+        wx.request({
+            url: url,
+            data: data ? data : null,
+            type: type ? type : 'GET',
+            success: res => {
+                if (res.data) {
+                    resolve(Object.assign(res, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
+                }else{
+                    resolve(Object.assign(res, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
+    
+                }
+            },
+            fail:error=>{
+                console.log(error);
+                resolve(Object.assign(error, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
+            }
+        });
+    });
 }
 module.exports = {
-    userLogin: login
+    userLogin: login,
+    request: request
 };
