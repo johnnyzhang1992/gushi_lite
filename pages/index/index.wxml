@@ -13,7 +13,7 @@
     <view class="weui-search-bar__form">
       <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="搜索"  focus="false" />
+          <input type="text" class="weui-search-bar__input" placeholder="搜索"  focus="{{false}}" />
       </view>
         <label class="weui-search-bar__label" bindtap="ngToSearch">
             <icon class="weui-icon-search" type="search" size="14"></icon>

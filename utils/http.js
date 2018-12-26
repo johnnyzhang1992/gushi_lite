@@ -38,7 +38,17 @@ function request(url,data,type){
         });
     });
 }
+// 加载失败
+function loadFail(msg){
+    wx.showToast({
+        title: msg ? msg :'加载失败',
+        icon: 'none',
+        duration: 2000
+    })
+}
+
 module.exports = {
     userLogin: login,
-    request: request
+    request: request,
+    loadFailL: loadFail
 };
