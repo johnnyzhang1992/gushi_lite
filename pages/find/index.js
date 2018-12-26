@@ -164,7 +164,7 @@ Page({
         wx.showLoading({
             title: '加载中',
         });
-        let url = 'https://xuegushi.cn/wxxcx/getRecentTopic';
+        let url = app.globalData.url+'/wxxcx/getRecentTopic';
         http.request(url,undefined).then(res=>{
             if(res.data && res.succeeded){
                 that.setData({
@@ -181,7 +181,7 @@ Page({
         let that = this;
         let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
         wx.showNavigationBarLoading();
-        http.request('https://xuegushi.cn/wxxcx/getPins?id='+user_id,undefined).then(res=>{
+        http.request(app.globalData.url+'/wxxcx/getPins?id='+user_id,undefined).then(res=>{
            if(res.data && res.succeeded){
                that.setData({
                    pins: res.data.data,
@@ -258,21 +258,20 @@ Page({
         wx.showNavigationBarLoading();
         let that = this;
         // Do something when page reach bottom.
-        wx.request({
-            url: 'https://xuegushi.cn/wxxcx/getPins',
-            data: {
-                page: that.data.current_page+1
-            },
-            success: res =>{
-                if(res.data){
-                    console.log('----------success------------');
-                    this.setData({
-                        pins: that.data.pins.concat(res.data.data),
-                        current_page: res.data.current_page,
-                        last_page: res.data.last_page
-                    });
-                    wx.hideNavigationBarLoading()
-                }
+        let data = {
+            page: that.data.current_page+1
+        };
+        let url = app.globalData.url+'/wxxcx/getPins';
+        http.request(url,data).then(res=>{
+            if(res.data && res.succeeded){
+                this.setData({
+                    pins: that.data.pins.concat(res.data.data),
+                    current_page: res.data.current_page,
+                    last_page: res.data.last_page
+                });
+                wx.hideNavigationBarLoading();
+            }else{
+                http.loadFailL();
             }
         })
     },
