@@ -38,46 +38,14 @@ Page({
         wx.setNavigationBarTitle({
             title: '个人中心'
         });
-        if (that.data.user_id < 1) {
-            // https.userLogin(0,'me');
-            wx.getSetting({
-                success: function (res) {
-                    if (res.authSetting['scope.userInfo']) {
-                        // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-                        wx.getUserInfo({
-                            success: function (res) {
-                                console(res.userInfo);
-                                that.setData({
-                                    userInfo: res.userInfo,
-                                    hasUserInfo: true
-                                });
-                                app.globalData.userInfo = res.userInfo;
-                            }
-                        })
-                    }
-                }
-            })
-        } else {
-            wx.showLoading({
-                title: '加载中',
+        if (app.globalData.userInfo) {
+            wx.showNavigationBarLoading();
+            that.setData({
+                userInfo: app.globalData.userInfo,
+                hasUserInfo: true
             });
-            if (app.globalData.userInfo) {
-                this.setData({
-                    userInfo: app.globalData.userInfo,
-                    hasUserInfo: true
-                })
-            } else if (this.data.canIUse) {
-                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                // 所以此处加入 callback 以防止这种情况
-                app.userInfoReadyCallback = res => {
-                    this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true
-                    })
-                }
-            }
             wx.request({
-                url: app.globalData.url+'/wxxcx/getUserInfo/' + this.data.user_id,
+                url: app.globalData.url + '/wxxcx/getUserInfo/' + that.data.user_id,
                 success: res => {
                     if (res.data) {
                         that.setData({
@@ -88,7 +56,7 @@ Page({
                             s_count: res.data.s_count
                         })
                     }
-                    wx.hideLoading();
+                    wx.hideNavigationBarLoading();
                 }
             });
         }

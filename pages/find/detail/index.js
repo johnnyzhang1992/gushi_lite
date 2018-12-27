@@ -1,6 +1,6 @@
 // pages/find/detail/index.js
 const app = getApp();
-let http = require('../../utils/http.js');
+let http = require('../../../utils/http.js');
 let authLogin = require('../../../utils/authLogin');
 Page({
     

@@ -79,7 +79,7 @@ App({
         hot:null,
         domain: 'https://xuegushi.cn/wxxcx',
         url: 'https://xuegushi.cn',
-        backUrl: ''
+        backUrl: {}
     },
     func: {
         // getPosts:https.getPosts,

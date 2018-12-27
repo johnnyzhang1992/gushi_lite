@@ -1,7 +1,7 @@
 // pages/find/index.js
 const app = getApp();
 let http = require('../../utils/http.js');
-let authLogin = require('../../../utils/authLogin');
+let authLogin = require('../../utils/authLogin');
 Page({
     
     /**
@@ -52,30 +52,35 @@ Page({
         let that = this;
         let id = e.target.dataset.id;
         let url = 'https://xuegushi.cn/wxxcx/pin/' + id + '/update' + '?user_id=' + wx.getStorageSync('user').user_id+'&wx_token=' + wx.getStorageSync('wx_token');
-        http.request(url,undefined).then(res=>{
-            if(res.data && res.succeeded){
-                let pins = that.data.pins;
-                pins = pins.filter((item)=>{
-                   return item.id != id;
-                });
-                wx.showToast({
-                    title: '删除成功',
-                    icon: 'success',
-                    mask: true,
-                    duration: 2000
-                });
-                that.setData({
-                    pins: pins
-                })
-            }else{
-                console.log(res);
-                wx.showToast({
-                    title: '删除失败',
-                    icon: 'none',
-                    duration: 2000
-                })
-            }
-        });
+        // 判断用户是否登录
+        if (that.data.user_id < 1) {
+            authLogin.authLogin('/pages/find/index','tab',app);
+        } else {
+            http.request(url,undefined).then(res=>{
+                if(res.data && res.succeeded){
+                    let pins = that.data.pins;
+                    pins = pins.filter((item)=>{
+                        return item.id != id;
+                    });
+                    wx.showToast({
+                        title: '删除成功',
+                        icon: 'success',
+                        mask: true,
+                        duration: 2000
+                    });
+                    that.setData({
+                        pins: pins
+                    })
+                }else{
+                    console.log(res);
+                    wx.showToast({
+                        title: '删除失败',
+                        icon: 'none',
+                        duration: 2000
+                    })
+                }
+            });
+        }
     },
     // 详情页
     pinDetail: (e)=>{
@@ -101,7 +106,7 @@ Page({
         let that = this;
         let url = app.globalData.url+'/wxxcx/pin/'+id+'/like';
         if (that.data.user_id < 1) {
-            authLogin.authLogin('/pages/poem/detail/index?id='+that.data.poem.id,'nor',app);
+            authLogin.authLogin('/pages/find/index','tab',app);
         } else {
             http.request(url,{
                 user_id:user_id,
