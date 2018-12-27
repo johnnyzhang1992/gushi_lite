@@ -110,14 +110,12 @@ Page({
         let wx_token = wx.getStorageSync('wx_token');
         let pins = this.data.pins;
         let that = this;
-        wx.request({
-            url: 'https://xuegushi.cn/wxxcx/pin/'+id+'/like',
-            data:{
-                user_id:user_id,
-                wx_token:wx_token
-            },
-            success:(res)=>{
-                console.log(res);
+        let url = app.globalData.url+'/wxxcx/pin/'+id+'/like';
+        http.request(url,{
+            user_id:user_id,
+            wx_token:wx_token
+        }).then(res=>{
+            if(res.data && res.succeeded){
                 if(res.data && res.data.status=='active'){
                     pins.map((item, index) => {
                         if (item.id == id) {
@@ -145,15 +143,12 @@ Page({
                         pins: pins
                     })
                 }else{
-                    wx.showToast({
-                        title: res.data.msg,
-                        duration: 1000
-                    })
+                    http.loadFailL(res.data.msg);
                 }
-                
+            }else{
+                http.loadFailL();
             }
-        })
-        
+        });
     },
     /**
      * 生命周期函数--监听页面加载

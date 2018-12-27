@@ -41,7 +41,7 @@ function request(url,data,type){
 // 加载失败
 function loadFail(msg){
     wx.showToast({
-        title: msg ? msg :'加载失败',
+        title: msg && msg !='' ? msg :'加载失败',
         icon: 'none',
         duration: 2000
     })
