@@ -1,6 +1,7 @@
 // pages/find/index.js
 const app = getApp();
 let http = require('../../utils/http.js');
+let authLogin = require('../../../utils/authLogin');
 Page({
     
     /**
@@ -34,19 +35,7 @@ Page({
         let that = this;
         // 判断用户是否登录
         if (that.data.user_id < 1) {
-            wx.showModal({
-                title: '提示',
-                content: '登录后才可以操作哦！',
-                success: function (res) {
-                    if (res.confirm) {
-                        wx.reLaunch({
-                            url: '/pages/me/index'
-                        });
-                    } else if (res.cancel) {
-                        console.log('用户点击取消')
-                    }
-                }
-            })
+            authLogin.authLogin('/pages/find/index','tab',app);
         } else {
             let _url = '/pages/find/new/index';
             if(pin_id>0){
@@ -111,44 +100,48 @@ Page({
         let pins = this.data.pins;
         let that = this;
         let url = app.globalData.url+'/wxxcx/pin/'+id+'/like';
-        http.request(url,{
-            user_id:user_id,
-            wx_token:wx_token
-        }).then(res=>{
-            if(res.data && res.succeeded){
-                if(res.data && res.data.status=='active'){
-                    pins.map((item, index) => {
-                        if (item.id == id) {
-                            item.like_count = item.like_count + 1;
-                            item.like_status = res.data.status;
-                            return item;
-                        } else {
-                            return item;
-                        }
-                    });
-                    that.setData({
-                        pins: pins
-                    })
-                }else if(res.data.status =='delete'){
-                    pins.map((item, index) => {
-                        if (item.id == id) {
-                            item.like_count = item.like_count - 1;
-                            item.like_status = res.data.status;
-                            return item;
-                        } else {
-                            return item;
-                        }
-                    });
-                    that.setData({
-                        pins: pins
-                    })
+        if (that.data.user_id < 1) {
+            authLogin.authLogin('/pages/poem/detail/index?id='+that.data.poem.id,'nor',app);
+        } else {
+            http.request(url,{
+                user_id:user_id,
+                wx_token:wx_token
+            }).then(res=>{
+                if(res.data && res.succeeded){
+                    if(res.data && res.data.status=='active'){
+                        pins.map((item, index) => {
+                            if (item.id == id) {
+                                item.like_count = item.like_count + 1;
+                                item.like_status = res.data.status;
+                                return item;
+                            } else {
+                                return item;
+                            }
+                        });
+                        that.setData({
+                            pins: pins
+                        })
+                    }else if(res.data.status =='delete'){
+                        pins.map((item, index) => {
+                            if (item.id == id) {
+                                item.like_count = item.like_count - 1;
+                                item.like_status = res.data.status;
+                                return item;
+                            } else {
+                                return item;
+                            }
+                        });
+                        that.setData({
+                            pins: pins
+                        })
+                    }else{
+                        http.loadFailL(res.data.msg);
+                    }
                 }else{
-                    http.loadFailL(res.data.msg);
+                    http.loadFailL();
                 }
-            }else{
-                http.loadFailL();
-            }
-        });
+            });
+        }
     },
     /**
      * 生命周期函数--监听页面加载

@@ -2,6 +2,7 @@
 const app = getApp();
 let until = require('../../../utils/util');
 const canvas = require('../../../utils/canvas');
+let authLogin = require('../../../utils/authLogin');
 Page({
     /**
      * 页面的初始数据
@@ -47,19 +48,7 @@ Page({
     addNew: function () {
         let that = this;
         if (that.data.user_id < 1) {
-            wx.showModal({
-                title: '提示',
-                content: '登录后才可以收藏哦！',
-                success: function (res) {
-                    if (res.confirm) {
-                        wx.reLaunch({
-                            url: '/pages/me/index'
-                        });
-                    } else if (res.cancel) {
-                        console.log('用户点击取消')
-                    }
-                }
-            })
+            authLogin.authLogin('/pages/poem/detail/index?id='+that.data.poem.id,'nor',app);
         } else {
             wx.navigateTo({
                 url: '/pages/find/new/index?type=poem&id='+that.data.poem.id
@@ -438,19 +427,7 @@ Page({
         let that = this;
         if(that.data.user_id<1){
             // https.userLogin(that.data.poem.id);
-            wx.showModal({
-                title: '提示',
-                content: '登录后才可以收藏哦！',
-                success: function(res) {
-                    if (res.confirm) {
-                        wx.reLaunch({
-                            url: '/pages/me/index'
-                        });
-                    } else if (res.cancel) {
-                        console.log('用户点击取消')
-                    }
-                }
-            })
+            authLogin.authLogin('/pages/poem/detail/index?id='+that.data.poem.id,'nor',app);
         }else{
             wx.request({
                 url: 'https://xuegushi.cn/wxxcx/' + that.data.poem.id + '/collect/poem?user_id=' + that.data.user_id + '&wx_token=' + wx.getStorageSync('wx_token'),
