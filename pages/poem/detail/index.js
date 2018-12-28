@@ -200,6 +200,7 @@ Page({
         let winHeight = that.data.winHeight;
         let filePath = file_path ? file_path : that.data.filePath;
         let date = until.formatDate();
+        const scale = 1/pixelRatio;
         const ctx = wx.createCanvasContext('myCanvas');
         // 全局设置
         // ctx.setGlobalAlpha(0.8);
@@ -274,6 +275,9 @@ Page({
         let img_y = winHeight -80;
         canvas.drawCircleImage(ctx,(img_width+5) * pixelRatio,img_width*2 * pixelRatio,(img_x + 30) * pixelRatio,
             (img_y + 30) * pixelRatio,img_x * pixelRatio, img_y * pixelRatio,codePath);
+        // 缩放
+        ctx.scale(scale, scale);
+        // 画图
         ctx.draw(true,()=>{
             console.log('画图结束，生成临时图...');
             wx.canvasToTempFilePath({
@@ -345,7 +349,11 @@ Page({
                         show_canvas: false
                     })
                 },2000)
-            }
+            },
+           fail: (res)=>{
+               console.log(res);
+               wx.hideLoading();
+           }
         });
     },
     notSaveImage: function(){
