@@ -1,8 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp();
-let util = require('../../utils/util.js');
-let http = require('../../utils/http.js');
+let util = require('../utils/util.js');
+let http = require('../utils/http.js');
 Page({
     data: {
         motto: '古诗文小助手',
@@ -93,7 +93,7 @@ Page({
     onShareAppMessage: function (res) {
         return {
             title: '古诗文小助手',
-            path: '/pages/index/index',
+            path: '/pages/index',
             // imageUrl:'/images/poem.png',
             success: function(res) {
                 // 转发成功

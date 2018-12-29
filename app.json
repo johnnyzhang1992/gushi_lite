@@ -1,6 +1,6 @@
 {
     "pages": [
-        "pages/index/index",
+        "pages/index",
         "pages/logs/logs",
         "pages/poem/detail/index",
         "pages/me/index",
@@ -36,7 +36,7 @@
         "position": "bottom",
         "list": [
             {
-                "pagePath": "pages/index/index",
+                "pagePath": "pages/index",
                 "text": "首页",
                 "iconPath": "images/icon/home.png",
                 "selectedIconPath": "images/icon/home_active.png"

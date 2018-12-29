@@ -42,7 +42,7 @@ Page({
     // 返回启动页
     return: function () {
         wx.switchTab({
-            url: '/pages/index/index'
+            url: '/pages/index'
         });
     },
     addNew: function () {

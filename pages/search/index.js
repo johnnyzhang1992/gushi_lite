@@ -88,7 +88,7 @@ Page({
     // do your job here
     // 示例：返回
     wx.switchTab({
-      url: '/pages/index/index'
+      url: '/pages/index'
     })
   },
 
