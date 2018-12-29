@@ -51,12 +51,16 @@ Page({
         // console.log(e);
         let that = this;
         let id = e.target.dataset.id;
-        let url = 'https://xuegushi.cn/wxxcx/pin/' + id + '/update' + '?user_id=' + wx.getStorageSync('user').user_id+'&wx_token=' + wx.getStorageSync('wx_token');
+        let url = 'https://xuegushi.cn/wxxcx/pin/' + id + '/update';
+        let data = {
+            user_id: that.data.user_id,
+            wx_token: wx.getStorageSync('wx_token')
+        };
         // 判断用户是否登录
         if (that.data.user_id < 1) {
             authLogin.authLogin('/pages/find/index','tab',app);
         } else {
-            http.request(url,undefined).then(res=>{
+            http.request(url,data).then(res=>{
                 if(res.data && res.succeeded){
                     let pins = that.data.pins;
                     pins = pins.filter((item)=>{
