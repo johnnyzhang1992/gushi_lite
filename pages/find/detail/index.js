@@ -3,7 +3,6 @@ const app = getApp();
 let http = require('../../../utils/http.js');
 let authLogin = require('../../../utils/authLogin');
 Page({
-    
     /**
      * 页面的初始数据
      */
@@ -38,6 +37,7 @@ Page({
             });
         }
     },
+    // 新增
     addNew: function (event) {
         let pin_id = event.currentTarget.dataset.id ? event.currentTarget.dataset.id : 0;
         let that = this;
@@ -53,6 +53,7 @@ Page({
             })
         }
     },
+    // 详情页
     pinDetail: (e)=>{
         let id = e.currentTarget.dataset.id;
         let type = e.currentTarget.dataset.type;
@@ -70,36 +71,41 @@ Page({
         wx.setNavigationBarTitle({
             title: '详情'
         });
-        wx.request({
-            url: 'https://xuegushi.cn/wxxcx/getPinDetail/' + options.id + '?user_id=' + that.data.user_id,
-            success: res => {
-                if (res.data) {
-                    // console.log(res.data);
-                    console.log('----------success------------');
-                    this.setData({
-                        pin: res.data.pin,
-                        poem: res.data.poem ? res.data.poem : null,
-                        poet: res.data.poet ? res.data.poet : null,
-                        type: 'pin',
-                        t_id: res.data.pin.id
-                    });
-                    // wx.hideLoading();
-                    that.getPinReviews(that);
-                }
+        let url = app.globalData.url+'/wxxcx/getPinDetail/' + options.id;
+        let data = {
+          user_id: that.data.user_id
+        };
+        http.request(url,data).then(res=>{
+            if(res.data && res.succeeded){
+                console.log('----------success------------');
+                this.setData({
+                    pin: res.data.pin,
+                    poem: res.data.poem ? res.data.poem : null,
+                    poet: res.data.poet ? res.data.poet : null,
+                    type: 'pin',
+                    t_id: res.data.pin.id
+                });
+                // wx.hideLoading();
+                that.getPinReviews();
+            }else{
+                http.loadFailL();
             }
         });
     },
+    // 评论获取焦点
     reviewFocus: function(){
         // console.log(event.detail)
         this.setData({
             review_bottom: '10px'
         })
     },
+    // 键盘收起
     keyBoardDown: function(){
         this.setData({
             review_bottom: 0
         })
     },
+    // 评论发布
     reviewSend: function(){
         let that = this;
         if (that.data.user_id < 1) {
@@ -127,11 +133,9 @@ Page({
                 t_id: that.data.pin.id,
                 t_type: 'pin'
             };
-            wx.request({
-                url: 'https://xuegushi.cn/wxxcx/createPinReview',
-                data: data,
-                success: (res) => {
-                    // console.log(res);
+    
+            http.request(app.globalData.url+'/wxxcx/createPinReview',data).then(res=>{
+                if(res.data && res.succeeded){
                     if (res.data.status == 200) {
                         let review = res.data.review;
                         let reviews = that.data.reviews.concat(review);
@@ -142,20 +146,25 @@ Page({
                             content: '',
                             review_count: review_count
                         })
+                    }else{
+                        http.loadFailL();
                     }
+                }else{
+                    http.loadFailL();
                 }
-            })
-            // console.log(data);
+            });
         }
     },
+    // 跳转到用户页
     userPins: (e) => {
         let id = e.currentTarget.dataset.id;
         wx.navigateTo({
             url: '/pages/find/user/index?id=' + id
         });
     },
-    getPinReviews: (th)=>{
-        let that = th;
+    // 获取评论
+    getPinReviews: function(){
+        let that = this;
         let id = that.data.pin.id;
         let page = that.data.current_page +1;
         if(that.data.total<page){
@@ -165,28 +174,28 @@ Page({
         that.setData({
             show_load: true
         });
-        wx.request({
-            url: 'https://xuegushi.cn/wxxcx/getPinReviews/'+id+'?page='+page,
-            success: (res)=>{
-                // console.log(res);
-                if(res.data){
-                    that.setData({
-                        reviews: page == 1 ? res.data.reviews.data : that.data.reviews.concat(res.data.reviews.data),
-                        current_page: res.data.reviews.current_page,
-                        total: res.data.reviews.last_page ? res.data.reviews.last_page : 1,
-                        show_load: false,
-                        review_count: res.data.reviews.total,
-                        review_users: res.data.users.data
-                    })
-                }
-            }
-        })
+        http.request(app.globalData.url+'/wxxcx/getPinReviews/'+id,{page:page}).then(res=>{
+           if(res.data && res.succeeded){
+               that.setData({
+                   reviews: page == 1 ? res.data.reviews.data : that.data.reviews.concat(res.data.reviews.data),
+                   current_page: res.data.reviews.current_page,
+                   total: res.data.reviews.last_page ? res.data.reviews.last_page : 1,
+                   show_load: false,
+                   review_count: res.data.reviews.total,
+                   review_users: res.data.users.data
+               })
+           } else{
+               http.loadFailL()
+           }
+        });
     },
+    // 输入检测
     bindKeyInput: function (e) {
         this.setData({
             content: e.detail.value
         })
     },
+    // 跳转到点赞用户列表页
     pinLikeUsers: function (e) {
         let that = this;
         let id = e.currentTarget.dataset.id;
@@ -194,6 +203,7 @@ Page({
             url: '/pages/find/users/index?id='+id
         })
     },
+    // 删除评论
     deleteReview: function(e){
         let that =this;
         let id = e.currentTarget.dataset.id;
@@ -201,40 +211,39 @@ Page({
         if (that.data.user_id < 1) {
             authLogin.authLogin('/pages/find/detail/index?id='+id,'nor',app);
         } else {
-            wx.request({
-                url: 'https://xuegushi.cn/wxxcx/deletePinReview/?id=' + id + '&user_id=' + wx.getStorageSync('user').user_id + '&wx_token=' + wx.getStorageSync('wx_token'),
-                success: (res) => {
-                    // console.log(res);
-                    if (res.data && res.data.status==200) {
-                        wx.showToast({
-                            title: '删除成功',
-                            icon: 'success',
-                            duration: 1000
-                        });
-                        setTimeout(() => {
-                            that.setData({
-                                current_page: 0,
-                                reviews: []
-                            });
-                            wx.startPullDownRefresh({ })
-                        }, 1000)
-                    } else if (res.data && res.data.status== 500) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                            duration: 1000
-                        })
-                    }else{
-                        wx.showToast({
-                            title: '删除失败',
-                            icon: 'none',
-                            duration: 1000
-                        })
-                    }
-                }
-            })
+            let url = app.globalData.url+'/wxxcx/deletePinReview/';
+            let data ={
+                id: id,
+                user_id: wx.getStorageSync('user').user_id,
+                wx_tiken: wx.getStorageSync('wx_token')
+            };
+            http.request(url,data).then(res=>{
+               if(res.data && res.succeeded){
+                   if (res.data.status==200) {
+                       wx.showToast({
+                           title: '删除成功',
+                           icon: 'success',
+                           duration: 1000
+                       });
+                       setTimeout(() => {
+                           let reviews = that.data.reviews;
+                           reviews = reviews.filter(item=>{
+                               return item.id != id;
+                           });
+                           that.setData({
+                               reviews: reviews
+                           });
+                       }, 1000)
+                   } else if (res.data.status== 500) {
+                       http.loadFailL(res.data.msg);
+                   }
+               } else{
+                   http.loadFailL();
+               }
+            });
         }
     },
+    // 点赞
     pinLike: function (e) {
         let id = e.currentTarget.dataset.id;
         let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
@@ -244,15 +253,12 @@ Page({
         if (that.data.user_id < 1) {
             authLogin.authLogin('/pages/find/detail/index?id='+id,'nor',app);
         } else {
-            wx.request({
-                url: 'https://xuegushi.cn/wxxcx/pin/' + id + '/like',
-                data: {
-                    user_id: user_id,
-                    wx_token: wx_token
-                },
-                success: (res) => {
-                    // console.log(res);
-                    if (res.data && res.data.status == 'active') {
+            http.request(app.globalData.url+'wxxcx/pin/' + id + '/like',{
+                user_id: user_id,
+                wx_token: wx_token
+            }).then(res=>{
+                if(res.data && res.succeeded){
+                    if (res.data.status == 'active') {
                         pin.like_count = pin.like_count + 1;
                         pin.like_status = 'active';
                         that.setData({
@@ -265,14 +271,12 @@ Page({
                             pin: pin
                         })
                     } else {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                            duration: 1000
-                        })
+                        http.loadFailL(res.data.msg);
                     }
+                }else{
+                    http.loadFailL();
                 }
-            })
+            });
         }
     },
     /**
@@ -312,7 +316,7 @@ Page({
             reviews: [],
             total:1
         });
-        this.getPinReviews(this);
+        this.getPinReviews();
         wx.stopPullDownRefresh();
     },
     
@@ -320,7 +324,7 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        this.getPinReviews(this);
+        this.getPinReviews();
     },
     
     /**

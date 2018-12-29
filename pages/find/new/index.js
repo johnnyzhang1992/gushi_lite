@@ -13,7 +13,8 @@ Page({
     poem: null,
     poet: null,
     pin:null,
-    t_id: 0
+    t_id: 0,
+    user_id: -1,
   },
   // 获取用户id
   getUserId: function () {
@@ -34,6 +35,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '写想法'
     });
+    that.getUserId();
     if(options.type && options.type == 'poem'){
       wx.request({
         url: 'https://xuegushi.cn/wxxcx/poem/' + options.id + '?user_id=' + that.data.user_id,
@@ -103,7 +105,7 @@ Page({
             location_img: '/images/icon/location_fill.png'
           })
         }
-       
+        
       }
     })
   },
@@ -180,42 +182,42 @@ Page({
   onReady: function () {
   
   },
-
+  
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
   
   },
-
+  
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
   
   },
-
+  
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
   
   },
-
+  
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
     wx.stopPullDownRefresh();
   },
-
+  
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
   
   },
-
+  
   /**
    * 用户点击右上角分享
    */
