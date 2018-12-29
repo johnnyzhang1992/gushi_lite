@@ -1,11 +1,13 @@
-/* pages/poem/poet/index/index.wxss */
+/* pages/poem/poet/index.wxss */
 .page.list{
     width: 100%;
     background-color: inherit;
     padding-top: 0
 }
 .home-content{
-    padding: 0
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
 }
 .navigator-hover{
     background-color: #fff;

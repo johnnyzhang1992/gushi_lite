@@ -165,7 +165,7 @@ Page({
                 success: res => {
                     if (res.data) {
                         console.log('----------success------------');
-                        console.log(res.data);
+                        // console.log(res.data);
                         let _detail = res.data.detail;
                         that.setData({
                             poem: res.data.poem,
@@ -382,7 +382,7 @@ Page({
                     console.log('----------success------------');
                     // console.log(res.data);
                     until.downImage(res.data.file_name).then(res1=>{
-                        console.log(res1);
+                        console.log(res1.tempFilePath);
                         if(res1 && res1.succeeded){
                             that.setData({
                                 codePath: res1.tempFilePath

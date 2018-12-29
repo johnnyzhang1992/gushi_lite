@@ -1,22 +1,29 @@
 /* pages/poem/detail/index.wxss */
 .weui-media-box__title{
   white-space:initial;
-  font-size: 12px;
-  text-align: left;
+  font-size: 14px;
+  text-align: center;
   color:#666;
   display: block;
   /* padding: 0 10px; */
 }
+.weui-media-box{
+    padding: 10px 10px;
+}
 .wyw{
-  text-align: justify;
-  text-indent: 2em;
-  margin-bottom: 10px;
+    text-align: justify;
+     text-indent: 1em;
+    margin-bottom:5px;
+    line-height:20px;
 }
 .xu{
   margin-bottom: 10px;
   color: #999;
   text-align: justify;
-  text-indent: 2em;
+  text-indent: 1em;
+  font-size: 12px;
+  text-overflow: normal;
+  display: block;
 }
 .poem-content{
   padding-bottom: 10px;
@@ -30,15 +37,21 @@
   margin-bottom: 5px;
 }
 .page__hd{
-  padding: 15px;
+  padding: 10px 15px 0 15px;
+}
+.weui-panel{
+    margin-top: 0;
+}
+.weui-panel:before{
+    border-top: none;
 }
 .page__title{
-  font-size: 16px;
+  font-size: 20px;
   color: #454545;
-  text-align: left;
+  text-align: center;
 }
 .page__desc{
-  text-align: left;
+  text-align: center;
 }
 .author-name{
   display:inline-block;
@@ -85,7 +98,9 @@
 .avatar .doyen{width: 40px;height: 40px;position: absolute;bottom: -2px;right: 20px;}
 .expertInfo{font-size: 12px;flex-grow: 2;color: #B0B0B0;line-height: 1.5em;}
 .expertInfo .name{font-size: 16px;color:#000;margin-bottom: 6px;}
-.tab-content{margin-top: 5px;}
+.tab-content{
+    /* margin-top: 5px; */
+}
 .scoll-h{height: 100%;}
 .tab-content{
   padding-bottom: 40px;
@@ -99,7 +114,7 @@
   color:#999;
   text-align:justify;
   display:block;
-  text-indent:2em;
+  text-indent:1em;
   margin-bottom: 6px;
 }
 .tab-list-content .yi{

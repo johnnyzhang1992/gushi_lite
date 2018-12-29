@@ -35,6 +35,13 @@
     color: #333;
     font-size: 14px;
 }
+.poem-item .author{
+    font-size: 16px;
+}
+.poem-item .content{
+    font-size: 12px;
+    color: #9b9b9b;
+}
 .poem-item .poem-author{
     color: #999;
     font-size: 14px;

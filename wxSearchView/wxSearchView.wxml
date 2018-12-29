@@ -64,7 +64,7 @@
                       <view class="poem-profile">{{item.profile}}</view>
                   </navigator>
                   <view class="weui-cells weui-cells_after-title" wx-if='{{poets.total>3}}'>
-                      <navigator url="/pages/poet/index/index?type=poet&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                      <navigator url="/pages/poet/index?type=poet&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                           <view class="weui-cell__hd"></view>
                           <view class="weui-cell__bd"><icon class="weui-icon-search_in-box" type="search" size="14"></icon>查看更多结果</view>
                           <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{p_count}}</view>

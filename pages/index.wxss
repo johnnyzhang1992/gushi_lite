@@ -1,5 +1,6 @@
 /**index.wxss**/
 .page.list{
+    padding-top: 0;
   width: 100%;
   background-color: inherit
 }
@@ -105,9 +106,25 @@
   font-size: 12px;
   padding: 2px 0;
 }
+.poem-item .poem-title.author{
+    font-size: 16px
+}
 .poem-item .poem-content{
-  font-size: 12px;
-  color: #454545;
+    font-size: 12px;
+    color: #454545;
+    font-size: 13px;
+    color: #999;
+    margin-top: 5px;
+}
+.poem-item .poem-author{
+    color: #999;
+    font-size: 13px;
+    /* padding: 5px 0; */
+    position:absolute;
+    right:15px;
+    top:8px;
+    display:inline-block;
+    width:auto;
 }
 .section{
   width: 100%;

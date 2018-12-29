@@ -35,9 +35,9 @@
         <view class="page__bd">
             <!-- <view class="weui-cells__title">随机获取5首古诗</view> -->
             <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="id">
-                <view class="poem-title">{{item.title}}</view>
-                <view class="poem-author">{{item.dynasty+' | '+item.author}}</view>
-                <view class="poem-title">{{item.content}}</view>
+                <view class="poem-title author">{{item.title}}</view>
+                <view class="poem-author">{{'['+item.dynasty+'] '+item.author}}</view>
+                <view class="poem-title content">{{item.content}}</view>
                 <view class="weui-media-box__info badge-list" wx:if="{{is_search && item.tags.length>0}}"> 
                     <view class="weui-badge" wx:for="{{item.tags}}" wx:key="unique" wx-if='{{item ==_keyWord}}'>{{item}}</view>
                 </view> 

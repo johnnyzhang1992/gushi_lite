@@ -1,4 +1,5 @@
-// pages/poem/poet/index/index.js
+// pages/poem/poet/index.js
+const app = getApp();
 Page({
 
   /**
@@ -35,9 +36,9 @@ Page({
       });
     }
     if (options.type) {
-      _url = 'https://xuegushi.cn/wxxcx/getPoetData?keyWord=' + options.keyWord;
+      _url = app.globalData.url+'/wxxcx/getPoetData?keyWord=' + options.keyWord;
     } else {
-      _url = 'https://xuegushi.cn/wxxcx/getPoetData'
+      _url = app.globalData.url+'/wxxcx/getPoetData'
     }
     wx.request({
       url: _url,
@@ -118,7 +119,7 @@ Page({
       return false;
     }
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoetData?dynasty='+that.data.dynasty[that.data.index],
+      url: app.globalData.url+'/wxxcx/getPoetData?dynasty='+that.data.dynasty[that.data.index],
       data: _data,
       success: res =>{
         if(res.data){
@@ -140,7 +141,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '古代诗人一览',
-      path: '/pages/poet/index/index',
+      path: '/pages/poet/index',
       // imageUrl:'/images/poem.png',
       success: function(res) {
         // 转发成功
@@ -161,7 +162,7 @@ Page({
     });
     wx.showNavigationBarLoading();
     wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoetData?dynasty='+that.data.dynasty[e.detail.value],
+      url: app.globalData.url+'/wxxcx/getPoetData?dynasty='+that.data.dynasty[e.detail.value],
       data: {
         page: 1
       },

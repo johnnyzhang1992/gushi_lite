@@ -1,7 +1,7 @@
 <!--pages/poem/poet/detail/index.wxml-->
 <view class="home-content">
     <view class='author_avatar' wx:if="poet.avatar">
-      <image src="{{poet.avatar}}"></image>
+        <image src="{{poet.avatar}}"></image>
     </view>
     <view class='author_name'>{{poet.author_name}}</view>
     <view class="divide"></view>
@@ -10,11 +10,11 @@
     <view class="divide"></view>
     <view class="page list">
         <view class="page__bd">
-            <view class="weui-cells__title">作品 (收录{{total}}首)</view> 
+            <view class="weui-cells__title">作品 (收录{{total}}首)</view>
             <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="id">
-                <view class="poem-title">{{item.title}}</view>
-                <view class="poem-author">{{item.dynasty+' | '+item.author}}</view>
-                <view class="poem-title">{{item.content}}</view>
+                <view class="poem-title author">{{item.title}}</view>
+                <!--<view class="poem-author">{{item.dynasty+' | '+item.author}}</view>-->
+                <view class="poem-title content">{{item.content}}</view>
             </navigator>
         </view>
     </view>
@@ -22,13 +22,13 @@
     <button class='return' bindtap="return"><image src='../../../images/icon/return.png'></image></button>
     <button class='add' bindtap='addNew' animation="{{animationData}}"><image src='../../../images/icon/add.png'></image></button>
     <view class="collect" bindtap="updateCollect">
-      <view class="collect-img" wx:if="{{!collect_status}}">
-        <image src="../../../images/icon/collect.png"></image>
-          <view class="text">收藏</view>
-      </view>
-      <view class="collect-img" wx:if="{{collect_status}}">
-        <image src="../../../images/icon/collect_active.png"></image>
-          <view class="text">已收藏</view>
-      </view>
+        <view class="collect-img" wx:if="{{!collect_status}}">
+            <image src="../../../images/icon/collect.png"></image>
+            <view class="text">收藏</view>
+        </view>
+        <view class="collect-img" wx:if="{{collect_status}}">
+            <image src="../../../images/icon/collect_active.png"></image>
+            <view class="text">已收藏</view>
+        </view>
     </view>
 </view>
