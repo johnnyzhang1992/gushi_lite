@@ -51,7 +51,7 @@
         <view class='tag item' wx-if='{{tags.length>0}}'>
           <view class='title'>类型</view>
             <view class='content'>
-              <navigator url="/pages/poem/index/index?type=tag&keyWord={{item}}" hover-class="navigator-hover" class="poem-item tag" wx:for="{{tags}}" wx:key="*.this">
+              <navigator url="/pages/poem/index?type=tag&keyWord={{item}}" hover-class="navigator-hover" class="poem-item tag" wx:for="{{tags}}" wx:key="*.this">
                   <view class="poem-title">{{item}}</view>
               </navigator>
             </view>
@@ -97,7 +97,7 @@
                 <view class="poem-title">{{item.content}}</view>
               </navigator>
               <view class="weui-cells weui-cells_after-title" wx-if='{{poems.total>3}}'>
-                <navigator url="/pages/poem/index/index?type=poem&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <navigator url="/pages/poem/index?type=poem&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                   <view class="weui-cell__hd"></view>
                     <view class="weui-cell__bd"><icon class="weui-icon-search_in-box" type="search" size="14"></icon>查看更多结果</view>
                       <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{p_count}}</view>

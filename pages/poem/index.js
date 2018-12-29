@@ -1,4 +1,4 @@
-// pages/poem/index/index.js
+// pages/poem/index.js
 const app = getApp();
 Page({
 
@@ -154,7 +154,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '古诗文',
-      path: '/pages/poem/index/index',
+      path: '/pages/poem/index',
       // imageUrl:'/images/poem.png',
       success: function(res) {
         // 转发成功

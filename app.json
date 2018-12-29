@@ -5,7 +5,7 @@
         "pages/poem/detail/index",
         "pages/me/index",
         "pages/search/index",
-        "pages/poem/index/index",
+        "pages/poem/index",
         "pages/sentence/index",
         "pages/poet/index",
         "pages/poet/detail/index",
