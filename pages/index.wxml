@@ -6,7 +6,7 @@
       <view class="h-time m">{{date[1]}}</view>
       <view class="h-poem">每日一诗</view>
       <view class="day">{{date[2]}}</view>
-      <navigator url="../poem/detail/index?id={{hot.id}}" class="h-p-content">{{hot.title}}</navigator>
+      <navigator url="poem/detail/index?id={{hot.id}}" class="h-p-content">{{hot.title}}</navigator>
     </view>
   </view>
   <view class="weui-search-bar">
@@ -22,14 +22,14 @@
     </view>
   </view>
   <view class="weui-flex nav-list">
-      <navigator url="../poem/index/index" hover-class="navigator-hover" class="weui-flex__item">
-          <image class="" src="../../images/icon/poem.png"></image> 诗词
+      <navigator url="poem/index/index" hover-class="navigator-hover" class="weui-flex__item">
+          <image class="" src="../images/icon/poem.png"></image> 诗词
       </navigator>
-      <navigator url="../sentence/index" hover-class="navigator-hover" class="weui-flex__item">
-          <image class="" src="../../images/icon/sentence.png"></image> 名句
+      <navigator url="sentence/index" hover-class="navigator-hover" class="weui-flex__item">
+          <image class="" src="../images/icon/sentence.png"></image> 名句
       </navigator>
-      <navigator url="../poet/index/index" hover-class="navigator-hover" class="weui-flex__item">
-          <image class="" src="../../images/icon/poet.png"></image> 诗人
+      <navigator url="poet/index/index" hover-class="navigator-hover" class="weui-flex__item">
+          <image class="" src="../images/icon/poet.png"></image> 诗人
       </navigator>
   </view>
   <view class="divide"></view>

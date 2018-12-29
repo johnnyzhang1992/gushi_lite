@@ -80,8 +80,5 @@ App({
         domain: 'https://xuegushi.cn/wxxcx',
         url: 'https://xuegushi.cn',
         backUrl: {}
-    },
-    func: {
-        // getPosts:https.getPosts,
     }
 });
