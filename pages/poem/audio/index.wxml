@@ -1,28 +1,29 @@
 <!--pages/poem/audio/index.wxml-->
 <view class='page'>
-<view class="page__hd">
+    <!--诗词内容-->
+    <view class="page__hd">
         <view class="page__title">{{poem.title}}</view>
         <view class="page__desc">{{poem.dynasty+' | '}}<view class="author-name">{{(poem.author)}}</view></view>
-    </view>
-    <view class="page__bd page__content">
-        <view class="weui-panel">
-            <view class="weui-panel__bd">
-                <view class="weui-media-box weui-media-box_text">
-                    <view class="weui-media-box__desc xu" wx:if="{{content.xu}}">{{content.xu}}</view>
-                    <text decode='true' class="weui-media-box__title " wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type =="诗"}}'>{{item}}</text>
-                    <text decode='true' class="weui-media-box__title wyw" wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type !="诗"}}'>{{item}}</text> 
+        <view class="page__bd page__content">
+            <view class="weui-panel">
+                <view class="weui-panel__bd">
+                    <view class="weui-media-box weui-media-box_text">
+                        <view class="weui-media-box__desc xu" wx:if="{{content.xu}}">{{content.xu}}</view>
+                        <text decode='true' class="weui-media-box__title " wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type =="诗"}}'>{{item}}</text>
+                        <text decode='true' class="weui-media-box__title wyw" wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type !="诗"}}'>{{item}}</text>
+                    </view>
                 </view>
             </view>
         </view>
     </view>
+    <!--audio-->
+    <view class='audio'>
+        <audio name="{{title}}" author="{{poem.author}}" src="{{_audio.src}}" id="myAudio" controls></audio>
+        <view class='audio-buttons'>
+            <button type="primary" size='mini' class='weui-btn weui-btn_mino weui-btn_primary' bindtap="audioPlay">播放</button>
+            <button type="primary" size='mini' class='weui-btn weui-btn_mino weui-btn_primary' bindtap="audioPause">暂停</button>
+            <!-- <button type="primary" bindtap="audio14">设置当前播放时间为14秒</button> -->
+            <button type="primary" size='mini' class='weui-btn weui-btn_mino weui-btn_primary' bindtap="audioStart">回到开头</button>
+        </view>
+    </view>
 </view>
-<view class='audio'>
-  <audio name="{{title}}" author="{{poem.author}}" src="{{_audio.src}}" id="myAudio" controls></audio>
-  <view class='audio-buttons'>
-    <button type="primary" size='mini' class='weui-btn weui-btn_mino weui-btn_primary' bindtap="audioPlay">播放</button>
-    <button type="primary" size='mini' class='weui-btn weui-btn_mino weui-btn_primary' bindtap="audioPause">暂停</button>
-    <!-- <button type="primary" bindtap="audio14">设置当前播放时间为14秒</button> -->
-    <button type="primary" size='mini' class='weui-btn weui-btn_mino weui-btn_primary' bindtap="audioStart">回到开头</button>
-  </view>
-</view>
-

@@ -1,7 +1,8 @@
 // pages/poem/audio/index.js
 const app = getApp();
+let http = require('../../../utils/http.js');
 Page({
-
+  
   /**
    * 页面的初始数据
    */
@@ -12,15 +13,19 @@ Page({
     poem: null,
     content: null
   },
+  // play
   audioPlay: function () {
     this.audioCtx.play()
   },
+  // pause
   audioPause: function () {
     this.audioCtx.pause()
   },
+  // seek
   audio14: function () {
     this.audioCtx.seek(14)
   },
+  // start again
   audioStart: function () {
     this.audioCtx.seek(0)
   },
@@ -32,117 +37,85 @@ Page({
     wx.showLoading({ title: '加载中' });
     wx.setNavigationBarTitle({
       title: options.title
-    })
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoemContent/' + options.id,
-      success: res => {
-        if (res.data) {
-          console.log('----------success------------');
-          // console.log(res.data);
-          this.setData({
-            poem: res.data.poem,
-            content:JSON.parse(res.data.poem.content),
-          });
-          wx.hideLoading();
-        }
-      }
     });
-    this.setData({
+    that.setData({
       title: options.title,
       id: options.id
     });
+    http.request(app.globalData.url+'/wxxcx/getPoemContent/' + options.id,undefined).then(res=>{
+      if(res.data && res.succeeded){
+        console.log('----------success------------');
+        // console.log(res.data);
+        that.setData({
+          poem: res.data.poem,
+          content:JSON.parse(res.data.poem.content),
+        });
+        wx.hideLoading();
+      }else{
+        http.loadFailL('内容加载失败！')
+      }
+    });
   },
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
     let that = this;
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getPoemAudio/'+that.data.id,
-      success: res => {
-        if (res.data) {
-          console.log(res.data);
-          that.setData({
-            _audio: res.data
-          });
-          that.audioCtx = wx.createAudioContext('myAudio');
-          // const backgroundAudioManager = wx.getBackgroundAudioManager()
-
-          // backgroundAudioManager.title = that.data.poem.title
-          // backgroundAudioManager.epname = that.data.poem.title
-          // backgroundAudioManager.singer = that.data.poem.title.author_name
-          // backgroundAudioManager.coverImgUrl = 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000'
-          // backgroundAudioManager.src = res.data.src // 设置了 src 之后会自动播放
-          // const innerAudioContext = wx.createInnerAudioContext()
-          // innerAudioContext.autoplay = true
-          // innerAudioContext.src = res.data.src;
-          // innerAudioContext.onPlay(() => {
-          //   console.log('开始播放')
-          // })
-          // innerAudioContext.onError((res) => {
-          //   console.log(res.errMsg)
-          //   console.log(res.errCode)
-          // })
-          wx.hideLoading();
-        } else {
-          wx.hideLoading();
-          wx.showToast({
-            title: '加载音频失败',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      },
-      fail: () => {
-        wx.showToast({
-          title: '加载音频失败',
-          icon: 'none',
-          duration: 2000
-        })
+    http.request(app.globalData.url+'/wxxcx/getPoemAudio/'+that.data.id,undefined).then(res=>{
+      if(res.data && res.succeeded){
+        // console.log(res.data);
+        that.setData({
+          _audio: res.data
+        });
+        that.audioCtx = wx.createAudioContext('myAudio');
+        that.audioCtx.setSrc(res.data.src);
+        wx.hideLoading();
+      }else{
+        http.loadFailL('音频加载失败！')
       }
-    })
+    });
   },
-
+  
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
   
   },
-
+  
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
   
   },
-
+  
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
   
   },
-
+  
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
   
   },
-
+  
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
   
   },
-
+  
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
   
   }
-})
+});

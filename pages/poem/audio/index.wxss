@@ -58,3 +58,9 @@ audio{
   color:#333;
   font-size:14px;
 }
+.page__content{
+    margin-top: 10px;
+}
+.weui-media-box{
+    padding: 15px 5px;
+}
