@@ -49,12 +49,7 @@ Page({
                     last_page: res.data.poems.last_page
                 });
             }else{
-                console.log(res);
-                wx.showToast({
-                    title: '请求失败，请刷新重试！',
-                    icon: 'none',
-                    duration: 2000
-                })
+                http.loadFailL();
             }
             wx.hideLoading();
             wx.hideNavigationBarLoading();
@@ -85,7 +80,7 @@ Page({
         let winWidth = sysInfo.windowWidth;
         let ii = 0;
         let animation = wx.createAnimation({
-            duration: 1000,
+            duration: 20000,
             timingFunction: "ease-in-out",
         });
         //动画的脚本定义必须每次都重新生成，不能放在循环外
@@ -105,7 +100,7 @@ Page({
             });
             ++ii;
             console.log(ii);
-        }.bind(that),20000);//3000这里的设置如果小于动画step的持续时间的话会导致执行一半后出错
+        }.bind(that),20000);//20000这里的设置如果小于动画step的持续时间的话会导致执行一半后出错
     },
     /**
      * 页面相关事件处理函数--监听用户下拉动作
