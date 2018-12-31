@@ -13,7 +13,8 @@ Page({
         objectArray: ['shijing','chuci','yuefu','xiaoxue','chuzhong','gaozhong','songci','shijiu','tangshi','songcisanbai','sanbai'],
         index: 10,
         date: util.formatDateToMb(),
-        hot: app.globalData.hot
+        hot: app.globalData.hot,
+        animationData: {},
     },
     // 跳转到搜索页面
     ngToSearch: function () {
@@ -77,6 +78,34 @@ Page({
     onReady: function() {
         // Do something when page ready.
         
+    },
+    onShow: function(){
+        let that = this;
+        let sysInfo = app.globalData.systemInfo;
+        let winWidth = sysInfo.windowWidth;
+        let ii = 0;
+        let animation = wx.createAnimation({
+            duration: 1000,
+            timingFunction: "ease-in-out",
+        });
+        //动画的脚本定义必须每次都重新生成，不能放在循环外
+        animation.translateX(winWidth-20).step({ duration: 10000 }).translateX(0).step({ duration: 10000 });
+        // 更新数据
+        that.setData({
+            // 导出动画示例
+            animationData: animation.export(),
+        });
+        setInterval(function () {
+            //动画的脚本定义必须每次都重新生成，不能放在循环外
+            animation.translateX(winWidth-20).step({ duration: 10000 }).translateX(-100).step({ duration: 10000 });
+            // 更新数据
+            that.setData({
+                // 导出动画示例
+                animationData: animation.export(),
+            });
+            ++ii;
+            console.log(ii);
+        }.bind(that),20000);//3000这里的设置如果小于动画step的持续时间的话会导致执行一半后出错
     },
     /**
      * 页面相关事件处理函数--监听用户下拉动作

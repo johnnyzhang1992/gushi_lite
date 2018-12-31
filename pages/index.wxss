@@ -35,6 +35,10 @@
 .h-p-content{
   font-size: 14px;
 }
+.h-boat .boat-img{
+    width: 48px;
+    height: 30px;
+}
 .searchbar-result{
     margin-top: 0;
     font-size: 14px;
