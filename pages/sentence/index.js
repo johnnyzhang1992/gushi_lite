@@ -1,4 +1,6 @@
 // pages/poem/sentence/index.js
+const app = getApp();
+let http = require('../../utils/http.js');
 Page({
 
   /**
@@ -38,32 +40,31 @@ Page({
       });
     }
     if (options.type) {
-      _url = 'https://xuegushi.cn/wxxcx/getSentenceData?keyWord=' + options.keyWord;
+      _url = app.globalData.url+'/wxxcx/getSentenceData?keyWord=' + options.keyWord;
     } else {
-      _url = 'https://xuegushi.cn/wxxcx/getSentenceData'
+      _url = app.globalData.url+'/wxxcx/getSentenceData'
     }
-    wx.request({
-      url: _url,
-      success: res =>{
-        if(res.data){
-          console.log('----------success------------');
-          // wx.setStorageSync('user',res.data);
-          // console.log(res.data);
-          this.setData({
-            poems: res.data.poems.data,
-            current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page,
-            themes: res.data.themes,
-            _types: res.data.types,
-            types: res.data.types[0].types,
-            total: res.data.poems.total,
-            isSearch: options.type ? true :false,
-            _keyWord: options.keyWord ? options.keyWord: null
-          });
-          wx.hideLoading();
-        }
+    http.request(_url,undefined).then(res=>{
+      if(res.data && res.succeeded){
+        console.log('----------success------------');
+        // wx.setStorageSync('user',res.data);
+        // console.log(res.data);
+        that.setData({
+          poems: res.data.poems.data,
+          current_page: res.data.poems.current_page,
+          last_page: res.data.poems.last_page,
+          themes: res.data.themes,
+          _types: res.data.types,
+          types: res.data.types[0].types,
+          total: res.data.poems.total,
+          isSearch: options.type ? true :false,
+          _keyWord: options.keyWord ? options.keyWord: null
+        });
+        wx.hideLoading();
+      }else{
+        http.loadFailL();
       }
-    })
+    });
   },
 
   /**
@@ -119,26 +120,27 @@ Page({
       }
     }
     if (that.data.current_page > that.data.last_page) {
-      wx.hideNavigationBarLoading()
+      wx.hideNavigationBarLoading();
       return false;
     }
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getSentenceData?theme=' + that.data.themes[that.data.th_index] + '&type=' + that.data.types[that.data.ty_index],
-      data: _data,
-      success: res =>{
-        if(res.data){
-          console.log('----------success------------');
-          // wx.setStorageSync('user',res.data);
-          // console.log(res.data);
-          this.setData({
-            poems: that.data.poems.concat(res.data.poems.data),
-            current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page
-          });
-          wx.hideNavigationBarLoading()
-        }
+    _data .theme = that.data.themes[that.data.th_index];
+    _data.type = that.data.types[that.data.ty_index];
+    http.request(app.globalData.url+'/wxxcx/getSentenceData',_data).then(res=>{
+      if(res.data && res.succeeded){
+  
+        console.log('----------success------------');
+        // wx.setStorageSync('user',res.data);
+        // console.log(res.data);
+        this.setData({
+          poems: that.data.poems.concat(res.data.poems.data),
+          current_page: res.data.poems.current_page,
+          last_page: res.data.poems.last_page
+        });
+        wx.hideNavigationBarLoading()
+      }else{
+        http.loadFailL();
       }
-    })
+    });
   },
 
   /**

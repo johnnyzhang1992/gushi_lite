@@ -1,39 +1,42 @@
 <!--pages/poem/sentence/index.wxml-->
 <view class="page list">
-  <view class="weui-flex nav-list" wx-if='{{!isSearch}}'>
-    <view class="weui-flex__item weui-flex">
-        <view class="weui-flex__item left">
-            <image class="" src="../../images/icon/theme.png"></image>  主题 ：
+    <!--filter-->
+    <view class="weui-flex nav-list" wx-if='{{!isSearch}}'>
+        <view class="weui-flex__item weui-flex">
+            <view class="weui-flex__item left">
+                <image class="" src="../../images/icon/theme.png"></image>  主题 ：
+            </view>
+            <view class="weui-flex__item right">
+                <picker bindchange="bindPickerThemeChange" value="{{th_index}}" range="{{themes}}">
+                    <view class="picker">{{themes[th_index]}}</view>
+                </picker>
+            </view>
         </view>
-        <view class="weui-flex__item right">
-            <picker bindchange="bindPickerThemeChange" value="{{th_index}}" range="{{themes}}">
-                <view class="picker">{{themes[th_index]}}</view>
-            </picker>
+        <view class="weui-flex__item weui-flex">
+            <view class="weui-flex__item left">
+                <image class="" src="../../images/icon/type.png"></image>  类型 ：
+            </view>
+            <view class="weui-flex__item right">
+                <picker bindchange="bindPickerTypeChange" value="{{ty_index}}" range="{{types}}">
+                    <view class="picker">{{types[ty_index]}}</view>
+                </picker>
+            </view>
         </view>
     </view>
-      <view class="weui-flex__item weui-flex">
-          <view class="weui-flex__item left">
-              <image class="" src="../../images/icon/type.png"></image>  类型 ：
-          </view>
-          <view class="weui-flex__item right">
-              <picker bindchange="bindPickerTypeChange" value="{{ty_index}}" range="{{types}}">
-                  <view class="picker">{{types[ty_index]}}</view>
-              </picker>
-          </view>
-      </view>
-  </view>
-  <view class="nav-breadcrumb weui-flex">
-      <view class="item theme" wx-if='{{!isSearch}}'>{{themes[th_index]}}</view>
-      <view class="item type" wx-if='{{!isSearch}}'>{{types[ty_index]}}</view>
-      <view class="item type" wx-if='{{isSearch}}'>{{_keyWord}}</view>
-      <view class="item total">共 {{total}} 条结果</view>
-  </view>
-  <view class="page__bd">
-    <view class="weui-cells weui-cells_after-title">
-      <view  class="poem-item" wx:for="{{poems}}" wx:key="id">
-          <view class="poem-title">{{item.title}}</view>
-          <navigator url="/pages/poem/detail/index?id={{item.poem_id}}" hover-class="navigator-hover" class="poem-author">{{'《'+item.poem_title +'》 | '+item.author}}</navigator>
-      </view>
+    <!--nav list-->
+    <view class="nav-breadcrumb weui-flex">
+        <view class="item theme" wx-if='{{!isSearch}}'>{{themes[th_index]}}</view>
+        <view class="item type" wx-if='{{!isSearch}}'>{{types[ty_index]}}</view>
+        <view class="item type" wx-if='{{isSearch}}'>{{_keyWord}}</view>
+        <view class="item total">共 {{total}} 条结果</view>
     </view>
-  </view>
+    <!-- sentence list-->
+    <view class="page__bd">
+        <view class="weui-cells weui-cells_after-title">
+            <view  class="poem-item" wx:for="{{poems}}" wx:key="id">
+                <view class="poem-title">{{item.title}}</view>
+                <navigator url="/pages/poem/detail/index?id={{item.poem_id}}" hover-class="navigator-hover" class="poem-author">{{'《'+item.poem_title +'》 | '+item.author}}</navigator>
+            </view>
+        </view>
+    </view>
 </view>
