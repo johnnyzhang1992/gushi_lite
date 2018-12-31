@@ -9,6 +9,7 @@
         <view class="weui-loading"></view>
         <view class="weui-loadmore__tips"> 正在加载</view>
     </view>
+    <!--诗词内容-->
     <view class="page__bd page__content">
         <official-account></official-account>
         <view class="weui-panel" wx-if="{{poem}}">
@@ -24,7 +25,11 @@
             </view>
         </view>
     </view>
-    <!-- <ad unit-id="adunit-1dc705dba430e05c"></ad> -->
+
+    <!--广告-->
+    <!--<ad unit-id="adunit-1dc705dba430e05c"></ad>-->
+
+    <!--诗词注释翻译等-->
     <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
         <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">注释</view>
         <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">翻译</view>
@@ -46,7 +51,8 @@
             </scroll-view>
         </swiper-item>
     </swiper>
-   
+
+    <!--button list-->
     <!--<button class='share' open-type="share"><image src='../../../images/icon/share.png'></image></button>-->
     <button class='share' bindtap='canvasToImage' animation="{{animationData}}"><image src='../../../images/icon/share.png'></image></button>
     <button class='copy' bindtap="copy"><image src='../../../images/icon/copy.png'></image></button>

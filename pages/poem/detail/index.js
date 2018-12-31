@@ -3,6 +3,7 @@ const app = getApp();
 let until = require('../../../utils/util');
 const canvas = require('../../../utils/canvas');
 let authLogin = require('../../../utils/authLogin');
+let http = require('../../../utils/http.js');
 Page({
     /**
      * 页面的初始数据
@@ -45,6 +46,7 @@ Page({
             url: '/pages/index'
         });
     },
+    // new find
     addNew: function () {
         let that = this;
         if (that.data.user_id < 1) {
@@ -85,10 +87,6 @@ Page({
             data = (that.data.detail && that.data.detail.yi) ? that.data.detail.yi.content : null
         }else if (cur == 0) {
             data = (that.data.detail && that.data.detail.zhu) ? that.data.detail.zhu.content: null;
-            // for(let i = 0;i<data.length;i++){
-            //   let _data = data[i].toString();
-            //   data[i] = [_data.substr(0,_data.indexOf("：")),_data.substr(_data.indexOf("：")+1,_data.length)];
-            // }
         }else if (cur == 2) {
             data = (that.data.detail && that.data.detail.shangxi) ? that.data.detail.shangxi.content:null
         }else if(cur == 4){
@@ -115,7 +113,6 @@ Page({
         wx.navigateTo({
             url: '/pages/poem/audio/index?id='+this.data.poem.id+'&title='+this.data.poem.title,
         })
-        
     },
     // 跳转到音频页面
     copy: function(){
@@ -160,31 +157,25 @@ Page({
     getPoemDetail: function(poem_id,user_id){
         let that = this;
         return new Promise((resolve,reject)=> { //结果以Promise形式返回
-            wx.request({
-                url: 'https://xuegushi.cn/wxxcx/poem/'+poem_id+'?user_id='+user_id,
-                success: res => {
-                    if (res.data) {
-                        console.log('----------success------------');
-                        // console.log(res.data);
-                        let _detail = res.data.detail;
-                        that.setData({
-                            poem: res.data.poem,
-                            detail: _detail,
-                            poems_count: res.data.poems_count,
-                            content:JSON.parse(res.data.poem.content),
-                            tags: (res.data.poem.tags && res.data.poem.tags !='') ? res.data.poem.tags.split(',') : [],
-                            // tab_lists: (_detail && _detail.zhu) ? _detail.zhu.content : null,
-                            collect_status: res.data.poem.collect_status,
-                            bg_image: res.data.bg_image,
-                            is_loading: false
-                        });
-                        resolve(Object.assign(res.data, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
-                    }else{
-                        resolve(Object.assign(res, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
-                    }
-                },
-                fail:error=>{
-                    resolve(Object.assign(error, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
+            http.request(app.globalData.url+'/wxxcx/poem/'+poem_id,{user: user_id}).then(res=>{
+                if(res.data && res.succeeded){
+                    console.log('----------success------------');
+                    // console.log(res.data);
+                    let _detail = res.data.detail;
+                    that.setData({
+                        poem: res.data.poem,
+                        detail: _detail,
+                        poems_count: res.data.poems_count,
+                        content:JSON.parse(res.data.poem.content),
+                        tags: (res.data.poem.tags && res.data.poem.tags !='') ? res.data.poem.tags.split(',') : [],
+                        // tab_lists: (_detail && _detail.zhu) ? _detail.zhu.content : null,
+                        collect_status: res.data.poem.collect_status,
+                        bg_image: res.data.bg_image,
+                        is_loading: false
+                    });
+                    resolve(Object.assign(res.data, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
+                }else{
+                    resolve(Object.assign(res, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
                 }
             });
         });
@@ -369,30 +360,25 @@ Page({
         if(_type == 'poem'){
             path = '/pages/poem/detail/index?id='+id;
         }
-        wx.request({
-            url: app.globalData.url+'/wxxcx/getWXACode/',
-            data: {
-                type: type,
-                target_id: id,
-                path: path,
-                width: 300
-            },
-            success: res => {
-                if (res.data) {
-                    console.log('----------success------------');
-                    // console.log(res.data);
-                    until.downImage(res.data.file_name).then(res1=>{
-                        console.log(res1.tempFilePath);
-                        if(res1 && res1.succeeded){
-                            that.setData({
-                                codePath: res1.tempFilePath
-                            });
-                        }
-                    })
-                }
-            },
-            fail:error=>{
-                console.log(error)
+        let data ={
+            type: type,
+            target_id: id,
+            path: path,
+            width: 300
+        };
+        http.request(app.globalData.url+'/wxxcx/getWXACode/',data).then(res=>{
+            if(res.data && res.succeeded){
+                // 下载小程序码都本地
+                until.downImage(res.data.file_name).then(res1=>{
+                    console.log(res1.tempFilePath);
+                    if(res1 && res1.succeeded){
+                        that.setData({
+                            codePath: res1.tempFilePath
+                        });
+                    }
+                })
+            }else{
+                http.loadFailL();
             }
         });
     },
@@ -437,20 +423,21 @@ Page({
             // https.userLogin(that.data.poem.id);
             authLogin.authLogin('/pages/poem/detail/index?id='+that.data.poem.id,'nor',app);
         }else{
-            wx.request({
-                url: 'https://xuegushi.cn/wxxcx/' + that.data.poem.id + '/collect/poem?user_id=' + that.data.user_id + '&wx_token=' + wx.getStorageSync('wx_token'),
-                success: res => {
-                    if(res.data){
-                        that.setData({
-                            collect_status: res.data.status
-                        })
-                    }else{
-                        that.setData({
-                            collect_status: res.data.status
-                        })
-                    }
-                }
-            })
+            let data = {
+                user_id: that.data.user_id,
+                wx_token: wx.getStorageSync('wx_token')
+            };
+            http.request(app.globalData.url+'/wxxcx/'+that.data.poem.id + '/collect/poem',data).then(res=>{
+               if(res.data && res.succeeded){
+                   that.setData({
+                       collect_status: res.data.status
+                   })
+               } else{
+                   that.setData({
+                       collect_status: res.data.status
+                   })
+               }
+            });
         }
     },
     /**
