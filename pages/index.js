@@ -9,8 +9,8 @@ Page({
         poems: [],
         current_page: 1,
         last_page: 1,
-        array: ['诗经','楚辞','乐府','小学古诗','初中古诗','高中古诗','宋词精选','古诗十九','唐诗三百首','宋词三百首','古诗三百首'],
-        objectArray: ['shijing','chuci','yuefu','xiaoxue','chuzhong','gaozhong','songci','shijiu','tangshi','songcisanbai','sanbai'],
+        category: ['诗经','楚辞','乐府','小学古诗','初中古诗','高中古诗','宋词精选','古诗十九','唐诗三百首','宋词三百首','古诗三百首'],
+        categoryCode: ['shijing','chuci','yuefu','xiaoxue','chuzhong','gaozhong','songci','shijiu','tangshi','songcisanbai','sanbai'],
         index: 10,
         date: util.formatDateToMb(),
         hot: app.globalData.hot,
@@ -61,7 +61,7 @@ Page({
         this.setData({
             index: e.detail.value
         });
-        that.getHomeData(that.data.objectArray[that.data.index]);
+        that.getHomeData(that.data.categoryCode[that.data.index]);
     },
     onLoad: function () {
         let that = this;
@@ -111,7 +111,7 @@ Page({
     // 滚动到底部
     onReachBottom: function() {
         let that = this;
-        this.getHomeData(that.data.objectArray[that.data.index],'more');
+        this.getHomeData(that.data.categoryCode[that.data.index],'more');
     },
     // 分享
     onShareAppMessage: function (res) {
