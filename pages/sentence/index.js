@@ -44,6 +44,10 @@ Page({
     } else {
       _url = app.globalData.url+'/wxxcx/getSentenceData'
     }
+    that.setData({
+      isSearch: options.type ? true :false,
+      _keyWord: options.keyWord ? options.keyWord: null
+    });
     http.request(_url,undefined).then(res=>{
       if(res.data && res.succeeded){
         console.log('----------success------------');
@@ -66,7 +70,69 @@ Page({
       }
     });
   },
-
+  // 获取名句数据
+  getSentenceData: function(page){
+    let that = this;
+    let data = {
+      theme: that.data.themes[that.data.th_index],
+      type: that.data.types[that.data.ty_index],
+      page: page ? page : 1
+    };
+    console.log(data);
+    let url = app.globalData.url+'/wxxcx/getSentenceData';
+    http.request(url,data).then(res=>{
+      wx.hideNavigationBarLoading();
+      if(res.data && res.succeeded){
+        console.log('----------success------------');
+        // wx.setStorageSync('user',res.data);
+        // console.log(res.data);
+        that.setData({
+          poems: page>1 ? that.data.poems.concat(res.data.poems.data) : res.data.poems.data,
+          current_page: res.data.poems.current_page,
+          last_page: res.data.poems.last_page,
+          total: res.data.poems.total
+        });
+        wx.hideLoading();
+      }else{
+        wx.hideLoading();
+        http.loadFailL();
+      }
+    })
+  },
+  // 检测主题变化
+  bindPickerThemeChange: function(e) {
+    let that = this;
+    if(e.detail.value>0){
+      this.setData({
+        th_index: e.detail.value,
+        types: that.data._types[e.detail.value - 1].types,
+        ty_index: 0
+      });
+    }else{
+      this.setData({
+        th_index: e.detail.value,
+        types: that.data._types[e.detail.value].types,
+        ty_index: 0
+      });
+    }
+    wx.setNavigationBarTitle({
+      title: that.data.themes[e.detail.value]
+    });
+    wx.showNavigationBarLoading();
+    that.getSentenceData(1);
+  },
+  // 检测类型变化
+  bindPickerTypeChange: function (e) {
+    let that = this;
+    this.setData({
+      ty_index: e.detail.value
+    });
+    wx.setNavigationBarTitle({
+      title: that.data.themes[that.data.th_index] + ' | ' + that.data.types[e.detail.value]
+    });
+    wx.showNavigationBarLoading();
+    that.getSentenceData(1);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -108,39 +174,13 @@ Page({
   onReachBottom: function () {
     wx.showNavigationBarLoading();
     let that = this;
-    let _data = {};
-    if (that.data.isSearch) {
-      _data = {
-        page: that.data.current_page + 1,
-        keyWord: that.data._keyWord
-      }
-    } else {
-      _data = {
-        page: that.data.current_page + 1,
-      }
-    }
+    let page = that.data.current_page + 1;
     if (that.data.current_page > that.data.last_page) {
       wx.hideNavigationBarLoading();
       return false;
+    }else{
+      that.getSentenceData(page);
     }
-    _data .theme = that.data.themes[that.data.th_index];
-    _data.type = that.data.types[that.data.ty_index];
-    http.request(app.globalData.url+'/wxxcx/getSentenceData',_data).then(res=>{
-      if(res.data && res.succeeded){
-  
-        console.log('----------success------------');
-        // wx.setStorageSync('user',res.data);
-        // console.log(res.data);
-        this.setData({
-          poems: that.data.poems.concat(res.data.poems.data),
-          current_page: res.data.poems.current_page,
-          last_page: res.data.poems.last_page
-        });
-        wx.hideNavigationBarLoading()
-      }else{
-        http.loadFailL();
-      }
-    });
   },
 
   /**
@@ -149,7 +189,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '名句赏析',
-      path: '/pages/poem/sentence/index',
+      path: '/pages/sentence/index',
       imageUrl:'/images/poem.png',
       success: function(res) {
         // 转发成功
@@ -159,75 +199,5 @@ Page({
         // 转发失败
       }
     }
-  },
-  bindPickerThemeChange: function(e) {
-    let that = this;
-    if(e.detail.value>0){
-      this.setData({
-        th_index: e.detail.value,
-        types: that.data._types[e.detail.value - 1].types,
-        ty_index: 0
-      });
-    }else{
-      this.setData({
-        th_index: e.detail.value,
-        types: that.data._types[e.detail.value].types,
-        ty_index: 0
-      });
-    }
-    wx.setNavigationBarTitle({
-      title: that.data.themes[e.detail.value]
-    });
-    wx.showNavigationBarLoading();
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getSentenceData?theme='+that.data.themes[e.detail.value],
-      data: {
-        page: 1
-      },
-      success: res =>{
-        if(res.data){
-          console.log('----------success------------');
-          // wx.setStorageSync('user',res.data);
-          // console.log(res.data);
-          that.setData({
-            poems: res.data.poems.data,
-            current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page,
-            total: res.data.poems.total
-          });
-          wx.hideNavigationBarLoading()
-        }
-      }
-    })
-  },
-  bindPickerTypeChange: function (e) {
-    let that = this;
-    this.setData({
-      ty_index: e.detail.value
-    });
-    wx.setNavigationBarTitle({
-      title: that.data.themes[that.data.th_index] + ' | ' + that.data.types[e.detail.value]
-    });
-    wx.showNavigationBarLoading();
-    wx.request({
-      url: 'https://xuegushi.cn/wxxcx/getSentenceData?theme='+that.data.themes[that.data.th_index]+'&type='+that.data.types[e.detail.value],
-      data: {
-        page: 1
-      },
-      success: res =>{
-        if(res.data){
-          console.log('----------success------------');
-          // wx.setStorageSync('user',res.data);
-          // console.log(res.data);
-          that.setData({
-            poems: res.data.poems.data,
-            current_page: res.data.poems.current_page,
-            last_page: res.data.poems.last_page,
-            total: res.data.poems.total
-          });
-          wx.hideNavigationBarLoading()
-        }
-      }
-    })
   }
 });
