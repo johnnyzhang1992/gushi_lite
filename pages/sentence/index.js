@@ -2,7 +2,6 @@
 const app = getApp();
 let http = require('../../utils/http.js');
 Page({
-
     /**
      * 页面的初始数据
      */

@@ -27,13 +27,13 @@ function request(url,data,type){
                 if (res.data) {
                     resolve(Object.assign(res, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
                 }else{
-                    resolve(Object.assign(res, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
+                    reject(Object.assign(res, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
     
                 }
             },
             fail:error=>{
                 console.log(error);
-                resolve(Object.assign(error, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
+                reject(Object.assign(error, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
             }
         });
     });
@@ -46,9 +46,20 @@ function loadFail(msg){
         duration: 2000
     })
 }
-
+// 刷新页面
+function startPullRefresh() {
+    wx.showModal({
+        title: '加载失败。',
+        content: '请下拉刷新以便重新加载',
+        showCancel: false,
+        success: ()=>{
+            wx.startPullDownRefresh();
+        }
+    })
+}
 module.exports = {
     userLogin: login,
     request: request,
-    loadFailL: loadFail
+    loadFailL: loadFail,
+    startPullRefresh: startPullRefresh
 };
