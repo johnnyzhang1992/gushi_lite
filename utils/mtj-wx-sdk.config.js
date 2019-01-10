@@ -10,7 +10,13 @@ module.exports = {
     appKey: '59986f0588',
 
     /**
-     * 是否获取当前的地理位置、速度
+     * 是否使用了插件
+     * @type {boolean}
+     */
+    hasPlugin: false,
+
+    /**
+     * 是否获取当前的地理位置和速度信息
      * @type {boolean}
      */
     getLocation: false
