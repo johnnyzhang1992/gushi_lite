@@ -8,9 +8,7 @@
             <view class="day">{{date[2]}}</view>
             <navigator url="poem/detail/index?id={{hot.id}}" class="h-p-content">{{hot.title}}</navigator>
         </view>
-        <view class="h-boat" animation="{{animationData}}">
-            <image class="boat-img" src="../images/boat.png"></image>
-        </view>
+        <image class="h-boat boat-img" src="../images/boat.png"  animation="{{animationData}}"></image>
     </view>
     <!--search section-->
     <view class="weui-search-bar">

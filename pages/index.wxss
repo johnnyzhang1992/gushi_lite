@@ -1,4 +1,8 @@
 /**index.wxss**/
+page{
+    width: 100%;
+    overflow-x: hidden;
+}
 .page.list{
     padding-top: 0;
   width: 100%;
@@ -12,6 +16,7 @@
   min-height:120px;
   background:url('https://xuegushi.cn/static/wx/h_bg.jpg') center center no-repeat;
   background-size:cover;
+  overflow-x: hidden; 
 }
 .h-content{
   margin:10px 10px;
@@ -35,7 +40,7 @@
 .h-p-content{
   font-size: 14px;
 }
-.h-boat .boat-img{
+.h-boat.boat-img{
     width: 48px;
     height: 30px;
 }
@@ -88,7 +93,7 @@
 .weui-cell {
   padding:4px 10px;
 }
-.list weui-cell_access{
+.list .weui-cell_access{
   font-size: 12px;
 }
 .poem-item{
@@ -114,8 +119,8 @@
     font-size: 16px
 }
 .poem-item .poem-content{
-    font-size: 12px;
-    color: #454545;
+    /*font-size: 12px;*/
+    /*color: #454545;*/
     font-size: 13px;
     color: #999;
     margin-top: 5px;

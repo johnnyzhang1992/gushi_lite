@@ -18,10 +18,12 @@ function login(id,type) {
 }
 // 封装小程序远程请求函数
 function request(url,data,type){
+    let _data = data ? data : {};
+    _data.appId = 'wx4278af156928b4f6';
     return new Promise((resolve,reject)=> { //结果以Promise形式返回
         wx.request({
             url: url,
-            data: data ? data : null,
+            data: _data,
             type: type ? type : 'GET',
             success: res => {
                 if (res.data) {

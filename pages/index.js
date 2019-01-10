@@ -84,7 +84,7 @@ Page({
             timingFunction: "ease-in-out",
         });
         //动画的脚本定义必须每次都重新生成，不能放在循环外
-        animation.translateX(winWidth-20).step({ duration: 10000 }).translateX(20).step({ duration: 10000 });
+        animation.translateX(winWidth-50).step({ duration: 10000 }).translateX(10).step({ duration: 10000 });
         // 更新数据
         that.setData({
             // 导出动画示例
@@ -92,14 +92,13 @@ Page({
         });
         setInterval(function () {
             //动画的脚本定义必须每次都重新生成，不能放在循环外
-            animation.translateX(winWidth-20).step({ duration: 10000 }).translateX(20).step({ duration: 10000 });
+            animation.translateX(winWidth-50).step({ duration: 10000 }).translateX(10).step({ duration: 10000 });
             // 更新数据
             that.setData({
                 // 导出动画示例
                 animationData: animation.export(),
             });
             ++ii;
-            console.log(ii);
         }.bind(that),20000);//20000这里的设置如果小于动画step的持续时间的话会导致执行一半后出错
     },
     /**
