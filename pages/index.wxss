@@ -107,7 +107,7 @@ page{
   overflow:hidden;
 }
 .poem-item .poem-title{
-  color: #333;
+  color: #454545;
   font-size: 14px;
 }
 .poem-item .poem-author{
