@@ -10,8 +10,9 @@
 搜索部分是在[天未](https://github.com/mindawei)的[wsSearchView](https://github.com/mindawei/wsSearchView)的基础上进行的改造和优化。
 
 ## 注意事项
+- 请求返回的收据尽量简洁
 - 使用定时器时，当退出当前页面时应该注销（onHide,onUnload）
-- 没有再 wxml 里面使用到的数据尽量不要放到 page.data 里面
+- 没有在 wxml 里面使用到的数据尽量不要放到 page.data 里面
 
 ## 小程序二维码
 
