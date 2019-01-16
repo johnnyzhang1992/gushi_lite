@@ -163,7 +163,7 @@ Page({
     onReachBottom: function () {
         let that = this;
         wx.showNavigationBarLoading();
-        if (that.data.current_page > that.data.last_page) {
+        if (current_page > last_page) {
             wx.hideNavigationBarLoading();
             return false;
         }

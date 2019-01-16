@@ -5,6 +5,7 @@ let util = require('../utils/util.js');
 let http = require('../utils/http.js');
 let current_page = 1;
 let last_page = 1;
+let homeInterval = null;
 Page({
     data: {
         motto: '古诗文小助手',
@@ -90,7 +91,7 @@ Page({
             // 导出动画示例
             animationData: animation.export(),
         });
-        setInterval(function () {
+        homeInterval = setInterval(function () {
             //动画的脚本定义必须每次都重新生成，不能放在循环外
             animation.translateX(winWidth-50).step({ duration: 10000 }).translateX(10).step({ duration: 10000 });
             // 更新数据
@@ -102,10 +103,10 @@ Page({
         }.bind(that),20000);//20000这里的设置如果小于动画step的持续时间的话会导致执行一半后出错
     },
     onHide: function(){
-        clearInterval();
+        clearInterval(homeInterval);
     },
     onUnload: function(){
-        clearInterval();
+        clearInterval(homeInterval);
     },
     /**
      * 页面相关事件处理函数--监听用户下拉动作
