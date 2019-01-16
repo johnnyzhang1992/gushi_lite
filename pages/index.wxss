@@ -5,40 +5,40 @@ page{
 }
 .page.list{
     padding-top: 0;
-  width: 100%;
-  background-color: inherit
+    width: 100%;
+    background-color: inherit
 }
 .home-content{
-  padding: 0
+    padding: 0
 }
 .home-header{
-  width:100%;
-  min-height:120px;
-  background:url('https://xuegushi.cn/static/wx/h_bg.jpg') center center no-repeat;
-  background-size:cover;
-  overflow-x: hidden; 
+    width:100%;
+    min-height:120px;
+    background:url('https://xuegushi.cn/static/wx/h_bg.jpg') center center no-repeat;
+    background-size:cover;
+    overflow-x: hidden;
 }
 .h-content{
-  margin:10px 10px;
-  color:#666;
-  /* border:1px solid #337ab7; */
-  padding:10px;
+    margin:10px 10px;
+    color:#666;
+    /* border:1px solid #337ab7; */
+    padding:10px;
 }
 .h-time{
-  font-size:12px;
-  writing-mode:vertical-rl;
-  direction:rtl;
-  float:right;
-  letter-spacing:2px;
+    font-size:12px;
+    writing-mode:vertical-rl;
+    direction:rtl;
+    float:right;
+    letter-spacing:2px;
 }
 .day{
-  font-size: 30px;
+    font-size: 30px;
 }
 .h-poem{
-  font-size: 14px;
+    font-size: 14px;
 }
 .h-p-content{
-  font-size: 14px;
+    font-size: 14px;
 }
 .h-boat.boat-img{
     width: 48px;
@@ -55,65 +55,65 @@ page{
     padding: 12px 15px 12px 35px;
 } */
 .weui-search-bar{
-  border: none;
-  width: 100%;
-  background-color: #fff; 
+    border: none;
+    width: 100%;
+    background-color: #fff;
 }
 .weui-search-bar__label,.weui-search-bar__form {
-  border-radius: 20px;
+    border-radius: 20px;
 }
 .weui-search-bar__text{
-  letter-spacing:2px;
-  font-size: 12px;
+    letter-spacing:2px;
+    font-size: 12px;
 }
 .nav-list{
-  /* background: #ededed; */
-  width: 100%;
+    /* background: #ededed; */
+    width: 100%;
 }
 .nav-list .weui-flex__item{
-  text-align: center;
-  font-size: 12px;
-  line-height: 20px;
-  padding:8px 10px;
-  color: #666;
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    padding:8px 10px;
+    color: #666;
 }
 .nav-list image{
-  width: 20px;
-  height: 20px;
-  vertical-align:middle;
+    width: 20px;
+    height: 20px;
+    vertical-align:middle;
 }
 .navigator-hover{
-  background-color: #fff;
-  color: #337ab7;
+    background-color: #fff;
+    color: #337ab7;
 }
 .weui-cells {
-  font-size: 14px;
-  color: #666;
+    font-size: 14px;
+    color: #666;
 }
 .weui-cell {
-  padding:4px 10px;
+    padding:4px 10px;
 }
 .list .weui-cell_access{
-  font-size: 12px;
+    font-size: 12px;
 }
 .poem-item{
-  display: block;
+    display: block;
 }
 .poem-item view{
-  width:100%;
-  display: block;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
+    width:100%;
+    display: block;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
 }
 .poem-item .poem-title{
-  color: #454545;
-  font-size: 14px;
+    color: #454545;
+    font-size: 14px;
 }
 .poem-item .poem-author{
-  color: #999;
-  font-size: 12px;
-  padding: 2px 0;
+    color: #999;
+    font-size: 12px;
+    padding: 2px 0;
 }
 .poem-item .poem-title.author{
     font-size: 16px
@@ -136,8 +136,8 @@ page{
     width:auto;
 }
 .section{
-  width: 100%;
+    width: 100%;
 }
 .section .picker{
-  color: #337ab7;
+    color: #337ab7;
 }

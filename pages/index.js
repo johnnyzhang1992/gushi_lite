@@ -3,12 +3,12 @@
 const app = getApp();
 let util = require('../utils/util.js');
 let http = require('../utils/http.js');
+let current_page = 1;
+let last_page = 1;
 Page({
     data: {
         motto: '古诗文小助手',
         poems: [],
-        current_page: 1,
-        last_page: 1,
         category: ['诗经','楚辞','乐府','小学古诗','初中古诗','高中古诗','宋词精选','古诗十九','唐诗三百首','宋词三百首','古诗三百首'],
         categoryCode: ['shijing','chuci','yuefu','xiaoxue','chuzhong','gaozhong','songci','shijiu','tangshi','songcisanbai','sanbai'],
         index: 10,
@@ -31,10 +31,10 @@ Page({
             url = url +'?name='+name;
         }
         if(type && type =='more'){
-            if(that.data.last_page<that.data.current_page){
+            if(last_page < current_page){
                 return false;
             }
-            data = {page: that.data.current_page+1};
+            data = {page: current_page+1};
         }
         wx.showNavigationBarLoading();
         http.request(url,data).then(res=>{
@@ -45,9 +45,9 @@ Page({
                 that.setData({
                     hot: app.globalData.hot ? app.globalData.hot : res.data.hot[0],
                     poems: (type && type == 'more') ? that.data.poems.concat(res.data.poems.data) : res.data.poems.data,
-                    current_page: res.data.poems.current_page,
-                    last_page: res.data.poems.last_page
                 });
+                current_page = res.data.poems.current_page;
+                last_page = res.data.poems.last_page
             }else{
                 http.loadFailL();
             }
@@ -100,6 +100,12 @@ Page({
             });
             ++ii;
         }.bind(that),20000);//20000这里的设置如果小于动画step的持续时间的话会导致执行一半后出错
+    },
+    onHide: function(){
+        clearInterval();
+    },
+    onUnload: function(){
+        clearInterval();
     },
     /**
      * 页面相关事件处理函数--监听用户下拉动作

@@ -1,27 +1,23 @@
 <!--pages/poem/index.wxml-->
 <view class="home-content">
     <!--filter-->
-    <view class="weui-flex nav-list" wx-if='{{!is_search}}'>
-        <view class="weui-flex__item weui-flex">
-            <view class="weui-flex__item left">
-                <image class="" src="../../images/icon/theme.png"></image>  朝代 ：
+    <view class="section filter-section">
+        <view class="section__title h4">类型</view>
+        <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
+            <view id="{{item.name}}"  class="filter-item {{t_index == index ? 'pressed' : ''}}" bindtap="TypeChange" wx:for="{{types}}"
+                  data-id="{{index}}"
+                  wx:key="{{item}}">{{item}}
             </view>
-            <view class="weui-flex__item right">
-                <picker bindchange="bindPickerDynastyChange" value="{{d_index}}" range="{{dynasty}}">
-                    <view class="picker">{{dynasty[d_index]}}</view>
-                </picker>
+        </scroll-view>
+    </view>
+    <view class="section filter-section">
+        <view class="section__title h4">朝代</view>
+        <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
+            <view id="{{item.name}}"  class="filter-item {{d_index == index ? 'pressed' : ''}}" bindtap="DynastyChange" wx:for="{{dynasty}}"
+                  data-id="{{index}}"
+                  wx:key="{{item}}">{{item}}
             </view>
-        </view>
-        <view class="weui-flex__item weui-flex">
-            <view class="weui-flex__item left">
-                <image class="" src="../../images/icon/type.png"></image>  类型 ：
-            </view>
-            <view class="weui-flex__item right">
-                <picker bindchange="bindPickerTypeChange" value="{{t_index}}" range="{{types}}">
-                    <view class="picker">{{types[t_index]}}</view>
-                </picker>
-            </view>
-        </view>
+        </scroll-view>
     </view>
     <view class="divide"></view>
     <!-- nav -->

@@ -121,3 +121,52 @@ ad{
   margin-top: 10px;
   margin-bottom: 10px;
 }
+/*
+* filter section
+*/
+.filter-section{
+  background-color: white;
+  height: auto;
+  padding: 3px 0 10px;
+  border-bottom: 1px solid #f4f4f4;
+  border-top: 1px solid #f4f4f4;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.filter-section:last-child{
+  padding-bottom: 5px;
+}
+.filter-section .h4{
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+.filter-section scroll-view{
+  width: 100%;
+  overflow-x: auto;
+  padding-left: 15px;
+}
+.filter-item{
+  background: #f7f7f7;
+  color: #24262a;
+  font-size: 12px;
+  padding: 2px 6px;
+  margin-bottom: 0;
+  display: inline-block;
+  border-radius: 4px;
+  position: relative;
+  margin-right: 8px;
+  border: 1px solid #f7f7f7;
+}
+.filter-item:last-child{
+  margin-right: 20px;
+}
+.filter-item.pressed{
+  color: white;
+  background-color: #337ab7;
+  border: 1px solid #337ab7;
+  font-weight: 500;
+}
