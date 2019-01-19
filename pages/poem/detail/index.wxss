@@ -106,7 +106,7 @@
   padding-bottom: 40px;
 }
 .tab-list-content{
-  padding: 0 3%;
+  padding: 10px 3%;
   width:94%;
 }
 .tab-list-content .item{

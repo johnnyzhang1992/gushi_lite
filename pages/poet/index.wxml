@@ -1,20 +1,17 @@
 <!--pages/poem/poet/index.wxml-->
 <view class="home-content">
-    <view class="weui-flex nav-list" wx-if='{{!is_search}}'>
-        <view class="weui-flex__item weui-flex">
-            <view class="weui-flex__item left">
-                <image class="" src="../../images/icon/theme.png"></image>  朝代 ：
+    <view class="section filter-section" wx:if='{{!is_search}}'>
+        <view class="section__title h4">朝代</view>
+        <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
+            <view id="{{item.name}}"  class="filter-item {{d_index == index ? 'pressed' : ''}}" bindtap="DynastyChange" wx:for="{{dynasty}}"
+                  data-id="{{index}}"
+                  wx:key="{{item}}">{{item}}
             </view>
-            <view class="weui-flex__item right">
-                <picker bindchange="bindPickerDynastyChange" value="{{index}}" range="{{dynasty}}">
-                    <view class="picker">{{dynasty[index]}}</view>
-                </picker>
-            </view>
-        </view>
+        </scroll-view>
     </view>
     <view class="divide"></view>
     <view class="nav-breadcrumb weui-flex">
-        <view class="item theme" wx-if='{{!is_search}}'>{{dynasty[index]}}</view>
+        <view class="item theme" wx-if='{{!is_search}}'>{{dynasty[d_index]}}</view>
         <view class="item theme" wx-if='{{is_search}}'>{{_keyWord}}</view>
         <view class="item total">共 {{total}} 条结果</view>
     </view>
