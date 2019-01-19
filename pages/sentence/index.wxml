@@ -31,10 +31,10 @@
     <!-- sentence list-->
     <view class="page__bd">
         <view class="weui-cells weui-cells_after-title">
-            <view  class="poem-item" wx:for="{{poems}}" wx:key="id">
+            <navigator url="/pages/poem/detail/index?id={{item.poem_id}}" hover-class="navigator-hover" class="poem-item" wx:for="{{poems}}" wx:key="id">
                 <view class="poem-title">{{item.title}}</view>
-                <navigator url="/pages/poem/detail/index?id={{item.poem_id}}" hover-class="navigator-hover" class="poem-author">{{'《'+item.poem_title +'》 | '+item.author}}</navigator>
-            </view>
+                <view class="poem-author">{{'《'+item.poem_title +'》 '+item.author}}</view>
+            </navigator>
         </view>
     </view>
 </view>
