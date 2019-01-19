@@ -1,6 +1,8 @@
 // pages/poem/sentence/index.js
 const app = getApp();
 let http = require('../../utils/http.js');
+let current_page = 1;
+let last_page = 1;
 Page({
     /**
      * 页面的初始数据
@@ -8,8 +10,6 @@ Page({
     data: {
         poems: null,
         inputShowed: false,
-        current_page: 1,
-        last_page: 1,
         themes: [],
         types: [],
         _types: [],
@@ -54,8 +54,6 @@ Page({
                 // console.log(res.data);
                 that.setData({
                     poems: res.data.poems.data,
-                    current_page: res.data.poems.current_page,
-                    last_page: res.data.poems.last_page,
                     themes: res.data.themes,
                     _types: res.data.types,
                     types: res.data.types[0].types,
@@ -63,6 +61,8 @@ Page({
                     isSearch: options.type ? true : false,
                     _keyWord: options.keyWord ? options.keyWord : null
                 });
+                current_page = res.data.poems.current_page;
+                last_page = res.data.poems.last_page;
                 wx.hideLoading();
             } else {
                 http.loadFailL();
@@ -98,35 +98,29 @@ Page({
         })
     },
     // 检测主题变化
-    bindPickerThemeChange: function (e) {
+    ThemeChange: function (e) {
         let that = this;
-        if (e.detail.value > 0) {
-            this.setData({
-                th_index: e.detail.value,
-                types: that.data._types[e.detail.value - 1].types,
-                ty_index: 0
-            });
-        } else {
-            this.setData({
-                th_index: e.detail.value,
-                types: that.data._types[e.detail.value].types,
-                ty_index: 0
-            });
-        }
+        let theme_index = e.currentTarget.dataset.id ? e.currentTarget.dataset.id : 0;
+        this.setData({
+            th_index: theme_index,
+            types: that.data._types[theme_index>0 ? theme_index-1 : 0].types,
+            ty_index: 0
+        });
         wx.setNavigationBarTitle({
-            title: that.data.themes[e.detail.value]
+            title: that.data.themes[theme_index]
         });
         wx.showNavigationBarLoading();
         that.getSentenceData(1);
     },
     // 检测类型变化
-    bindPickerTypeChange: function (e) {
+    TypeChange: function (e) {
         let that = this;
+        let type_index= e.currentTarget.dataset.id ? e.currentTarget.dataset.id: 0;
         this.setData({
-            ty_index: e.detail.value
+            ty_index: type_index
         });
         wx.setNavigationBarTitle({
-            title: that.data.themes[that.data.th_index] + ' | ' + that.data.types[e.detail.value]
+            title: that.data.themes[that.data.th_index] + ' | ' + that.data.types[type_index]
         });
         wx.showNavigationBarLoading();
         that.getSentenceData(1);
@@ -172,8 +166,8 @@ Page({
     onReachBottom: function () {
         wx.showNavigationBarLoading();
         let that = this;
-        let page = that.data.current_page + 1;
-        if (that.data.current_page > that.data.last_page) {
+        let page = current_page + 1;
+        if (current_page > last_page) {
             wx.hideNavigationBarLoading();
             return false;
         } else {
