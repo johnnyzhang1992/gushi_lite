@@ -24,7 +24,7 @@
     font-size: 12px;
 }
 .poem-item{
-    display: block;
+    /* display: block; */
 }
 .poem-item view{
     width:100%;
@@ -33,13 +33,37 @@
     white-space:nowrap;
     overflow:hidden;
 }
+.poem-item .left{
+    max-width: 60px;
+}
+.poem-item .poet-img{
+    width: 52px;
+}
+.poem-item image{
+    width: 52px;
+    height: 75px;
+}
+.poem-item .left .name{
+    font-size:50px;
+    max-height:75px;
+}
 .poem-item .poem-title{
     color: #333;
     font-size: 14px;
 }
+.poem-item .dynasty{
+    color:#999;
+    font-size:13px;
+}
 .poem-item .poem-profile{
     color: #666;
     font-size: 12px;
+    white-space: initial;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
 }
 .poem-item .poem-title:first-child{
     overflow: inherit;

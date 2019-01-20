@@ -10,7 +10,7 @@ Page({
      */
     data: {
         motto: '古诗文小助手',
-        poets: null,
+        poets: [],
         current_page: 1,
         last_page: 1,
         dynasty: ["全部", "先秦", "两汉", "魏晋", "南北朝", "隋代", "唐代", "五代", "宋代", "金朝", "元代", "明代", "清代", "近代"],
@@ -44,7 +44,7 @@ Page({
                 // wx.setStorageSync('user',res.data);
                 // console.log(res.data);
                 that.setData({
-                    poets: res.data.poets.data,
+                    poets: current_page >1 ? that.data.poets.concat(res.data.poets.data) : res.data.poets.data,
                     total: res.data.poets.total
                 });
                 current_page = res.data.poets.current_page;
@@ -94,6 +94,7 @@ Page({
         });
         wx.showNavigationBarLoading();
         that.getPoetData(d_index, 1);
+        current_page = 1;
     },
 
     /**
@@ -142,6 +143,7 @@ Page({
             return false;
         }
         that.getPoetData(that.data.d_index, current_page + 1, that.data._keyWord);
+        current_page ++;
     },
 
     /**

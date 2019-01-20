@@ -3,11 +3,7 @@
 const mtjwxsdk = require('./utils/mtj-wx-sdk.js');
 App({
     onLaunch: function () {
-        // 展示本地存储能力
-        let logs = wx.getStorageSync('logs') || [];
         let that = this;
-        logs.unshift(Date.now());
-        wx.setStorageSync('logs', logs);
         // 获取用户手机信息
         wx.getSystemInfo({
             success: res => {

@@ -18,9 +18,7 @@
     <view class="section filter-section" wx:if='{{!is_search}}'>
         <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
             <view class="section__title h4 filter-item">朝代：</view>
-            <view id="{{item.name}}"  class="filter-item {{d_index == index ? 'pressed' : ''}}" bindtap="DynastyChange" wx:for="{{dynasty}}"
-                  data-id="{{index}}"
-                  wx:key="{{item}}">{{item}}
+            <view id="{{item.name}}" class="filter-item {{d_index == index ? 'pressed' : ''}}" bindtap="DynastyChange" wx:for="{{dynasty}}" data-id="{{index}}" wx:key="{{item}}">{{item}}
             </view>
         </scroll-view>
     </view>
@@ -33,12 +31,18 @@
     <view class="divide"></view>
     <view class="page list">
         <view class="page__bd">
-            <!-- <view class="weui-cells__title">随机获取5首古诗</view> -->
-            <navigator url="/pages/poet/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poets}}" wx:key="id">
-                <view class="poem-title">{{item.author_name}} | <view class="poem-author">{{item.dynasty}}</view></view>
-                <view class="poem-profile">{{item.profile}}</view>
+            <navigator url="/pages/poet/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item weui-flex" wx:for="{{poets}}" wx:key="id">
+                <view class="weui-flex__item left">
+                    <view class="poet-img" wx:if="{{item.avatar}}">
+                        <image src="{{item.avatar}}" lazy-load="{{true}}" ></image>
+                    </view>
+                    <view class="poet-img name" wx:else>{{item.author_name[0]}}</view>
+                </view>
+                <view class="weui-flex__item">
+                    <view class="poem-title">{{item.author_name}}<text class="dynasty">「{{item.dynasty}}」</text></view>
+                    <view class="poem-profile">{{item.profile}}</view>
+                </view>
             </navigator>
         </view>
     </view>
 </view>
-

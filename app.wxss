@@ -147,7 +147,7 @@ ad {
 .filter-section {
     background-color: white;
     height: auto;
-    padding: 3px 0 10px;
+    padding: 3px 0 5px;
     border-bottom: 1px solid #f4f4f4;
     border-top: 1px solid #f4f4f4;
     overflow: hidden;
