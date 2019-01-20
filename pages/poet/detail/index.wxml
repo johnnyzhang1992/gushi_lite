@@ -1,6 +1,6 @@
 <!--pages/poem/poet/detail/index.wxml-->
 <view class="home-content">
-    <view class='author_avatar' wx:if="poet.avatar">
+    <view class='author_avatar' wx:if="{{poet.avatar}}">
         <image src="{{poet.avatar}}"></image>
     </view>
     <view class='author_name'>{{poet.author_name}}</view>
@@ -18,9 +18,15 @@
             </navigator>
         </view>
     </view>
-    <button class='share' open-type="share"><image src='../../../images/icon/share.png'></image></button>
-    <button class='return' bindtap="return"><image src='../../../images/icon/return.png'></image></button>
-    <button class='add' bindtap='addNew' animation="{{animationData}}"><image src='../../../images/icon/add.png'></image></button>
+    <button class='share' open-type="share">
+        <image src='../../../images/icon/share.png'></image>
+    </button>
+    <button class='return' bindtap="return">
+        <image src='../../../images/icon/return.png'></image>
+    </button>
+    <button class='add' bindtap='addNew' animation="{{animationData}}">
+        <image src='../../../images/icon/add.png'></image>
+    </button>
     <view class="collect" bindtap="updateCollect">
         <view class="collect-img" wx:if="{{!collect_status}}">
             <image src="../../../images/icon/collect.png"></image>

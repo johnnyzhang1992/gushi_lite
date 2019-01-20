@@ -38,6 +38,7 @@ Page({
             dynasty: that.data.dynasty[d_index ? d_index : 0],
             page: page
         };
+        current_page = page;
         http.request(_url, data).then(res => {
             if (res.data && res.succeeded) {
                 console.log('----------success------------');
@@ -94,7 +95,6 @@ Page({
         });
         wx.showNavigationBarLoading();
         that.getPoetData(d_index, 1);
-        current_page = 1;
     },
 
     /**
@@ -143,7 +143,6 @@ Page({
             return false;
         }
         that.getPoetData(that.data.d_index, current_page + 1, that.data._keyWord);
-        current_page ++;
     },
 
     /**
