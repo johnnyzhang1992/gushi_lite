@@ -1,10 +1,24 @@
 <!--pages/poem/index.wxml-->
 <view class="home-content">
+    <!--search section-->
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="搜索" focus="{{false}}" />
+            </view>
+            <label class="weui-search-bar__label" bindtap="ngToSearch">
+                <icon class="weui-icon-search" type="search" size="14"></icon>
+                <view class="weui-search-bar__text">输入作者/题目/诗句进行搜索</view>
+            </label>
+        </view>
+    </view>
+    <view class="divide"></view>
     <!--filter-->
     <view class="filter"  wx:if='{{!isSearch}}'>
         <view class="section filter-section">
-            <view class="section__title h4">类型</view>
             <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
+                <view class="section__title h4 filter-item">类型：</view>
                 <view id="{{item.name}}"  class="filter-item {{t_index == index ? 'pressed' : ''}}" bindtap="TypeChange" wx:for="{{types}}"
                       data-id="{{index}}"
                       wx:key="{{item}}">{{item}}
@@ -12,8 +26,8 @@
             </scroll-view>
         </view>
         <view class="section filter-section">
-            <view class="section__title h4">朝代</view>
             <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
+                <view class="section__title h4 filter-item">朝代：</view>
                 <view id="{{item.name}}"  class="filter-item {{d_index == index ? 'pressed' : ''}}" bindtap="DynastyChange" wx:for="{{dynasty}}"
                       data-id="{{index}}"
                       wx:key="{{item}}">{{item}}

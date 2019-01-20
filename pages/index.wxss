@@ -44,6 +44,7 @@ page{
     width: 48px;
     height: 30px;
 }
+
 .searchbar-result{
     margin-top: 0;
     font-size: 14px;
@@ -66,6 +67,7 @@ page{
     letter-spacing:2px;
     font-size: 12px;
 }
+
 .nav-list{
     /* background: #ededed; */
     width: 100%;

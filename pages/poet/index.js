@@ -19,6 +19,12 @@ Page({
         is_search: false,
         _keyWord: null
     },
+    // 跳转到搜索页面
+    ngToSearch: function () {
+        wx.navigateTo({
+            url: '/pages/search/index'
+        });
+    },
     // 获取诗人列表
     getPoetData: function (d_index, page, keyWord) {
         let that = this;

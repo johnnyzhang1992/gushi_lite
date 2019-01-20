@@ -73,3 +73,21 @@
   text-align: left;
   color: #337ab7;
 }
+
+
+.searchbar-result{
+    margin-top: 0;
+    font-size: 14px;
+}
+.searchbar-result:before{
+    display: none;
+}
+.weui-search-bar{
+    border: none;
+    width: 100%;
+    background-color: #fff;
+}
+.weui-search-bar__text{
+    letter-spacing:2px;
+    font-size: 12px;
+}

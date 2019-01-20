@@ -8,18 +8,18 @@
             <view class="day">{{date[2]}}</view>
             <navigator url="poem/detail/index?id={{hot.id}}" class="h-p-content">{{hot.title}}</navigator>
         </view>
-        <image class="h-boat boat-img" src="../images/boat.png"  animation="{{animationData}}"></image>
+        <image class="h-boat boat-img" src="../images/boat.png" animation="{{animationData}}"></image>
     </view>
     <!--search section-->
     <view class="weui-search-bar">
         <view class="weui-search-bar__form">
             <view class="weui-search-bar__box">
                 <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                <input type="text" class="weui-search-bar__input" placeholder="搜索"  focus="{{false}}" />
+                <input type="text" class="weui-search-bar__input" placeholder="搜索" focus="{{false}}" />
             </view>
             <label class="weui-search-bar__label" bindtap="ngToSearch">
                 <icon class="weui-icon-search" type="search" size="14"></icon>
-                <view class="weui-search-bar__text">搜索诗词/诗人</view>
+                <view class="weui-search-bar__text">输入作者/题目/诗句进行搜索</view>
             </label>
         </view>
     </view>
@@ -56,7 +56,7 @@
         <view class="page__bd">
             <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="id">
                 <view class="poem-title author">{{item.title}}</view>
-                <view class="poem-author">{{'['+item.dynasty+' ]  '+item.author}}</view>
+                <view class="poem-author">{{'['+item.dynasty+' ] '+item.author}}</view>
                 <view class="poem-content content">{{item.content}}</view>
             </navigator>
         </view>

@@ -1,10 +1,24 @@
 <!--pages/poem/sentence/index.wxml-->
 <view class="page list">
+    <!--search section-->
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="搜索" focus="{{false}}" />
+            </view>
+            <label class="weui-search-bar__label" bindtap="ngToSearch">
+                <icon class="weui-icon-search" type="search" size="14"></icon>
+                <view class="weui-search-bar__text">输入作者/题目/诗句进行搜索</view>
+            </label>
+        </view>
+    </view>
+    <view class="divide"></view>
     <!--filter-->
     <view class="filter" wx:if='{{!isSearch}}'>
         <view class="section filter-section">
-            <view class="section__title h4">主题</view>
             <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
+                <view class="section__title h4 filter-item">主题：</view>
                 <view id="{{'theme_'+index}}"  class="filter-item {{th_index == index ? 'pressed' : ''}}" bindtap="ThemeChange" wx:for="{{themes}}"
                       data-id="{{index}}"
                       wx:key="{{item}}">{{item}}
@@ -12,9 +26,9 @@
             </scroll-view>
         </view>
         <view class="section filter-section">
-            <view class="section__title h4">类型</view>
             <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
-                <view id="{{'type_'+index}}"  class="filter-item {{ty_index == index ? 'pressed' : ''}}" bindtap="TypeChange" wx:for="{{types}}"
+                <view class="section__title h4 filter-item">类型：</view>
+                <view id="{{'type_'+index}}" class="filter-item {{ty_index == index ? 'pressed' : ''}}" bindtap="TypeChange" wx:for="{{types}}"
                       data-id="{{index}}"
                       wx:key="{{item}}">{{item}}
                 </view>
