@@ -2,7 +2,8 @@
 <view class="page panel">
     <view class="page__hd" wx-if="{{poem}}">
         <view class="page__title">{{poem.title}}</view>
-        <view class="page__desc" wx:if='{{ poem.author_id>0}}'>{{(author.dynasty ? author.dynasty : poem.dynasty)}}
+        <view class="page__desc" wx:if='{{ poem.author_id>0}}'>
+            <text>{{(author.dynasty ? author.dynasty : poem.dynasty)}}</text>
             <navigator url='../../poet/detail/index?id={{poem.author_id}}' class="author-name active">{{'「'+(author.author_name ? author.author_name : poem.author+'」')}}</navigator>
         </view>
         <view class="page__desc" wx:if='{{ poem.author_id<0}}'>{{(author.dynasty ? author.dynasty : poem.dynasty)}}

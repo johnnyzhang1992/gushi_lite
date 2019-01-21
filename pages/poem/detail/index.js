@@ -4,6 +4,7 @@ let until = require('../../../utils/util');
 const canvas = require('../../../utils/canvas');
 let authLogin = require('../../../utils/authLogin');
 let http = require('../../../utils/http.js');
+let poemDetailTimeOut = null;
 Page({
     /**
      * 页面的初始数据
@@ -331,7 +332,7 @@ Page({
                 console.log('图片保存完成');
                 wx.hideLoading();
                 wx.showToast({
-                    title: '保存成功，现在去分享吧！',
+                    title: '成功保存到系统相册',
                     icon: 'none',
                     duration: 2000
                 });
@@ -460,7 +461,7 @@ Page({
         this.setData({
             animationData: animation.export()
         });
-        setTimeout(function () {
+        poemDetailTimeOut = setTimeout(function () {
             animation.scale(1, 1).step();
             this.setData({
                 animationData: animation.export()
@@ -472,14 +473,14 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-    
+        clearTimeout(poemDetailTimeOut)
     },
     
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-    
+        clearTimeout(poemDetailTimeOut)
     },
     
     /**

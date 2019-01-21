@@ -2,6 +2,7 @@
 const app = getApp();
 let http = require('../../utils/http.js');
 let authLogin = require('../../utils/authLogin');
+let findTimeOut = null;
 Page({
     
     /**
@@ -215,7 +216,7 @@ Page({
         this.setData({
             animationData: animation.export()
         });
-        setTimeout(function () {
+        findTimeOut = setTimeout(function () {
             animation.scale(1,1).step();
             this.setData({
                 animationData: animation.export()
@@ -227,14 +228,14 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-    
+        clearTimeout(findTimeOut);
     },
     
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-    
+        clearTimeout(findTimeOut);
     },
     
     /**

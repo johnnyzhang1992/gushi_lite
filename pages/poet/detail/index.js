@@ -1,5 +1,6 @@
 // pages/poem/poet/detail/index.js
 let authLogin = require('../../../utils/authLogin');
+let poetTimeOut = null;
 Page({
     
     /**
@@ -116,13 +117,13 @@ Page({
             duration: 500,
             timingFunction: "ease",
             delay: 0
-        })
+        });
         animation.scale(1.3, 1.3).step();
         this.setData({
             animationData: animation.export()
-        })
-        setTimeout(function () {
-            animation.scale(1, 1).step()
+        });
+        poetTimeOut = setTimeout(function () {
+            animation.scale(1, 1).step();
             this.setData({
                 animationData: animation.export()
             })
@@ -133,14 +134,14 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-    
+        clearTimeout(poetTimeOut);
     },
     
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-    
+        clearTimeout(poetTimeOut);
     },
     
     /**

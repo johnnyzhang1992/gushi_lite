@@ -78,9 +78,9 @@
                         <!--button list-->
                         <view class="page__bd bottom-section weui-flex">
                             <view class="weui-flex__item" data-id='{{item.id}}' bindtap='addNew'>
-                                <image src="../../images/icon/repost.png"></image> 转发</view>
+                                <image src="../../images/icon/repost.png"></image> </view>
                             <view class="weui-flex__item" bindtap='pinDetail' data-id="{{item.id}}" data-type="{{item.t_type}}">
-                                <image src="../../images/icon/review.png"></image> 评论</view>
+                                <image src="../../images/icon/review.png"></image> </view>
                             <view class="weui-flex__item" bindtap='pinLike' data-id="{{item.id}}" data-count="{{item.like_count}}">
                                 <image src="{{item.like_status =='active' ? '../../images/icon/good_active.png' : '../../images/icon/good.png'}}"></image> {{item.like_count}}</view>
                             <view class="weui-flex__item" bindtap='deletePin' data-id="{{item.id}}" wx-if="{{user_id && user_id == 10}}"> 删除</view>
