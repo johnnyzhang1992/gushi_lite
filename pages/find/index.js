@@ -3,6 +3,8 @@ const app = getApp();
 let http = require('../../utils/http.js');
 let authLogin = require('../../utils/authLogin');
 let findTimeOut = null;
+let current_page = 1;
+let last_page = 1;
 Page({
     
     /**
@@ -11,10 +13,8 @@ Page({
     data: {
         motto: '古诗文小助手',
         user_id: 0,
-        current_page:1,
-        total_page:0,
         tags: ['科普','故事','问与答'],
-        pins: null,
+        pins: [],
         indicatorDots: true,
         animationData:{},
         userInfo: wx.getStorageSync('user'),
@@ -84,6 +84,9 @@ Page({
                         duration: 2000
                     })
                 }
+            }).catch(error => {
+                console.log(error);
+                http.loadFailL();
             });
         }
     },
@@ -168,28 +171,35 @@ Page({
                 that.setData({
                     topic: res.data
                 });
-                that.getPins();
+                that.getPins(1);
                 wx.hideLoading();
             }else{
                 http.loadFailL();
             }
         });
     },
-    getPins: function(){
+    getPins: function(page){
         let that = this;
         let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
         wx.showNavigationBarLoading();
-        http.request(app.globalData.url+'/wxxcx/getPins?id='+user_id,undefined).then(res=>{
+        let data = {
+            page: page,
+            user_id: user_id
+        };
+        http.request(app.globalData.url+'/wxxcx/getPins',data).then(res=>{
            if(res.data && res.succeeded){
                that.setData({
-                   pins: res.data.data,
-                   current_page: res.data.current_page,
-                   total_page: res.data.last_page
+                   pins: page > 1 ? that.data.pins.concat(res.data.data) : res.data.data
                });
+               current_page = res.data.current_page;
+               last_page = res.data.last_page;
                wx.hideNavigationBarLoading();
            }else{
               http.loadFailL();
            }
+        }).catch(error => {
+            console.log(error);
+            http.loadFailL();
         });
     },
     /**
@@ -242,7 +252,8 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-        this.getPins();
+        this.getPins(1);
+        current_page = 1;
         wx.stopPullDownRefresh();
     },
     
@@ -250,28 +261,13 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        if(this.data.last_page<this.data.current_page){
+        if(current_page+1>last_page){
             return false;
         }
         wx.showNavigationBarLoading();
-        let that = this;
         // Do something when page reach bottom.
-        let data = {
-            page: that.data.current_page+1
-        };
-        let url = app.globalData.url+'/wxxcx/getPins';
-        http.request(url,data).then(res=>{
-            if(res.data && res.succeeded){
-                this.setData({
-                    pins: that.data.pins.concat(res.data.data),
-                    current_page: res.data.current_page,
-                    last_page: res.data.last_page
-                });
-                wx.hideNavigationBarLoading();
-            }else{
-                http.loadFailL();
-            }
-        })
+        this.getPins(current_page+1);
+        current_page++;
     },
     
     /**

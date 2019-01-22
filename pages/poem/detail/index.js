@@ -176,7 +176,7 @@ Page({
                     });
                     resolve(Object.assign(res.data, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
                 }else{
-                    resolve(Object.assign(res, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
+                    reject(Object.assign(res, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
                 }
             });
         });
@@ -315,6 +315,9 @@ Page({
                     that.drawImage(res.tempFilePath);
             
                 }
+            }).catch(error => {
+                console.log(error);
+                http.loadFailL();
             });
         }
     },
@@ -381,6 +384,9 @@ Page({
             }else{
                 http.loadFailL();
             }
+        }).catch(error => {
+            console.log(error);
+            http.loadFailL();
         });
     },
     /**
@@ -415,6 +421,9 @@ Page({
                 that.renderTagList();
                 that.getCodeImage('poem',options.id);
             }
+        }).catch(error => {
+            console.log(error);
+            http.loadFailL();
         });
     },
     // 更新收藏情况
@@ -438,6 +447,9 @@ Page({
                        collect_status: res.data.status
                    })
                }
+            }).catch(error => {
+                console.log(error);
+                http.loadFailL();
             });
         }
     },
@@ -502,6 +514,9 @@ Page({
                 wx.stopPullDownRefresh();
                 this.renderTagList();
             }
+        }).catch(error => {
+            console.log(error);
+            http.loadFailL();
         });
     },
     

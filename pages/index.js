@@ -54,6 +54,9 @@ Page({
             }
             wx.hideLoading();
             wx.hideNavigationBarLoading();
+        }).catch(error => {
+            console.log(error);
+            http.loadFailL();
         });
     },
     // 监控筛选变化
