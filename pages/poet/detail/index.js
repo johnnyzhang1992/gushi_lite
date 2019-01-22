@@ -1,6 +1,11 @@
 // pages/poem/poet/detail/index.js
+const app = getApp();
 let authLogin = require('../../../utils/authLogin');
 let poetTimeOut = null;
+let http = require('../../../utils/http.js');
+let current_page = 1;
+let last_page = 1;
+let poet_id = 0;
 Page({
     
     /**
@@ -8,10 +13,8 @@ Page({
      */
     data: {
         poet: null,
-        poems: null,
+        poems: [],
         total: 0,
-        current_page: 1,
-        last_page: 1,
         collect_status: false,
         user_id: 0,
         animationData: {}
@@ -45,37 +48,47 @@ Page({
             })
         }
     },
+    getPoetData: function(page){
+        let that = this;
+        let url = app.globalData.domain+'/getPoetDetailData/'+poet_id;
+        let data = {
+            user_id: that.data.user_id,
+            page: page
+        };
+        http.request(url,data).then(res=>{
+            if(res.data && res.succeeded){
+                console.log('----------success------------');
+                // wx.setStorageSync('user',res.data);
+                // console.log(res.data);
+                that.setData({
+                    poet: res.data.poet,
+                    poems: current_page>1 ? that.data.poems.concat(res.data.poems.data) : res.data.poems.data,
+                    total: res.data.poems.data.length>0 ? res.data.poems.total : 0,
+                    collect_status: res.data.poet.collect_status
+                });
+                current_page  = res.data.poems.data.length>0 ? res.data.poems.current_page : 1;
+                last_page = res.data.poems.data.length>0 ? res.data.poems.last_page : 1;
+                wx.setNavigationBarTitle({
+                    title: that.data.poet.author_name
+                });
+                wx.hideLoading();
+                wx.hideNavigationBarLoading();
+            }
+        }).catch(error=>{
+            console.log(error);
+            http.loadFailL();
+        });
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let that = this;
         wx.showLoading({
             title: '加载中',
         });
         this.getUserId();
-        wx.request({
-            url: 'https://xuegushi.cn/wxxcx/getPoetDetailData/'+options.id+'?user_id=' + that.data.user_id,
-            success: res =>{
-                if(res.data){
-                    console.log('----------success------------');
-                    // wx.setStorageSync('user',res.data);
-                    // console.log(res.data);
-                    this.setData({
-                        poet: res.data.poet,
-                        poems: res.data.poems.data,
-                        current_page: res.data.poems.data.length>0 ? res.data.poems.current_page : 0,
-                        last_page: res.data.poems.data.length>0 ? res.data.poems.last_page : 0,
-                        total: res.data.poems.data.length>0 ? res.data.poems.total : 0,
-                        collect_status: res.data.poet.collect_status
-                    });
-                    wx.setNavigationBarTitle({
-                        title: that.data.poet.author_name
-                    });
-                    wx.hideLoading();
-                }
-            }
-        })
+        poet_id = options.id ? options.id : 0;
+        this.getPoetData(1);
     },
     // 更新收藏情况
     updateCollect: function () {
@@ -84,27 +97,29 @@ Page({
             // https.userLogin(that.data.author.id,'poet');
             authLogin.authLogin('/pages/poet/detail/index?id='+that.data.poet.id,'nor',app);
         } else {
-            wx.request({
-                url: 'https://xuegushi.cn/wxxcx/' + that.data.poet.id + '/collect/author?user_id=' + that.data.user_id +'&wx_token='+wx.getStorageSync('wx_token'),
-                success: res => {
-                    if (res.data) {
-                        that.setData({
-                            collect_status: res.data.status
-                        })
-                    } else {
-                        that.setData({
-                            collect_status: res.data.status
-                        })
-                    }
+            let url = app.globalData.domain+'/'+ that.data.poet.id + '/collect/author';
+            let data = {
+                user_id: that.data.user_id,
+                wx_token: wx.getStorageSync('wx_token')
+            };
+            http.request(url,data).then(res=>{
+                if(res.data && res.succeeded){
+                    that.setData({
+                        collect_status: res.data.status
+                    })
+                }else{
+                    http.loadFailL('操作失败，请重试！');
                 }
-            })
+            }).catch(error=>{
+                console.log(error);
+                http.loadFailL('操作失败，请重试！');
+            });
         }
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-        let that = this;
         
     },
     
@@ -112,6 +127,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        let that = this;
         let animation = wx.createAnimation({
             transformOrigin: "50% 50%",
             duration: 500,
@@ -119,12 +135,12 @@ Page({
             delay: 0
         });
         animation.scale(1.3, 1.3).step();
-        this.setData({
+        that.setData({
             animationData: animation.export()
         });
         poetTimeOut = setTimeout(function () {
             animation.scale(1, 1).step();
-            this.setData({
+            that.setData({
                 animationData: animation.export()
             })
         }.bind(this), 500)
@@ -148,6 +164,9 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
+        this.getPoetData(1);
+        wx.showNavigationBarLoading();
+        current_page = 1;
         wx.stopPullDownRefresh()
     },
     
@@ -157,23 +176,11 @@ Page({
     onReachBottom: function () {
         let that = this;
         wx.showNavigationBarLoading();
-        wx.request({
-            url: 'https://xuegushi.cn/wxxcx/getPoetDetailData/'+that.data.poet.id,
-            data: {
-                page: that.data.current_page+1
-            },
-            success: res =>{
-                if(res.data){
-                    console.log('----------success------------');
-                    this.setData({
-                        poems: that.data.poems.concat(res.data.poems.data),
-                        current_page: res.data.poems.current_page,
-                        last_page: res.data.poems.last_page
-                    });
-                    wx.hideNavigationBarLoading()
-                }
-            }
-        })
+        current_page++;
+        if(current_page>last_page){
+            return false;
+        }
+        that.getPoetData(current_page);
     },
     
     /**
