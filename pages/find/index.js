@@ -153,6 +153,9 @@ Page({
                 }else{
                     http.loadFailL();
                 }
+            }).catch(error => {
+                console.log(error);
+                http.loadFailL();
             });
         }
     },
@@ -176,6 +179,9 @@ Page({
             }else{
                 http.loadFailL();
             }
+        }).catch(error => {
+            console.log(error);
+            http.loadFailL();
         });
     },
     getPins: function(page){
@@ -189,7 +195,7 @@ Page({
         http.request(app.globalData.url+'/wxxcx/getPins',data).then(res=>{
            if(res.data && res.succeeded){
                that.setData({
-                   pins: page > 1 ? that.data.pins.concat(res.data.data) : res.data.data
+                   pins: page >1 ? [...that.data.pins, ...res.data.data] : res.data.data
                });
                current_page = res.data.current_page;
                last_page = res.data.last_page;

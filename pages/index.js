@@ -45,7 +45,7 @@ Page({
                 }
                 that.setData({
                     hot: app.globalData.hot ? app.globalData.hot : res.data.hot[0],
-                    poems: (type && type == 'more') ? that.data.poems.concat(res.data.poems.data) : res.data.poems.data,
+                    poems: [...that.data.poems, ...res.data.poems.data]
                 });
                 current_page = res.data.poems.current_page;
                 last_page = res.data.poems.last_page

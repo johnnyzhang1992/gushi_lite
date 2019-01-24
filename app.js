@@ -67,6 +67,12 @@ App({
         })
         // 版本更新部分结束------
     },
+    // 如果找不到页面就跳转到首页
+    onPageNotFound(res) {
+        wx.switchTab({
+            url: 'pages/index'
+        })
+    },
     globalData: {
         userInfo: null,
         code:null,
