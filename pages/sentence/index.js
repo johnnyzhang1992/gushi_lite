@@ -84,6 +84,9 @@ Page({
         };
         console.log(data);
         let url = app.globalData.url + '/wxxcx/getSentenceData';
+        if(that.data.isSearch){
+            url = url+'?keyWord='+that.data._keyWord;
+        }
         http.request(url, data).then(res => {
             wx.hideNavigationBarLoading();
             if (res.data && res.succeeded) {
