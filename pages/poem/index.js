@@ -66,6 +66,9 @@ Page({
                 title: options.keyWord,
                 _keyWord: options.keyWord
             });
+            that.setData({
+                _type : options.type
+            })
         }
         wx.showLoading({
             title: '加载中',
@@ -81,40 +84,26 @@ Page({
             http.loadFailL();
         });
     },
-    // 检测朝代变化
-    DynastyChange: function (e) {
+    // 检测变化
+    filterPoem: function (e) {
         let that = this;
-        let d_index = e.currentTarget.dataset.id;
-        this.setData({
-            d_index: d_index
-        });
+        let id = e.currentTarget.dataset.id;
+        let type = e.currentTarget.dataset.type;
+        if(type =='dynasty'){
+            this.setData({
+                d_index: id
+            });
+        }else{
+            that.setData({
+                t_index: id
+            });
+        };
+
         wx.setNavigationBarTitle({
-            title: that.data.dynasty[d_index]
+            title: that.data.dynasty[that.data.d_index] + ' | ' + that.data.types[that.data.t_index]
         });
         wx.showNavigationBarLoading();
         that.getPoemData(that.data._type, that.data.keyWord, that.data.types[that.data.t_index], 1).then((res) => {
-            if (res && res.succeeded) {
-                wx.hideNavigationBarLoading()
-            } else {
-                http.loadFailL('加载数据失败，请下拉重试。');
-            }
-        }).catch(error=>{
-            console.log(error);
-            http.loadFailL();
-        });
-    },
-    // 类型变化
-    TypeChange: function (e) {
-        let that = this;
-        let type_id = e.currentTarget.dataset.id;
-        that.setData({
-            t_index: type_id
-        });
-        wx.setNavigationBarTitle({
-            title: that.data.dynasty[that.data.d_index] + ' | ' + that.data.types[type_id]
-        });
-        wx.showNavigationBarLoading();
-        that.getPoemData(that.data._type, that.data.keyWord, that.data.types[type_id], 1).then((res) => {
             if (res && res.succeeded) {
                 wx.hideNavigationBarLoading()
             } else {

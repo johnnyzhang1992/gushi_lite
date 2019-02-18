@@ -11,7 +11,7 @@
                 <icon class="weui-icon-search" type="search" size="14"></icon>
                 <view class="weui-search-bar__text">输入作者/题目/诗句进行搜索</view>
             </label>
-        </view>
+        </view> 
     </view>
     <view class="divide"></view>
     <!--filter-->
@@ -19,8 +19,9 @@
         <view class="section filter-section">
             <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
                 <view class="section__title h4 filter-item">类型：</view>
-                <view id="{{item.name}}"  class="filter-item {{t_index == index ? 'pressed' : ''}}" bindtap="TypeChange" wx:for="{{types}}"
+                <view id="{{item.name}}"  class="filter-item {{t_index == index ? 'pressed' : ''}}" bindtap="filterPoem" wx:for="{{types}}"
                       data-id="{{index}}"
+                      data-type="type"
                       wx:key="{{item}}">{{item}}
                 </view>
             </scroll-view>
@@ -28,8 +29,9 @@
         <view class="section filter-section">
             <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
                 <view class="section__title h4 filter-item">朝代：</view>
-                <view id="{{item.name}}"  class="filter-item {{d_index == index ? 'pressed' : ''}}" bindtap="DynastyChange" wx:for="{{dynasty}}"
+                <view id="{{item.name}}"  class="filter-item {{d_index == index ? 'pressed' : ''}}" bindtap="filterPoem" wx:for="{{dynasty}}"
                       data-id="{{index}}"
+                      data-type="dynasty"
                       wx:key="{{item}}">{{item}}
                 </view>
             </scroll-view>
@@ -48,7 +50,6 @@
     <!--poem list-->
     <view class="page list">
         <view class="page__bd">
-            <!-- <view class="weui-cells__title">随机获取5首古诗</view> -->
             <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="id">
                 <view class="poem-title author">{{item.title}}</view>
                 <view class="poem-author">{{'['+item.dynasty+'] '+item.author}}</view>
