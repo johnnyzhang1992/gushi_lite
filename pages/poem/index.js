@@ -97,8 +97,7 @@ Page({
             that.setData({
                 t_index: id
             });
-        };
-
+        }
         wx.setNavigationBarTitle({
             title: that.data.dynasty[that.data.d_index] + ' | ' + that.data.types[that.data.t_index]
         });
