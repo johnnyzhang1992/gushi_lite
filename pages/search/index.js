@@ -1,6 +1,7 @@
 // pages/search/index.js
 const app = getApp();
 let WxSearch = require('../../wxSearchView/wxSearchView.js');
+let util = require('../../utils/util');
 Page({
 
   /**
@@ -65,6 +66,7 @@ Page({
     // console.log(value);
     wx.showNavigationBarLoading();
     let that = this;
+    value = util.excludeSpecial(value);
     this.setData({
       keyWord: value
     });
