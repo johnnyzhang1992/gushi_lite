@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "searchHighlightTextView": "../../component/searchHighlightTextView/searchHighlightTextView"
+    },
+    "navigationBarTitleText": "诗词"
+}

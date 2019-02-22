@@ -1,4 +1,5 @@
 <view>
+    <!--搜索框部分-->
     <view class="weui-search-bar">
         <view class="weui-search-bar__form">
             <view class="weui-search-bar__box">
@@ -14,7 +15,9 @@
             <text wx:else data-key='back'>返回</text>
         </view>
     </view>
+    <!--搜索结果部分-->
     <view class="wxSearch" style="height:{{wxSearchData.view.seachHeight}}px;top:{{wxSearchData.view.barHeight}}px;">
+        <!--搜索历史和热点-->
         <view class="wxSearchInner">
             <!-- 搜索提示部分 -->
             <view class="wxSearchMindKey">
@@ -24,6 +27,7 @@
                     </block>
                 </view>
             </view>
+            <!--搜索历史-->
             <view wx:if="{{wxSearchData.his[0]}}" class="wxSearchHistory" style="display:{{wxSearchData.value.length>0 ? 'none':'block'}}">
                 <view class="wxSearchHistoryItem">
                     <text class="wxSearchHistoryItemTitle">搜索记录</text>
@@ -35,7 +39,7 @@
                     </block>
                 </view>
             </view>
-
+            <!--搜索热点-->
             <view class="wxSearchKey" style="display:{{wxSearchData.value.length>0 ? 'none':'block'}}">
                 <text wx:if="{{wxSearchData.hotKeys[0]}}" class="wxSearchTitle">搜索热点</text>
                 <view class="wxSearchKeyList">
@@ -45,7 +49,7 @@
                 </view>
             </view>
         </view>
-        <!--result-->
+        <!--搜索结果部分-->
         <view class='search-result' style='display:block'>
             <view class='tag item' wx-if='{{tags.length>0}}'>
                 <view class='title'>类型</view>
@@ -124,15 +128,13 @@
                                 <view class="poem-author">{{item.dynasty+' | '+item.author}}</view>
                             </view>
                         </view>
-                        <!--<view class="poem-title">-->
-                            <view class="search-result-item poem-content">
-                                <searchHighlightTextView
-                                        class="result-item"
-                                        datas='{{item}}'
-                                        type="poem"
-                                />
-                            </view>
-                        <!--</view>-->
+                        <view class="search-result-item poem-content">
+                            <searchHighlightTextView
+                                    class="result-item"
+                                    datas='{{item}}'
+                                    type="poem"
+                            />
+                        </view>
                     </navigator>
                     <view class="weui-cells weui-cells_after-title" wx-if='{{poems.total>3}}'>
                         <navigator url="/pages/poem/index?type=poem&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
@@ -144,6 +146,7 @@
                 </view>
             </view>
         </view>
-        <ad unit-id="adunit-271379a2a27890de"></ad>
+        <!--广告-->
+        <!--<ad unit-id="adunit-271379a2a27890de"></ad>-->
     </view>
 </view>

@@ -51,9 +51,31 @@
     <view class="page list">
         <view class="page__bd">
             <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="id">
-                <view class="poem-title author">{{item.title}}</view>
-                <view class="poem-author">{{'['+item.dynasty+'] '+item.author}}</view>
-                <view class="poem-title content">{{item.content}}</view>
+                <view wx:if='{{!isSearch}}'>
+                    <view class="poem-title author">{{item.title}}</view>
+                    <view class="poem-author">{{'['+item.dynasty+'] '+item.author}}</view>
+                    <view class="poem-title content">{{item.content}}</view>
+                </view>
+                <view wx:if='{{isSearch}}'>
+                    <view class="poem-title weui-flex">
+                        <view class="weui-flex__item align-left">
+                            <searchHighlightTextView
+                                    class="result-item"
+                                    datas='{{item}}'
+                            />
+                        </view>
+                        <view class="weui-flex__item align-right">
+                            <view class="poem-author">{{item.dynasty+' | '+item.author}}</view>
+                        </view>
+                    </view>
+                    <view class="search-result-item content">
+                        <searchHighlightTextView
+                                class="result-item"
+                                datas='{{item}}'
+                                type="poem"
+                        />
+                    </view>
+                </view>
                 <view class="weui-media-box__info badge-list" wx:if="{{is_search && item.tags.length>0}}"> 
                     <view class="weui-badge" wx:for="{{item.tags}}" wx:key="unique" wx-if='{{item ==_keyWord}}'>{{item}}</view>
                 </view> 

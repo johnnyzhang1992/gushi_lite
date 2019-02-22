@@ -57,6 +57,13 @@ Page({
                 console.log('----------success------------');
                 // wx.setStorageSync('user',res.data);
                 // console.log(res.data);
+                if(options.type && res.data.poems.total){
+                    res.data.poems.data.map(item=>{
+                        item.key = options.keyWord;
+                        item.name = item.title;
+                        return item;
+                    })
+                }
                 that.setData({
                     poems: res.data.poems.data,
                     themes: res.data.themes,
@@ -82,7 +89,7 @@ Page({
             type: that.data.types[that.data.ty_index],
             page: page ? page : 1
         };
-        console.log(data);
+        // console.log(data);
         let url = app.globalData.url + '/wxxcx/getSentenceData';
         if(that.data.isSearch){
             url = url+'?keyWord='+that.data._keyWord;
@@ -93,6 +100,13 @@ Page({
                 console.log('----------success------------');
                 // wx.setStorageSync('user',res.data);
                 // console.log(res.data);
+                if(that.data.isSearch){
+                    res.data.poems.data.map(item=>{
+                        item.key = that.data._keyWord;
+                        item.name = item.title;
+                        return item;
+                    })
+                }
                 that.setData({
                     poems: page > 1 ? that.data.poems.concat(res.data.poems.data) : res.data.poems.data,
                     current_page: res.data.poems.current_page,

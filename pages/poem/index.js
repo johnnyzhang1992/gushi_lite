@@ -67,7 +67,8 @@ Page({
                 _keyWord: options.keyWord
             });
             that.setData({
-                _type : options.type
+                _type : options.type,
+                isSearch: options.type ? true : false
             })
         }
         wx.showLoading({
