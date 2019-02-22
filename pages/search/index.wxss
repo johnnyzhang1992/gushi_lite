@@ -26,7 +26,7 @@ page{
 }
 .item .weui-cell__bd{
   position: relative;
-  padding-left: 25px;
+  /* padding-left: 25px; */
   font-size: 14px;
   color: #337ab7;
 }
@@ -63,6 +63,7 @@ page{
 .poem-item .poem-title{
     color: #333;
     font-size: 14px;
+    /* padding-left: 5px; */
 }
 .poem-item .poem-profile{
     color: #666;
@@ -78,7 +79,6 @@ page{
     overflow: inherit;
     /* padding: 5px 0; */
 }
-.poem-item .poem-content{
-    font-size: 14px;
+.poem-content .normal{
     color: #454545;
 }

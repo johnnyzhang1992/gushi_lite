@@ -1,7 +1,6 @@
 /* component/searchHilightTextView.wxss */
 text {
   height: 40rpx;
-  font-family: PingFangSC;
   font-size: 36rpx;
   font-weight: normal;
   font-style: normal;

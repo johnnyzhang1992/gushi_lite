@@ -13,7 +13,7 @@
 
 page {
     background-color: #fff;
-    font-size: 16px;
+    font-size: 36rpx;
     font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
     /*border-bottom:1px solid #ddd;*//* margin-bottom:10px; */
     color: #666;
