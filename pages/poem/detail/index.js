@@ -158,7 +158,7 @@ Page({
     getPoemDetail: function(poem_id,user_id){
         let that = this;
         return new Promise((resolve,reject)=> { //结果以Promise形式返回
-            http.request(app.globalData.url+'/wxxcx/poem/'+poem_id,{user: user_id}).then(res=>{
+            http.request(app.globalData.url+'/wxxcx/poem/'+poem_id,{user_id: user_id}).then(res=>{
                 if(res.data && res.succeeded){
                     console.log('----------success------------');
                     // console.log(res.data);

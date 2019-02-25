@@ -62,12 +62,12 @@ Page({
 			keyWord: value
 		});
 		http.request(app.globalData.domain+'/search/' + value,undefined).then(res=>{
-			if(res && res.succeeded){
+			if(res.data && res.succeeded){
 				that.setData({
-					poems: res.data ? res.data.poems : null,
-					poets: res.data ? res.data.poets : null,
-					sentences: res.data ? res.data.sentences : null,
-					tags: res.data.tags
+					poems: res.data.poems ? res.data.poems : {},
+					poets: res.data.poets ? res.data.poets : {},
+					sentences: res.data.sentences ? res.data.sentences : {},
+					tags: res.data.tags ? res.data.tags : []
 				});
 				wx.hideNavigationBarLoading()
 			}
