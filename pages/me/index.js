@@ -32,7 +32,7 @@ Page({
         wx.setNavigationBarTitle({
             title: '个人中心'
         });
-        if (app.globalData.userInfo) {
+        if (app.globalData.userInfo && that.data.user_id > 0) {
             wx.showNavigationBarLoading();
             that.setData({
                 userInfo: app.globalData.userInfo,
@@ -83,8 +83,8 @@ Page({
         // console.log('---this');
         // console.log(e);
         let that = this;
-        // console.log(e.detail);
         if(e.detail.errMsg != 'getUserInfo:ok'){
+            http.loadFailL('授权失败！');
             // 授权失败
             return false;
         }else{
@@ -92,86 +92,88 @@ Page({
                 userInfo: e.detail.userInfo,
                 hasUserInfo: true
             });
+            let code = '';
             wx.login({
                 success: res => {
-                    app.globalData.code = res.code
+                    console.log(res);
+                    // app.globalData.code = res.code;
                     // 发送 res.code 到后台换取 openId, sessionKey, unionId
-                }
-            });
-            // 可以将 res 发送给后台解码出 unionId
-            app.globalData.userInfo = e.detail.userInfo;
-            // 向关联网站发送请求，解密、存储数据
-            wx.request({
-                url: app.globalData.url+'/wxxcx/userInfo',
-                data: {
-                    code: app.globalData.code,
-                    iv: e.detail.iv,
-                    encryptedData: e.detail.encryptedData,
-                    systemInfo:app.globalData.systemInfo
-                },
-                success: function (res) {
-                    if(res.data){
-                        console.log('----------success------------');
-                        wx.setStorageSync('user',res.data);
-                        wx.setStorageSync('wx_token', res.data.wx_token);
-                        app.globalData.userInfo = res.data;
-                        wx.request({
-                            url: app.globalData.url+'/wxxcx/getUserInfo/'+res.data.user_id,
-                            success: _res => {
-                                if (_res.data) {
-                                    that.setData({
-                                        user_id: res.data.user_id,
-                                        p_count: _res.data.p_count,
-                                        a_count: _res.data.a_count,
-                                        u_count: _res.data.u_count,
-                                        u_t_count: _res.data.u_t_count,
-                                        s_count: _res.data.s_count
-                                    });
-                                    if(app.globalData.backUrl && app.globalData.backUrl.url){
-                                        // 问询是否返回登录前页面
-                                        wx.showModal({
-                                            title: '登录成功',
-                                            content: '您是否想返回登录前的页面？',
-                                            cancelText: '不需要',
-                                            confirmText: '马上返回',
-                                            success: (res)=>{
-                                                console.log(res);
-                                                that.getUserDetail();
-                                                let backUrl = app.globalData.backUrl;
-                                                if(res && res.confirm){
-                                                    // 现在去登录
-                                                    if(backUrl && backUrl.type && backUrl.type == 'tab'){
-                                                        wx.switchTab({
-                                                            url: backUrl.url
+                    code = res.code;
+                    // 可以将 res 发送给后台解码出 unionId
+                    app.globalData.userInfo = e.detail.userInfo;
+                    let data = {
+                        code: code,
+                        iv: e.detail.iv,
+                        encryptedData: e.detail.encryptedData,
+                        systemInfo:app.globalData.systemInfo
+                    };
+                    console.log(data);
+                    // 向关联网站发送请求，解密、存储数据
+                    wx.request({
+                        url: app.globalData.url+'/wxxcx/userCrate',
+                        data: data,
+                        success: function (res) {
+                            if(res.data && res.data.user_id){
+                                console.log('----------success------------');
+                                wx.setStorageSync('user',res.data);
+                                wx.setStorageSync('wx_token', res.data.wx_token);
+                                app.globalData.userInfo = res.data;
+                                wx.request({
+                                    url: app.globalData.url+'/wxxcx/getUserInfo/'+res.data.user_id,
+                                    success: _res => {
+                                        if (_res.data) {
+                                            that.setData({
+                                                user_id: res.data.user_id,
+                                                p_count: _res.data.p_count,
+                                                a_count: _res.data.a_count,
+                                                u_count: _res.data.u_count,
+                                                u_t_count: _res.data.u_t_count,
+                                                s_count: _res.data.s_count
+                                            });
+                                            if(app.globalData.backUrl && app.globalData.backUrl.url){
+                                                // 问询是否返回登录前页面
+                                                wx.showModal({
+                                                    title: '登录成功',
+                                                    content: '您是否想返回登录前的页面？',
+                                                    cancelText: '不需要',
+                                                    confirmText: '马上返回',
+                                                    success: (res)=>{
+                                                        console.log(res);
+                                                        that.getUserDetail();
+                                                        let backUrl = app.globalData.backUrl;
+                                                        if(res && res.confirm){
+                                                            // 现在去登录
+                                                            if(backUrl && backUrl.type && backUrl.type == 'tab'){
+                                                                wx.switchTab({
+                                                                    url: backUrl.url
+                                                                });
+                                                            }else{
+                                                                wx.navigateTo({
+                                                                    url: backUrl.url
+                                                                })
+                                                            }
+                                                        }
+                                                    },
+                                                    fail: (error)=>{
+                                                        console.log(error);
+                                                        wx.showToast({
+                                                            title: '好像哪里出错了，请重试。',
+                                                            icon: 'none',
+                                                            mask: true
                                                         });
-                                                    }else{
-                                                        wx.navigateTo({
-                                                            url: backUrl.url
-                                                        })
                                                     }
-                                                }
-                                            },
-                                            fail: (error)=>{
-                                                console.log(error);
-                                                wx.showToast({
-                                                    title: '好像哪里出错了，请重试。',
-                                                    icon: 'none',
-                                                    mask: true
-                                                });
+                                                })
                                             }
-                                        })
+                                        }
                                     }
-                                }
+                                });
+                            }else{
+                                http.loadFailL('登陆失败')
                             }
-                        });
-                    }
+                        }
+                    });
                 }
             });
-            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-            // 所以此处加入 callback 以防止这种情况
-            if (that.userInfoReadyCallback) {
-                that.userInfoReadyCallback(res)
-            }
         }
         
     },

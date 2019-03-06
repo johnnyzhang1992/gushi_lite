@@ -1,4 +1,5 @@
 // pages/me/search/index.js
+
 Page({
 
   /**
@@ -28,7 +29,7 @@ Page({
       content: '确定删除吗？',
       success: function (res) {
         if (res.confirm) {
-          console.log('用户点击确定')
+          console.log('用户点击确定');
           wx.request({
             url: 'https://xuegushi.cn/wxxcx/search/'+id+'/update',
             success: res => {

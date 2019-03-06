@@ -16,28 +16,28 @@
 
 // 提示集合
 let __tipKeys = [];
-// 搜索回调函数 
+// 搜索回调函数
 let __searchFunction = null;
-// 返回函数 
+// 返回函数
 let __goBackFunction = null;
 // 应用变量
 let __that = null;
 
 // 初始化函数
 function init(that, hotKeys, tipKeys, searchFunction, goBackFunction) {
-
+  
   __that = that;
   __tipKeys = tipKeys;
   __searchFunction = searchFunction;
   __goBackFunction = goBackFunction;
-
+  
   let temData = {};
   let barHeight = 43;
   let view = {
     barHeight: barHeight
   };
   temData.hotKeys = hotKeys;
-
+  
   wx.getSystemInfo({
     success: function (res) {
       let wHeight = res.windowHeight;
@@ -48,7 +48,7 @@ function init(that, hotKeys, tipKeys, searchFunction, goBackFunction) {
       });
     }
   });
-
+  
   getHisKeys(__that);
 }
 
@@ -57,7 +57,7 @@ function wxSearchInput(e) {
   let inputValue = e.detail.value;
   // 页面数据
   let temData = __that.data.wxSearchData;
-  // 寻找提示值 
+  // 寻找提示值
   let tipKeys = [];
   if (inputValue && inputValue.length > 0) {
     for (let i = 0; i < __tipKeys.length; i++) {
@@ -195,4 +195,4 @@ module.exports = {
   wxSearchDeleteAll: wxSearchDeleteAll, // 删除所有的历史记录
   wxSearchConfirm: wxSearchConfirm, // 搜索函数
   wxSearchClear: wxSearchClear,  // 清空函数
-}
+};
