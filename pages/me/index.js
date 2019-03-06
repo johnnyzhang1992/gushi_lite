@@ -8,7 +8,6 @@ Page({
         userInfo: null,
         hasUserInfo: false,
         user_id: 0,
-        // canIUse: wx.canIUse('button.open-type.getUserInfo'),
         canIUse: true,
         p_count: 0,
         a_count: 0,
@@ -26,6 +25,86 @@ Page({
             });
         }
     },
+    // 通过用户点击按钮获取用户数据
+    bindGetUserInfo: function(e) {
+        let that = this;
+        if(e.detail.errMsg != 'getUserInfo:ok'){
+            http.loadFailL('授权失败！');
+            // 授权失败
+            return false;
+        }else{
+            // 注册或者登陆
+            wx.login({
+                success: res => {
+                    // 发送 res.code 到后台换取 openId, sessionKey, unionId
+                    app.globalData.userInfo = e.detail.userInfo;
+                    let data = {
+                        code: res.code,
+                        iv: e.detail.iv,
+                        encryptedData: e.detail.encryptedData,
+                        systemInfo:app.globalData.systemInfo
+                    };
+                    // console.log(data);
+                    // 向关联网站发送请求，解密、存储数据
+                    http.request(app.globalData.url+'/wxxcx/userCrate',data).then(res=>{
+                        if(res.data && res.data.user_id){
+                            console.log('----------success------------');
+                            wx.setStorageSync('user',res.data);
+                            wx.setStorageSync('wx_token', res.data.wx_token);
+                            app.globalData.userInfo = res.data;
+                            that.setData({
+                                userInfo: e.detail.userInfo,
+                                hasUserInfo: true
+                            });
+                            that.getUserInfo(res.data.user_id).then(_res=>{
+                                if(_res.data){
+                                    // 返回登录前页面
+                                    http.backUrl();
+                                }
+                            }).catch(error=>{
+                                console.log(error);
+                                http.loadFailL();
+                            });
+                        }else{
+                            http.loadFailL('注册失败')
+                        }
+                    }).catch(error=>{
+                        console.log(error);
+                        http.loadFailL();
+                    });
+                }
+            });
+        }
+        
+    },
+    // 获取用户的基本信息
+    getUserInfo: function(user_id){
+        let that = this;
+        return new Promise((resolve,reject)=> { //结果以Promise形式返回
+            http.request(app.globalData.url + '/wxxcx/getUserInfo/' + user_id,undefined).then(res=>{
+                if (res.data) {
+                    that.setData({
+                        userInfo: app.globalData.userInfo,
+                        hasUserInfo: true,
+                        p_count: res.data.p_count,
+                        a_count: res.data.a_count,
+                        u_count: res.data.u_count,
+                        u_t_count: res.data.u_t_count,
+                        s_count: res.data.s_count
+                    });
+                    resolve(Object.assign(res, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
+                }else{
+                    reject(Object.assign(res, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
+                    http.loadFailL();
+                }
+                wx.hideNavigationBarLoading();
+            }).catch(error=>{
+                console.log(error);
+                http.loadFailL();
+            })
+        });
+      
+    },
     onLoad: function () {
         let that = this;
         this.getUserId();
@@ -34,25 +113,8 @@ Page({
         });
         if (app.globalData.userInfo && that.data.user_id > 0) {
             wx.showNavigationBarLoading();
-            that.setData({
-                userInfo: app.globalData.userInfo,
-                hasUserInfo: true
-            });
-            wx.request({
-                url: app.globalData.url + '/wxxcx/getUserInfo/' + that.data.user_id,
-                success: res => {
-                    if (res.data) {
-                        that.setData({
-                            p_count: res.data.p_count,
-                            a_count: res.data.a_count,
-                            u_count: res.data.u_count,
-                            u_t_count: res.data.u_t_count,
-                            s_count: res.data.s_count
-                        })
-                    }
-                    wx.hideNavigationBarLoading();
-                }
-            });
+            // 获取用户的基本信息
+           this.getUserInfo(that.data.user_id)
         }
     },
     onReady: function() {
@@ -63,119 +125,10 @@ Page({
      */
     onPullDownRefresh: function(){
         wx.showNavigationBarLoading();
-        let that = this;
-        wx.request({
-            url: app.globalData.url+'/wxxcx/getUserInfo/'+this.data.user_id,
-            success: res => {
-                if (res.data) {
-                    that.setData({
-                        p_count: res.data.p_count,
-                        a_count: res.data.a_count
-                    });
-                    wx.hideNavigationBarLoading();
-                    wx.stopPullDownRefresh()
-                }
-            }
-        });
-    },
-    // 通过用户点击按钮获取用户数据
-    bindGetUserInfo: function(e) {
-        // console.log('---this');
-        // console.log(e);
-        let that = this;
-        if(e.detail.errMsg != 'getUserInfo:ok'){
-            http.loadFailL('授权失败！');
-            // 授权失败
+        if(this.data.user_id<1){
             return false;
-        }else{
-            that.setData({
-                userInfo: e.detail.userInfo,
-                hasUserInfo: true
-            });
-            let code = '';
-            wx.login({
-                success: res => {
-                    console.log(res);
-                    // app.globalData.code = res.code;
-                    // 发送 res.code 到后台换取 openId, sessionKey, unionId
-                    code = res.code;
-                    // 可以将 res 发送给后台解码出 unionId
-                    app.globalData.userInfo = e.detail.userInfo;
-                    let data = {
-                        code: code,
-                        iv: e.detail.iv,
-                        encryptedData: e.detail.encryptedData,
-                        systemInfo:app.globalData.systemInfo
-                    };
-                    console.log(data);
-                    // 向关联网站发送请求，解密、存储数据
-                    wx.request({
-                        url: app.globalData.url+'/wxxcx/userCrate',
-                        data: data,
-                        success: function (res) {
-                            if(res.data && res.data.user_id){
-                                console.log('----------success------------');
-                                wx.setStorageSync('user',res.data);
-                                wx.setStorageSync('wx_token', res.data.wx_token);
-                                app.globalData.userInfo = res.data;
-                                wx.request({
-                                    url: app.globalData.url+'/wxxcx/getUserInfo/'+res.data.user_id,
-                                    success: _res => {
-                                        if (_res.data) {
-                                            that.setData({
-                                                user_id: res.data.user_id,
-                                                p_count: _res.data.p_count,
-                                                a_count: _res.data.a_count,
-                                                u_count: _res.data.u_count,
-                                                u_t_count: _res.data.u_t_count,
-                                                s_count: _res.data.s_count
-                                            });
-                                            if(app.globalData.backUrl && app.globalData.backUrl.url){
-                                                // 问询是否返回登录前页面
-                                                wx.showModal({
-                                                    title: '登录成功',
-                                                    content: '您是否想返回登录前的页面？',
-                                                    cancelText: '不需要',
-                                                    confirmText: '马上返回',
-                                                    success: (res)=>{
-                                                        console.log(res);
-                                                        that.getUserDetail();
-                                                        let backUrl = app.globalData.backUrl;
-                                                        if(res && res.confirm){
-                                                            // 现在去登录
-                                                            if(backUrl && backUrl.type && backUrl.type == 'tab'){
-                                                                wx.switchTab({
-                                                                    url: backUrl.url
-                                                                });
-                                                            }else{
-                                                                wx.navigateTo({
-                                                                    url: backUrl.url
-                                                                })
-                                                            }
-                                                        }
-                                                    },
-                                                    fail: (error)=>{
-                                                        console.log(error);
-                                                        wx.showToast({
-                                                            title: '好像哪里出错了，请重试。',
-                                                            icon: 'none',
-                                                            mask: true
-                                                        });
-                                                    }
-                                                })
-                                            }
-                                        }
-                                    }
-                                });
-                            }else{
-                                http.loadFailL('登陆失败')
-                            }
-                        }
-                    });
-                }
-            });
         }
-        
+        this.getUserInfo(this.data.user_id)
     },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {
