@@ -6,7 +6,7 @@
             <view class="h-time m">{{date[1]}}</view>
             <view class="h-poem">每日一诗</view>
             <view class="day">{{date[2]}}</view>
-            <navigator url="poem/detail/index?id={{hot.id}}" class="h-p-content">{{hot.title}}</navigator>
+            <navigator url="sentence/detail/index?id={{hot.id}}" class="h-p-content">{{hot.title}}</navigator>
         </view>
         <image class="h-boat boat-img" src="../images/boat.png" animation="{{animationData}}"></image>
     </view>

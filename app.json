@@ -21,7 +21,8 @@
         "pages/find/new/index",
         "pages/find/user/index",
         "pages/find/users/index",
-        "pages/find/topic/index"
+        "pages/find/topic/index",
+        "pages/sentence/detail/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

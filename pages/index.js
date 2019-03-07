@@ -12,7 +12,7 @@ Page({
         poems: [],
         category: ['诗经','楚辞','乐府','小学古诗','初中古诗','高中古诗','宋词精选','古诗十九','唐诗三百首','宋词三百首','古诗三百首'],
         categoryCode: ['shijing','chuci','yuefu','xiaoxue','chuzhong','gaozhong','songci','shijiu','tangshi','songcisanbai','sanbai'],
-        index: 10,
+        index: 6,
         date: util.formatDateToMb(),
         hot: app.globalData.hot,
         animationData: {},

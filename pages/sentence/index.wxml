@@ -45,7 +45,7 @@
     <!-- sentence list-->
     <view class="page__bd">
         <view class="weui-cells weui-cells_after-title">
-            <navigator url="/pages/poem/detail/index?id={{item.poem_id}}" hover-class="navigator-hover" class="poem-item" wx:for="{{poems}}" wx:key="id">
+            <navigator url="/pages/sentence/detail/index?id={{item.id}}" hover-class="navigator-hover" class="poem-item" wx:for="{{poems}}" wx:key="id">
                 <view wx:if="{{isSearch}}">
                     <view class="search-result-item">
                         <searchHighlightTextView
