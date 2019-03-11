@@ -1,4 +1,5 @@
 // pages/me/search/index.js
+const app = getApp();
 let http = require('../../../utils/http.js');
 let current_page = 1;
 let last_page = 1;
@@ -9,9 +10,7 @@ Page({
      */
     data: {
         user_id: 0,
-        lists: null,
-        a_current_page: 0,
-        a_last_page: 0,
+        lists: [],
         a_total: 0
     },
     // 获取用户id
@@ -22,44 +21,41 @@ Page({
             user_id: user_id
         });
     },
+    // 更新状态
     update: function (event) {
         let that = this;
         let id = event.currentTarget.dataset.id;
-        console.log(id);
         wx.showModal({
             title: '提示',
             content: '确定删除吗？',
             success: function (res) {
                 if (res.confirm) {
-                    console.log('用户点击确定');
-                    wx.request({
-                        url: 'https://xuegushi.cn/wxxcx/search/' + id + '/update',
-                        success: res => {
-                            // console.log(res.data);
-                            wx.hideLoading();
-                            if (res.data && res.data.status == 200) {
-                                wx.showToast({
-                                    title: '删除成功',
-                                    icon: 'success',
-                                    duration: 2000
-                                });
-                                that.data.lists.map(function (item, index) {
-                                    if (item.id == id) {
-                                        console.log(item, index);
-                                        that.data.lists.splice(index, 1)
-                                    }
-                                });
-                                that.setData({
-                                    lists: that.data.lists
-                                })
-                            } else {
-                                wx.showToast({
-                                    title: '删除失败',
-                                    icon: 'none',
-                                    duration: 2000
-                                })
-                            }
+                    http.request(app.globalData.url + '/wxxcx/search/' + id + '/update',undefined).then(res=>{
+                        if (res.data && res.data.status == 200) {
+                            that.data.lists.map(function (item, index) {
+                                if (item.id == id) {
+                                    console.log(item, index);
+                                    that.data.lists.splice(index, 1)
+                                }
+                            });
+                            that.setData({
+                                lists: that.data.lists
+                            });
+                            wx.showToast({
+                                title: '删除成功',
+                                icon: 'success',
+                                duration: 2000
+                            });
+                        } else {
+                            wx.showToast({
+                                title: '删除失败',
+                                icon: 'none',
+                                duration: 2000
+                            })
                         }
+                    }).catch(error => {
+                        console.log(error);
+                        http.loadFailL();
                     });
                 } else if (res.cancel) {
                     console.log('用户点击取消')
@@ -67,11 +63,34 @@ Page({
             }
         })
     },
+    // 获取搜索列表
+    getList: function (page) {
+        let that = this;
+        if (page > last_page) {
+            return false;
+        }
+        http.request(app.globalData.url + '/wxxcx/search_list', { page: page + 1}).then(res => {
+            if (res.data) {
+                that.setData({
+                    lists: res.data.data,
+                    a_total: res.data.total
+                });
+                current_page = res.data.data.current_page;
+                last_page = res.data.data.last_page
+            } else {
+                http.loadFailL();
+            }
+            wx.hideLoading();
+            wx.hideNavigationBarLoading()
+        }).catch(error => {
+            console.log(error);
+            http.loadFailL();
+        });
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let that = this;
         this.getUserId();
         wx.showLoading({
             title: '加载中',
@@ -79,32 +98,7 @@ Page({
         wx.setNavigationBarTitle({
             title: '搜索列表'
         });
-        wx.request({
-            url: 'https://xuegushi.cn/wxxcx/search_list',
-            success: res => {
-                // console.log(res.data);
-                wx.hideLoading();
-                if (res.data) {
-                    that.setData({
-                        lists: res.data.data,
-                        a_current_page: res.data.current_page,
-                        a_last_page: res.data.last_page,
-                        a_total: res.data.total
-                    })
-                } else {
-                    wx.showModal({
-                        title: '温馨提示',
-                        content: '数据加载失败，请下拉刷新重试加载。',
-                        showCancel: false,
-                        success: function (res) {
-                            if (res.confirm) {
-                                console.log('用户点击确定')
-                            }
-                        }
-                    })
-                }
-            }
-        });
+        this.getList(0)
     },
 
     /**
@@ -139,37 +133,16 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        wx.showNavigationBarLoading();
+        this.getList(0);
+        wx.stopPullDownRefresh()
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        if (this.data.a_last_page < this.data.a_current_page) {
-            return false;
-        }
-        let that = this;
-        // Do something when page reach bottom.
-        wx.request({
-            url: 'https://xuegushi.cn/wxxcx/search_list',
-            data: {
-                page: that.data.a_current_page + 1
-            },
-            success: res => {
-                if (res.data) {
-                    console.log('----------success------------');
-                    // wx.setStorageSync('user',res.data);
-                    // console.log(res.data);
-                    this.setData({
-                        lists: that.data.lists.concat(res.data.data),
-                        a_current_page: res.data.current_page,
-                        a_last_page: res.data.last_page,
-                    });
-                    wx.hideNavigationBarLoading()
-                }
-            }
-        })
+        this.getList(current_page);
     },
 
     /**
@@ -178,4 +151,4 @@ Page({
     onShareAppMessage: function () {
 
     }
-})
+});
