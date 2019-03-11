@@ -31,7 +31,7 @@
     <view class="divide"></view>
     <view class="page list">
         <view class="page__bd">
-            <navigator url="/pages/poet/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item weui-flex" wx:for="{{poets}}" wx:key="id">
+            <navigator url="/pages/poet/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item weui-flex" wx:for="{{poets}}" wx:key="{{item.id}}">
                 <view class="weui-flex__item left">
                     <view class="poet-img" wx:if="{{item.avatar}}">
                         <image src="{{item.avatar}}" lazy-load="{{true}}" ></image>
