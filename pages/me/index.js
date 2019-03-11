@@ -141,7 +141,7 @@ Page({
         return {
             title: '个人中心',
             path: '/page/me/index',
-            imageUrl:'/images/poem.png',
+            // imageUrl:'/images/poem.png',
             success: function(res) {
                 // 转发成功
                 console.log('转发成功！')

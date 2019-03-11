@@ -32,7 +32,7 @@ Page({
         if (page > last_page) {
             return false;
         }
-        http.request(app.globalData.url + '/wxxcx/getCollect/' + that.data.user_id + '/sentence', { page: page + 1 }).then(res => {
+        http.request(app.globalData.url + '/wxxcx/getCollect/' + that.data.user_id , { page: page + 1,type:'sentence'}).then(res => {
             if (res.data) {
                 that.setData({
                     sentences: res.data.data.data,
@@ -54,9 +54,6 @@ Page({
         // Do something when page ready.
     },
     onReachBottom: function () {
-        if (this.data.p_last_page < this.data.p_current_page) {
-            return false;
-        }
         // Do something when page reach bottom.
         this.getCollectSentence(current_page);
     },
@@ -65,7 +62,8 @@ Page({
      */
     onPullDownRefresh: function () {
         wx.showNavigationBarLoading();
-        this.getCollectSentence(current_page);
+        this.getCollectSentence(0);
+        wx.stopPullDownRefresh()
     },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {
@@ -74,7 +72,7 @@ Page({
         }
         return {
             title: '个人中心',
-            path: '/page/me/sentence/index',
+            path: '/page/me/index',
             // imageUrl:'/images/poem.png',
             success: function (res) {
                 // 转发成功
