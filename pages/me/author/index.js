@@ -26,7 +26,7 @@ Page({
         http.request(app.globalData.url + '/wxxcx/getCollect/' + that.data.user_id , { page: page + 1,type:'author' }).then(res => {
             if (res.data) {
                 that.setData({
-                    poets: res.data.data.data,
+                    poets: [...that.data.poets,...res.data.data.data],
                     a_total: res.data.data.total
                 });
                 current_page = res.data.data.current_page;

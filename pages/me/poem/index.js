@@ -27,7 +27,7 @@ Page({
         http.request(app.globalData.url + '/wxxcx/getCollect/' + that.data.user_id, { page: page + 1, type: 'poem' }).then(res => {
             if (res.data) {
                 that.setData({
-                    poems: res.data.data.data,
+                    poems: [...that.data.poems,...res.data.data.data],
                     p_total: res.data.data.total
                 });
                 current_page = res.data.data.current_page;

@@ -72,7 +72,7 @@ Page({
         http.request(app.globalData.url + '/wxxcx/search_list', { page: page + 1}).then(res => {
             if (res.data) {
                 that.setData({
-                    lists: res.data.data,
+                    lists: [...that.data.lists,...res.data.data],
                     a_total: res.data.total
                 });
                 current_page = res.data.data.current_page;
