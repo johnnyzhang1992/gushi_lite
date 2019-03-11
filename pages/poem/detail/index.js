@@ -205,7 +205,7 @@ Page({
         // 日期
         font_size = 16*pixelRatio+'px';
         canvas.drawText(ctx,date[0],60 * pixelRatio,20 * pixelRatio,'center','#fff',60*pixelRatio,'normal normal normal '+font_size+' sans-serif');
-        canvas.drawText(ctx,date[1]+'/'+date[2],60 * pixelRatio,40 * pixelRatio,'center','#fff',60*pixelRatio,'normal normal normal '+font_size+' sans-serif');
+        canvas.drawText(ctx,date[1]+'-'+date[2],60 * pixelRatio,40 * pixelRatio,'center','#fff',60*pixelRatio,'normal normal normal '+font_size+' sans-serif');
         // 正文
         let result = [];
         font_size = 14*pixelRatio+'px';

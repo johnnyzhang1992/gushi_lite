@@ -1,5 +1,5 @@
 /* component/searchHilightTextView.wxss */
-text {
+.highTextView text {
   height: 40rpx;
   font-size: 36rpx;
   font-weight: normal;
@@ -9,12 +9,12 @@ text {
   letter-spacing: normal;
 }
 
-.highlight {
+.highTextView .highlight {
   color: #337ab7;
   font-weight:500;
   padding:0 1px;
 
 }
-.normal {
+.highTextView .normal {
   color: #333;
 }

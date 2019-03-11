@@ -63,12 +63,12 @@ Page({
         let that = this;
         if (options.type) {
             wx.setNavigationBarTitle({
-                title: options.keyWord,
-                _keyWord: options.keyWord
+                title: options.keyWord
             });
             that.setData({
                 _type : options.type,
-                isSearch: options.type ? true : false
+                _keyWord: options.keyWord,
+                isSearch: !!options.type
             })
         }
         wx.showLoading({
@@ -118,9 +118,7 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-        wx.setNavigationBarTitle({
-            title: '古诗文'
-        });
+        // do none thing
     },
 
     /**

@@ -80,6 +80,9 @@ Page({
                 if(res.data && res.succeeded){
                     console.log('----------success------------');
                     // console.log(res.data);
+                    if(res.data.sentence){
+                        res.data.sentence.title_arr = that.splitSentence(res.data.sentence.title);
+                    }
                     that.setData({
                         sentence: res.data.sentence,
                         author: res.data.author,
@@ -100,7 +103,16 @@ Page({
             });
         });
     },
-
+    // 拆分词句
+    splitSentence: function(sentence){
+        // 替代特殊符号 。。
+        let pattern = new RegExp("[。.]");
+        sentence = sentence.replace(/，/g,',');
+        console.log(sentence);
+        sentence = sentence.replace(pattern,'');
+        console.log(sentence);
+        return sentence.split(',');
+    },
     // context.font="italic small-caps bold 12px arial";
     // canvas 画图
     drawImage: function(file_path){
@@ -122,8 +134,8 @@ Page({
         canvas.drawRect(ctx,20 * pixelRatio, 0, 80 * pixelRatio, 50 * pixelRatio,'rgba(0,0,0,0.4)');
         // 日期
         font_size = 16*pixelRatio+'px';
-        canvas.drawText(ctx,date[0],60 * pixelRatio,20 * pixelRatio,'center','#fff',60*pixelRatio,'normal normal normal '+font_size+' sans-serif');
-        canvas.drawText(ctx,date[1]+'/'+date[2],60 * pixelRatio,40 * pixelRatio,'center','#fff',60*pixelRatio,'normal normal normal '+font_size+' sans-serif');
+        canvas.drawText(ctx,'戊戌年',60 * pixelRatio,20 * pixelRatio,'center','#fff',60*pixelRatio,'normal normal normal '+font_size+' sans-serif');
+        canvas.drawText(ctx,date[1]+'-'+date[2],60 * pixelRatio,40 * pixelRatio,'center','#fff',60*pixelRatio,'normal normal normal '+font_size+' sans-serif');
         // 正文
         font_size = 14*pixelRatio+'px';
         console.log('normal normal normal '+font_size+' "Microsoft YaHei""');
