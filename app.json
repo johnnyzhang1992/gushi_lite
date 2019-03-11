@@ -22,7 +22,8 @@
         "pages/find/user/index",
         "pages/find/users/index",
         "pages/find/topic/index",
-        "pages/sentence/detail/index"
+        "pages/sentence/detail/index",
+        "pages/me/sentence/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

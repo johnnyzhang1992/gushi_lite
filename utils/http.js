@@ -19,7 +19,7 @@ function login(id,type) {
 // 封装小程序远程请求函数
 function request(url,data,type){
     let _data = data ? data : {};
-    _data.appId = 'wx4278af156928b4f6';
+    _data.appId = wx.getStorageSync('user').openId;
     _data.wx_token = wx.getStorageSync('wx_token');
     return new Promise((resolve,reject)=> { //结果以Promise形式返回
         wx.request({

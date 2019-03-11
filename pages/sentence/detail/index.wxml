@@ -1,4 +1,4 @@
-<!--pages/author/detail/index.wxml-->
+<!--pages/sentence/detail/index.wxml-->
 <view class="page panel">
     <view class="page__hd" wx-if="{{sentence}}">
         <view class="sentence-section">
@@ -27,10 +27,8 @@
         <view class="weui-loading"></view>
         <view class="weui-loadmore__tips"> 正在加载</view>
     </view>
-    <!--广告-->
-    <!--<ad unit-id="adunit-1dc705dba430e05c"></ad>-->
     <!--诗词内容-->
-    <view class="page__bd page__content">
+    <view class="page__bd page__content" wx:if="{{poem}}">
         <official-account></official-account>
         <navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
             <view class="poem-title author">{{poem.title}}</view>
@@ -38,7 +36,8 @@
             <view class="poem-title content">{{poem.content}}</view>
         </navigator>
     </view>
-
+    <!--广告-->
+    <ad unit-id="adunit-1dc705dba430e05c"></ad>
     <!--button list-->
     <button class='share' bindtap='canvasToImage' animation="{{animationData}}">
         <image src='../../../images/icon/share.png'></image>
@@ -52,6 +51,7 @@
     <button class='add' bindtap='addNew'>
         <image src='../../../images/icon/add.png'></image>
     </button>
+    <!--collect section-->
     <view class="collect" bindtap="updateCollect">
         <view class="collect-img" wx:if="{{!collect_status}}">
             <image src="../../../images/icon/collect.png"></image>

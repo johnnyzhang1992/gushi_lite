@@ -1,0 +1,72 @@
+/* pages/me/author/index.wxss */
+.container{
+    padding: 10px 0 0 0;
+}
+.page__bd{
+    padding-bottom: 0
+}
+.page.list{
+    width: 100%;
+}
+.page.list{
+    width: 100%;
+    background-color: inherit;
+    padding-top: 0
+}
+.home-content{
+    padding: 0
+}
+.navigator-hover{
+    background-color: #fff;
+    color: #337ab7;
+}
+.weui-cells {
+    font-size: 14px;
+    color: #666;
+}
+.weui-cell {
+    padding:8px 15px;
+}
+.list weui-cell_access{
+    font-size: 12px;
+}
+.poem-item{
+    display: block;
+}
+.poem-item view{
+    /* width:100%; */
+    display: block;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+}
+.poem-item .poem-title{
+    color: #333;
+    font-size: 14px;
+}
+.poem-item .poem-author{
+    color: #999;
+    font-size: 12px;
+    /* padding: 5px 0; */
+    display: inline-block;
+    float: right;
+    text-align: right;
+}
+.poem-item .poem-content{
+    font-size: 14px;
+    color: #454545;
+}
+.poem-item .collect{
+  color:#999;
+  font-size:12px;
+  padding-top:5px;
+}
+.weui-cells__title {
+    margin-top:.77em;
+    margin-bottom:1em;
+    padding-left:15px;
+    padding-right:15px;
+    color:#333;
+    font-size:12px;
+    text-align:center;
+}

@@ -1,38 +1,45 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo"  bindgetuserinfo="bindGetUserInfo"> 马上登录 </button>
-     <block wx:else="">
-       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-   <view class="page list">
+    <view class="userinfo">
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo"  bindgetuserinfo="bindGetUserInfo"> 马上登录 </button>
+        <block wx:else="">
+            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.name}}</text>
+        </block>
+    </view>
+    <view class="divide"></view>
+    <view class="page list">
         <view class="page__bd">
             <view class="weui-cells weui-cells_after-title">
                 <navigator url="poem/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                    <view class="weui-cell__hd">
-
-                    </view>
+                    <view class="weui-cell__hd"> </view>
                     <view class="weui-cell__bd">诗词收藏</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{p_count}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{poem_count}}</view>
+                </navigator>
+                <navigator url="sentence/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__hd"> </view>
+                    <view class="weui-cell__bd">名句收藏</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{sentence_count}}</view>
                 </navigator>
                 <navigator url="author/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                    <view class="weui-cell__hd">
-
-                    </view>
+                    <view class="weui-cell__hd"> </view>
                     <view class="weui-cell__bd">诗人收藏</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{a_count}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{poet_count}}</view>
                 </navigator>
-                <navigator url="user/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx-if='{{user_id == 10}}'>
-                    <view class="weui-cell__hd">
-                    </view>
+            </view>
+        </view>
+    </view>
+    <view class="divide"></view>
+    <view class="page list"  wx-if='{{user_id == 10}}'>
+        <view class="page__bd">
+            <view class="weui-cells weui-cells_after-title">
+                <navigator url="user/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__hd"> </view>
                     <view class="weui-cell__bd">用户数量(新增{{u_t_count}})</view>
                     <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{u_count}}</view>
                 </navigator>
-                 <navigator url="search/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx-if='{{user_id == 10}}'>
-                    <view class="weui-cell__hd">
-                    </view>
+                <navigator url="search/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__hd"> </view>
                     <view class="weui-cell__bd">今日搜索</view>
                     <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{s_count}}</view>
                 </navigator>
@@ -41,10 +48,10 @@
     </view>
     <ad unit-id="adunit-bf6445b29863936e"></ad>
     <view class='weui-footer'>
-      <view class='weui-footer-links'>
-        <navigator url='about/index' class='weui-footer__link'>关于</navigator>
-        <navigator url='log/index' class='weui-footer__link'>版本说明</navigator>
-      </view>
-      <view class='weui-footer__text'>Copyright © 2018 xuegushi.cn</view>
+        <view class='weui-footer-links'>
+            <navigator url='about/index' class='weui-footer__link'>关于</navigator>
+            <navigator url='log/index' class='weui-footer__link'>版本说明</navigator>
+        </view>
+        <view class='weui-footer__text'>Copyright © 2018 xuegushi.cn</view>
     </view>
 </view>

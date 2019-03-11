@@ -9,8 +9,9 @@ Page({
         hasUserInfo: false,
         user_id: 0,
         canIUse: true,
-        p_count: 0,
-        a_count: 0,
+        poem_count: 0,
+        poet_count: 0,
+        sentence_count: 0,
         u_count: 0,
         u_t_count: 0,
         s_count: 0
@@ -86,8 +87,9 @@ Page({
                     that.setData({
                         userInfo: app.globalData.userInfo,
                         hasUserInfo: true,
-                        p_count: res.data.p_count,
-                        a_count: res.data.a_count,
+                        poem_count: res.data.poem_count,
+                        poet_count: res.data.poet_count,
+                        sentence_count: res.data.sentence_count,
                         u_count: res.data.u_count,
                         u_t_count: res.data.u_t_count,
                         s_count: res.data.s_count
@@ -111,6 +113,7 @@ Page({
         wx.setNavigationBarTitle({
             title: '个人中心'
         });
+        // 确认用户是否登录
         if (app.globalData.userInfo && that.data.user_id > 0) {
             wx.showNavigationBarLoading();
             // 获取用户的基本信息
