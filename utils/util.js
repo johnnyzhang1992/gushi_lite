@@ -127,7 +127,7 @@ const downImage= (url)=>{
 };
 
 const excludeSpecial = function stripscript(s){
-    let pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%《》]");
+    let pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%《》]",'g');
     let rs = "";
     for (let i = 0; i < s.length; i++) {
         rs = rs+s.substr(i, 1).replace(pattern, '');

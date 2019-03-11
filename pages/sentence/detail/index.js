@@ -106,11 +106,9 @@ Page({
     // 拆分词句
     splitSentence: function(sentence){
         // 替代特殊符号 。。
-        let pattern = new RegExp("[。.]");
+        let pattern = new RegExp("[。.]",'g');
         sentence = sentence.replace(/，/g,',');
-        console.log(sentence);
-        sentence = sentence.replace(pattern,'');
-        console.log(sentence);
+        sentence = sentence.replace(pattern,',');
         return sentence.split(',');
     },
     // context.font="italic small-caps bold 12px arial";
