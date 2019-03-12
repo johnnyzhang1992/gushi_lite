@@ -169,3 +169,17 @@
   color: #09bb07;
   white-space: nowrap;
 }
+/**
+new add
+ */
+.tip-list{
+  background-color: #fff;
+}
+.tip-list .title{
+  border-bottom: 1px solid #eee;
+}
+.tip-list .item{
+  margin-bottom: 0;
+  padding-left: 15px;
+  font-size: small;
+}

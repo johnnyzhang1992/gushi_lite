@@ -14,7 +14,15 @@ Page({
 		poets: null,
 		sentences:null,
 		tags: null,
-		keyWord: ''
+		keyWord: '',
+		closeTips: false
+	},
+	// close tips
+	closeTips: function(){
+		wx.setStorageSync('closeTipsStatus', 'close');
+		this.setData({
+			closeTips: true
+		})
 	},
 	/**x
 	 * 生命周期函数--监听页面加载
@@ -29,6 +37,12 @@ Page({
 		that.setData({
 			keyWord: options && options.keyWord ? options.keyWord : ''
 		});
+		let tipsStatus = wx.getStorageSync('closeTipsStatus');
+		if(tipsStatus && tipsStatus.length>0){
+			that.setData({
+				closeTips: true
+			})
+		}
 		http.request(app.globalData.domain+'/getsHotSearch',undefined).then(res=>{
 			if(res && res.succeeded){
 				hotKey = res.data;
