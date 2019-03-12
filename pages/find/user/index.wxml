@@ -64,5 +64,4 @@
             </view>
         </view>
     </view>
-    <button class='share add' bindtap='addNew' animation="{{animationData}}"><image src='../../../images/icon/add.png'></image></button>
 </view>

@@ -107,6 +107,13 @@ Page({
         });
       
     },
+    // 赞赏
+    zanShang: function(){
+        wx.previewImage({
+            current: app.globalData.url+'/static/xcx/zanshang.jpeg', // 当前显示图片的http链接
+            urls: [app.globalData.url+'/static/xcx/zanshang.jpeg'] // 需要预览的图片http链接列表
+        })
+    },
     onLoad: function () {
         let that = this;
         this.getUserId();
