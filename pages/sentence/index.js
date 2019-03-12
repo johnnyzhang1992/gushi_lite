@@ -8,7 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        poems: null,
+        poems: [],
         inputShowed: false,
         themes: [],
         types: [],
@@ -55,8 +55,6 @@ Page({
         http.request(_url, undefined).then(res => {
             if (res.data && res.succeeded) {
                 console.log('----------success------------');
-                // wx.setStorageSync('user',res.data);
-                // console.log(res.data);
                 if(options.type && res.data.poems.total){
                     res.data.poems.data.map(item=>{
                         item.key = options.keyWord;
@@ -70,8 +68,6 @@ Page({
                     _types: res.data.types,
                     types: res.data.types[0].types,
                     total: res.data.poems.total,
-                    isSearch: options.type ? true : false,
-                    _keyWord: options.keyWord ? options.keyWord : null
                 });
                 current_page = res.data.poems.current_page;
                 last_page = res.data.poems.last_page;
@@ -98,8 +94,6 @@ Page({
             wx.hideNavigationBarLoading();
             if (res.data && res.succeeded) {
                 console.log('----------success------------');
-                // wx.setStorageSync('user',res.data);
-                // console.log(res.data);
                 if(that.data.isSearch){
                     res.data.poems.data.map(item=>{
                         item.key = that.data._keyWord;
@@ -108,11 +102,11 @@ Page({
                     })
                 }
                 that.setData({
-                    poems: page > 1 ? that.data.poems.concat(res.data.poems.data) : res.data.poems.data,
-                    current_page: res.data.poems.current_page,
-                    last_page: res.data.poems.last_page,
+                    poems: [...that.data.poems,...res.data.poems.data],
                     total: res.data.poems.total
                 });
+                current_page = res.data.poems.current_page;
+                last_page = res.data.poems.last_page;
                 wx.hideLoading();
             } else {
                 http.loadFailL();
@@ -204,7 +198,7 @@ Page({
         return {
             title: '名句赏析',
             path: '/pages/sentence/index',
-            imageUrl: '/images/poem.png',
+            // imageUrl: '/images/poem.png',
             success: function (res) {
                 // 转发成功
                 console.log('转发成功！')
