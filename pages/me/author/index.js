@@ -62,6 +62,9 @@ Page({
      */
     onPullDownRefresh: function () {
         wx.showNavigationBarLoading();
+        this.setData({
+            poets: []
+        });
         this.getCollectPoet(0);
         wx.stopPullDownRefresh()
     },

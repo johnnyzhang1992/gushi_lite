@@ -5,7 +5,7 @@
             <view class="weui-cells__title">{{a_total}} 搜索总量</view>
             <view data-id="{{item.id}}" class="weui-cell poem-item" wx:for="{{lists}}" wx:key="id" bindtap="update">
                 <view class="poem-title">{{item.name}}({{item.count}}) <view class="poem-author">id: {{'['+item.id+']'}}</view></view>
-                <view class="poem-title collect">收藏时间：{{item.created_at}}</view>
+                <view class="poem-title collect">时间：{{item.created_at}}</view>
             </view>
         </view>
     </view>

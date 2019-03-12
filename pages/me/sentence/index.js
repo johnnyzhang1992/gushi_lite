@@ -62,6 +62,9 @@ Page({
      */
     onPullDownRefresh: function () {
         wx.showNavigationBarLoading();
+        this.setData({
+           sentences: []
+        });
         this.getCollectSentence(0);
         wx.stopPullDownRefresh()
     },
