@@ -48,8 +48,8 @@
     color: #999;
     font-size: 12px;
     /* padding: 5px 0; */
-    display: inline-block;
-    float: right;
+    /*display: inline-block;*/
+    /*float: right;*/
     text-align: right;
 }
 .poem-item .poem-content{

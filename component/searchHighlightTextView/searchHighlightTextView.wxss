@@ -18,3 +18,6 @@
 .highTextView .normal {
   color: #333;
 }
+.poem-title .normal {
+  color: #999;
+}

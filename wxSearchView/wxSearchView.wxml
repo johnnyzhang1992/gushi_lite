@@ -130,7 +130,7 @@
                         </view>
                         <view class="search-result-item poem-content">
                             <searchHighlightTextView
-                                    class="result-item"
+                                    class="result-item poem-title"
                                     datas='{{item}}'
                                     type="poem"
                             />

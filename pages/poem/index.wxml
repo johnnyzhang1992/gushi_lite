@@ -69,9 +69,9 @@
                             <view class="poem-author">{{'['+item.dynasty+'] '+item.author}}</view>
                         </view>
                     </view>
-                    <view class="search-result-item content">
+                    <view class="search-result-item poem-title content">
                         <searchHighlightTextView
-                                class="result-item"
+                                class="result-item poem-title"
                                 datas='{{item}}'
                                 type="poem"
                         />
