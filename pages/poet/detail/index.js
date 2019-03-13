@@ -1,7 +1,7 @@
 // pages/poem/poet/detail/index.js
 const app = getApp();
 let authLogin = require('../../../utils/authLogin');
-let poetTimeOut = null;
+// let poetTimeOut = null;
 let http = require('../../../utils/http.js');
 let current_page = 1;
 let last_page = 1;
@@ -127,37 +127,20 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        let that = this;
-        let animation = wx.createAnimation({
-            transformOrigin: "50% 50%",
-            duration: 500,
-            timingFunction: "ease",
-            delay: 0
-        });
-        animation.scale(1.3, 1.3).step();
-        that.setData({
-            animationData: animation.export()
-        });
-        poetTimeOut = setTimeout(function () {
-            animation.scale(1, 1).step();
-            that.setData({
-                animationData: animation.export()
-            })
-        }.bind(this), 500)
     },
     
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-        clearTimeout(poetTimeOut);
+   
     },
     
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-        clearTimeout(poetTimeOut);
+  
     },
     
     /**

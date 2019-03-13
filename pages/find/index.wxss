@@ -1,227 +1,164 @@
 /* pages/find/index.wxss */
 .page{
-  padding-top: 0
+    padding-top: 0
 }
 .weui-panel:before {
-  border-top: none;
+    border-top: none;
 }
 .weui-media-box:before {
-  content: " ";
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  height: 1px;
-  border-top: 1rpx solid #E5E5E5;
-  color: #E5E5E5;
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1rpx solid #E5E5E5;
+    color: #E5E5E5;
 }
 .slide-image{
-  width: 100%;
-  /* height: auto; */
-  min-height: 200px;
-  display: block
+    width: 100%;
+    /* height: auto; */
+    min-height: 200px;
+    display: block
 }
 .notices{
-  color:#ccc;
-  font-size: 15px;
-}
-.tag-lists{
-  margin-top: 0
-}
-.tagList{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  border-bottom: 1px solid #eee;
-}
-.tagItem{
-  flex: 0 0 15%;
-  font-size: 13px;
-  text-align: center;
-  border: 1px solid #eee;
-  margin: 5px;
-  padding: 2px 3px 2px 3px;
-  border-radius: 0px;
-  background-color: rgba(200, 200, 200, 0.1);
+    color:#ccc;
+    font-size: 15px;
 }
 .content-section{
-  /* background-color:#f6f7f8; */
-     margin:5px;
+    /* background-color:#f6f7f8; */
+    margin:5px;
     border-radius:0 6px 6px 0;
-     padding-bottom:0;
+    padding-bottom:0;
     border:1px solid #ddd;
     border-left:2px solid #337ab7;
 }
-.poem-item{
-  display: block;
+
+.topic-item{
+    display: block;
 }
-.poem-item view{
-  width:100%;
-  display: block;
-  /* white-space:nowrap; */
+.topic-item view{
+    /* width:100%; */
+    display: -webkit-box;
+    text-overflow:ellipsis;
+    /* white-space:nowrap; */
+    overflow:hidden;
+    -webkit-line-clamp: 3;
 }
-.poem-item .poem-title{
-  color: #333;
-  font-size: 14px;
-}
-.poem-item .poem-author{
-  color: #999;
-  font-size: 12px;
-  padding: 2px 0;
-}
-.poem-item .poem-content{
-  font-size: 12px;
-  color: #454545;
-  overflow:hidden;
-  display: -webkit-box;
-  text-overflow:ellipsis;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-.poet-item{
-  display: block;
-}
-.poet-item view{
-  /* width:100%; */
-  display: -webkit-box;
-  text-overflow:ellipsis;
-  /* white-space:nowrap; */
-  overflow:hidden;
-  -webkit-line-clamp: 3;
-}
-.poet-item .poem-title{
+.topic-item .topic-title{
     color: #333;
     font-size: 14px;
 }
-.poet-item .poem-profile{
+.topic-item .topic-profile{
     color: #666;
     font-size: 12px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     text-overflow:ellipsis;
 }
-.poet-item .poem-title:first-child{
+.topic-item .topic-title:first-child{
     overflow: inherit;
 }
-.poet-item .poem-author{
+.topic-item .topic-author{
     color: #999;
     font-size: 12px;
     display: inline-block;
     overflow: inherit;
-    /* padding: 5px 0; */
+}
+.pins-title{
+    padding:5px 15px;
+    font-weight: lighter;
+    background-color:rgb(247,247,250);
+    color: #333;
 }
 .pins-content{
-  width: 100%;
-  overflow: hidden;
+    width: 100%;
+    overflow: hidden;
 }
 .pin-content{
-  padding: 5px 15px;
-  -webkit-line-clamp: 5;
-  color: #333;
-  font-size: 14px;
-  display: block;
-}
-.pin-author,.pin-time{
-  float: none;
-  padding-left: 10px;
-}
-.pin-author{
-  font-size: 14px;
-  color: #333;
-  margin-bottom:6px;
+    color: #333;
+    font-size: 14px;
+    display: block;
 }
 .pin-time{
-  font-size: 12px;
-  display: inline-block;
-}
-.pin-avatar{
-  width:40px;
-  max-width: 40px;
-}
-.pin-avatar image{
-  border-radius: 100%; 
+    float: none;
+    color: #999;
+    font-size: 13px;
+    display: inline-block;
+    margin-bottom: 5px;
 }
 .right-top{
-  margin-top:0;
+    margin-top:0;
 }
 .right-top .pin-location{
-  display: block;
-  position: relative;
-  margin-top: 5px;
-  padding-left: 10px;
+    display: block;
+    position: relative;
+    margin-top: 5px;
+    padding-left: 10px;
 }
 .pin-location .pin-location-img{
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  position:absolute;
-  left:5px;
-  top:-5px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position:absolute;
+    left:5px;
+    top:-5px;
 }
 .pin-location .location-name{
-  /*display: inline-block;*/
-  margin-left: 12px;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    /*display: inline-block;*/
+    margin-left: 12px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 .bottom-section{
-  margin-top: 10px;
-  padding: 0 10px;
+    margin-top: 10px;
+    padding: 0 10px;
+    clear: both;
+    overflow: hidden;
 }
-.bottom-section image{
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: 0;
-}
-.bottom-section .weui-flex__item{
-  font-size: 12px;
-  line-height: 20px;
-  position: relative;
-  padding-left:23px;
+.bottom-section .delete-btn{
+    display: inline-block;
+    float: right;
 }
 .pinSection{
-  padding-bottom: 8px
+    padding-bottom: 8px
 }
 .pin-item{
-  line-height: 22px;
-  padding: 5px 15px;
+    line-height: 22px;
+    padding: 5px 15px;
 }
 .pin-item .pin-title{
-  /* display: inline-block; */
-  font-weight: bold;
-  width: auto;
+    font-weight: bold;
+    width: auto;
 }
 .pin-item .pin-content{
-  /* display: inline-block; */
-  padding-left: 0;
-  line-height: 22px;
-  /* width:auto; */
-   text-overflow:ellipsis;
-  -webkit-line-clamp: 5;
+    padding-left: 0;
+    line-height: 22px;
+    text-overflow:ellipsis;
+    -webkit-line-clamp: 5;
 }
 .pin-section{
-  margin-top: 0;
-  background-color: #fff;
+    margin-top: 0;
+    background-color: #fff;
 }
 .topic-content{
-  padding: 0 15px 10px  15px;
+    padding: 0 15px 10px  15px;
 }
 .topic-img{
-  width: 50px;
-  height: auto;
-  padding-top: 15px;
+    width: 50px;
+    height: auto;
+    padding-top: 15px;
 }
-.topic-content .poem-profile{
-   overflow : hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+.topic-content .topic-profile{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 .topic-content .page__bd{
-  padding-bottom: 0;
+    padding-bottom: 0;
 }

@@ -120,16 +120,3 @@
 .collect-img .text.active{
   color: #337ab7;
 }
-.add{
-    background-color:#337ab7;
-    position:fixed;
-    right: 60px;
-    padding:8px;
-    border-radius:100%;
-    bottom:50px;
-}
-.add image{
-    width:22px;
-    height:22px;
-    display:block;
-}

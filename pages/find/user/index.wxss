@@ -1,183 +1,79 @@
 /* pages/find/user/index.wxss */
 /* pages/find/index.wxss */
 .page{
-  padding-top: 0
+    padding-top: 0
 }
 .weui-panel:before {
-  border-top: none;
+    border-top: none;
 }
 .weui-media-box:before {
-  content: " ";
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  height: 1px;
-  border-top: 1rpx solid #E5E5E5;
-  color: #E5E5E5;
-}
-.slide-image{
-  width: 100%;
-  /* height: auto; */
-  min-height: 200px;
-  display: block
-}
-.notices{
-  color:#ccc;
-  font-size: 15px;
-}
-.tag-lists{
-  margin-top: 0
-}
-.tagList{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  border-bottom: 1px solid #eee;
-}
-.tagItem{
-  flex: 0 0 15%;
-  font-size: 13px;
-  text-align: center;
-  border: 1px solid #eee;
-  margin: 5px;
-  padding: 2px 3px 2px 3px;
-  border-radius: 0px;
-  background-color: rgba(200, 200, 200, 0.1);
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1rpx solid #E5E5E5;
+    color: #E5E5E5;
 }
 .content-section{
-  background-color:#f6f7f8;
-  margin:5px;
-  border-radius:8px;
-  padding-bottom: 0
-}
-.poem-item{
-  display: block;
-}
-.poem-item view{
-  width:100%;
-  display: block;
-  
-  /* white-space:nowrap; */
-
-}
-.poem-item .poem-title{
-  color: #333;
-  font-size: 14px;
-}
-.poem-item .poem-author{
-  color: #999;
-  font-size: 12px;
-  padding: 2px 0;
-}
-.poem-item .poem-content{
-  font-size: 12px;
-  color: #454545;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  -webkit-line-clamp: 3;
-}
-.poet-item{
-  display: block;
-}
-.poet-item view{
-  /* width:100%; */
-  display: block;
-  text-overflow:ellipsis;
-  /* white-space:nowrap; */
-  overflow:hidden;
-  -webkit-line-clamp: 3;
-}
-.poet-item .poem-title{
-    color: #333;
-    font-size: 14px;
-}
-.poet-item .poem-profile{
-    color: #666;
-    font-size: 12px;
-    -webkit-line-clamp: 3;
-    text-overflow:ellipsis;
-}
-.poet-item .poem-title:first-child{
-    overflow: inherit;
-}
-.poet-item .poem-author{
-    color: #999;
-    font-size: 12px;
-    display: inline-block;
-    overflow: inherit;
-    /* padding: 5px 0; */
+    background-color:#f6f7f8;
+    margin:5px;
+    border-radius:8px;
+    padding-bottom: 0
 }
 .pins-content{
-  width: 100%;
-  overflow: hidden;
+    width: 100%;
+    overflow: hidden;
 }
 .pin-content{
-  padding: 5px 15px;
-  -webkit-line-clamp: 5;
-  color: #333;
-  font-size: 14px;
-  display: block;
-}
-.pin-author,.pin-time{
-  float: none;
-  padding-left: 10px;
-}
-.pin-author{
-  font-size: 14px;
-  color: #333;
-  margin-bottom:6px;
+    padding: 5px 15px;
+    -webkit-line-clamp: 5;
+    color: #333;
+    font-size: 14px;
+    display: block;
 }
 .pin-time{
-  font-size: 12px;
+    float: none;
+    padding-left: 10px;
 }
-.pin-avatar{
-  width:40px;
-  max-width: 40px;
-}
-.pin-avatar image{
-  border-radius: 100%; 
+.pin-time{
+    font-size: 12px;
 }
 .right-top{
-  margin-top:0;
+    margin-top:0;
 }
 .bottom-section{
-  margin-top: 10px;
-  padding: 0 10px;
+    margin-top: 10px;
+    padding: 0 10px;
+    clear: both;
+    overflow: hidden;
 }
-.bottom-section image{
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: 0;
-}
-.bottom-section .weui-flex__item{
-  font-size: 12px;
-  line-height: 20px;
-  position: relative;
-  padding-left:23px;
+.bottom-section .delete-btn{
+    display: inline-block;
+    float: right;
 }
 .pinSection{
-  padding-bottom: 8px
+    padding-bottom: 8px
 }
 .pin-item{
-  line-height: 22px;
-  padding: 5px 15px;
+    line-height: 22px;
+    padding: 5px 10px;
 }
 .pin-item .pin-title{
-  /* display: inline-block; */
-  font-weight: bold;
-  width: auto;
+    /* display: inline-block; */
+    font-weight: bold;
+    width: auto;
 }
 .pin-item .pin-content{
-  /* display: inline-block; */
-  padding-left: 0;
-  line-height: 22px;
-  /* width:auto; */
-   text-overflow:ellipsis;
-  -webkit-line-clamp: 5;
+    /* display: inline-block; */
+    padding-left: 0;
+    line-height: 22px;
+    /* width:auto; */
+    text-overflow:ellipsis;
+    -webkit-line-clamp: 5;
 }
 .pin-section{
-  margin-top: 0;
-  background-color: #fff;
+    margin-top: 0;
+    background-color: #fff;
 }

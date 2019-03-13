@@ -39,7 +39,7 @@ Page({
 		that.setData({
 			keyWord: options && options.keyWord ? options.keyWord : ''
 		});
-		http.request(app.globalData.url+'/wxxcx/getRecentTopic',undefined).then(res=>{
+		http.request(app.globalData.url+'/wxxcx/getTopicDetail/'+options.id,undefined).then(res=>{
 			if(res.data){
 				console.log('----------success------------');
 				that.setData({

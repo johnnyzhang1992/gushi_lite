@@ -20,7 +20,6 @@
         "pages/find/detail/index",
         "pages/find/new/index",
         "pages/find/user/index",
-        "pages/find/users/index",
         "pages/find/topic/index",
         "pages/sentence/detail/index",
         "pages/me/sentence/index"

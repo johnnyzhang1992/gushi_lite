@@ -4,7 +4,6 @@ let until = require('../../../utils/util');
 const canvas = require('../../../utils/canvas');
 let authLogin = require('../../../utils/authLogin');
 let http = require('../../../utils/http.js');
-let poemDetailTimeOut = null;
 Page({
     /**
      * 页面的初始数据
@@ -463,36 +462,21 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        let animation = wx.createAnimation({
-            transformOrigin: "50% 50%",
-            duration: 500,
-            timingFunction: "ease",
-            delay: 0
-        });
-        animation.scale(1.3, 1.3).step();
-        this.setData({
-            animationData: animation.export()
-        });
-        poemDetailTimeOut = setTimeout(function () {
-            animation.scale(1, 1).step();
-            this.setData({
-                animationData: animation.export()
-            })
-        }.bind(this), 500)
+    
     },
     
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-        clearTimeout(poemDetailTimeOut)
+
     },
     
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-        clearTimeout(poemDetailTimeOut)
+    
     },
     
     /**

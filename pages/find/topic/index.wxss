@@ -16,6 +16,37 @@ page{
     min-height:100%;
     padding-top: 0
 }
+.topic-item{
+    display: block;
+}
+.topic-item view{
+    /* width:100%; */
+    display: -webkit-box;
+    text-overflow:ellipsis;
+    /* white-space:nowrap; */
+    overflow:hidden;
+    -webkit-line-clamp: 3;
+}
+.topic-item .topic-title{
+    color: #333;
+    font-size: 14px;
+}
+.topic-item .topic-profile{
+    color: #666;
+    font-size: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    text-overflow:ellipsis;
+}
+.topic-item .topic-title:first-child{
+    overflow: inherit;
+}
+.topic-item .topic-author{
+    color: #999;
+    font-size: 12px;
+    display: inline-block;
+    overflow: inherit;
+}
 .item{
     margin-bottom: 10px;
     background-color: #fff;

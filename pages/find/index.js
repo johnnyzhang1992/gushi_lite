@@ -18,7 +18,7 @@ Page({
         indicatorDots: true,
         animationData: {},
         userInfo: wx.getStorageSync('user'),
-        topic: null
+        topics: []
     },
     // 获取用户id
     getUserId: function () {
@@ -105,60 +105,6 @@ Page({
             url: '/pages/find/user/index?id=' + id
         });
     },
-    // 鼓掌
-    pinLike: function (e) {
-        let id = e.currentTarget.dataset.id;
-        let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
-        let wx_token = wx.getStorageSync('wx_token');
-        let pins = this.data.pins;
-        let that = this;
-        let url = app.globalData.url + '/wxxcx/pin/' + id + '/like';
-        if (that.data.user_id < 1) {
-            authLogin.authLogin('/pages/find/index', 'tab', app);
-        } else {
-            http.request(url, {
-                user_id: user_id,
-                wx_token: wx_token
-            }).then(res => {
-                if (res.data && res.succeeded) {
-                    if (res.data && res.data.status == 'active') {
-                        pins.map((item, index) => {
-                            if (item.id == id) {
-                                item.like_count = item.like_count + 1;
-                                item.like_status = res.data.status;
-                                return item;
-                            } else {
-                                return item;
-                            }
-                        });
-                        that.setData({
-                            pins: pins
-                        })
-                    } else if (res.data.status == 'delete') {
-                        pins.map((item, index) => {
-                            if (item.id == id) {
-                                item.like_count = item.like_count - 1;
-                                item.like_status = res.data.status;
-                                return item;
-                            } else {
-                                return item;
-                            }
-                        });
-                        that.setData({
-                            pins: pins
-                        })
-                    } else {
-                        http.loadFailL(res.data.msg);
-                    }
-                } else {
-                    http.loadFailL();
-                }
-            }).catch(error => {
-                console.log(error);
-                http.loadFailL();
-            });
-        }
-    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -168,11 +114,12 @@ Page({
         wx.showLoading({
             title: '加载中',
         });
-        let url = app.globalData.url + '/wxxcx/getRecentTopic';
-        http.request(url, undefined).then(res => {
+        let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
+        let url = app.globalData.url + '/wxxcx/getTopics';
+        http.request(url, {user_id: user_id}).then(res => {
             if (res.data && res.succeeded) {
                 that.setData({
-                    topic: res.data
+                    topics: res.data.data
                 });
                 that.getPins(1);
                 wx.hideLoading();

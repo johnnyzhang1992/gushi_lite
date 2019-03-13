@@ -84,60 +84,6 @@ Page({
 		this.getUserId();
 		this.getPins(0);
 	},
-	// 鼓掌
-	pinLike: function (e) {
-		let id = e.currentTarget.dataset.id;
-		let user_id = wx.getStorageSync('user') ? wx.getStorageSync('user').user_id : 0;
-		let wx_token = wx.getStorageSync('wx_token');
-		let pins = this.data.pins;
-		let that = this;
-		let url = app.globalData.url + '/wxxcx/pin/' + id + '/like';
-		if (that.data.user_id < 1) {
-			authLogin.authLogin('/pages/find/index', 'tab', app);
-		} else {
-			http.request(url, {
-				user_id: user_id,
-				wx_token: wx_token
-			}).then(res => {
-				if (res.data && res.succeeded) {
-					if (res.data && res.data.status == 'active') {
-						pins.map((item, index) => {
-							if (item.id == id) {
-								item.like_count = item.like_count + 1;
-								item.like_status = res.data.status;
-								return item;
-							} else {
-								return item;
-							}
-						});
-						that.setData({
-							pins: pins
-						})
-					} else if (res.data.status == 'delete') {
-						pins.map((item, index) => {
-							if (item.id == id) {
-								item.like_count = item.like_count - 1;
-								item.like_status = res.data.status;
-								return item;
-							} else {
-								return item;
-							}
-						});
-						that.setData({
-							pins: pins
-						})
-					} else {
-						http.loadFailL(res.data.msg);
-					}
-				} else {
-					http.loadFailL();
-				}
-			}).catch(error => {
-				console.log(error);
-				http.loadFailL();
-			});
-		}
-	},
 	// 获取 pins
 	getPins: function(page){
 		let that = this;

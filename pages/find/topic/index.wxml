@@ -1,16 +1,9 @@
 <!--pages/find/topic/index.wxml-->
 <view>
-    <view class="weui-flex  topic-content">
-        <!-- <view class="topic-img"> -->
-            <!-- <image src="{{userInfo.avatarUrl}}" mode="aspectFit" style="width:50px;height:50px;background-color:#ddd" /> -->
-        <!-- </view> -->
-        <view class="weui-flex__item">
-            <view class="page__bd " wx-if="{{topic}}">
-                <view class="weui-cell poet-item">
-                    <view class="poem-title">{{topic.name}}</view>
-                    <view class="poem-profile">{{topic.description}}</view>
-                </view>
-            </view>
+    <view class="topic" wx-if="{{topic}}">
+        <view class="weui-cell topic-item">
+            <view class="topic-title">{{topic.name}}</view>
+            <view class="topic-profile">{{topic.description}}</view>
         </view>
     </view>
     <view class="wxSearch" style="min-height:{{wxSearchData.view.seachHeight}}px;top:0px;">
@@ -44,7 +37,14 @@
                 <view class='title'>名句</view>
                 <view class='content'>
                     <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="poem-item sentence" wx:for="{{sentences.data}}" wx:key="id">
-                        <view class="poem-title">{{item.title}}</view>
+                        <view class="poem-title">
+                            <view class="search-result-item">
+                                <searchHighlightTextView
+                                        class="result-item"
+                                        datas='{{item}}'
+                                />
+                            </view>
+                        </view>
                         <view class="poem-author">{{'《'+item.poem_title +'》 | '+item.author}}</view>
                     </navigator>
                     <view class="weui-cells weui-cells_after-title" wx-if='{{sentences.total>3}}'>
@@ -60,9 +60,20 @@
                 <view class='title'>诗词</view>
                 <view class='content'>
                     <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems.data}}" wx:key="id">
-                        <view class="poem-title">{{item.title}}</view>
+                        <view class="poem-title">
+                            <searchHighlightTextView
+                                    class="result-item"
+                                    datas='{{item}}'
+                            />
+                        </view>
                         <view class="poem-author">{{item.dynasty+' | '+item.author}}</view>
-                        <view class="poem-title">{{item.content}}</view>
+                        <view class="poem-title">
+                            <searchHighlightTextView
+                                    class="result-item"
+                                    datas='{{item}}'
+                                    type="poem"
+                            />
+                        </view>
                     </navigator>
                     <view class="weui-cells weui-cells_after-title" wx-if='{{poems.total>3}}'>
                         <navigator url="/pages/poem/index?type=poem&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
