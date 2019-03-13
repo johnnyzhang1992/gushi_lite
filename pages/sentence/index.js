@@ -120,7 +120,8 @@ Page({
         this.setData({
             th_index: theme_index,
             types: that.data._types[theme_index>0 ? theme_index-1 : 0].types,
-            ty_index: 0
+            ty_index: 0,
+            poems: []
         });
         wx.setNavigationBarTitle({
             title: that.data.themes[theme_index]
@@ -133,7 +134,8 @@ Page({
         let that = this;
         let type_index= e.currentTarget.dataset.id ? e.currentTarget.dataset.id: 0;
         this.setData({
-            ty_index: type_index
+            ty_index: type_index,
+            poems: []
         });
         wx.setNavigationBarTitle({
             title: that.data.themes[that.data.th_index] + ' | ' + that.data.types[type_index]
