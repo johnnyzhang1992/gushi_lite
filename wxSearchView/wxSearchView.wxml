@@ -91,7 +91,7 @@
                 <view class='title'>名句</view>
                 <view class='content'>
                     <block wx:for="{{sentences.data}}" wx:key="id">
-                        <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item sentence" >
+                        <navigator url="/pages/sentence/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item sentence" >
                             <view class="poem-title">
                                 <view class="search-result-item">
                                     <searchHighlightTextView
