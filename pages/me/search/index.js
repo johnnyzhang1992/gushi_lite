@@ -75,10 +75,10 @@ Page({
                     lists: [...that.data.lists,...res.data.data],
                     a_total: res.data.total
                 });
-                current_page = res.data.data.current_page;
-                last_page = res.data.data.last_page
+                current_page = res.data.current_page;
+                last_page = res.data.last_page
             } else {
-                http.loadFailL();
+                http.loadFailL();s
             }
             wx.hideLoading();
             wx.hideNavigationBarLoading()
@@ -134,6 +134,9 @@ Page({
      */
     onPullDownRefresh: function () {
         wx.showNavigationBarLoading();
+        this.setData({
+            lists: []
+        })
         this.getList(0);
         wx.stopPullDownRefresh()
     },
