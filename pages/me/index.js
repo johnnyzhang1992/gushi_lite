@@ -138,7 +138,8 @@ Page({
         if(this.data.user_id<1){
             return false;
         }
-        this.getUserInfo(this.data.user_id)
+        this.getUserInfo(this.data.user_id);
+        wx.stopPullDownRefresh();
     },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {
