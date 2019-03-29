@@ -45,7 +45,7 @@ Page({
                 }
                 that.setData({
                     hot: app.globalData.hot ? app.globalData.hot : res.data.hot[0],
-                    poems: current_page >= 1 ? [...that.data.poems, ...res.data.poems.data] : res.data.poems.data
+                    poems: current_page >1 ? [...that.data.poems, ...res.data.poems.data] : res.data.poems.data
                 });
                 current_page = res.data.poems.current_page;
                 last_page = res.data.poems.last_page
@@ -65,6 +65,7 @@ Page({
         this.setData({
             index: e.detail.value
         });
+        current_page = 1;
         that.getHomeData(that.data.categoryCode[that.data.index]);
     },
     onLoad: function () {
