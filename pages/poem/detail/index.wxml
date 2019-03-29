@@ -24,7 +24,7 @@
                     <text decode='true' selectable='true' class="weui-media-box__title " wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type =="诗"}}'>{{item}}</text>
                     <text decode='true' selectable='true' class="weui-media-box__title wyw" wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type !="诗"}}'>{{item}}</text>
                     <view class="weui-media-box__info badge-list" wx:if="{{tags.length>0}}">
-                        <view class="weui-badge" wx:for="{{tags}}" wx:key="unique">{{item}}</view>
+                        <view class="weui-badge" wx:for="{{tags}}" wx:key="unique" wx:if="{{item.length>0}}">{{item}}</view>
                     </view>
                 </view>
             </view>

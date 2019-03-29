@@ -4,6 +4,10 @@ let until = require('../../../utils/util');
 const canvas = require('../../../utils/canvas');
 let authLogin = require('../../../utils/authLogin');
 let http = require('../../../utils/http.js');
+let findTimeOut = null;
+let bg_image = '';
+let filePath = '';
+let codePath = '';
 Page({
     /**
      * 页面的初始数据
@@ -17,10 +21,8 @@ Page({
         themes:[],
         collect_status: false,
         is_loading: true,
-        animation: {},
+        animationData: {},
         filePath: null,
-        bg_image: null,
-        codePath: null,
         pixelRatio: 1,
         canvas_img: null,
         is_show: 'visible',
@@ -87,11 +89,11 @@ Page({
                         author: res.data.author,
                         poem: res.data.poem,
                         collect_status: res.data.sentence.collect_status,
-                        bg_image: res.data.bg_image,
                         is_loading: false,
                         types: (res.data.sentence.type && res.data.sentence.type !='') ? res.data.sentence.type.split(',') : [],
                         themes: (res.data.sentence.theme && res.data.sentence.theme !='') ? res.data.sentence.theme.split(',') : [],
                     });
+                    bg_image = res.data.bg_image;
                     wx.setNavigationBarTitle({
                         title: res.data.sentence.title
                     });
@@ -105,7 +107,7 @@ Page({
     // 拆分词句
     splitSentence: function(sentence){
         // 替代特殊符号 。。
-        let pattern = new RegExp("[。.]",'g');
+        let pattern = new RegExp("[。.!]",'g');
         sentence = sentence.replace(/，/g,',');
         sentence = sentence.replace(pattern,',');
         return sentence.split(',');
@@ -117,7 +119,7 @@ Page({
         let pixelRatio = that.data.pixelRatio;
         let winWidth = that.data.winWidth;
         let winHeight = that.data.winHeight;
-        let filePath = file_path ? file_path : that.data.filePath;
+        let filePath = file_path ? file_path : filePath;
         let date = until.formatDate();
         const scale = 1/pixelRatio;
         const ctx = wx.createCanvasContext('myCanvas');
@@ -152,13 +154,13 @@ Page({
         canvas.drawText(ctx,author,winWidth * pixelRatio/2,(winHeight-85-text_y)*pixelRatio,'center',
             '#808080',(winWidth-90)*pixelRatio,'normal normal bold '+font_size+' sans-serif');
         // 二维码左侧文字
-        ctx.setFontSize(15*pixelRatio);
-        ctx.setFillStyle('#333');
+        ctx.font = 15*pixelRatio+'px';
+        ctx.fillStyle = '#333';
         ctx.setTextAlign('center');
         ctx.fillText("更多古诗词内容",(winWidth-130)/2*pixelRatio,(winHeight-55)*pixelRatio);
         ctx.fillText("长按二维码进入",(winWidth-130)/2*pixelRatio,(winHeight-35)*pixelRatio);
         // 二维码
-        let codePath = that.data.codePath ? that.data.codePath : '/images/xcx1.jpg';
+        let codePath = codePath ? codePath : '/images/xcx1.jpg';
         let img_width = 30;
         let img_x = winWidth-135;
         let img_y = winHeight -80;
@@ -202,15 +204,12 @@ Page({
             wx.showLoading({
                 title: '图片生成中...',
             });
-            until.downImage(that.data.bg_image,).then(res=>{
+            until.downImage(bg_image).then(res=>{
                 console.log('背景图片下载完成---');
                 if(res && res.succeeded){
-                    that.setData({
-                        file_path: res.tempFilePath
-                    });
+                    filePath = res.tempFilePath;
                     console.log('canvas 画图中...');
                     that.drawImage(res.tempFilePath);
-            
                 }
             }).catch(error => {
                 console.log(error);
@@ -255,7 +254,6 @@ Page({
     },
     // 获取小程序码
     getCodeImage: function(type,id){
-        let that = this;
         let _type = type ? type : 'sentence';
         let path = '';
         if(_type == 'sentence'){
@@ -273,9 +271,7 @@ Page({
                 until.downImage(res.data.file_name).then(res1=>{
                     console.log(res1.tempFilePath);
                     if(res1 && res1.succeeded){
-                        that.setData({
-                            codePath: res1.tempFilePath
-                        });
+                        codePath = res1.tempFilePath
                     }
                 })
             }else{
@@ -359,21 +355,39 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        wx.setNavigationBarTitle({
+            title: '广场'
+        });
+        let animation = wx.createAnimation({
+            transformOrigin: "50% 50%",
+            duration: 500,
+            timingFunction: "ease",
+            delay: 0
+        });
+        animation.scale(1.3, 1.3).step();
+        this.setData({
+            animationData: animation.export()
+        });
+        findTimeOut = setTimeout(function () {
+            animation.scale(1, 1).step();
+            this.setData({
+                animationData: animation.export()
+            })
+        }.bind(this), 500)
     },
     
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+        clearTimeout(findTimeOut);
     },
     
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        clearTimeout(findTimeOut);
     },
     
     /**

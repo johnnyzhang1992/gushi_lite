@@ -6,10 +6,11 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"uglifyFileName": true
+		"uglifyFileName": true,
+		"autoAudits": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.2",
+	"libVersion": "2.6.4",
 	"appid": "wx4278af156928b4f6",
 	"projectname": "gushi_lite",
 	"isGameTourist": false,

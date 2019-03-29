@@ -73,8 +73,15 @@ Page({
                 that.setData({
                     _audio: res.data
                 });
-                that.audioCtx = wx.createAudioContext('myAudio');
-                that.audioCtx.setSrc(res.data.src);
+                that.audioCtx = wx.createInnerAudioContext('myAudio');
+                that.audioCtx.src = res.data.src;
+                that.audioCtx.onPlay(() => {
+                    console.log('开始播放')
+                });
+                that.audioCtx.onError((res) => {
+                    console.log(res.errMsg);
+                    console.log(res.errCode)
+                });
                 wx.hideLoading();
             } else {
                 http.loadFailL('音频加载失败！')

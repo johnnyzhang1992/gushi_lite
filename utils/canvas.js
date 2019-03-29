@@ -40,7 +40,7 @@ const breakLinesForCanvas = function(context, text, width, font) {
 const drawRect = function(ctx,x,y,x1,y1,color){
     ctx.beginPath();
     if(color){
-        ctx.setFillStyle(color);
+        ctx.fillStyle = color;
     }
     ctx.rect(x,y,x1,y1);
     ctx.fill();
@@ -50,7 +50,7 @@ const drawText = function(ctx,text,x,y,align,color,width,font){
     if(font){
         ctx.font = font;
     }
-    ctx.setFillStyle(color);
+    ctx.fillStyle = color;
     ctx.setTextAlign(align);
     ctx.fillText(text,x,y,width);
 };
@@ -59,7 +59,7 @@ const drawCircleImage = function(ctx,c_width,img_width,x,y,x1,y1,img_url){
     ctx.save();
     ctx.beginPath();
     ctx.arc(x,y,c_width,0, 2*Math.PI);
-    ctx.setFillStyle('#fff');
+    ctx.fillStyle = '#fff';
     ctx.fill();
     ctx.clip();
     ctx.drawImage(img_url, x1, y1, img_width,img_width);

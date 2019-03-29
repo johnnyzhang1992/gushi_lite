@@ -100,6 +100,7 @@ Page({
                     http.loadFailL();
                 }
                 wx.hideNavigationBarLoading();
+                wx.hideLoading();
             }).catch(error=>{
                 console.log(error);
                 http.loadFailL();
@@ -120,11 +121,14 @@ Page({
         wx.setNavigationBarTitle({
             title: '个人中心'
         });
+        wx.showLoading({
+            title: '加载中',
+        });
         // 确认用户是否登录
         if (app.globalData.userInfo && that.data.user_id > 0) {
             wx.showNavigationBarLoading();
             // 获取用户的基本信息
-           this.getUserInfo(that.data.user_id)
+           this.getUserInfo(that.data.user_id);
         }
     },
     onReady: function() {

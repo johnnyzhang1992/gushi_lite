@@ -3,6 +3,7 @@ const app = getApp();
 let http = require('../../utils/http.js');
 let current_page = 1;
 let last_page = 1;
+let _types = [];
 Page({
     /**
      * 页面的初始数据
@@ -12,7 +13,6 @@ Page({
         inputShowed: false,
         themes: [],
         types: [],
-        _types: [],
         th_index: 0,
         ty_index: 0,
         total: 0,
@@ -65,10 +65,10 @@ Page({
                 that.setData({
                     poems: res.data.poems.data,
                     themes: res.data.themes,
-                    _types: res.data.types,
                     types: res.data.types[0].types,
                     total: res.data.poems.total,
                 });
+                _types = res.data.types;
                 current_page = res.data.poems.current_page;
                 last_page = res.data.poems.last_page;
                 wx.hideLoading();
@@ -119,7 +119,7 @@ Page({
         let theme_index = e.currentTarget.dataset.id ? e.currentTarget.dataset.id : 0;
         this.setData({
             th_index: theme_index,
-            types: that.data._types[theme_index>0 ? theme_index-1 : 0].types,
+            types: _types[theme_index>0 ? theme_index-1 : 0].types,
             ty_index: 0,
             poems: []
         });

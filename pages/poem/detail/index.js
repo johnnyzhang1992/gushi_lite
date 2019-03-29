@@ -4,6 +4,10 @@ let until = require('../../../utils/util');
 const canvas = require('../../../utils/canvas');
 let authLogin = require('../../../utils/authLogin');
 let http = require('../../../utils/http.js');
+let bg_image = '';
+let poem_detail = {};
+let filePath = '';
+let codePath = '';
 Page({
     /**
      * 页面的初始数据
@@ -11,8 +15,6 @@ Page({
     data: {
         user_id: 0,
         poem: null,
-        detail: null,
-        poems_count:0,
         content:null,
         tags:[],
         winHeight: "",//窗口高度
@@ -20,12 +22,8 @@ Page({
         scrollLeft: 0, //tab标题的滚动条位置
         tab_lists: null,
         collect_status: false,
-        _audio: null,
         is_loading: true,
         animation: {},
-        filePath: null,
-        bg_image: null,
-        codePath: null,
         pixelRatio: 1,
         canvas_img: null,
         is_show: 'visible',
@@ -135,7 +133,7 @@ Page({
     },
     // 渲染tagList
     renderTagList: function () {
-        let _detail = this.data.detail;
+        let _detail = poem_detail;
         if (_detail && _detail.yi) {
             _detail.yi = JSON.parse(_detail.yi)
         }
@@ -149,9 +147,9 @@ Page({
             _detail.more_infos = JSON.parse(_detail.more_infos)
         }
         this.setData({
-            detail: _detail,
             tab_lists: (_detail && _detail.zhu) ? _detail.zhu.content : null,
-        })
+        });
+        poem_detail = _detail;
     },
     // 获取诗词详情
     getPoemDetail: function(poem_id,user_id){
@@ -161,18 +159,16 @@ Page({
                 if(res.data && res.succeeded){
                     console.log('----------success------------');
                     // console.log(res.data);
-                    let _detail = res.data.detail;
                     that.setData({
                         poem: res.data.poem,
-                        detail: _detail,
-                        poems_count: res.data.poems_count,
                         content:JSON.parse(res.data.poem.content),
                         tags: (res.data.poem.tags && res.data.poem.tags !='') ? res.data.poem.tags.split(',') : [],
                         // tab_lists: (_detail && _detail.zhu) ? _detail.zhu.content : null,
                         collect_status: res.data.poem.collect_status,
-                        bg_image: res.data.bg_image,
                         is_loading: false
                     });
+                    bg_image = res.data.bg_image;
+                    poem_detail = res.data.detail;
                     resolve(Object.assign(res.data, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
                 }else{
                     reject(Object.assign(res, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
@@ -189,7 +185,7 @@ Page({
         let pixelRatio = that.data.pixelRatio;
         let winWidth = that.data.winWidth;
         let winHeight = that.data.winHeight;
-        let filePath = file_path ? file_path : that.data.filePath;
+        let filePath = file_path ? file_path : filePath;
         let date = until.formatDate();
         const scale = 1/pixelRatio;
         const ctx = wx.createCanvasContext('myCanvas');
@@ -254,13 +250,13 @@ Page({
             }
         });
         // 二维码左侧文字
-        ctx.setFontSize(15*pixelRatio);
-        ctx.setFillStyle('#333');
+        font_size = 15*pixelRatio+'px';
+        ctx.fillStyle = '#333';
         ctx.setTextAlign('center');
         ctx.fillText("更多古诗词内容",(winWidth-130)/2*pixelRatio,(winHeight-55)*pixelRatio);
         ctx.fillText("长按二维码进入",(winWidth-130)/2*pixelRatio,(winHeight-35)*pixelRatio);
         // 二维码
-        let codePath = that.data.codePath ? that.data.codePath : '/images/xcx1.jpg';
+        let codePath = codePath ? codePath : '/images/xcx1.jpg';
         let img_width = 30;
         let img_x = winWidth-135;
         let img_y = winHeight -80;
@@ -304,15 +300,12 @@ Page({
             wx.showLoading({
                 title: '图片生成中...',
             });
-            until.downImage(that.data.bg_image,).then(res=>{
+            until.downImage(bg_image).then(res=>{
                 console.log('背景图片下载完成---');
                 if(res && res.succeeded){
-                    that.setData({
-                        file_path: res.tempFilePath
-                    });
+                    filePath = res.tempFilePath;
                     console.log('canvas 画图中...');
                     that.drawImage(res.tempFilePath);
-            
                 }
             }).catch(error => {
                 console.log(error);
@@ -357,7 +350,6 @@ Page({
     },
     // 获取小程序码
     getCodeImage: function(type,id){
-        let that = this;
         let _type = type ? type : 'poem';
         let path = '';
         if(_type == 'poem'){
@@ -375,9 +367,7 @@ Page({
                 until.downImage(res.data.file_name).then(res1=>{
                     console.log(res1.tempFilePath);
                     if(res1 && res1.succeeded){
-                        that.setData({
-                            codePath: res1.tempFilePath
-                        });
+                        codePath = res1.tempFilePath
                     }
                 })
             }else{

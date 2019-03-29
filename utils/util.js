@@ -5,11 +5,11 @@ const formatTime = date => {
     const hour = date.getHours();
     const minute = date.getMinutes();
     const second = date.getSeconds();
-    
+
     return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 };
-const getDateDiff = dateStr =>{
-    let  getDateTimeStamp = dateStr => {
+const getDateDiff = dateStr => {
+    let getDateTimeStamp = dateStr => {
         return Date.parse(dateStr.replace(/-/gi, "/"))
     };
     let publishTime = getDateTimeStamp(dateStr) / 1000,
@@ -47,7 +47,7 @@ const getDateDiff = dateStr =>{
     d_hours = parseInt(d / 3600);
     d_minutes = parseInt(d / 60);
     d_seconds = parseInt(d);
-    
+
     if (d_days > 0 && d_days < 3) {
         return d_days + '天前';
     } else if (d_days <= 0 && d_hours > 0) {
@@ -72,50 +72,54 @@ const formatNumber = n => {
     return n[1] ? n : '0' + n
 };
 
-const formatDateToMb = () =>{
+const formatDateToMb = () => {
     let date = new Date();
-    let mb_str = ['零','一','二','三','四','五','六','七','八','九','十','十一','十二'];
+    let mb_str = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
     let y = date.getFullYear().toString();
     let Y = '';
-    let m = date.getMonth()+1;
-    let M = mb_str[m]+'月';
+    let m = date.getMonth() + 1;
+    let M = mb_str[m] + '月';
     let d = date.getDate();
-    for(let i = 0; i<y.split('').length;i++){
-        Y = Y+ mb_str[y.split('')[i]]
+    for (let i = 0; i < y.split('').length; i++) {
+        Y = Y + mb_str[y.split('')[i]]
     }
-    return [Y,M,d];
+    return [Y, M, d];
 };
 
-const formatDate = ()=>{
+const formatDate = () => {
     let date = new Date();
     let y = date.getFullYear().toString();
-    let m = date.getMonth()+1;
+    let m = date.getMonth() + 1;
     let d = date.getDate();
-    if(m<10){
-        m = '0'+m
+    if (m < 10) {
+        m = '0' + m
     }
-    if(d<10){
-        d = '0'+d
+    if (d < 10) {
+        d = '0' + d
     }
-    return [y,m,d]
+    return [y, m, d]
 };
-const downImage= (url)=>{
-    return new Promise((resolve,reject)=> { //结果以Promise形式返回
+const downImage = (url) => {
+    return new Promise((resolve, reject) => { //结果以Promise形式返回
         // const downloadTask = wx.downloadFile({
         wx.downloadFile({
-            url: url,//仅为示例，并非真实的资源
-            success (res) {
+            url: url, //仅为示例，并非真实的资源
+            success(res) {
                 // console.log(res);
                 // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
                 if (res.statusCode === 200) {
                     // that.setData({
                     //     filePath: res.tempFilePath
                     // });
-                    resolve(Object.assign(res, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
+                    resolve(Object.assign(res, {
+                        succeeded: true
+                    })); //成功失败都resolve，并通过succeeded字段区分
                 }
             },
-            fail: error=>{
-                resolve(Object.assign(error, {succeeded: false})); //成功失败都resolve，并通过succeeded字段区分
+            fail: error => {
+                resolve(Object.assign(error, {
+                    succeeded: false
+                })); //成功失败都resolve，并通过succeeded字段区分
             }
         });
         // downloadTask.onProgressUpdate((res) => {
@@ -126,11 +130,11 @@ const downImage= (url)=>{
     });
 };
 
-const excludeSpecial = function stripscript(s){
-    let pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%《》]",'g');
+const excludeSpecial = function stripscript(s) {
+    let pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%《》]", 'g');
     let rs = "";
     for (let i = 0; i < s.length; i++) {
-        rs = rs+s.substr(i, 1).replace(pattern, '');
+        rs = rs + s.substr(i, 1).replace(pattern, '');
     }
     return rs;
 };

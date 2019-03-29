@@ -12,7 +12,7 @@ Page({
         poems: [],
         category: ['诗经','楚辞','乐府','小学古诗','初中古诗','高中古诗','宋词精选','古诗十九','唐诗三百首','宋词三百首','古诗三百首'],
         categoryCode: ['shijing','chuci','yuefu','xiaoxue','chuzhong','gaozhong','songci','shijiu','tangshi','songcisanbai','sanbai'],
-        index: 9,
+        index: 3,
         date: util.formatDateToMb(),
         hot: app.globalData.hot,
         animationData: {},
@@ -45,7 +45,7 @@ Page({
                 }
                 that.setData({
                     hot: app.globalData.hot ? app.globalData.hot : res.data.hot[0],
-                    poems: [...that.data.poems, ...res.data.poems.data]
+                    poems: current_page >= 1 ? [...that.data.poems, ...res.data.poems.data] : res.data.poems.data
                 });
                 current_page = res.data.poems.current_page;
                 last_page = res.data.poems.last_page
