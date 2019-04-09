@@ -44,6 +44,7 @@
     /* white-space:nowrap; */
     overflow:hidden;
     -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 .topic-item .topic-title{
     color: #333;
@@ -54,6 +55,7 @@
     font-size: 12px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     text-overflow:ellipsis;
 }
 .topic-item .topic-title:first-child{
@@ -78,7 +80,8 @@
 .pin-content{
     color: #333;
     font-size: 14px;
-    display: block;
+    /* display: block; */
+    -webkit-line-clamp: 3
 }
 .pin-time{
     float: none;

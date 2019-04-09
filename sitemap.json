@@ -1,0 +1,63 @@
+{
+    "rules": [
+		{
+        	"action": "allow",
+        	"page": "pages/index",
+			"matching": "exact"
+		},{
+        	"action": "allow",
+        	"page": "pages/me/index",
+        	"matching": "exact"
+     	 },{
+        	"action": "allow",
+        	"page": "pages/search/index",
+        	"matching": "exact"
+      	},{
+       		"action": "allow",
+        	"page": "pages/poet/index",
+        	"matching": "exact"
+      	},{
+        	"action": "allow",
+        	"page": "pages/poem/index",
+        	"matching": "exact"
+      	},{
+        	"action": "allow",
+        	"page": "pages/sentence/index",
+        	"matching": "exact"
+      	},{
+        	"action": "allow",
+        	"page": "pages/find/index",
+        	"matching": "exact"
+      	},{
+			"action": "allow",
+        	"page": "pages/search/index",
+        	"params": ["keyWord"],
+       	 	"matching": "partial"
+		},{
+        	"action": "allow",
+        	"page": "pages/poem/index",
+        	"params": ["keyWord","type"],
+       	 	"matching": "partial"
+    	},{
+            "action": "allow",
+            "page": "pages/poem/detail",
+            "params": ["id"],
+            "matching": "partial"
+		},{
+			"action": "allow",
+			"page": "pages/poet/detail",
+			"params": ["id"],
+			"matching": "partial"
+		},{
+			"action": "allow",
+			"page": "pages/sentence/index",
+			"params": ["keyWord"],
+			"matching": "partial"
+		},{
+			"action": "allow",
+            "page": "pages/poem/audio",
+            "params": ["id"],
+            "matching": "partial"
+		}
+    ]
+}

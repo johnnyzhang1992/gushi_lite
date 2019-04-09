@@ -1,0 +1,33 @@
+<navigator url="/pages/poem/detail/index?id={{poem_item.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
+    <view wx:if='{{!isSearch}}' class="poem_top">
+        <view class="poem-title author">{{poem_item.title}}</view>
+        <view class="poem-author">{{'['+poem_item.dynasty+'] '+poem_item.author}}</view>
+        <view class="poem-title content">{{poem_item.content}}</view>
+    </view>
+    <!--关键词搜索-->
+    <view wx:if='{{isSearch}}'>
+        <view class="poem-title weui-flex">
+            <view class="weui-flex__item align-left">
+                <searchHighlightTextView
+                    class="result-item"
+                    datas='{{poem_item}}'
+                />
+            </view>
+            <view class="weui-flex__item align-right">
+                <view class="poem-author">{{'['+poem_item.dynasty+'] '+item.author}}</view>
+            </view>
+        </view>
+        <view class="search-result-poem_item poem-title content">
+            <searchHighlightTextView
+                class="result-item poem-title"
+                datas='{{poem_item}}'
+                type="poem"
+             />
+        </view>
+    </view>
+    <view class="weui-media-box__info badge-list" wx:if="{{is_search && poem_item.tags.length>0}}">
+        <view class="weui-badge" wx:for="{{poem_item.tags}}" wx:key="unique" wx-if='{{poem_item ==_keyWord}}'>{{poem_item}}</view>
+    </view>              
+</navigator>
+                
+                

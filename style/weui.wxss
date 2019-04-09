@@ -196,39 +196,7 @@ icon {
 .weui-cell_select {
   padding: 0;
 }
-.weui-select {
-  position: relative;
-  padding-left: 15px;
-  padding-right: 30px;
-  height: 2.58823529em;
-  min-height: 2.58823529em;
-  line-height: 2.58823529em;
-  border-right: 1rpx solid #D9D9D9;
-}
-.weui-select:before {
-  content: " ";
-  display: inline-block;
-  height: 6px;
-  width: 6px;
-  border-width: 2px 2px 0 0;
-  border-color: #C8C8CD;
-  border-style: solid;
-  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
-          transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
-  position: relative;
-  top: -2px;
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  margin-top: -4px;
-}
-.weui-select_in-select-after {
-  padding-left: 0;
-}
-.weui-cell__hd_in-select-after,
-.weui-cell__bd_in-select-before {
-  padding-left: 15px;
-}
+
 .weui-cell_vcode {
   padding-right: 0;
 }
@@ -341,37 +309,7 @@ icon {
 .weui-btn-area {
   margin: 1.17647059em 15px 0.3em;
 }
-.weui-agree {
-  display: block;
-  padding: .5em 15px;
-  font-size: 13px;
-}
-.weui-agree__text {
-  color: #999999;
-}
-.weui-agree__link {
-  display: inline;
-  color: #586C94;
-}
-.weui-agree__checkbox {
-  position: absolute;
-  left: -9999px;
-}
-.weui-agree__checkbox-icon {
-  position: relative;
-  top: 2px;
-  display: inline-block;
-  border: 1px solid #D1D1D1;
-  background-color: #FFFFFF;
-  border-radius: 3px;
-  width: 11px;
-  height: 11px;
-}
-.weui-agree__checkbox-icon-check {
-  position: absolute;
-  top: 1px;
-  left: 1px;
-}
+
 .weui-footer {
   color: #999999;
   font-size: 14px;

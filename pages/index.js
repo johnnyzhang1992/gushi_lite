@@ -16,6 +16,7 @@ Page({
         date: util.formatDateToMb(),
         hot: app.globalData.hot,
         animationData: {},
+        show_load: true
     },
     // 跳转到搜索页面
     ngToSearch: function () {
@@ -27,6 +28,7 @@ Page({
     getHomeData: function(name,type){
         let that = this;
         let data = null;
+        let page = 1;
         let url = app.globalData.domain+'/getHomeData';
         if(name && name !=''){
             url = url +'?name='+name;
@@ -35,8 +37,12 @@ Page({
             if(last_page < current_page){
                 return false;
             }
-            data = {page: current_page+1};
+            page = current_page+1;
+            data = {page: page};
         }
+        that.setData({
+            show_load: true
+        });
         wx.showNavigationBarLoading();
         http.request(url,data).then(res=>{
             if(res.data && res.succeeded){
@@ -45,7 +51,8 @@ Page({
                 }
                 that.setData({
                     hot: app.globalData.hot ? app.globalData.hot : res.data.hot[0],
-                    poems: current_page >1 ? [...that.data.poems, ...res.data.poems.data] : res.data.poems.data
+                    poems: page >1 ? [...that.data.poems, ...res.data.poems.data] : res.data.poems.data,
+                    show_load: false
                 });
                 current_page = res.data.poems.current_page;
                 last_page = res.data.poems.last_page

@@ -1,6 +1,6 @@
 {
     "usingComponents": {
-        "searchHighlightTextView": "../../component/searchHighlightTextView/searchHighlightTextView"
+        "poemItemView": "../../component/poemItemView/poemItemView"
     },
     "navigationBarTitleText": "诗词"
 }

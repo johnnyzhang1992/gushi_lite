@@ -11,53 +11,9 @@
     background-color: #fff;
     color: #337ab7;
 }
-.weui-cells {
-    font-size: 14px;
-    color: #666;
-}
-.weui-cell {
-    padding:6px 15px;
-}
-.list weui-cell_access{
-    font-size: 12px;
-}
-.poem-item{
-    display: block;
-}
-.poem-item view{
-    width:100%;
-    display: block;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    overflow:hidden;
-}
-.poem-item .poem-title{
-    color: #333;
-    font-size: 14px;
-}
-.poem-item .poem-title.author{
-    font-size: 16px
-}
-.poem-item .poem-title.content{
-    font-size: 13px;
-    color: #999;
-    margin-top: 5px;
-}
 
-.poem-item .poem-author{
-    color: #999;
-    font-size: 13px;
-    /* padding: 5px 0; */
-    position:absolute;
-    right:15px;
-    top:10px;
-    display:inline-block;
-    width:auto;
-}
-.poem-item .poem-content{
-    font-size: 14px;
-    color: #454545;
-}
+
+
 .nav-list{
     background: #fff;
     width: 100%;
@@ -85,20 +41,6 @@
 .nav-breadcrumb{
   margin-top: 0
 }
-.poem-item .badge-list{
-  padding-top: 0;
-  text-align: left;
-  margin-top: 2px;
-  white-space: initial;
-  overflow: initial;
-  padding-bottom: 0;
-}
-.badge-list .weui-badge{
-  margin-right: 5px;
-  margin-bottom: 2px;
-  display: inline-block;
-  width: auto;
-}
 
 .searchbar-result{
     margin-top: 0;
@@ -118,4 +60,61 @@
 .weui-search-bar__text{
     letter-spacing:2px;
     font-size: 12px;
+}
+
+/*
+* filter section
+*/
+
+.filter-section {
+    background-color: white;
+    height: auto;
+    padding: 3px 0 5px;
+    border-bottom: 1px solid #f4f4f4;
+    border-top: 1px solid #f4f4f4;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.filter-section:last-child {
+    padding-bottom: 5px;
+}
+
+.filter-section .h4 {
+    font-size: 14px;
+    line-height: 25px;
+    background: #fff;
+    border: none;
+    margin-right:0;
+    padding-right:0;
+}
+
+.filter-section scroll-view {
+    width: 100%;
+    overflow-x: auto;
+    padding-left: 10px;
+}
+
+.filter-item {
+    background: #f7f7f7;
+    color: #24262a;
+    font-size: 12px;
+    padding: 2px 6px;
+    margin-bottom: 0;
+    display: inline-block;
+    border-radius: 4px;
+    position: relative;
+    margin-right: 8px;
+    border: 1px solid #f7f7f7;
+}
+
+.filter-item:last-child {
+    margin-right: 20px;
+}
+
+.filter-item.pressed {
+    color: white;
+    background-color: #337ab7;
+    border: 1px solid #337ab7;
+    font-weight: 500;
 }

@@ -54,11 +54,16 @@
     <!--poem list-->
     <view class="page list">
         <view class="page__bd">
-            <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="{{item.id}}">
-                <view class="poem-title author">{{item.title}}</view>
-                <view class="poem-author">{{'['+item.dynasty+' ] '+item.author}}</view>
-                <view class="poem-content content">{{item.content}}</view>
-            </navigator>
+            <poemItemView
+                    datas="{{item}}"
+                    isSearch="{{false}}"
+                    wx:for="{{poems}}"
+                    wx:key="{{item.id}}"
+            />
         </view>
+    </view>
+    <view class="weui-loadmore" wx-if="{{show_load}}">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
     </view>
 </view>
