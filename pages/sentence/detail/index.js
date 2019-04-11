@@ -155,7 +155,7 @@ Page({
         canvas.drawText(ctx,author,winWidth * pixelRatio/2,(winHeight-85-text_y)*pixelRatio,'center',
             '#808080',(winWidth-90)*pixelRatio,'normal normal bold '+font_size+' sans-serif');
         // 二维码左侧文字
-        ctx.font = 15*pixelRatio+'px';
+        // ctx.font = 15*pixelRatio+'px';
         ctx.fillStyle = '#333';
         ctx.setTextAlign('center');
         ctx.fillText("更多古诗词内容",(winWidth-130)/2*pixelRatio,(winHeight-55)*pixelRatio);
