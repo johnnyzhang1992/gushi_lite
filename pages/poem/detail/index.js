@@ -28,7 +28,8 @@ Page({
         canvas_img: null,
         is_show: 'visible',
         is_load: false,
-        show_canvas: false
+        show_canvas: false,
+        is_ipx: app.globalData.isIpx
     },
     // 获取用户id
     getUserId: function(){

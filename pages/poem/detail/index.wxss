@@ -120,6 +120,7 @@
 .tab-list-content .yi{
   text-indent: 0;
 }
+
 .collect{
   position: fixed;
   bottom: 0;
@@ -129,7 +130,10 @@
   border-top:1px solid #f5f5f5;
   width:100%;
   opacity: 0.8;
-  background-color:#fff;
+  background-color:#d7d6dc;
+}
+.collect.iphoneX_view{
+    bottom: 68rpx;
 }
 .collect-img image{
   height: 24px;
@@ -144,11 +148,13 @@
 .collect-img .text.active{
   color: #337ab7;
 }
+.audio.iphoneX_view,.copy.iphoneX_view,.share.iphoneX_view,.return.iphoneX_view{
+    bottom: 84px;
+}
 .audio{
   background-color:#337ab7;
   position:fixed;
   right:60px;
-
   padding:8px;
   border-radius:100%;
   bottom: 50px; 
@@ -238,4 +244,7 @@ canvas{
 }
 .canvas-bottom .quan{
     left: 85px;
+}
+.iphoneX_view.wechat,.iphoneX_view.save_image{
+    bottom: 68rpx;
 }

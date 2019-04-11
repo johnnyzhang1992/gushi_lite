@@ -39,17 +39,17 @@
     <!--广告-->
     <ad unit-id="adunit-1dc705dba430e05c"></ad>
     <!--button list-->
-    <button class='share' bindtap='canvasToImage' animation="{{animationData}}">
+    <button class="share {{is_ipx ? 'iphoneX_view' : ''}}" bindtap='canvasToImage' animation="{{animationData}}">
         <image src='../../../images/icon/share.png'></image>
     </button>
-    <button class='copy' bindtap="copy">
+    <button class="copy {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="copy">
         <image src='../../../images/icon/copy.png'></image>
     </button>
-    <button class='return' bindtap="return">
+    <button class="return {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="return">
         <image src='../../../images/icon/return.png'></image>
     </button>
     <!--collect section-->
-    <view class="collect" bindtap="updateCollect">
+    <view class="collect {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="updateCollect">
         <view class="collect-img" wx:if="{{!collect_status}}">
             <image src="../../../images/icon/collect.png"></image>
             <view class="text">收藏</view>
@@ -68,14 +68,14 @@
             <image src="{{canvas_img}}" style="width:100%;height:100%;" mode="aspectFit"></image>
         </view>
         <view class="canvas-bottom" wx-if="{{is_load}}">
-            <button class="wechat" open-type="share" plain='true'>
+            <button class="wechat {{is_ipx ? 'iphoneX_view' : ''}}" open-type="share" plain='true'>
                 <image src="../../../images/wechat.png"></image>
             </button>
-            <view class="wechat quan" bindtap="saveImage">
+            <view class="wechat quan {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="saveImage">
                 <image src="../../../images/wechat_1.png"></image>
             </view>
             <!--<view class="save_image" bindtap="saveImage"> 保存图片到本地</view>-->
-            <view class="save_image not" bindtap="notSaveImage"> 退出</view>
+            <view class="save_image not {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="notSaveImage"> 退出</view>
         </view>
     </view>
 </view>

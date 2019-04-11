@@ -27,7 +27,8 @@ Page({
         canvas_img: null,
         is_show: 'visible',
         is_load: false,
-        show_canvas: false
+        show_canvas: false,
+        is_ipx: app.globalData.isIpx
     },
     // 获取用户id
     getUserId: function(){
@@ -150,7 +151,7 @@ Page({
             '#333',(winWidth-80)*pixelRatio,'normal normal bold '+font_size+' sans-serif');
         // 作者
         font_size = 14*pixelRatio+'px';
-        let author = that.data.author.author_name + ' | ' + that.data.author.dynasty;
+        let author = that.data.poem.author + ' | ' + that.data.poem.dynasty;
         canvas.drawText(ctx,author,winWidth * pixelRatio/2,(winHeight-85-text_y)*pixelRatio,'center',
             '#808080',(winWidth-90)*pixelRatio,'normal normal bold '+font_size+' sans-serif');
         // 二维码左侧文字

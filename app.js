@@ -4,12 +4,6 @@ const mtjwxsdk = require('./utils/mtj-wx-sdk.js');
 App({
     onLaunch: function () {
         let that = this;
-        // 获取用户手机信息
-        wx.getSystemInfo({
-            success: res => {
-                this.globalData.systemInfo = res;
-            }
-        });
         // 尝试使用 unionId 登录
         wx.login({
             success: res => {
@@ -64,8 +58,19 @@ App({
                 icon: 'none',
                 duration: 2000
             })
-        })
+        });
         // 版本更新部分结束------
+        
+        // 获取用户手机信息
+        wx.getSystemInfo({
+            success: res => {
+                this.globalData.systemInfo = res;
+                //model中包含着设备信息
+                console.log(res.model);
+                // 判断是否为 iPhone X
+                this.globalData.isIpx = res.model.search('iPhone X') != -1;
+            }
+        });
     },
     // 如果找不到页面就跳转到首页
     onPageNotFound(res) {
