@@ -18,7 +18,7 @@
 .weui-cell:first-child:before {
     display: none;
 }
-.list weui-cell_access{
+.list .weui-cell_access{
     font-size: 12px;
 }
 .poem-item{
@@ -37,6 +37,7 @@
 .poem-item .poem-title{
     color: #333;
     font-size: 14px;
+    position: relative;
 }
 .poem-item .poem-title.author{
     font-size: 16px

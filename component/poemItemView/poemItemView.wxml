@@ -14,7 +14,7 @@
                 />
             </view>
             <view class="weui-flex__item align-right">
-                <view class="poem-author">{{'['+poem_item.dynasty+'] '+item.author}}</view>
+                <view class="poem-author">{{'['+poem_item.dynasty+'] '+(item.author ? item.author : poem_item.author)}}</view>
             </view>
         </view>
         <view class="search-result-poem_item poem-title content">

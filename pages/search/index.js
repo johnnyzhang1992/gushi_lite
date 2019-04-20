@@ -3,6 +3,8 @@ const app = getApp();
 let WxSearch = require('../../wxSearchView/wxSearchView.js');
 let util = require('../../utils/util');
 let http = require('../../utils/http');
+let videoAd = null;
+let video_error_code = 0;
 Page({
 	
 	/**
@@ -15,7 +17,8 @@ Page({
 		sentences:null,
 		tags: null,
 		keyWord: '',
-		closeTips: false
+		closeTips: false,
+		video_loaded: true
 	},
 	// close tips
 	closeTips: function(){
@@ -58,6 +61,57 @@ Page({
 			console.log(error);
 			http.loadFailL();
 		});
+		// 视频广告部分
+		if(wx.createRewardedVideoAd){
+			videoAd = wx.createRewardedVideoAd({
+				adUnitId: 'adunit-c09925982f2e8174'
+			});
+			if(videoAd){
+				videoAd.onError((event)=>{
+					console.log(event);
+					if(!event.detail){
+						videoAd.show()
+					}
+				});
+				// 小程序视频广告
+				videoAd.load()
+						.then(() => {
+							console.log('---then---');
+							if(video_error_code<1){
+								videoAd.show()
+							}else{
+								console.log('错误 code:'+video_error_code)
+							}
+						})
+						.catch(err => {
+							console.log('---catch--in---');
+							console.log(err.errMsg);
+						});
+				videoAd.onClose((status)=>{
+					if(status && status.isEnded || status ===undefined){
+						http.loadFailL('感谢您对小助手的支持！')
+					}else{
+						console.log('---中途退出');
+					}
+				})
+			}
+		}
+		
+	},
+	// 视频广告加载成功
+	videoLoad: function(){
+		console.log('---视频成功--');
+	},
+	// 视频广告加载失败
+	videoError: function(event){
+		console.log('---视频加载失败---');
+		if(event.detail && event.detail.errCode>0){
+			video_error_code = event.detail.errCode;
+			this.setData({
+				video_loaded: false
+			});
+			
+		}
 	},
 	// 3 转发函数，固定部分，直接拷贝即可
 	wxSearchInput: WxSearch.wxSearchInput,  // 输入变化时的操作

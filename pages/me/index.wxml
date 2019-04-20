@@ -30,7 +30,7 @@
         </view>
     </view>
     <view class="divide"></view>
-    <view class="page list"  wx-if='{{user_id == 10}}'>
+    <view class="page list">
         <view class="page__bd">
             <view class="weui-cells weui-cells_after-title">
                 <view  class="weui-cell weui-cell_access" bindtap="zanShang">
@@ -41,6 +41,7 @@
             </view>
         </view>
     </view>
+    <!--  用户和搜索数量，管理员可见 -->
     <view class="page list"  wx-if='{{user_id == 10}}'>
         <view class="page__bd">
             <view class="weui-cells weui-cells_after-title">

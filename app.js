@@ -66,7 +66,7 @@ App({
             success: res => {
                 this.globalData.systemInfo = res;
                 //model中包含着设备信息
-                console.log(res.model);
+                console.log('手机型号：'+res.model);
                 // 判断是否为 iPhone X
                 this.globalData.isIpx = res.model.search('iPhone X') != -1;
             }

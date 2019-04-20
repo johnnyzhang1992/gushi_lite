@@ -158,6 +158,13 @@
             </view>
         </view>
         <!--广告-->
-        <ad unit-id="adunit-271379a2a27890de"></ad>
+        <view class="video">
+            <view class="video-ad" wx-if="{{video_loaded}}">
+                <ad unit-id="adunit-c09925982f2e8174" bindload="videoLoad" binderror="videoError"></ad>
+            </view>
+            <view class="normal-ad" wx-if="{{!video_loaded}}">
+                <ad unit-id="adunit-271379a2a27890de"></ad>
+            </view>
+        </view>
     </view>
 </view>
