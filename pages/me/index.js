@@ -103,6 +103,7 @@ Page({
                 wx.hideLoading();
             }).catch(error=>{
                 console.log(error);
+                wx.hideLoading();
                 http.loadFailL();
             })
         });
@@ -129,6 +130,8 @@ Page({
             wx.showNavigationBarLoading();
             // 获取用户的基本信息
            this.getUserInfo(that.data.user_id);
+        }else{
+            wx.hideLoading();
         }
     },
     onReady: function() {

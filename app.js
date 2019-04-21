@@ -16,12 +16,21 @@ App({
                         systemInfo:this.globalData.systemInfo
                     },
                     success: function (res) {
-                        if(res.data){
+                        if(res.data && !res.data.status){
                             console.log('----------success------------');
                             wx.setStorageSync('user',res.data);
                             wx.setStorageSync('wx_token', res.data.wx_token);
                             that.globalData.userInfo = res.data;
-                        }
+                        }else{
+							try {
+								wx.removeStorageSync('user');
+								wx.removeStorageSync('closeTipsStatus');
+								wx.removeStorageSync('wx_token');
+							} catch (e) {
+								// Do something when catch error
+								console.log('--clear storage fail---')
+							}
+						}
                     }
                 });
             }

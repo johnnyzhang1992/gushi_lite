@@ -11,7 +11,10 @@
   align-items: center;
   margin-bottom: 10px;
 }
-
+.userinfo .login-btn{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 .userinfo-avatar {
   width: 80px;
   height: 80px;
