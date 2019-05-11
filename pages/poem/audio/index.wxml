@@ -19,7 +19,7 @@
     <!--audio-->
     <view class='audio'>
         <audio name="{{title}}" author="{{poem.author}}" src="{{_audio.src}}" id="myAudio" controls></audio>
-        <view class='audio-buttons'>
+        <view class='audio-buttons' wx:if="{{_audio}}">
             <button type="primary" size='mini' class='weui-btn weui-btn_mino weui-btn_primary' bindtap="audioPlay">播放</button>
             <button type="primary" size='mini' class='weui-btn weui-btn_mino weui-btn_primary' bindtap="audioPause">暂停</button>
             <!-- <button type="primary" bindtap="audio14">设置当前播放时间为14秒</button> -->

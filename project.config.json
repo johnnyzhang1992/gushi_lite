@@ -14,6 +14,8 @@
 	"appid": "wx4278af156928b4f6",
 	"projectname": "gushi_lite",
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

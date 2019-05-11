@@ -1,6 +1,7 @@
 // pages/poem/audio/index.js
 const app = getApp();
 let http = require('../../../utils/http.js');
+let audioCtx = null;
 Page({
 
     /**
@@ -11,23 +12,25 @@ Page({
         id: null,
         audio: null,
         poem: null,
-        content: null
+        content: null,
+        _audio: null
     },
     // play
     audioPlay: function() {
-        this.audioCtx.play()
+        audioCtx.play()
     },
     // pause
     audioPause: function() {
-        this.audioCtx.pause()
+        audioCtx.pause()
     },
     // seek
     audio14: function() {
-        this.audioCtx.seek(14)
+        audioCtx.seek(14)
     },
     // start again
     audioStart: function() {
-        this.audioCtx.seek(0)
+        audioCtx.seek(0)
+        audioCtx.play();
     },
     /**
      * 生命周期函数--监听页面加载
@@ -56,33 +59,39 @@ Page({
             } else {
                 http.loadFailL()
             }
-        }).catch(error => {
+        }).then(() => {
+            this.loadAudio();
+         }).catch(error => {
             console.log(error);
             http.loadFailL();
         });
+     
     },
-
     /**
-     * 生命周期函数--监听页面初次渲染完成
+     * 加载音频
      */
-    onReady: function() {
+    loadAudio: function () { 
         let that = this;
-        http.request(app.globalData.url + '/wxxcx/getPoemAudio/' + that.data.id, undefined).then(res => {
+           // 加载音频
+           http.request(app.globalData.url + '/wxxcx/getPoemAudio/' + that.data.id, undefined).then(res => {
             if (res.data && res.succeeded) {
                 // console.log(res.data);
+                console.log('--音频加载成功')
                 that.setData({
                     _audio: res.data
                 });
-                that.audioCtx = wx.createInnerAudioContext('myAudio');
-                that.audioCtx.src = res.data.src;
-                that.audioCtx.onPlay(() => {
+                audioCtx = wx.createInnerAudioContext('myAudio');
+                audioCtx.src = res.data.src;
+                audioCtx.autoplay = true;
+                audioCtx.obeyMuteSwitch = false;
+                audioCtx.onPlay(() => {
                     console.log('开始播放')
                 });
-                that.audioCtx.onError((res) => {
+                audioCtx.onError((res) => {
                     console.log(res.errMsg);
                     console.log(res.errCode)
                 });
-                wx.hideLoading();
+                // wx.hideLoading();
             } else {
                 http.loadFailL('音频加载失败！')
             }
@@ -90,6 +99,12 @@ Page({
             console.log(error);
             http.loadFailL();
         });
+    },
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function() {
+        
     },
 
     /**
@@ -103,14 +118,14 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function() {
-
+        audioCtx.stop();
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function() {
-
+        audioCtx.destroy();
     },
 
     /**
