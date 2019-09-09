@@ -83,13 +83,13 @@ Page({
         if(cur == 3){
             data = that.data.poem.background
         }else if (cur ==1){
-            data = (that.data.detail && that.data.detail.yi) ? that.data.detail.yi.content : null
+            data = (poem_detail && poem_detail.yi) ? poem_detail.yi.content : null
         }else if (cur == 0) {
-            data = (that.data.detail && that.data.detail.zhu) ? that.data.detail.zhu.content: null;
+            data = (poem_detail && poem_detail.zhu) ? poem_detail.zhu.content: null;
         }else if (cur == 2) {
-            data = (that.data.detail && that.data.detail.shangxi) ? that.data.detail.shangxi.content:null
+            data = (poem_detail && poem_detail.shangxi) ? poem_detail.shangxi.content:null
         }else if(cur == 4){
-            data = that.data.detail.more_infos ? that.data.detail.more_infos.content : []
+            data = poem_detail.more_infos ? poem_detail.more_infos.content : []
         }
         that.setData({
             tab_lists: data
@@ -166,7 +166,7 @@ Page({
                         tags: (res.data.poem.tags && res.data.poem.tags !='') ? res.data.poem.tags.split(',') : [],
                         // tab_lists: (_detail && _detail.zhu) ? _detail.zhu.content : null,
                         collect_status: res.data.poem.collect_status,
-                        is_loading: false
+                        is_loading: false,
                     });
                     bg_image = res.data.bg_image;
                     poem_detail = res.data.detail;
