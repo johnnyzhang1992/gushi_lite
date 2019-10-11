@@ -1,5 +1,0 @@
-{
-    "usingComponents": {
-        "searchHighlightTextView": "../../../component/searchHighlightTextView/searchHighlightTextView"
-    }
-}

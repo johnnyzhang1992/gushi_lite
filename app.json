@@ -16,11 +16,6 @@
         "pages/me/user/index",
         "pages/me/log/index",
         "pages/me/search/index",
-        "pages/find/index",
-        "pages/find/detail/index",
-        "pages/find/new/index",
-        "pages/find/user/index",
-        "pages/find/topic/index",
         "pages/sentence/detail/index",
         "pages/me/sentence/index"
     ],
