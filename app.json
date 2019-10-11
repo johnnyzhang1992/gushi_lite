@@ -43,8 +43,8 @@
                 "selectedIconPath": "images/icon/home_active.png"
             },
             {
-                "pagePath": "pages/find/index",
-                "text": "发现",
+                "pagePath": "pages/search/index",
+                "text": "搜索",
                 "iconPath": "images/icon/find.png",
                 "selectedIconPath": "images/icon/find_active.png"
             },

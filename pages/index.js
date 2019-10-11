@@ -18,12 +18,6 @@ Page({
         animationData: {},
         show_load: true
     },
-    // 跳转到搜索页面
-    ngToSearch: function () {
-        wx.navigateTo({
-            url: '/pages/search/index'
-        });
-    },
     // 获取首页数据
     getHomeData: function(name,type){
         let that = this;

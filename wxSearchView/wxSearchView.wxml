@@ -41,7 +41,7 @@
             </view>
             <!--搜索热点-->
             <view class="wxSearchKey" style="display:{{wxSearchData.value.length>0 ? 'none':'block'}}">
-                <text wx:if="{{wxSearchData.hotKeys[0]}}" class="wxSearchTitle">搜索热点</text>
+                <text wx:if="{{wxSearchData.hotKeys[0]}}" class="wxSearchTitle">大家都在搜什么</text>
                 <view class="wxSearchKeyList">
                     <block wx:for="{{wxSearchData.hotKeys}}" wx:key='*.this'>
                         <view class="wxSearchKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
@@ -155,15 +155,6 @@
             <view class="wxSearchKeyList">
                <view class="item">1. 关键词尽量简洁，不要整句搜索，也不要包含特殊字符（例如：，。《》以及空格等）</view>
                <view class="item">2. 如果长的搜索词查询不到结果，可以尝试缩短搜索词，再次尝试。 </view>
-            </view>
-        </view>
-        <!--广告-->
-        <view class="video">
-            <view class="video-ad" wx-if="{{video_loaded}}">
-                <ad unit-id="adunit-c09925982f2e8174" bindload="videoLoad" binderror="videoError"></ad>
-            </view>
-            <view class="normal-ad" wx-if="{{!video_loaded}}">
-                <ad unit-id="adunit-271379a2a27890de"></ad>
             </view>
         </view>
     </view>
