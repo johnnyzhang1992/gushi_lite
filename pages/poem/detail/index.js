@@ -453,61 +453,6 @@ Page({
         wx.hideLoading();
     },
     /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-        wx.setNavigationBarTitle({
-            title: this.data.poem.title
-        });
-    },
-    
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-    
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-    
-    },
-    
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-        wx.showLoading({
-            title: '刷新中...',
-            mask: true
-        });
-        let that = this;
-        this.getUserId();
-        that.setData({
-            is_loading: true
-        });
-        that.getPoemDetail(that.data.poem.id,that.data.user_id).then((res)=>{
-            if(res && res.succeeded){
-                wx.hideLoading();
-                wx.stopPullDownRefresh();
-                this.renderTagList();
-            }
-        }).catch(error => {
-            console.log(error);
-            http.loadFailL();
-        });
-    },
-    
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-    
-    },
-    
-    /**
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {

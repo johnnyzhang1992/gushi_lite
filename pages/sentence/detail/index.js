@@ -356,9 +356,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        wx.setNavigationBarTitle({
-            title: this.data.poem.title
-        });
         let animation = wx.createAnimation({
             transformOrigin: "50% 50%",
             duration: 500,
