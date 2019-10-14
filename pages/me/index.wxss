@@ -1,46 +1,80 @@
 /**index.wxss**/
-.container{
-  padding: 0 0 0 0;
+.container {
+    padding: 0 0 0 0;
 }
-.page__bd{
-  padding-bottom: 0
+.page__bd {
+    padding-bottom: 0;
 }
 .userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 15px;
+    background-color: #337ab7;
 }
-.userinfo .login-btn{
+.userinfo .login-btn {
     margin-top: 30px;
     margin-bottom: 30px;
 }
+.userinfo-avatar-view {
+    width: 130px;
+    text-align: right;
+}
 .userinfo-avatar {
-  width: 80px;
-  height: 80px;
-  margin: 20px;
-  border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin: 20px;
+    border-radius: 50%;
 }
 
 .userinfo-nickname {
-  color: #aaa;
+    color: #fff;
 }
-
-.usermotto {
-  margin-top: 200px;
+.collect-view {
+    width: 80%;
+    margin-top: -30px;
+    background-color: #fff;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 4px #efefef;
 }
-.page.list{
-  width: 100%;
+.collect-view .section-title {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
 }
-.page.list{
+.collect-list {
+    display: flex;
+    font-size: 16px;
+    text-align: center;
+}
+.collect-item {
+    flex: 1;
+    font-size: 14px;
+    border-right: 1px solid #efefef;
+}
+.collect-item:last-child {
+    border-right: none;
+}
+.collect-item-count {
+    color: #999;
+    font-size: 0.8em;
+}
+.collect-item_active{
+  background-color: #fff;
+}
+.page.list {
+    width: 100%;
+}
+.page.list {
     width: 100%;
     background-color: inherit;
-    padding-top: 0
+    padding-top: 0;
 }
-.home-content{
-    padding: 0
+.home-content {
+    padding: 0;
 }
-.navigator-hover{
+.navigator-hover {
     background-color: #fff;
     color: #337ab7;
 }
@@ -49,43 +83,43 @@
     color: #666;
 }
 .weui-cell {
-    padding:8px 15px;
+    padding: 10px 15px;
 }
-.list weui-cell_access{
+.list weui-cell_access {
     font-size: 12px;
 }
-.poem-item{
+.poem-item {
     display: block;
 }
-.poem-item view{
+.poem-item view {
     /* width:100%; */
     display: block;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
-.poem-item .poem-title{
+.poem-item .poem-title {
     color: #333;
     font-size: 14px;
 }
-.poem-item .poem-author{
+.poem-item .poem-author {
     color: #999;
     font-size: 12px;
     /* padding: 5px 0; */
     display: inline-block;
-    float: right;
+    /* float: right; */
     text-align: right;
 }
-.poem-item .poem-content{
+.poem-item .poem-content {
     font-size: 14px;
     color: #454545;
 }
 .weui-cells__title {
-  margin-top:.77em;
-  margin-bottom:1em;
-  padding-left:15px;
-  padding-right:15px;
-  color:#333;
-  font-size:12px;
-  text-align:center;
+    margin-top: 0.77em;
+    margin-bottom: 1em;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #333;
+    font-size: 12px;
+    text-align: center;
 }

@@ -357,7 +357,7 @@ Page({
      */
     onShow: function () {
         wx.setNavigationBarTitle({
-            title: '广场'
+            title: this.data.poem.title
         });
         let animation = wx.createAnimation({
             transformOrigin: "50% 50%",

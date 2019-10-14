@@ -1,4 +1,4 @@
-<!--index.wxml-->
+<!-- index.wxml -->
 <view class="container home-content">
     <view class="home-header">
         <view class="h-content">
@@ -6,47 +6,43 @@
             <view class="h-time m">{{date[1]}}</view>
             <view class="h-poem">每日一诗</view>
             <view class="day">{{date[2]}}</view>
-            <navigator url="sentence/detail/index?id={{hot.id}}" class="h-p-content">{{hot.title}}</navigator>
+            <navigator url="sentence/detail/index?id={{hot.id}}" class="h-p-content">
+                {{hot.title}}
+            </navigator>
         </view>
         <image class="h-boat boat-img" src="../images/boat.png" animation="{{animationData}}"></image>
     </view>
-    <!--nav list-->
+    <!-- nav list -->
     <view class="weui-flex nav-list">
         <navigator url="poem/index" hover-class="navigator-hover" class="weui-flex__item">
-            <image class="" src="../images/icon/poem.png"></image> 诗词
+            <image class="" src="../images/icon/poem.png"></image>
+            诗词
         </navigator>
         <navigator url="sentence/index" hover-class="navigator-hover" class="weui-flex__item">
-            <image class="" src="../images/icon/sentence.png"></image> 名句
+            <image class="" src="../images/icon/sentence.png"></image>
+            名句
         </navigator>
         <navigator url="poet/index" hover-class="navigator-hover" class="weui-flex__item">
-            <image class="" src="../images/icon/poet.png"></image> 诗人
+            <image class="" src="../images/icon/poet.png"></image>
+            诗人
         </navigator>
     </view>
     <view class="divide"></view>
-    <!--filter-->
-    <view class="section">
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    筛选：{{array[index]}}
-                </view>
-                <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
-                    <picker bindchange="bindPickerChange" value="{{index}}" range="{{category}}">
-                        <view class="picker">{{category[index]}}</view>
-                    </picker>
-                </view>
+    <!-- filter -->
+    <view class="section filter-section">
+        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">筛选：{{array[index]}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{category}}">
+                    <view class="picker">{{category[index]}}</view>
+                </picker>
             </view>
         </view>
     </view>
-    <!--poem list-->
+    <!-- poem list -->
     <view class="page list">
         <view class="page__bd">
-            <poemItemView
-                    datas="{{item}}"
-                    isSearch="{{false}}"
-                    wx:for="{{poems}}"
-                    wx:key="{{item.id}}"
-            />
+            <poemItemView datas="{{item}}" isSearch="{{false}}" wx:for="{{poems}}" wx:key="{{item.id}}" />
         </view>
     </view>
     <view class="weui-loadmore" wx-if="{{show_load}}">

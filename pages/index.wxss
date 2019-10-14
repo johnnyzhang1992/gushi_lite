@@ -74,7 +74,7 @@ page{
 }
 .nav-list .weui-flex__item{
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 20px;
     padding:8px 10px;
     color: #666;
@@ -139,6 +139,10 @@ page{
 }
 .section{
     width: 100%;
+}
+.filter-section{
+    font-size: 15px;
+    padding: 5px 15px;
 }
 .section .picker{
     color: #337ab7;

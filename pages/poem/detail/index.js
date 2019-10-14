@@ -168,6 +168,9 @@ Page({
                         collect_status: res.data.poem.collect_status,
                         is_loading: false,
                     });
+                    wx.setNavigationBarTitle({
+                        title: res.data.poem.title
+                    });
                     bg_image = res.data.bg_image;
                     poem_detail = res.data.detail;
                     resolve(Object.assign(res.data, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
@@ -453,7 +456,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-    
+        wx.setNavigationBarTitle({
+            title: this.data.poem.title
+        });
     },
     
     /**
@@ -508,7 +513,7 @@ Page({
     onShareAppMessage: function () {
         let that = this;
         return {
-            title: that.data.poem.title,
+            title: `${that.data.poem.title} | 古诗文小助手`,
             path: '/pages/poem/detail/index?id='+that.data.poem.id,
             // imageUrl:'/images/poem.png',
             success: function(res) {
