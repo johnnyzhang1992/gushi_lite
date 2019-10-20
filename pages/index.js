@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp();
+const apiDomain = app.globalData.domain;
 let util = require("../utils/util.js");
 let http = require("../utils/http.js");
 let current_page = 1;
@@ -11,14 +12,11 @@ Page({
         motto: "古诗文小助手",
         poems: [],
         category: [
-            "诗经",
-            "楚辞",
-            "乐府",
-            "小学古诗",
-            "初中古诗",
-            "高中古诗",
+            "诗经全集",
+            "楚辞全集",
+            "乐府诗集",
             "宋词精选",
-            "古诗十九",
+            "古诗十九首",
             "唐诗三百首",
             "宋词三百首",
             "古诗三百首"
@@ -26,15 +24,22 @@ Page({
         categoryCode: [
             "shijing",
             "chuci",
-            "yuefu",
-            "xiaoxue",
-            "chuzhong",
-            "gaozhong",
+            "yuefu",,
             "songci",
             "shijiu",
             "tangshi",
             "songcisanbai",
             "sanbai"
+        ],
+        categoryPofile: [
+            '最古老的诗集',
+            '浪漫主义诗集',
+            '古代乐府诗集',
+            '优秀宋词集锦',
+            '南朝萧统录',
+            '蘅塘退士编',
+            '朱孝臧编',
+            '曾立国编',
         ],
         index: 3,
         date: util.formatDateToMb(),
@@ -47,7 +52,7 @@ Page({
         let that = this;
         let data = null;
         let page = 1;
-        let url = app.globalData.domain + "/getHomeData";
+        let url = apiDomain + "/getHomeData";
         if (name && name != "") {
             url = url + "?name=" + name;
         }
@@ -92,10 +97,10 @@ Page({
             });
     },
     // 监控筛选变化
-    bindPickerChange: function(e) {
+    bindPickerChange: function (e) {
         let that = this;
         this.setData({
-            index: e.detail.value
+            index: e.currentTarget.dataset.index
         });
         current_page = 1;
         that.getHomeData(that.data.categoryCode[that.data.index]);

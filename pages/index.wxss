@@ -72,17 +72,17 @@ page{
     /* background: #ededed; */
     width: 100%;
 }
-.nav-list .weui-flex__item{
+.nav-list image{
+    width: 45rpx;
+    height: 45rpx;
+    vertical-align:middle;
+}
+.nav-item{
     text-align: center;
-    font-size: 14px;
-    line-height: 20px;
+    line-height: 40rpx;
     padding:8px 10px;
     color: #666;
-}
-.nav-list image{
-    width: 20px;
-    height: 20px;
-    vertical-align:middle;
+    font-size: 36rpx;
 }
 .navigator-hover{
     background-color: #fff;
@@ -140,10 +140,6 @@ page{
 .section{
     width: 100%;
 }
-.filter-section{
-    font-size: 15px;
-    padding: 5px 15px;
-}
 .section .picker{
     color: #337ab7;
 }
@@ -152,54 +148,53 @@ page{
 */
 
 .filter-section {
-    background-color: white;
-    height: auto;
-    padding: 3px 0 5px;
-    border-bottom: 1px solid #f4f4f4;
-    border-top: 1px solid #f4f4f4;
+    box-sizing: border-box;
+    padding: 5px 10px;
     overflow: hidden;
-    white-space: nowrap;
 }
-
-.filter-section:last-child {
-    padding-bottom: 5px;
+.filter-section .filter-title{
+    font-size: 36rpx;
+    color: #4c1f2c;
+    padding: 0 10px;
 }
-
-.filter-section .h4 {
-    font-size: 14px;
-    line-height: 25px;
-    background: #fff;
-    border: none;
-    margin-right:0;
-    padding-right:0;
-}
-
-.filter-section scroll-view {
+.filter-list{
     width: 100%;
-    overflow-x: auto;
-    padding-left: 10px;
+    margin-top: 5px;
 }
-
-.filter-item {
-    background: #f7f7f7;
-    color: #24262a;
-    font-size: 12px;
-    padding: 2px 6px;
-    margin-bottom: 0;
+.filter-list .filter-item{
+    width: 25% ;
+    color: #333; 
+    margin-right: 0;
+    box-sizing: border-box;
     display: inline-block;
-    border-radius: 4px;
+    padding: 10px 5px 0 5px;
+    max-height: 115px;
+    text-align: center;
     position: relative;
-    margin-right: 8px;
-    border: 1px solid #f7f7f7;
 }
-
-.filter-item:last-child {
-    margin-right: 20px;
+.filter-item:before{
+    content: " ";
+    position: absolute;
+    left: calc(50% - 25px);
+    top: 0;
+    height: 2px;
+    width: 50px;
+    /* border-top: 4rpx solid #f3f3f3; */
+    color: #f3f3f3;
+    background-color: #ddd;
 }
-
-.filter-item.pressed {
-    color: white;
+.filter-item.active:before{
     background-color: #337ab7;
-    border: 1px solid #337ab7;
-    font-weight: 500;
+}
+.filter-list .filter-item text{
+    /* width:calc(100% - 32px); */
+    /* float: left; */
+    height: 100%;
+    text-align: left;
+    writing-mode:vertical-rl;
+    letter-spacing: 2px;
+}
+.filter-item .profile{
+    font-size: 0.7em;
+    color: #999;
 }

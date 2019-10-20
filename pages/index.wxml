@@ -14,15 +14,15 @@
     </view>
     <!-- nav list -->
     <view class="weui-flex nav-list">
-        <navigator url="poem/index" hover-class="navigator-hover" class="weui-flex__item">
+        <navigator url="poem/index" hover-class="navigator-hover" class="weui-flex__item nav-item">
             <image class="" src="../images/icon/poem.png"></image>
             诗词
         </navigator>
-        <navigator url="sentence/index" hover-class="navigator-hover" class="weui-flex__item">
+        <navigator url="sentence/index" hover-class="navigator-hover" class="weui-flex__item nav-item">
             <image class="" src="../images/icon/sentence.png"></image>
             名句
         </navigator>
-        <navigator url="poet/index" hover-class="navigator-hover" class="weui-flex__item">
+        <navigator url="poet/index" hover-class="navigator-hover" class="weui-flex__item nav-item">
             <image class="" src="../images/icon/poet.png"></image>
             诗人
         </navigator>
@@ -30,15 +30,15 @@
     <view class="divide"></view>
     <!-- filter -->
     <view class="section filter-section">
-        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-            <view class="weui-cell__bd">筛选：{{array[index]}}</view>
-            <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
-                <picker bindchange="bindPickerChange" value="{{index}}" range="{{category}}">
-                    <view class="picker">{{category[index]}}</view>
-                </picker>
+        <view class="filter-title">选集</view>
+        <view class="filter-list">
+            <view class="filter-item {{index ===idx ? 'active' : '' }}" wx:for="{{category}}" wx:for-index="idx" data-index="{{idx}}" bindtap="bindPickerChange" wx:key="{{idx}}">
+                <text>{{category[idx]}}</text>
+                <text class="profile">{{categoryPofile[idx]}}</text>
             </view>
         </view>
     </view>
+    <view class="divide"></view>
     <!-- poem list -->
     <view class="page list">
         <view class="page__bd">
