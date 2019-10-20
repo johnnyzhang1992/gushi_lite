@@ -41,7 +41,7 @@ Page({
             '朱孝臧编',
             '曾立国编',
         ],
-        index: 3,
+        index: 0,
         date: util.formatDateToMb(),
         hot: app.globalData.hot,
         animationData: {},

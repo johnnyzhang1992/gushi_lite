@@ -12,6 +12,7 @@
         </view>
         <image class="h-boat boat-img" src="../images/boat.png" animation="{{animationData}}"></image>
     </view>
+    <view class="divide"></view>
     <!-- nav list -->
     <view class="weui-flex nav-list">
         <navigator url="poem/index" hover-class="navigator-hover" class="weui-flex__item nav-item">
