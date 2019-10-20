@@ -108,7 +108,7 @@ Page({
     // 拆分词句
     splitSentence: function(sentence){
         // 替代特殊符号 。。
-        let pattern = new RegExp("[。.!]",'g');
+        let pattern = new RegExp("[。.、!]",'g');
         sentence = sentence.replace(/，/g,',');
         sentence = sentence.replace(pattern,',');
         return sentence.split(',');

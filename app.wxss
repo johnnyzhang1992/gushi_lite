@@ -90,7 +90,7 @@ textarea {
 .divide {
     height: 8px;
     width: 100%;
-    background: #efefef;
+    background: #f3f3f3;
 }
 
 .nav-breadcrumb {

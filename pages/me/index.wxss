@@ -119,3 +119,6 @@
   font-size: 12px;
   text-align: center;
 }
+.d10{
+  height: 10px;
+}

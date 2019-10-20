@@ -16,66 +16,60 @@
             </block>
         </view>
     </view>
-    <!-- <view class="divide"></view> -->
+    <view class="divide d10"></view>
     <view class="page list">
-        <view class="page__bd">
-            <view class="weui-cells weui-cells_after-title">
-                <navigator url="poem/index" class="weui-cell weui-cell_accessem" hover-class="weui-cell_active">
-                    <view class="weui-cell__hd"></view>
-                    <view class="weui-cell__bd">诗词收藏</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
-                        {{poem_count}}
-                    </view>
-                </navigator>
-                <navigator url="sentence/index" class="weui-cell weui-cell_accessem" hover-class="weui-cell_active">
-                    <view class="weui-cell__hd"></view>
-                    <view class="weui-cell__bd">名句收藏</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
-                        {{sentence_count}}
-                    </view>
-                </navigator>
-                <navigator url="author/index" class="weui-cell weui-cell_accessem" hover-class="weui-cell_active">
-                    <view class="weui-cell__hd"></view>
-                    <view class="weui-cell__bd">诗人收藏</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
-                        {{poet_count}}
-                    </view>
-                </navigator>
-            </view>
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="poem/index" class="weui-cell weui-cell_accessem" hover-class="weui-cell_active">
+                <view class="weui-cell__hd"></view>
+                <view class="weui-cell__bd">诗词收藏</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
+                    {{poem_count}}
+                </view>
+            </navigator>
+            <navigator url="sentence/index" class="weui-cell weui-cell_accessem" hover-class="weui-cell_active">
+                <view class="weui-cell__hd"></view>
+                <view class="weui-cell__bd">名句收藏</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
+                    {{sentence_count}}
+                </view>
+            </navigator>
+            <navigator url="author/index" class="weui-cell weui-cell_accessem" hover-class="weui-cell_active">
+                <view class="weui-cell__hd"></view>
+                <view class="weui-cell__bd">诗人收藏</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
+                    {{poet_count}}
+                </view>
+            </navigator>
         </view>
     </view>
     <view class="divide"></view>
     <view class="page list">
-        <view class="page__bd">
-            <view class="weui-cells weui-cells_after-title">
-                <view class="weui-cell weui-cell_access" bindtap="zanShang">
-                    <view class="weui-cell__hd"></view>
-                    <view class="weui-cell__bd">给程序员小哥哥赞赏</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px"></view>
-                </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_access" bindtap="zanShang">
+                <view class="weui-cell__hd"></view>
+                <view class="weui-cell__bd">给程序员小哥哥赞赏</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px"></view>
             </view>
         </view>
     </view>
     <view class="divide"></view>
     <!-- 用户和搜索数量，管理员可见 -->
     <view class="page list" wx-if='{{user_id == 10}}'>
-        <view class="page__bd">
-            <view class="weui-cells weui-cells_after-title">
-                <navigator url="user/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                    <view class="weui-cell__hd"></view>
-                    <view class="weui-cell__bd">用户数量(新增{{u_t_count}})</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
-                        {{u_count}}
-                    </view>
-                </navigator>
-                <navigator url="search/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                    <view class="weui-cell__hd"></view>
-                    <view class="weui-cell__bd">今日搜索</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
-                        {{s_count}}
-                    </view>
-                </navigator>
-            </view>
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="user/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd"></view>
+                <view class="weui-cell__bd">用户数量(新增{{u_t_count}})</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
+                    {{u_count}}
+                </view>
+            </navigator>
+            <navigator url="search/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd"></view>
+                <view class="weui-cell__bd">今日搜索</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
+                    {{s_count}}
+                </view>
+            </navigator>
         </view>
     </view>
     <ad unit-id="adunit-bf6445b29863936e"></ad>
