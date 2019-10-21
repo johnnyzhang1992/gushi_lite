@@ -2,7 +2,7 @@
 
 .weui-media-box__title {
   white-space: initial;
-  font-size: 32rpx;
+  font-size: 34rpx;
   /* line-height: 38rpx; */
   text-align: center;
   color: #666;
@@ -11,14 +11,14 @@
 }
 
 .weui-media-box {
-  padding: 10px 10px;
+  padding: 10px 10%;
 }
 
 .wyw {
   text-align: left;
   text-indent: 2em;
   margin-bottom: 5px;
-  line-height: 20px;
+  line-height: 22px;
 }
 
 .xu {
@@ -174,10 +174,6 @@
   font-size: 16px;
   color: #000;
   margin-bottom: 6px;
-}
-
-.tab-content {
-  /* margin-top: 5px; */
 }
 
 .scoll-h {

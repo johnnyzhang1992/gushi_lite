@@ -102,5 +102,18 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {}
+	onShareAppMessage: function () {
+		return {
+            title: this.data.name,
+            path: "/pages/homeList/index",
+            // imageUrl:'/images/poem.png',
+            success: function(res) {
+                // 转发成功
+                console.log("转发成功！");
+            },
+            fail: function(res) {
+                // 转发失败
+            }
+        };
+	}
 });
