@@ -1,0 +1,17 @@
+<!-- pages/poem/list/index.wxml -->
+<view class="container home-content">
+    <view class="top-section">
+        <h2 class="title">{{name}}</h2>
+        <view class="profile">{{profile}}</view>
+    </view>
+    <!-- poem list -->
+    <view class="page list">
+        <view class="page__bd">
+            <poemItemView datas="{{item}}" isSearch="{{false}}" wx:for="{{poems}}" wx:key="{{item.id}}" />
+        </view>
+    </view>
+    <view class="weui-loadmore" wx-if="{{show_load}}">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+</view>

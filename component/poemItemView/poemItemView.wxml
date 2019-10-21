@@ -2,7 +2,7 @@
     <view wx:if='{{!isSearch}}' class="poem_top">
         <view class="poem-title author">{{poem_item.title}}</view>
         <view class="poem-author">{{'['+poem_item.dynasty+'] '+poem_item.author}}</view>
-        <view class="poem-title content">{{poem_item.content}}</view>
+        <text decode="{{true}}" class="poem-title content">{{poem_item.content}}</text>
     </view>
     <!--关键词搜索-->
     <view wx:if='{{isSearch}}'>

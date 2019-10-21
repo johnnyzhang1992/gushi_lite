@@ -4,89 +4,102 @@ const app = getApp();
 const apiDomain = app.globalData.domain;
 let util = require("../utils/util.js");
 let http = require("../utils/http.js");
-let current_page = 1;
-let last_page = 1;
+
 let homeInterval = null;
 Page({
     data: {
         motto: "古诗文小助手",
         poems: [],
-        category: [
-            "诗经全集",
-            "楚辞全集",
-            "乐府诗集",
-            "宋词精选",
-            "古诗十九首",
-            "唐诗三百首",
-            "宋词三百首",
-            "古诗三百首"
+        categories: [
+            {
+                code: 'shijing',
+                name: '诗经全集',
+                profile: '最古老的诗集',
+            },
+            {
+                code: 'chuci',
+                name: '楚辞全集',
+                profile: '浪漫主义诗集',
+            },
+            {
+                code: 'yuefu',
+                name: '乐府诗集',
+                profile: '古代乐府诗集',
+            },
+            {
+                code: 'songci',
+                name: '宋词精选',
+                profile: '优秀宋词集锦',
+            },
+            {
+                code: 'shijiu',
+                name: '古诗十九首',
+                profile: '南朝萧统录',
+            },
+            {
+                code: 'tangshi',
+                name: '唐诗三百首',
+                profile: '蘅塘退士编',
+            },
+            {
+                code: 'songcisanbai',
+                name: '宋词三百首',
+                profile: '朱孝臧编',
+            },
+            {
+                code: 'sanbai',
+                name: '古诗三百首',
+                profile: '曾立国编',
+            },
         ],
-        categoryCode: [
-            "shijing",
-            "chuci",
-            "yuefu",,
-            "songci",
-            "shijiu",
-            "tangshi",
-            "songcisanbai",
-            "sanbai"
+        books: [
+            {
+                name: '小学诗词',
+                code: 'xiaoxue',
+                profile: '饮湖上初晴后雨'
+            },
+            {
+                name: '小学古文',
+                code: 'xiaoxuewyw',
+                profile: '孟母三迁'
+            },
+            {
+                name: '初中诗词',
+                code: 'chuzhong',
+                profile: '茅屋为秋风所破歌'
+            },
+            {
+                name: '初中古文',
+                code: 'chuzhongwyw',
+                profile: '湖心亭看雪'
+            },
+            {
+                name: '高中诗词',
+                code: 'gaozhong',
+                profile: '鱼我所欲也'
+            },
+            {
+                name: '高中古文',
+                code: 'gaozhongwyw',
+                profile: '孔雀东南飞'
+            },
         ],
-        categoryPofile: [
-            '最古老的诗集',
-            '浪漫主义诗集',
-            '古代乐府诗集',
-            '优秀宋词集锦',
-            '南朝萧统录',
-            '蘅塘退士编',
-            '朱孝臧编',
-            '曾立国编',
-        ],
-        index: 0,
         date: util.formatDateToMb(),
         hot: app.globalData.hot,
         animationData: {},
         show_load: true
     },
-    // 获取首页数据
-    getHomeData: function(name, type) {
-        let that = this;
-        let data = null;
-        let page = 1;
-        let url = apiDomain + "/getHomeData";
-        if (name && name != "") {
-            url = url + "?name=" + name;
-        }
-        if (type && type == "more") {
-            if (last_page < current_page) {
-                return false;
-            }
-            page = current_page + 1;
-            data = { page: page };
-        }
-        that.setData({
-            show_load: true
-        });
-        wx.showNavigationBarLoading();
-        http.request(url, data)
+    // 每日一诗
+    getRandomSentence: function() { 
+        const that = this;
+        let url = apiDomain + "/getRandomSentence";
+        http.request(url, null)
             .then(res => {
-                if (res.data && res.succeeded) {
-                    if (!app.globalData.hot) {
-                        app.globalData.hot = res.data.hot[0];
-                    }
+                if (res.data && res.succeeded) { 
                     that.setData({
-                        hot: app.globalData.hot
-                            ? app.globalData.hot
-                            : res.data.hot[0],
-                        poems:
-                            page > 1
-                                ? [...that.data.poems, ...res.data.poems.data]
-                                : res.data.poems.data,
-                        show_load: false
-                    });
-                    current_page = res.data.poems.current_page;
-                    last_page = res.data.poems.last_page;
-                } else {
-                    http.loadFailL();
+                        hot: res.data[0]
+                    })
+                    app.globalData.hot = res.data[0]
                 }
                 wx.hideLoading();
                 wx.hideNavigationBarLoading();
@@ -97,23 +110,38 @@ Page({
             });
     },
     // 监控筛选变化
-    bindPickerChange: function (e) {
-        let that = this;
-        this.setData({
-            index: e.currentTarget.dataset.index
+    pageRedirectTo: function (e) {
+        const { code, type } = e.currentTarget.dataset;
+        let item = {};
+        if (type === 'category') {
+            this.data.categories.forEach(element => {
+                if (element.code === code) {
+                    item = element;
+                }
+            });
+        } else { 
+            this.data.books.forEach(element => { 
+                if (element.code === code) { 
+                    item = element;
+                }
+            })
+        }
+        console.log(item)
+        wx.navigateTo({
+            url: `/pages/homeList/index?code=${item.code}&name=${item.name}&profile=${item.profile}`,
         });
-        current_page = 1;
-        that.getHomeData(that.data.categoryCode[that.data.index]);
     },
     onLoad: function() {
-        let that = this;
         wx.showLoading({
             title: "加载中"
         });
-        that.getHomeData(that.data.categoryCode[that.data.index]);
-    },
-    onReady: function() {
-        // Do something when page ready.
+        if (!this.data.hot) {
+            this.getRandomSentence();
+        } else { 
+            wx.hideLoading();
+                wx.hideNavigationBarLoading();
+        }
+        // that.getHomeData(that.data.categoryCode[that.data.index]);
     },
     onShow: function() {
         let that = this;
@@ -164,11 +192,6 @@ Page({
      */
     onPullDownRefresh: function() {
         wx.stopPullDownRefresh();
-    },
-    // 滚动到底部
-    onReachBottom: function() {
-        let that = this;
-        this.getHomeData(that.data.categoryCode[that.data.index], "more");
     },
     // 分享
     onShareAppMessage: function(res) {

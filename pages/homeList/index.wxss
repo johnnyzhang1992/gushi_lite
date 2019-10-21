@@ -1,0 +1,27 @@
+/* pages/poem/list/index.wxss */
+page {
+    width: 100%;
+    overflow-x: hidden;
+}
+.page.list {
+    padding-top: 0;
+    width: 100%;
+    background-color: inherit;
+}
+.home-content {
+    padding: 0;
+}
+.top-section {
+    font-size: 40rpx;
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+.top-section .title {
+    color: #333;
+}
+.top-section .profile {
+    color: #999;
+    font-size: 0.7em;
+}
