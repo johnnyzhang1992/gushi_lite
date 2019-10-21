@@ -3,7 +3,7 @@
 .weui-media-box__title {
   white-space: initial;
   font-size: 32rpx;
-  line-height: 38rpx;
+  /* line-height: 38rpx; */
   text-align: center;
   color: #666;
   display: block;
@@ -15,7 +15,7 @@
 }
 
 .wyw {
-  text-align: justify;
+  text-align: left;
   text-indent: 2em;
   margin-bottom: 5px;
   line-height: 20px;

@@ -56,17 +56,17 @@ Page({
             {
                 name: '小学诗词',
                 code: 'xiaoxue',
-                profile: '饮湖上初晴后雨'
+                profile: '静夜思'
             },
             {
                 name: '小学古文',
                 code: 'xiaoxuewyw',
-                profile: '孟母三迁'
+                profile: '揠苗助长'
             },
             {
                 name: '初中诗词',
                 code: 'chuzhong',
-                profile: '茅屋为秋风所破歌'
+                profile: '明月几时有'
             },
             {
                 name: '初中古文',
