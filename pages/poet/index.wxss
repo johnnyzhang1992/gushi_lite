@@ -23,9 +23,6 @@
 .list weui-cell_access{
     font-size: 12px;
 }
-.poem-item{
-    /* display: block; */
-}
 .poem-item view{
     width:100%;
     display: block;
@@ -106,7 +103,12 @@
 .nav-breadcrumb{
     margin-top: 0
 }
-
+.weui-search-bar__form{
+    border: none;
+}
+.weui-search-bar__form label{  
+    border: 1px solid #ddd;
+}
 .searchbar-result{
     margin-top: 0;
     font-size: 14px;
@@ -134,7 +136,7 @@
 .filter-section {
     background-color: white;
     height: auto;
-    padding: 3px 0 5px;
+    padding: 5px 0 10px 10px;
     border-bottom: 1px solid #f4f4f4;
     border-top: 1px solid #f4f4f4;
     overflow: hidden;
@@ -146,31 +148,37 @@
 }
 
 .filter-section .h4 {
-    font-size: 14px;
-    line-height: 25px;
+    color: #4c1f2c;
+    font-size: 36rpx;
+    line-height: 38rpxpx;
     background: #fff;
     border: none;
     margin-right:0;
     padding-right:0;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .filter-section scroll-view {
     width: 100%;
     overflow-x: auto;
-    padding-left: 10px;
 }
 
 .filter-item {
     background: #f7f7f7;
-    color: #24262a;
-    font-size: 12px;
-    padding: 2px 6px;
+    color: #fff;
+    font-size: 32rpx;
+    padding: 4px 10px;
     margin-bottom: 0;
     display: inline-block;
     border-radius: 4px;
     position: relative;
     margin-right: 8px;
-    border: 1px solid #f7f7f7;
+    writing-mode:vertical-rl;
+    letter-spacing: 2px;
+    /* display: table-cell; */
+    height: 51px;
+    text-align: center;
 }
 
 .filter-item:last-child {
@@ -179,7 +187,6 @@
 
 .filter-item.pressed {
     color: white;
-    background-color: #337ab7;
-    border: 1px solid #337ab7;
+    background-color: #337ab7!important;
     font-weight: 500;
 }

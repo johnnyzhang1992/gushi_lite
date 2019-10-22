@@ -17,21 +17,23 @@
     <!--filter-->
     <view class="filter"  wx:if='{{!isSearch}}'>
         <view class="section filter-section">
+            <view class="section__title h4">类型</view>
             <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
-                <view class="section__title h4 filter-item">类型：</view>
                 <view id="{{item.name}}"  class="filter-item {{t_index == index ? 'pressed' : ''}}" bindtap="filterPoem" wx:for="{{types}}"
                       data-id="{{index}}"
                       data-type="type"
+                      style="background:{{colors[index]}}"
                       wx:key="{{item}}">{{item}}
                 </view>
             </scroll-view>
         </view>
         <view class="section filter-section">
+            <view class="section__title h4">朝代</view>
             <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
-                <view class="section__title h4 filter-item">朝代：</view>
                 <view id="{{item.name}}"  class="filter-item {{d_index == index ? 'pressed' : ''}}" bindtap="filterPoem" wx:for="{{dynasty}}"
                       data-id="{{index}}"
                       data-type="dynasty"
+                      style="background:{{colors[index]}}"
                       wx:key="{{item}}">{{item}}
                 </view>
             </scroll-view>
