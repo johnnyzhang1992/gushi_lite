@@ -98,7 +98,6 @@ Page({
         });
     },
     // 跳转到搜索页面
-
     ngToSearch: function() {
         wx.switchTab({
             url: "/pages/search/index"

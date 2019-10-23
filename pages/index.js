@@ -152,6 +152,9 @@ Page({
             duration: 20000,
             timingFunction: "ease-in-out"
         });
+        wx.setNavigationBarTitle({
+            title: "首页 | 古诗文小助手"
+        });
         //动画的脚本定义必须每次都重新生成，不能放在循环外
         animation
             .translateX(winWidth - 50)

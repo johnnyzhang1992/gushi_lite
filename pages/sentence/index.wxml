@@ -16,47 +16,18 @@
     <view class="divide"></view>
     <!--filter-->
     <view class="filter" wx:if='{{!isSearch}}'>
-        <view class="section filter-section">
-            <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
-                <view class="section__title h4 filter-item">主题：</view>
-                <view id="{{'theme_'+index}}"  class="filter-item {{th_index == index ? 'pressed' : ''}}" bindtap="ThemeChange" wx:for="{{themes}}"
+        <view class="section filter-section" wx:for="{{categories}}" wx:for-item="_theme">
+            <view class="section__title h4">{{_theme.theme_name}}</view>
+            <view class="section__content" style="width:100%">
+                <view id="{{item.name}}"  class="filter-item" data-theme="{{_theme.theme_name}}" data-type="{{item}}" wx:for="{{_theme.types}}"
                       data-id="{{index}}"
-                      wx:key="{{item}}">{{item}}
+                      style="background:{{colors[index]}}"
+                      wx:key="{{item}}"
+                      bindtap="getStences"
+                      >
+                      {{item}}
                 </view>
-            </scroll-view>
-        </view>
-        <view class="section filter-section">
-            <scroll-view scroll-x="{{true}}" class="section__content" style="width:100%">
-                <view class="section__title h4 filter-item">类型：</view>
-                <view id="{{'type_'+index}}" class="filter-item {{ty_index == index ? 'pressed' : ''}}" bindtap="TypeChange" wx:for="{{types}}"
-                      data-id="{{index}}"
-                      wx:key="{{item}}">{{item}}
-                </view>
-            </scroll-view>
-        </view>
-    </view>
-    <!--nav list-->
-    <view class="nav-breadcrumb weui-flex">
-        <view class="item theme" wx-if='{{!isSearch}}'>{{themes[th_index]}}</view>
-        <view class="item type" wx-if='{{!isSearch}}'>{{types[ty_index]}}</view>
-        <view class="item type" wx-if='{{isSearch}}'>{{_keyWord}}</view>
-        <view class="item total">共 {{total}} 条结果</view>
-    </view>
-    <!-- sentence list-->
-    <view class="page__bd">
-        <view class="weui-cells weui-cells_after-title">
-            <navigator url="/pages/sentence/detail/index?id={{item.id}}" hover-class="navigator-hover" class="poem-item" wx:for="{{poems}}" wx:key="{{item.id}}">
-                <view wx:if="{{isSearch}}">
-                    <view class="search-result-item">
-                        <searchHighlightTextView
-                                class="result-item"
-                                datas='{{item}}'
-                        />
-                    </view>
-                </view>
-                <view class="poem-title"  wx:if="{{!isSearch}}">{{item.title}}</view>
-                <view class="poem-author">{{'《'+item.poem_title +'》 '+item.author}}</view>
-            </navigator>
+            </view>
         </view>
     </view>
 </view>

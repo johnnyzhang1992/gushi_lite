@@ -12,7 +12,7 @@
         </view>
         <view class="weui-search-bar__cancel-btn" bindtap="wxSearchConfirm">
             <text wx:if="{{wxSearchData.value.length>0}}" data-key='search'>搜索</text>
-            <text wx:else data-key='back'>返回</text>
+            <!-- <text wx:else data-key='back'>返回</text> -->
         </view>
     </view>
     <!--搜索结果部分-->
@@ -104,7 +104,7 @@
                         </navigator>
                     </block>
                     <view class="weui-cells weui-cells_after-title" wx-if='{{sentences.total>3}}'>
-                        <navigator url="/pages/sentence/index?type=sentence&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <navigator url="/pages/sentence/list/index?isSearch=true&keyWord={{keyWord}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                             <view class="weui-cell__hd"></view>
                             <view class="weui-cell__bd">查看更多结果</view>
                             <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">{{sentences.total}}</view>

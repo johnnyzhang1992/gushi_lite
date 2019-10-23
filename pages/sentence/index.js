@@ -1,213 +1,185 @@
 // pages/poem/sentence/index.js
 const app = getApp();
-let http = require('../../utils/http.js');
-let current_page = 1;
-let last_page = 1;
-let _types = [];
 Page({
     /**
      * 页面的初始数据
      */
     data: {
-        poems: [],
-        inputShowed: false,
-        themes: [],
-        types: [],
-        th_index: 0,
-        ty_index: 0,
-        total: 0,
-        isSearch: false,
-        _keyWord: null
+        categories: [
+            {
+                theme_name: "抒情",
+                types: [
+                    "全部",
+                    "爱情",
+                    "友情",
+                    "离别",
+                    "思念",
+                    "思乡",
+                    "伤感",
+                    "孤独",
+                    "闺怨",
+                    "悼亡",
+                    "怀古",
+                    "爱国",
+                    "感恩"
+                ]
+            },
+            {
+                theme_name: "四季",
+                types: ["全部", "春天", "夏天", "秋天", "冬天"]
+            },
+            {
+                theme_name: "山水",
+                types: [
+                    "全部",
+                    "庐山",
+                    "泰山",
+                    "江河",
+                    "长江",
+                    "黄河",
+                    "西湖",
+                    "瀑布"
+                ]
+            },
+            {
+                theme_name: "天气",
+                types: [
+                    "全部",
+                    "写风",
+                    "写云",
+                    "写雨",
+                    "写雪",
+                    "彩虹",
+                    "太阳",
+                    "月亮",
+                    "星星"
+                ]
+            },
+            {
+                theme_name: "人物",
+                types: ["全部", "女子", "父亲", "母亲", "老师", "儿童"]
+            },
+            {
+                theme_name: "人生",
+                types: [
+                    "全部",
+                    "励志",
+                    "哲理",
+                    "青春",
+                    "时光",
+                    "梦想",
+                    "读书",
+                    "战争"
+                ]
+            },
+            {
+                theme_name: "生活",
+                types: ["全部", "乡村", "田园", "边塞", "写桥"]
+            },
+            {
+                theme_name: "节日",
+                types: [
+                    "全部",
+                    "春节",
+                    "元宵节",
+                    "寒食节",
+                    "清明节",
+                    "端午节",
+                    "七夕节",
+                    "中秋节",
+                    "重阳节"
+                ]
+            },
+            {
+                theme_name: "动物",
+                types: ["全部", "写鸟", "写马", "写猫"]
+            },
+            {
+                theme_name: "植物",
+                types: [
+                    "全部",
+                    "梅花",
+                    "梨花",
+                    "荷花",
+                    "菊花",
+                    "柳树",
+                    "叶子",
+                    "竹子"
+                ]
+            },
+            {
+                theme_name: "食物",
+                types: ["全部", "写酒", "写茶", "荔枝"]
+            }
+        ],
+        colors: [
+            "#41395b",
+            "#6f8657",
+            "#94232d",
+            "#c45a65",
+            "#4c1f24",
+            // "#2376b7",
+            "#0f1423",
+            "#f03752",
+            "#4f383e",
+            "#ccccd6",
+            "#41395b",
+            "#6f8657",
+            "#94232d",
+            "#c45a65",
+            "#4c1f24",
+            // "#2376b7",
+            "#0f1423",
+            "#f03752",
+            "#4f383e",
+            "#ccccd6"
+        ]
     },
     // 跳转到搜索页面
-    ngToSearch: function () {
+    ngToSearch: function() {
+        wx.switchTab({
+            url: "/pages/search/index"
+        });
+    },
+    
+    getStences: function(e) {
+        let theme = e.currentTarget.dataset.theme;
+        let type = e.currentTarget.dataset.type;
         wx.navigateTo({
-            url: '/pages/search/index'
+            url: `/pages/sentence/list/index?isSearch=false&theme=${theme}&type=${type}`
         });
     },
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-        let that = this;
-        let _url = '';
-        wx.showLoading({
-            title: '加载中',
-        });
-        if (options.type) {
-            wx.setNavigationBarTitle({
-                title: options.keyWord
-            });
-        } else {
-            wx.setNavigationBarTitle({
-                title: '热门名句'
-            });
-        }
-        if (options.type) {
-            _url = app.globalData.url + '/wxxcx/getSentenceData?keyWord=' + options.keyWord;
-        } else {
-            _url = app.globalData.url + '/wxxcx/getSentenceData'
-        }
-        that.setData({
-            isSearch: options.type ? true : false,
-            _keyWord: options.keyWord ? options.keyWord : null
-        });
-        http.request(_url, undefined).then(res => {
-            if (res.data && res.succeeded) {
-                console.log('----------success------------');
-                if(options.type && res.data.poems.total){
-                    res.data.poems.data.map(item=>{
-                        item.key = options.keyWord;
-                        item.name = item.title;
-                        return item;
-                    })
-                }
-                that.setData({
-                    poems: res.data.poems.data,
-                    themes: res.data.themes,
-                    types: res.data.types[0].types,
-                    total: res.data.poems.total,
-                });
-                _types = res.data.types;
-                current_page = res.data.poems.current_page;
-                last_page = res.data.poems.last_page;
-                wx.hideLoading();
-            } else {
-                http.loadFailL();
-            }
-        });
-    },
-    // 获取名句数据
-    getSentenceData: function (page) {
-        let that = this;
-        let data = {
-            theme: that.data.themes[that.data.th_index],
-            type: that.data.types[that.data.ty_index],
-            page: page ? page : 1
-        };
-        // console.log(data);
-        let url = app.globalData.url + '/wxxcx/getSentenceData';
-        if(that.data.isSearch){
-            url = url+'?keyWord='+that.data._keyWord;
-        }
-        http.request(url, data).then(res => {
-            wx.hideNavigationBarLoading();
-            if (res.data && res.succeeded) {
-                console.log('----------success------------');
-                if(that.data.isSearch){
-                    res.data.poems.data.map(item=>{
-                        item.key = that.data._keyWord;
-                        item.name = item.title;
-                        return item;
-                    })
-                }
-                that.setData({
-                    poems: [...that.data.poems,...res.data.poems.data],
-                    total: res.data.poems.total
-                });
-                current_page = res.data.poems.current_page;
-                last_page = res.data.poems.last_page;
-                wx.hideLoading();
-            } else {
-                http.loadFailL();
-            }
-        })
-    },
-    // 检测主题变化
-    ThemeChange: function (e) {
-        let that = this;
-        let theme_index = e.currentTarget.dataset.id ? e.currentTarget.dataset.id : 0;
-        this.setData({
-            th_index: theme_index,
-            types: _types[theme_index>0 ? theme_index-1 : 0].types,
-            ty_index: 0,
-            poems: []
-        });
+    onLoad: function(options) {
         wx.setNavigationBarTitle({
-            title: that.data.themes[theme_index]
+            title: "热门名句"
         });
-        wx.showNavigationBarLoading();
-        that.getSentenceData(1);
-    },
-    // 检测类型变化
-    TypeChange: function (e) {
-        let that = this;
-        let type_index= e.currentTarget.dataset.id ? e.currentTarget.dataset.id: 0;
-        this.setData({
-            ty_index: type_index,
-            poems: []
-        });
-        wx.setNavigationBarTitle({
-            title: that.data.themes[that.data.th_index] + ' | ' + that.data.types[type_index]
-        });
-        wx.showNavigationBarLoading();
-        that.getSentenceData(1);
-    },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
-        wx.stopPullDownRefresh()
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-        wx.showNavigationBarLoading();
-        let that = this;
-        let page = current_page + 1;
-        if (current_page > last_page) {
-            wx.hideNavigationBarLoading();
-            return false;
-        } else {
-            that.getSentenceData(page);
-        }
+    onPullDownRefresh: function() {
+        wx.stopPullDownRefresh();
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
         return {
-            title: '名句赏析',
-            path: '/pages/sentence/index',
+            title: "名句赏析",
+            path: "/pages/sentence/index",
             // imageUrl: '/images/poem.png',
-            success: function (res) {
+            success: function(res) {
                 // 转发成功
-                console.log('转发成功！')
+                console.log("转发成功！");
             },
-            fail: function (res) {
+            fail: function(res) {
                 // 转发失败
             }
-        }
+        };
     }
 });

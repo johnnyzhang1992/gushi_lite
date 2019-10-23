@@ -28,7 +28,7 @@ Page({
      */
     onLoad: function(options) {
         wx.setNavigationBarTitle({
-            title: "搜索"
+            title: "搜索 | 古诗文小助手"
         });
         // 2 搜索栏初始化
         let that = this;

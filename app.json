@@ -18,7 +18,8 @@
     "pages/me/log/index",
     "pages/me/search/index",
     "pages/sentence/detail/index",
-    "pages/me/sentence/index"
+    "pages/me/sentence/index",
+    "pages/sentence/list/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

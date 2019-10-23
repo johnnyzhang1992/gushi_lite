@@ -1,6 +1,5 @@
 {
     "usingComponents": {
-        "searchHighlightTextView": "../../component/searchHighlightTextView/searchHighlightTextView"
     },
     "navigationBarTitleText": "名句"
 }
