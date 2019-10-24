@@ -2,8 +2,8 @@
 
 .weui-media-box__title {
   white-space: initial;
-  font-size: 34rpx;
-  /* line-height: 38rpx; */
+  font-size: 36rpx;
+  line-height: 40rpx;
   text-align: center;
   color: #666;
   display: block;
@@ -11,14 +11,13 @@
 }
 
 .weui-media-box {
-  padding: 10px 10%;
+  padding: 10px 8%;
 }
 
 .wyw {
   text-align: left;
   text-indent: 2em;
   margin-bottom: 5px;
-  line-height: 22px;
 }
 
 .xu {
@@ -26,7 +25,7 @@
   color: #999;
   text-align: center;
   text-indent: 2em;
-  font-size: 28rpx;
+  font-size: 30rpx;
   text-overflow: normal;
   display: block;
 }
@@ -123,7 +122,7 @@
   content: "";
   display: block;
   height: 2px;
-  width: 32px;
+  width: 100%;
   background: #337ab7;
   position: absolute;
   bottom: 0;
@@ -185,12 +184,13 @@
 }
 
 .tab-list-content {
-  padding: 10px 3%;
+  padding: 10px 8%;
   width: 94%;
+  box-sizing: border-box;
 }
 
 .tab-list-content .item {
-  font-size: 13px;
+  font-size: 32rpx;
   color: #999;
   text-align: justify;
   display: block;
