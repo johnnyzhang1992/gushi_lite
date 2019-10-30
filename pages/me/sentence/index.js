@@ -71,7 +71,15 @@ Page({
         UPDATE_SENTENCE_COLLECT('get', data)
             .then(res => {
                 if (res.data && res.succeeded) {
-                    wx.startPullDownRefresh();
+                    const { sentences } = this.data;
+                    const newSentences = sentences.map(item => { 
+                        if (item.like_id !== parseInt(id)) { 
+                            return item;
+                        }
+                    })
+                    this.setData({
+                        sentences: newSentences
+                    })
                 } else {
                     LOADFAIL('删除失败');
                 }
