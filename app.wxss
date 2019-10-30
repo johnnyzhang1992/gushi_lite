@@ -1,23 +1,26 @@
 /**app.wxss**/
-
-.container {
+@import 'style/weui.wxss';
+page {
+    color: #1a1a1a;
+    font-size: 36rpx;
+    font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+    /* color: #666; */
+    letter-spacing: 0.5px;
+     background: #f6f6f6;
+    -webkit-tap-highlight-color: rgba(26,26,26,0);
+}
+.container{
     height: 100%;
     display: flex;
+    background: #fff;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 100rpx 0;
     box-sizing: border-box;
 }
-@import 'style/weui.wxss';
-
-page {
-    background-color: #fff;
-    font-size: 36rpx;
-    font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
-    /*border-bottom:1px solid #ddd;*//* margin-bottom:10px; */
-    color: #666;
-    letter-spacing: 0.5px;
+.page{
+    background: #fff;
 }
 
 .page__hd {
