@@ -1,6 +1,10 @@
 // pages/me/sentence/index.js
 const app = getApp();
-import { GET_COLLECT_SENTENCE,LOADFAIL } from "../../../apis/request";
+import {
+    GET_COLLECT_SENTENCE,
+    LOADFAIL,
+    UPDATE_SENTENCE_COLLECT
+} from "../../../apis/request";
 let current_page = 1;
 let last_page = 1;
 Page({
@@ -24,17 +28,7 @@ Page({
             user_id: user_id
         });
     },
-    onLoad: function() {
-        let that = this;
-        this.getUserId();
-        wx.showLoading({
-            title: "加载中"
-        });
-        wx.setNavigationBarTitle({
-            title: "名句收藏"
-        });
-        that.getCollectSentence(0);
-    },
+    // 获取收藏名句列表
     getCollectSentence: function(page) {
         let that = this;
         if (page > last_page) {
@@ -57,16 +51,48 @@ Page({
                     current_page = res.data.data.current_page;
                     last_page = res.data.data.last_page;
                 } else {
-                    LOADFAIL()
+                    LOADFAIL();
                 }
                 wx.hideLoading();
                 wx.hideNavigationBarLoading();
             })
             .catch(error => {
                 console.log(error);
-                LOADFAIL()
+                LOADFAIL();
             });
     },
+    // 删除收藏的名句
+    updateCollectSentence: function(e) {
+        let id = e.currentTarget.dataset.id;
+        const data = {
+            id,
+            user_id: app.globalData.userInfo.user_id
+        }
+        UPDATE_SENTENCE_COLLECT('get', data)
+            .then(res => {
+                if (res.data && res.succeeded) {
+                    wx.startPullDownRefresh();
+                } else {
+                    LOADFAIL('删除失败');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                LOADFAIL();
+            });
+    },
+    onLoad: function() {
+        let that = this;
+        this.getUserId();
+        wx.showLoading({
+            title: "加载中"
+        });
+        wx.setNavigationBarTitle({
+            title: "名句收藏"
+        });
+        that.getCollectSentence(0);
+    },
+
     onReady: function() {
         // Do something when page ready.
     },

@@ -3,7 +3,7 @@
     <view class="page list">
         <view class="page__bd">
             <view class="weui-cells__title">{{a_total}} 收藏</view>
-            <mp-slideview buttons="{{slideButtons}}" bindbuttontap="slideButtonTap" wx:for="{{sentences}}" wx:key="{{item.id}}">
+            <mp-slideview buttons="{{slideButtons}}" bindbuttontap="updateCollectSentence" data-id="{{item.like_id}}" wx:for="{{sentences}}" wx:key="{{item.id}}">
                 <navigator url="/pages/sentence/detail/index?id={{item.like_id}}" hover-class="navigator-hover" class="weui-cell poem-item">
                     <view class="poem-title">{{item.title}}</view>
                     <view class="poem-author">{{item.origin}}</view>

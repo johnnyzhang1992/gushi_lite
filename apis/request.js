@@ -44,6 +44,7 @@ export const LOADFAIL = msg => {
 //-----------------
 //------ 个人中心 --
 //-----------------
+
 /**
  * 获取收藏的名句列表
  * @param {get} method
@@ -52,6 +53,7 @@ export const LOADFAIL = msg => {
 export const GET_COLLECT_SENTENCE = (method, data) => {
     return Request(`/wxxcx/getCollect/${data.user_id}`, data, method);
 };
+
 /**
  * 更新名句收藏状态
  * @param {get} method
