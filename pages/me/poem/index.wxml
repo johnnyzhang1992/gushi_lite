@@ -1,13 +1,18 @@
-<!--pages/me/poem/index.wxml-->
+<!-- pages/me/poem/index.wxml -->
 <view class="container">
     <view class="page list">
         <view class="page__bd">
             <view class="weui-cells__title">{{p_total}} 收藏</view>
-            <navigator url="/pages/poem/detail/index?id={{item.poem_id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="id">
-                <view class="poem-title">{{item.title}} <view class="poem-author">{{'['+item.dynasty+'] '+item.author}}</view></view>
-                <view class="poem-title">{{item.content}}</view>
-                <view class="collect">收藏时间：{{item.updated_at}}</view>
-            </navigator>
+            <mp-slideview buttons="{{slideButtons}}" bindbuttontap="updateCollectPoem" data-id="{{item.like_id}}" wx:for="{{poems}}" wx:key="{{item.id}}">
+                <navigator url="/pages/poem/detail/index?id={{item.poem_id}}" hover-class="navigator-hover" class="weui-cell poem-item">
+                    <view class="poem-title">
+                        {{item.title}}
+                        <view class="poem-author">{{'['+item.dynasty+'] '+item.author}}</view>
+                    </view>
+                    <view class="poem-title">{{item.content}}</view>
+                    <view class="collect">收藏时间：{{item.updated_at}}</view>
+                </navigator>
+            </mp-slideview>
         </view>
     </view>
 </view>

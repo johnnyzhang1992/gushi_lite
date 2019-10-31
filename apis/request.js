@@ -46,9 +46,9 @@ export const LOADFAIL = msg => {
 //-----------------
 
 /**
- * 获取收藏的名句列表
- * @param {get} method
- * @param {user_id} data
+ * 获取我的名句收藏列表
+ * @param {String} method
+ * @param {Object} data
  */
 export const GET_COLLECT_SENTENCE = (method, data) => {
     return Request(`/wxxcx/getCollect/${data.user_id}`, data, method);
@@ -56,9 +56,27 @@ export const GET_COLLECT_SENTENCE = (method, data) => {
 
 /**
  * 更新名句收藏状态
- * @param {get} method
- * @param {useri_id,wx_token} data
+ * @param {String} method
+ * @param {Object} data
  */
 export const UPDATE_SENTENCE_COLLECT = (method, data) => {
     return Request(`/wxxcx/${data.id}/collect/sentence`, data, method);
+};
+
+/**
+ * 获取我的诗人收藏列表
+ * @param {String} method
+ * @param {Object} data
+ */
+export const GET_COLLECT_POEM = (method, data) => {
+    return Request(`/wxxcx/getCollect/${data.user_id}`, data, method);
+};
+
+/**
+ * 更新诗词收藏状态
+ * @param {*} method
+ * @param {*} data
+ */
+export const UPDATE_POEM_COLLECT = (method, data) => {
+    return Request(`/wxxcx/${data.id}/collect/poem`, data, method);
 };

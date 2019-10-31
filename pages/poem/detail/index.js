@@ -575,7 +575,8 @@ Page({
         } else {
             let data = {
                 user_id: that.data.user_id,
-                wx_token: wx.getStorageSync("wx_token")
+                wx_token: wx.getStorageSync("wx_token"),
+                id: that.data.poem.id
             };
             http.request(
                 app.globalData.url +

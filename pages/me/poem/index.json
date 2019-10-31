@@ -1,1 +1,4 @@
-{}
+{"usingComponents": {
+    "mp-slideview": "../../../component/slideview/slideview"
+  }
+}
