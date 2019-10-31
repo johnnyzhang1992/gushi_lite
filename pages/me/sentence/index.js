@@ -72,7 +72,7 @@ Page({
             .then(res => {
                 if (res.data && res.succeeded) {
                     const { sentences } = this.data;
-                    const newSentences = sentences.map(item => { 
+                    const newSentences = sentences.filter(item => { 
                         if (item.like_id !== parseInt(id)) { 
                             return item;
                         }
