@@ -7,26 +7,31 @@ const app = getApp();
 const BaseUrl = app.globalData.url;
 
 // 封装小程序远程请求函数
-function Request(url, params, method) {
-    let _data = params || {};
-    _data.openId = wx.getStorageSync("user").openId;
-    _data.wx_token = wx.getStorageSync("wx_token");
+function Request(url, params = {}, method) {
+    let data = {
+        ...params,
+        openId: wx.getStorageSync("user").openId,
+        wx_token: wx.getStorageSync("wx_token")
+    };
     return new Promise((resolve, reject) => {
         //结果以Promise形式返回
         wx.request({
             url: BaseUrl + url,
-            data: _data,
+            data: data,
             type: method || "GET",
             success: res => {
                 if (res.data) {
-                    resolve(Object.assign(res, { succeeded: true })); //成功失败都resolve，并通过succeeded字段区分
+                    resolve(Object.assign(res, { succeeded: true }));
+                    //成功失败都resolve，并通过succeeded字段区分
                 } else {
-                    reject(Object.assign(res, { succeeded: false })); //成功失败都resolve，并通过succeeded字段区分
+                    reject(Object.assign(res, { succeeded: false }));
+                    //成功失败都resolve，并通过succeeded字段区分
                 }
             },
             fail: error => {
                 console.log(error);
-                reject(Object.assign(error, { succeeded: false })); //成功失败都resolve，并通过succeeded字段区分
+                reject(Object.assign(error, { succeeded: false }));
+                //成功失败都resolve，并通过succeeded字段区分
             }
         });
     });
@@ -35,7 +40,7 @@ function Request(url, params, method) {
 // 加载失败
 export const LOADFAIL = msg => {
     wx.showToast({
-        title: msg && msg != "" ? msg : "加载失败",
+        title: msg || "加载失败",
         icon: "none",
         duration: 2000
     });
