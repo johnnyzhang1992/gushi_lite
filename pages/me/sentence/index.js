@@ -34,7 +34,7 @@ Page({
         if (page > last_page) {
             return false;
         }
-        GET_COLLECT_SENTENCE("get", {
+        GET_COLLECT_SENTENCE("GET", {
             user_id: that.data.user_id,
             page: page + 1,
             type: "sentence"
@@ -70,7 +70,7 @@ Page({
         }
         UPDATE_SENTENCE_COLLECT('get', data)
             .then(res => {
-                if (res.data && res.succeeded) {
+                if (res.data && res.succeeded && !res.data.status) {
                     const { sentences } = this.data;
                     const newSentences = sentences.filter(item => { 
                         if (item.like_id !== parseInt(id)) { 

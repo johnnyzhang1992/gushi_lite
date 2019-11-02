@@ -1,13 +1,26 @@
 // pages/me/author/index.js
 const app = getApp();
-let http = require('../../../utils/http.js');
+import {
+    LOADFAIL,
+    UPDATE_POET_COLLECT,
+    GET_COLLECT_POET
+} from "../../../apis/request";
 let current_page = 1;
 let last_page = 1;
+
 Page({
     data: {
         user_id: 0,
         poets: [],
-        a_total: 0
+        a_total: 0,
+        slideButtons: [
+            {
+                type: "warn",
+                text: "删除",
+                extClass: "test",
+                src: "" // icon的路径
+            }
+        ]
     },
     // 获取用户id
     getUserId: function () {
@@ -23,7 +36,12 @@ Page({
         if (page > last_page) {
             return false;
         }
-        http.request(app.globalData.url + '/wxxcx/getCollect/' + that.data.user_id , { page: page + 1,type:'author' }).then(res => {
+        let data = {
+            user_id: that.data.user_id,
+            page: page + 1,
+            type: 'author' 
+        }
+        GET_COLLECT_POET("GET",data).then(res => {
             if (res.data) {
                 that.setData({
                     poets: [...that.data.poets,...res.data.data.data],
@@ -32,14 +50,42 @@ Page({
                 current_page = res.data.data.current_page;
                 last_page = res.data.data.last_page
             } else {
-                http.loadFailL();
+                LOADFAIL();
             }
             wx.hideLoading();
             wx.hideNavigationBarLoading()
         }).catch(error => {
             console.log(error);
-            http.loadFailL();
+            LOADFAIL();
         });
+    },
+    // 更新收藏状态
+    updateCollectPoet: function(e) {
+        let id = e.currentTarget.dataset.id;
+        const data = {
+            id,
+            user_id: app.globalData.userInfo.user_id
+        }
+        UPDATE_POET_COLLECT('get', data)
+            .then(res => {
+                if (res.data && res.succeeded && !res.data.status) {
+                    const { poets } = this.data;
+                    const newPoets = poets.filter(item => { 
+                        if (item.like_id !== parseInt(id)) { 
+                            return item;
+                        }
+                    })
+                    this.setData({
+                        poets: newPoets
+                    })
+                } else {
+                    LOADFAIL('删除失败');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                LOADFAIL();
+            });
     },
     onLoad: function () {
         this.getUserId();

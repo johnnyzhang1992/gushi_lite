@@ -70,7 +70,7 @@ Page({
         const { poems } = this.data;
         UPDATE_POEM_COLLECT("get", data)
             .then(res => {
-                if (res.data && res.succeeded) {
+                if (res.data && res.succeeded && !res.data.status) {
                     const Poems = poems.filter(item => {
                         return item.like_id !== id;
                     });

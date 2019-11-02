@@ -65,11 +65,11 @@ export const GET_COLLECT_SENTENCE = (method, data) => {
  * @param {Object} data
  */
 export const UPDATE_SENTENCE_COLLECT = (method, data) => {
-    return Request(`/wxxcx/${data.id}/collect/sentence`, data, method);
+    return Request(`/wxxcx/updateCollect/sentence`, data, method);
 };
 
 /**
- * 获取我的诗人收藏列表
+ * 获取我的诗词收藏列表
  * @param {String} method
  * @param {Object} data
  */
@@ -79,9 +79,27 @@ export const GET_COLLECT_POEM = (method, data) => {
 
 /**
  * 更新诗词收藏状态
- * @param {*} method
- * @param {*} data
+ * @param {String} method
+ * @param {Object} data
  */
 export const UPDATE_POEM_COLLECT = (method, data) => {
-    return Request(`/wxxcx/${data.id}/collect/poem`, data, method);
+    return Request(`/wxxcx/updateCollect/poem`, data, method);
 };
+
+/**
+ * 获取我的诗词作者人收藏列表
+ * @param {String} method 
+ * @param {Object} data 
+ */
+export const GET_COLLECT_POET = (method, data) => { 
+    return Request(`/wxxcx/getCollect/${data.user_id}`, data, method);
+}
+
+/**
+ * 更新诗人收藏状态
+ * @param {String} method 
+ * @param {Object} data 
+ */
+export const UPDATE_POET_COLLECT = (method, data) => { 
+    return Request(`/wxxcx/updateCollect/author`, data, method);
+}
