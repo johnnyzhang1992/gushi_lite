@@ -146,7 +146,7 @@
                 </view>
             </view>
         </view>
-        <view class="divide"></view>
+        <view class="divide" wx:if="{{!closeTips}}"></view>
         <view class="tip-list" wx:if="{{!closeTips}}">
             <view class="wxSearchHistoryItem title">
                 <text class="wxSearchHistoryItemTitle">搜索提示</text>

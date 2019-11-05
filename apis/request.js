@@ -51,55 +51,41 @@ export const LOADFAIL = msg => {
 //-----------------
 
 /**
- * 获取我的名句收藏列表
+ * 获取我的收藏信息(诗词、名句、诗人)
  * @param {String} method
  * @param {Object} data
  */
-export const GET_COLLECT_SENTENCE = (method, data) => {
+export const GET_USER_COLLECT = (method, data) => {
     return Request(`/wxxcx/getCollect/${data.user_id}`, data, method);
 };
 
 /**
- * 更新名句收藏状态
+ * 更新收藏状态
  * @param {String} method
  * @param {Object} data
  */
-export const UPDATE_SENTENCE_COLLECT = (method, data) => {
-    return Request(`/wxxcx/updateCollect/sentence`, data, method);
+export const UPDATE_USER_COLLECT = (method, data) => {
+    return Request(`/wxxcx/updateCollect/${data.type}`, data, method);
+};
+
+//-----------------
+//------ 搜索部分 --
+//-----------------
+
+/**
+ * 获取搜索热词
+ * @param {*} method
+ * @param {*} data
+ */
+export const GET_HOT_SEARCH = (method, data) => {
+    return Request(`/wxxcx/getsHotSearch`, data, method);
 };
 
 /**
- * 获取我的诗词收藏列表
- * @param {String} method
- * @param {Object} data
+ * 根据关键字搜索
+ * @param {*} method
+ * @param {*} data
  */
-export const GET_COLLECT_POEM = (method, data) => {
-    return Request(`/wxxcx/getCollect/${data.user_id}`, data, method);
+export const GET_SEARCH = (method, data) => {
+    return Request(`/wxxcx/search/${data.key}`, data, method);
 };
-
-/**
- * 更新诗词收藏状态
- * @param {String} method
- * @param {Object} data
- */
-export const UPDATE_POEM_COLLECT = (method, data) => {
-    return Request(`/wxxcx/updateCollect/poem`, data, method);
-};
-
-/**
- * 获取我的诗词作者人收藏列表
- * @param {String} method 
- * @param {Object} data 
- */
-export const GET_COLLECT_POET = (method, data) => { 
-    return Request(`/wxxcx/getCollect/${data.user_id}`, data, method);
-}
-
-/**
- * 更新诗人收藏状态
- * @param {String} method 
- * @param {Object} data 
- */
-export const UPDATE_POET_COLLECT = (method, data) => { 
-    return Request(`/wxxcx/updateCollect/author`, data, method);
-}

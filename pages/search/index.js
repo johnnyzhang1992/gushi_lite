@@ -1,8 +1,11 @@
 // pages/search/index.js
-const app = getApp();
 let WxSearch = require("../../wxSearchView/wxSearchView.js");
 let util = require("../../utils/util");
-let http = require("../../utils/http");
+import {
+    LOADFAIL,
+    GET_HOT_SEARCH,
+    GET_SEARCH
+} from "../../apis/request";
 Page({
     /**
      * 页面的初始数据
@@ -32,7 +35,7 @@ Page({
         });
         // 2 搜索栏初始化
         let that = this;
-        let hotKey = null;
+        
         that.setData({
             keyWord: options && options.keyWord ? options.keyWord : ""
         });
@@ -42,7 +45,17 @@ Page({
                 closeTips: true
             });
         }
-        http.request(app.globalData.domain + "/getsHotSearch", undefined)
+        // this.getHotSearch();
+    },
+
+    onShow: function () {
+        this.getHotSearch(); 
+    },
+
+    getHotSearch: function() {
+        let hotKey = null;
+        let that = this;
+        GET_HOT_SEARCH('GET', {})
             .then(res => {
                 if (res && res.succeeded) {
                     hotKey = res.data;
@@ -57,7 +70,7 @@ Page({
             })
             .catch(error => {
                 console.log(error);
-                http.loadFailL();
+                LOADFAIL()
             });
     },
     // 3 转发函数，固定部分，直接拷贝即可
@@ -76,7 +89,10 @@ Page({
         this.setData({
             keyWord: value
         });
-        http.request(app.globalData.domain + "/search/" + value, undefined)
+        const data = {
+            key: value
+        }
+        GET_SEARCH('GET',data)
             .then(res => {
                 if (res.data && res.succeeded) {
                     that.setData({
@@ -90,7 +106,7 @@ Page({
             })
             .catch(error => {
                 console.log(error);
-                http.loadFailL();
+                LOADFAIL();
             });
     },
 
@@ -106,7 +122,8 @@ Page({
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
+        this.getHotSearch()
         wx.stopPullDownRefresh();
     },
 

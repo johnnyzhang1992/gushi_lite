@@ -1,9 +1,9 @@
 // pages/me/sentence/index.js
 const app = getApp();
 import {
-    GET_COLLECT_SENTENCE,
+    GET_USER_COLLECT,
     LOADFAIL,
-    UPDATE_SENTENCE_COLLECT
+    UPDATE_USER_COLLECT
 } from "../../../apis/request";
 let current_page = 1;
 let last_page = 1;
@@ -34,7 +34,7 @@ Page({
         if (page > last_page) {
             return false;
         }
-        GET_COLLECT_SENTENCE("GET", {
+        GET_USER_COLLECT("GET", {
             user_id: that.data.user_id,
             page: page + 1,
             type: "sentence"
@@ -66,9 +66,10 @@ Page({
         let id = e.currentTarget.dataset.id;
         const data = {
             id,
-            user_id: app.globalData.userInfo.user_id
+            user_id: app.globalData.userInfo.user_id,
+            type: "sentence"
         }
-        UPDATE_SENTENCE_COLLECT('get', data)
+        UPDATE_USER_COLLECT('get', data)
             .then(res => {
                 if (res.data && res.succeeded && !res.data.status) {
                     const { sentences } = this.data;

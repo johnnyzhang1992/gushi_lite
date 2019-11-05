@@ -1,9 +1,9 @@
 // pages/me/author/index.js
 const app = getApp();
 import {
+    GET_USER_COLLECT,
     LOADFAIL,
-    UPDATE_POET_COLLECT,
-    GET_COLLECT_POET
+    UPDATE_USER_COLLECT
 } from "../../../apis/request";
 let current_page = 1;
 let last_page = 1;
@@ -41,7 +41,7 @@ Page({
             page: page + 1,
             type: 'author' 
         }
-        GET_COLLECT_POET("GET",data).then(res => {
+        GET_USER_COLLECT("GET",data).then(res => {
             if (res.data) {
                 that.setData({
                     poets: [...that.data.poets,...res.data.data.data],
@@ -64,9 +64,10 @@ Page({
         let id = e.currentTarget.dataset.id;
         const data = {
             id,
-            user_id: app.globalData.userInfo.user_id
+            user_id: app.globalData.userInfo.user_id,
+            type: 'author'
         }
-        UPDATE_POET_COLLECT('get', data)
+        UPDATE_USER_COLLECT('get', data)
             .then(res => {
                 if (res.data && res.succeeded && !res.data.status) {
                     const { poets } = this.data;

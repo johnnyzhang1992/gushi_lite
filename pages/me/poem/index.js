@@ -1,9 +1,9 @@
 // pages/me/poem/index.js
 //获取应用实例
 import {
-    GET_COLLECT_POEM,
+    GET_USER_COLLECT,
     LOADFAIL,
-    UPDATE_POEM_COLLECT
+    UPDATE_USER_COLLECT
 } from "../../../apis/request";
 let current_page = 1;
 let last_page = 1;
@@ -40,7 +40,7 @@ Page({
             page: page + 1,
             type: "poem"
         };
-        GET_COLLECT_POEM("get", data)
+        GET_USER_COLLECT("get", data)
             .then(res => {
                 if (res.data) {
                     that.setData({
@@ -65,10 +65,11 @@ Page({
         const { id } = e.currentTarget.dataset;
         const data = {
             id,
-            user_id: this.data.user_id
+            user_id: this.data.user_id,
+            type: 'poem'
         };
         const { poems } = this.data;
-        UPDATE_POEM_COLLECT("get", data)
+        UPDATE_USER_COLLECT("get", data)
             .then(res => {
                 if (res.data && res.succeeded && !res.data.status) {
                     const Poems = poems.filter(item => {
