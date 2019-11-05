@@ -10,9 +10,8 @@
                     <view class="userinfo-avatar">
                         <open-data class="" lang="zh_CN" type="userAvatarUrl"></open-data>
                     </view>
-                    <!-- <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> -->
                 </view>
-                <text class="userinfo-nickname">{{userInfo.name}}</text>
+               <open-data  class="userinfo-nickname"type="userNickName" lang="en" />
             </block>
         </view>
     </view>
