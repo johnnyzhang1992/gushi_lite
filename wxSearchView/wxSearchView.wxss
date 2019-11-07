@@ -1,14 +1,18 @@
 /** 整个区域 */
+.page{
+  padding-top: 0;
+}
 .wxSearch{
-  position: absolute;
-  top: 43px;
+  /* position: absolute; */
+  /* top: 43px;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100%; */
   border-top: 1px #eee solid;
   background-color: rgba(200, 200, 200, 0.1);
-  z-index: 9999;
+  /* z-index: 9999; */
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch
 }
 
 /** 搜索框下面的提示区域 */

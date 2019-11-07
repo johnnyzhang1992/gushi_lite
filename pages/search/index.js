@@ -67,6 +67,7 @@ Page({
                     that.mySearchFunction, // 提供一个搜索回调函数
                     that.myGobackFunction //提供一个返回回调函数
                 );
+                wx.stopPullDownRefresh();
             })
             .catch(error => {
                 console.log(error);
@@ -81,10 +82,17 @@ Page({
     wxSearchClear: WxSearch.wxSearchClear, // 清空函数
     // 4 搜索回调函数
     mySearchFunction: function(value) {
-        // do your job here
-        // console.log(value);
-        wx.showNavigationBarLoading();
         let that = this;
+        let pattern = new RegExp(/^[\u4E00-\u9FA5]{1,8}$/)
+        if (!pattern.test(value)) {
+            wx.showToast({
+                title: '请输入1-8位中文字符',
+                icon: 'none',
+                duration: 2000
+              })
+            return false;
+        }
+        wx.showNavigationBarLoading();
         value = util.excludeSpecial(value);
         this.setData({
             keyWord: value
@@ -124,7 +132,6 @@ Page({
      */
     onPullDownRefresh: function () {
         this.getHotSearch()
-        wx.stopPullDownRefresh();
     },
 
     /**

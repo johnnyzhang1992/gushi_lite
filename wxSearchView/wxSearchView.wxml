@@ -1,4 +1,4 @@
-<view>
+<view class="page">
     <!--搜索框部分-->
     <view class="weui-search-bar">
         <view class="weui-search-bar__form">

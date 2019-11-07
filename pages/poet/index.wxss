@@ -20,7 +20,7 @@
 .weui-cell {
     padding:4px 10px;
 }
-.list weui-cell_access{
+.list .weui-cell_access{
     font-size: 12px;
 }
 .poem-item view{
@@ -162,6 +162,7 @@
 .filter-section scroll-view {
     width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch
 }
 
 .filter-item {

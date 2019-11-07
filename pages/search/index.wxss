@@ -1,14 +1,7 @@
 /* pages/search/index.wxss */
-.container{
-  padding: 10px 0;
-}
 @import "../../wxSearchView/wxSearchView.wxss";
 page{
   background-color: #efeff4;
-  overflow:hidden;
-  clear:both;
-  position:relative;
-  min-height:100%;
 }
 .item{
   margin-bottom: 10px;

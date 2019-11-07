@@ -101,6 +101,7 @@
 .filter-section scroll-view {
     width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch
 }
 
 .filter-item {
