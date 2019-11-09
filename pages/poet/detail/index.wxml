@@ -34,4 +34,6 @@
             <view class="text">已收藏</view>
         </view>
     </view>
+     <!-- 快捷导航 -->
+    <shortcut id=""></shortcut>
 </view>

@@ -1,0 +1,33 @@
+<view class="shortcut" style="right: {{ right }}; bottom: {{ bottom }};">
+
+  <!-- 首页 -->
+  <form bindsubmit="_onTargetPage" report-submit="true">
+    <button formType="submit" data-index="0" class="nav-item btn-normal {{ isShow ? 'show_60' : (transparent ? '' : 'hide_80') }}">
+      <image src="../../images/icon/home.png" class="icon-img" />
+    </button>
+  </form>
+
+  <!-- 分类页 -->
+  <form bindsubmit="_onTargetPage" report-submit="true">
+    <button formType="submit" data-index="1" class="nav-item btn-normal {{ isShow ? 'show_40' : (transparent ? '' : 'hide_60') }}">
+      <image src="../../images/icon/search.png" class="icon-img" />
+    </button>
+  </form>
+
+  <!-- 个人中心 -->
+  <form bindsubmit="_onTargetPage" report-submit="true">
+    <button formType="submit" data-index="2" class="nav-item btn-normal {{ isShow ? 'show_20' : (transparent ? '' : 'hide_20') }}">
+      <image src="../../images/icon/my.png" class="icon-img" />
+    </button>
+  </form>
+
+  <!-- 显示隐藏开关 -->
+  <form bindsubmit="_onToggleShow" report-submit="true">
+    <button formType="submit" class="nav-item nav-item__switch btn-normal {{ isShow ? 'shortcut_click_show' : '' }}">
+
+      <image wx:if='{{isShow}}' src="../../images/icon/apps_active.png" class="icon-img" />
+      <image wx:if='{{!isShow}}' src="../../images/icon/apps.png" class="icon-img" />
+    </button>
+  </form>
+
+</view>

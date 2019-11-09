@@ -126,7 +126,6 @@ Page({
                 }
             })
         }
-        console.log(item)
         wx.navigateTo({
             url: `/pages/homeList/index?code=${item.code}&name=${item.name}&profile=${item.profile}`,
         });

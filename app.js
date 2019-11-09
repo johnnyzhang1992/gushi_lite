@@ -1,6 +1,11 @@
 //app.js
 // 百度小程序统计
 const mtjwxsdk = require("./utils/mtj-wx-sdk.js");
+const tabBarLinks = [
+    "/pages/index",
+    "/pages/search/index",
+    "/pages/me/index"
+];
 App({
     onLaunch: function() {
         let that = this;
@@ -83,6 +88,34 @@ App({
         wx.switchTab({
             url: "pages/index"
         });
+    },
+       /**
+     * 获取tabBar页面路径列表
+     */
+    getTabBarLinks() {
+        return tabBarLinks;
+    },
+
+    /**
+     * 跳转到指定页面
+     * 支持tabBar页面
+     */
+    navigationTo(url) {
+        if (!url || url.length == 0) {
+            return false;
+        }
+        let tabBarLinks = this.getTabBarLinks();
+        // tabBar页面
+        if (tabBarLinks.indexOf(url) > -1) {
+            wx.switchTab({
+                url: "/" + url
+            });
+        } else {
+            // 普通页面
+            wx.navigateTo({
+                url: "/" + url
+            });
+        }
     },
     globalData: {
         userInfo: null,

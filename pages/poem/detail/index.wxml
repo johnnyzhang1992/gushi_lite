@@ -118,4 +118,6 @@
             </view>
         </view>
     </view>
+    <!-- 快捷导航 -->
+    <shortcut id=""></shortcut>
 </view>

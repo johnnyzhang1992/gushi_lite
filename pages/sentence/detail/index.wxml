@@ -36,8 +36,6 @@
             <view class="poem-title content">{{poem.content}}</view>
         </navigator>
     </view>
-    <!--广告-->
-    <ad unit-id="adunit-1dc705dba430e05c"></ad>
     <!--button list-->
     <button class="share {{is_ipx ? 'iphoneX_view' : ''}}" bindtap='canvasToImage' animation="{{animationData}}">
         <image src='../../../images/icon/share.png'></image>
@@ -78,4 +76,6 @@
             <view class="save_image not {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="notSaveImage"> 退出</view>
         </view>
     </view>
+         <!-- 快捷导航 -->
+    <shortcut id=""></shortcut>
 </view>

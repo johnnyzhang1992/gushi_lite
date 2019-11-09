@@ -5,7 +5,7 @@
         <text decode="{{true}}" class="poem-title content">{{poem_item.content}}</text>
     </view>
     <!--关键词搜索-->
-    <view wx:if='{{isSearch}}'>
+    <view wx:if='{{isSearch}}' class="item-search">
         <view class="poem-title weui-flex">
             <view class="weui-flex__item align-left">
                 <searchHighlightTextView

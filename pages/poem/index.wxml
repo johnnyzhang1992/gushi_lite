@@ -50,7 +50,7 @@
     </view>
     <view class="divide"></view>
     <!--poem list-->
-    <view class="page list">
+    <view class="list">
         <view class="page__bd">
             <poemItemView
                     datas="{{item}}"
