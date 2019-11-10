@@ -33,6 +33,8 @@
 }
 .poem_top{
     position: relative;
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 5px;
 }
 .poem-item .poem-title{
     color: #333;
@@ -40,10 +42,14 @@
     position: relative;
 }
 .poem-item .poem-title.author{
-    font-size: 16px
+    font-size: 32rpx;
+    max-width: 72%;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
 }
 .poem-item .poem-title.content{
-    font-size: 13px;
+    font-size: 28rpx;
     color: #999;
     margin-top: 5px;
     text-overflow:ellipsis;

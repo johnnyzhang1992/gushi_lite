@@ -1,100 +1,19 @@
 /* pages/poem/sentence/index.wxss */
-.page.list{
+.page.list {
     width: 100%;
     background-color: #ebebeb;
     padding-top: 0;
 }
-.home-content{
-    padding: 0
+.home-content {
+    padding: 0;
 }
-.navigator-hover{
+.navigator-hover {
     background-color: #fff;
     color: #337ab7;
 }
-.weui-cells{
-  background-color: inherit;
-  /* padding-top: 5px; */
-}
-.poem-item{
-  display: block;
-  background-color: #fff;
-  padding:8px 10px;
-  margin:5px 0;
-  /* border-radius: 5px; */
-  border:none;
-  position:relative;
-  -webkit-box-align:center;
-  -webkit-align-items:center;
-  align-items:center;
-}
-.poem-item view{
-    width:100%;
-    display: block;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    overflow:hidden;
-}
-.poem-item .poem-title{
-    color: #333;
-    font-size: 14px;
-}
-.poem-item .poem-author{
-    color: #337ab7;
-    font-size: 12px;
-    /* padding: 5px 0; */
-    text-align: right;
-    margin-top: 5px;
-}
-.poem-item .poem-content{
-    font-size: 14px;
-    color: #454545;
-}
-.nav-list{
-     background: #fff; 
-    width: 100%;
-}
-.nav-list .weui-flex__item{
-    text-align: center;
-    font-size: 12px;
-    line-height: 20px;
-    padding:8px 0;
-    color: #666;
-}
-.nav-list image{
-    width: 20px;
-    height: 20px;
-    vertical-align:middle;
-}
-.nav-list .left{
-  min-width: 60px;
-  text-align: right;
-}
-.nav-list .right{
-  text-align: left;
-  color: #337ab7;
-}
-
-.weui-search-bar__form{
-    border: none;
-}
-.weui-search-bar__form label{  
-    border: 1px solid #ddd;
-}
-.searchbar-result{
-    margin-top: 0;
-    font-size: 14px;
-}
-.searchbar-result:before{
-    display: none;
-}
-.weui-search-bar{
-    border: none;
-    width: 100%;
-    background-color: #fff;
-}
-.weui-search-bar__text{
-    letter-spacing:2px;
-    font-size: 12px;
+.weui-cells {
+    background-color: inherit;
+    /* padding-top: 5px; */
 }
 
 /*
@@ -121,8 +40,8 @@
     line-height: 38rpxpx;
     background: #fff;
     border: none;
-    margin-right:0;
-    padding-right:0;
+    margin-right: 0;
+    padding-right: 0;
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -142,10 +61,10 @@
     border-radius: 4px;
     position: relative;
     margin-right: 8px;
-    writing-mode:vertical-rl;
+    writing-mode: vertical-rl;
     letter-spacing: 2px;
     /* display: table-cell; */
-    height: 51px;
+    height: 55px;
     text-align: center;
 }
 
@@ -155,6 +74,6 @@
 
 .filter-item.pressed {
     color: white;
-    background-color: #337ab7!important;
+    background-color: #337ab7 !important;
     font-weight: 500;
 }

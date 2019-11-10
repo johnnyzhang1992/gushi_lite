@@ -12,62 +12,6 @@
     color: #337ab7;
 }
 
-
-
-.nav-list{
-    background: #fff;
-    width: 100%;
-}
-.nav-list .weui-flex__item{
-    text-align: center;
-    font-size: 12px;
-    line-height: 20px;
-    padding:8px 0;
-    color: #666;
-}
-.nav-list image{
-    width: 20px;
-    height: 20px;
-    vertical-align:middle;
-}
-.nav-list .left{
-    min-width: 60px;
-    text-align: right;
-}
-.nav-list .right{
-    text-align: left;
-    color: #337ab7;
-}
-.nav-breadcrumb{
-  margin-top: 0
-}
-.weui-search-bar__form{
-    border: none;
-}
-.weui-search-bar__form label{  
-    border: 1px solid #ddd;
-}
-
-.searchbar-result{
-    margin-top: 0;
-    font-size: 14px;
-}
-.searchbar-result:before{
-    display: none;
-}
-/* .weui-cell{
-    padding: 12px 15px 12px 35px;
-} */
-.weui-search-bar{
-    border: none;
-    width: 100%;
-    background-color: #fff;
-}
-.weui-search-bar__text{
-    letter-spacing:2px;
-    font-size: 12px;
-}
-
 /*
 * filter section
 */

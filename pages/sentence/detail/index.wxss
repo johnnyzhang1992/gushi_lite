@@ -167,7 +167,9 @@
     font-size: 14px;
 }
 .poem-item .poem-title.author{
-    font-size: 16px
+    font-size: 16px;
+    max-width: 72%;
+
 }
 .poem-item .poem-title.content{
     font-size: 13px;
