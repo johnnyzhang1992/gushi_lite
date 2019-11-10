@@ -2,7 +2,7 @@
 <view class="page list">
     <!--filter-->
     <view class="filter" wx:if='{{!isSearch}}'>
-        <view class="section filter-section" wx:for="{{categories}}" wx:for-item="_theme">
+        <view class="section filter-section" wx:for="{{categories}}" wx:for-item="_theme" wx:key="index">
             <view class="section__title h4">{{_theme.theme_name}}</view>
             <view class="section__content" style="width:100%">
                 <view id="{{item.name}}"  class="filter-item" data-theme="{{_theme.theme_name}}" data-type="{{item}}" wx:for="{{_theme.types}}"

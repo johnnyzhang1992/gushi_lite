@@ -46,6 +46,14 @@ export const LOADFAIL = msg => {
     });
 };
 
+/**
+ * 获取一条随机名句
+ * @param {String} method 
+ * @param {Object} data 
+ */
+export const GET_RANDOM_SENTENCE = (method, data) => { 
+    return Request(`/wxxcx/getRandomSentence`, data, method);
+}
 //-----------------
 //------ 个人中心 --
 //-----------------

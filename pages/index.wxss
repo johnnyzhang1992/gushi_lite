@@ -147,5 +147,5 @@ page{
 }
 .filter-item .profile{
     font-size: 0.7em;
-    color: #999;
+    color: #666;
 }
