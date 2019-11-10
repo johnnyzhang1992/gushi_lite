@@ -62,11 +62,11 @@
   padding-top:5px;
 }
 .weui-cells__title {
-    margin-top:.77em;
-    margin-bottom:1em;
+    margin-top:.5em;
+    margin-bottom:0.7em;
     padding-left:15px;
     padding-right:15px;
     color:#333;
-    font-size:12px;
+    font-size:36rpx;
     text-align:center;
 }

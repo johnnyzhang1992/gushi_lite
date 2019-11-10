@@ -32,6 +32,7 @@
 }
 .poem-item{
     display: block;
+    border-bottom: 1px solid #efefef;
 }
 .poem-item view{
     /* width:100%; */
@@ -47,10 +48,10 @@
 .poem-item .poem-author{
     color: #999;
     font-size: 12px;
-    /* padding: 5px 0; */
-    display: inline-block;
     float: right;
-    text-align: right;
+    max-width: 72%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .poem-item .poem-content{
     font-size: 14px;
@@ -62,11 +63,11 @@
   padding-top:5px;
 }
 .weui-cells__title {
-    margin-top:.77em;
-    margin-bottom:1em;
+    margin-top:.5em;
+    margin-bottom:0.7em;
     padding-left:15px;
     padding-right:15px;
     color:#333;
-    font-size:12px;
+    font-size:36rpx;
     text-align:center;
 }
