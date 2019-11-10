@@ -1,7 +1,7 @@
 <!--pages/poem/index.wxml-->
 <view class="home-content">
     <!--search section-->
-    <view class="weui-search-bar">
+    <!-- <view class="weui-search-bar">
         <view class="weui-search-bar__form">
             <view class="weui-search-bar__box">
                 <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
@@ -13,7 +13,7 @@
             </label>
         </view>
     </view>
-    <view class="divide"></view>
+    <view class="divide"></view> -->
     <!--filter-->
     <view class="filter"  wx:if='{{!isSearch}}'>
         <view class="section filter-section">

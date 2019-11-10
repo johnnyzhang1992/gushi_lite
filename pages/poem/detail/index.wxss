@@ -57,8 +57,8 @@
 }
 
 .page__title {
-  font-size: 20px;
-  color: #454545;
+  font-size: 40rpx;
+  color: #333;
   text-align: center;
 }
 
@@ -109,8 +109,11 @@
 }
 
 .tab-item {
-  margin: 0 10px;
+  /* margin: 0 10px; */
   display: inline-block;
+  width: 25%;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .tab-item.active {
@@ -177,6 +180,7 @@
 
 .scoll-h {
   height: 100%;
+  -webkit-overflow-scrolling : touch;  
 }
 
 .tab-content {
@@ -184,14 +188,14 @@
 }
 
 .tab-list-content {
-  padding: 10px 8%;
-  width: 94%;
+  padding: 10px 8% 12% 8%;
+  /* width: 94%; */
   box-sizing: border-box;
 }
 
 .tab-list-content .item {
-  font-size: 32rpx;
-  color: #999;
+  font-size: 34rpx;
+  color: #454545;
   text-align: justify;
   display: block;
   text-indent: 1em;
@@ -257,7 +261,7 @@
 .copy {
   background-color: #337ab7;
   position: fixed;
-  left: 60px;
+  left: 10px;
   padding: 8px;
   border-radius: 100%;
   bottom: 50px;

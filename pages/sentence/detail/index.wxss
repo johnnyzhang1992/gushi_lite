@@ -36,8 +36,8 @@
     border-top: none;
 }
 .page__title{
-    font-size: 20px;
-    color: #454545;
+    font-size: 40rpx;
+    color: #333;
     text-align: center;
 }
 .page__desc{
@@ -74,7 +74,7 @@
     width:calc(100% - 32px);
     writing-mode:vertical-rl;
     border:1px solid #999;
-    padding:15px;
+    padding: 30px 15px;
 }
 .sentence-title text{
     display: block;
@@ -123,7 +123,7 @@
 .copy{
     background-color:#337ab7;
     position:fixed;
-    left: 60px;
+    left: 10px;
     padding:8px;
     border-radius:100%;
     bottom:50px;

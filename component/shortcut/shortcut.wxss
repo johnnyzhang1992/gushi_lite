@@ -4,7 +4,7 @@
     position: fixed;
     right: 24rpx;
     bottom: 250rpx;
-    width: 76rpx;
+    width: 88rpx;
     line-height: 1;
     z-index: 5;
     border-radius: 50%;
@@ -16,9 +16,9 @@
     position: absolute;
     bottom: 0;
     padding: 0;
-    width: 76rpx;
-    height: 76rpx;
-    line-height: 76rpx;
+    width: 85rpx;
+    height: 85rpx;
+    line-height: 85rpx;
     color: #fff;
     background: #ccc;
     border-radius: 50%;
@@ -27,8 +27,8 @@
     opacity: 0;
 }
 .icon-img {
-    width: 76rpx;
-    height: 76rpx;
+    width: 85rpx;
+    height: 85rpx;
     padding: 15rpx;
     box-sizing: border-box;
 }

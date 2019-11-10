@@ -6,7 +6,7 @@ page {
     font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
     /* color: #666; */
     letter-spacing: 0.5px;
-     background: #f6f6f6;
+     background: #fff;
     -webkit-tap-highlight-color: rgba(26,26,26,0);
 }
 .container{
@@ -93,7 +93,7 @@ textarea {
 .divide {
     height: 8px;
     width: 100%;
-    background: #f3f3f3;
+    background: #efefef;
 }
 
 .nav-breadcrumb {
@@ -148,4 +148,7 @@ ad {
 }
 .align-left{
     text-align: left;
+}
+::-webkit-scrollbar{
+    display: none;
 }

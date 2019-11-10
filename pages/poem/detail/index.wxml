@@ -61,11 +61,11 @@
         <swiper-item wx:for="{{[0,1,2,3]}}" wx:key='*this'>
             <scroll-view scroll-y="true" class="scoll-h tab-list-content">
                 <block wx:for="{{tab_lists}}" wx:key="*this" wx:if="{{currentTab < 3}}">
-                    <text decode='true' class='item yi' wx:if='{{ currentTab == 0}}'>{{item}}</text>
-                    <text decode='true' class='item' wx:if='{{ currentTab != 0}}'>{{item}}</text>
+                    <text decode='true' selectable='true' class='item yi' wx:if='{{ currentTab == 0}}'>{{item}}</text>
+                    <text decode='true' selectable='true' class='item' wx:if='{{ currentTab != 0}}'>{{item}}</text>
                 </block>
                 <block wx:if="{{currentTab > 2 }}">
-                    <text decode="true" class="item">{{poem.background }}</text>
+                    <text decode="true" selectable='true' class="item">{{poem.background }}</text>
                 </block>
             </scroll-view>
         </swiper-item>
@@ -80,9 +80,9 @@
     <button class="audio {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="audio">
         <image src='../../../images/icon/audio.png'></image>
     </button>
-    <button class="return {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="return">
+    <!-- <button class="return {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="return">
         <image src='../../../images/icon/return.png'></image>
-    </button>
+    </button> -->
     <view class="collect {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="updateCollect">
         <view class="collect-img" wx:if="{{!collect_status}}">
             <image src="../../../images/icon/collect.png"></image>

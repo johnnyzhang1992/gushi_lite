@@ -43,9 +43,9 @@
     <button class="copy {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="copy">
         <image src='../../../images/icon/copy.png'></image>
     </button>
-    <button class="return {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="return">
+    <!-- <button class="return {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="return">
         <image src='../../../images/icon/return.png'></image>
-    </button>
+    </button> -->
     <!--collect section-->
     <view class="collect {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="updateCollect">
         <view class="collect-img" wx:if="{{!collect_status}}">

@@ -15,6 +15,7 @@
             <!-- <text wx:else data-key='back'>返回</text> -->
         </view>
     </view>
+    <view class="divide" wx:if="{{!closeTips}}"></view>
     <!--搜索结果部分-->
     <view class="wxSearch" style="height:{{wxSearchData.view.seachHeight}}px;top:{{wxSearchData.view.barHeight}}px;">
         <!--搜索历史和热点-->
