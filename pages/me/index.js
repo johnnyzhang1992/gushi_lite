@@ -1,7 +1,6 @@
 //index.js
 //获取应用实例
 const app = getApp();
-let http = require("../../utils/http.js");
 import {
     CREATE_USER,
     LOADFAIL,
@@ -110,7 +109,7 @@ Page({
                         resolve(Object.assign(res, { succeeded: true })); //成功失败都resolve，并通过succeeded字段区分
                     } else {
                         reject(Object.assign(res, { succeeded: false })); //成功失败都resolve，并通过succeeded字段区分
-                        http.loadFailL();
+                        LOADFAIL()
                     }
                     wx.hideNavigationBarLoading();
                     wx.hideLoading();
@@ -118,7 +117,7 @@ Page({
                 .catch(error => {
                     console.log(error);
                     wx.hideLoading();
-                    http.loadFailL();
+                    LOADFAIL();
                 });
         });
     },
