@@ -10,36 +10,36 @@ App({
     onLaunch: function() {
         let that = this;
         // 尝试使用 unionId 登录
-        wx.login({
-            success: res => {
-                this.globalData.code = res.code;
-                // 发送 res.code 到后台换取 openId, sessionKey, unionId
-                wx.request({
-                    url: "https://xuegushi.cn/wxxcx/userInfo",
-                    data: {
-                        code: this.globalData.code,
-                        systemInfo: this.globalData.systemInfo
-                    },
-                    success: function(res) {
-                        if (res.data && !res.data.status) {
-                            console.log("----------success------------");
-                            wx.setStorageSync("user", res.data);
-                            wx.setStorageSync("wx_token", res.data.wx_token);
-                            that.globalData.userInfo = res.data;
-                        } else {
-                            try {
-                                wx.removeStorageSync("user");
-                                wx.removeStorageSync("closeTipsStatus");
-                                wx.removeStorageSync("wx_token");
-                            } catch (e) {
-                                // Do something when catch error
-                                console.log("--clear storage fail---");
-                            }
-                        }
-                    }
-                });
-            }
-        });
+        // wx.login({
+        //     success: res => {
+        //         this.globalData.code = res.code;
+        //         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        //         wx.request({
+        //             url: "https://xuegushi.cn/wxxcx/userInfo",
+        //             data: {
+        //                 code: this.globalData.code,
+        //                 systemInfo: this.globalData.systemInfo
+        //             },
+        //             success: function(res) {
+        //                 if (res.data && !res.data.status) {
+        //                     console.log("----------success------------");
+        //                     wx.setStorageSync("user", res.data);
+        //                     wx.setStorageSync("wx_token", res.data.wx_token);
+        //                     that.globalData.userInfo = res.data;
+        //                 } else {
+        //                     try {
+        //                         wx.removeStorageSync("user");
+        //                         wx.removeStorageSync("closeTipsStatus");
+        //                         wx.removeStorageSync("wx_token");
+        //                     } catch (e) {
+        //                         // Do something when catch error
+        //                         console.log("--clear storage fail---");
+        //                     }
+        //                 }
+        //             }
+        //         });
+        //     }
+        // });
         // 版本更新------
         const updateManager = wx.getUpdateManager();
         // 强制更新

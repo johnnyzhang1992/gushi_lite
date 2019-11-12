@@ -5,7 +5,6 @@ let util = require("../utils/util.js");
 let homeInterval = null;
 Page({
     data: {
-        motto: "古诗文小助手",
         categories: [
             {
                 code: "shijing",
@@ -145,9 +144,6 @@ Page({
         let animation = wx.createAnimation({
             duration: 20000,
             timingFunction: "ease-in-out"
-        });
-        wx.setNavigationBarTitle({
-            title: "首页 | 古诗文小助手"
         });
         //动画的脚本定义必须每次都重新生成，不能放在循环外
         animation
