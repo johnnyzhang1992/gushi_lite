@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "chat": "plugin://wechatBot/chat",
+    "customTextMessage": "../../../component/customTextMessage/customTextMessage",
+    "customGuideCard": "../../../component/customGuideCard/customGuideCard",
+    "customQuery": "../../../component/customQuery/customQuery",
+    "customoperateCard": "../../../component/customoperateCard/customoperateCard"
+  },
+  "navigationBarTitleText": "诗词机器人助手"
+}

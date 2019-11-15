@@ -1,57 +1,71 @@
 {
-  "pages": [
-    "pages/index",
-    "pages/logs/logs",
-    "pages/poem/index",
-    "pages/homeList/index",
-    "pages/poem/detail/index",
-    "pages/me/index",
-    "pages/search/index",
-    "pages/sentence/index",
-    "pages/poet/index",
-    "pages/poet/detail/index",
-    "pages/me/poem/index",
-    "pages/me/author/index",
-    "pages/me/about/index",
-    "pages/poem/audio/index",
-    "pages/me/user/index",
-    "pages/me/log/index",
-    "pages/me/search/index",
-    "pages/sentence/detail/index",
-    "pages/me/sentence/index",
-    "pages/sentence/list/index"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#337ab7",
-    "navigationBarTitleText": "古诗文小助手",
-    "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true,
-    "onReachBottomDistance": 40
-  },
-  "tabBar": {
-    "selectedColor": "#337ab7",
-    "position": "bottom",
-    "list": [
-      {
-        "pagePath": "pages/index",
-        "text": "首页",
-        "iconPath": "images/icon/home.png",
-        "selectedIconPath": "images/icon/home_active.png"
-      },
-      {
-        "pagePath": "pages/search/index",
-        "text": "搜索",
-        "iconPath": "images/icon/find.png",
-        "selectedIconPath": "images/icon/find_active.png"
-      },
-      {
-        "pagePath": "pages/me/index",
-        "text": "我",
-        "iconPath": "images/icon/my.png",
-        "selectedIconPath": "images/icon/my_active.png"
-      }
-    ]
-  },
-  "sitemapLocation": "sitemap.json"
+    "pages": [
+        "pages/index",
+        "pages/logs/logs",
+        "pages/poem/index",
+        "pages/homeList/index",
+        "pages/poem/detail/index",
+        "pages/me/index",
+        "pages/search/index",
+        "pages/sentence/index",
+        "pages/poet/index",
+        "pages/poet/detail/index",
+        "pages/me/poem/index",
+        "pages/me/author/index",
+        "pages/me/about/index",
+        "pages/poem/audio/index",
+        "pages/me/user/index",
+        "pages/me/log/index",
+        "pages/me/search/index",
+        "pages/sentence/detail/index",
+        "pages/me/sentence/index",
+        "pages/sentence/list/index",
+        "pages/me/robot/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#337ab7",
+        "navigationBarTitleText": "古诗文小助手",
+        "navigationBarTextStyle": "white",
+        "enablePullDownRefresh": true,
+        "onReachBottomDistance": 40
+    },
+    "tabBar": {
+        "selectedColor": "#337ab7",
+        "position": "bottom",
+        "list": [
+            {
+                "pagePath": "pages/index",
+                "text": "首页",
+                "iconPath": "images/icon/home.png",
+                "selectedIconPath": "images/icon/home_active.png"
+            },
+            {
+                "pagePath": "pages/search/index",
+                "text": "搜索",
+                "iconPath": "images/icon/find.png",
+                "selectedIconPath": "images/icon/find_active.png"
+            },
+            {
+                "pagePath": "pages/me/index",
+                "text": "我",
+                "iconPath": "images/icon/my.png",
+                "selectedIconPath": "images/icon/my_active.png"
+            }
+        ]
+    },
+    "plugins": {
+        "wechatBot": {
+            "version": "1.1.5",
+            "provider": "wx8c631f7e9f2465e1"
+        },
+        "WechatSI": {
+            "version": "0.3.3",
+            "provider": "wx069ba97219f66d99"
+        }
+    },
+    "requiredBackgroundModes": [
+        "audio"
+    ],
+    "sitemapLocation": "sitemap.json"
 }

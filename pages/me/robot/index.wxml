@@ -1,0 +1,9 @@
+<!-- pages/me/robot/index.wxml -->
+<!-- 系统导航 -->
+<view style="height: 100vh">
+    <chat  id="component-id" bind:queryCallback="getQueryCallback"                   bind:backHome="goBackHome"
+      generic:textMessage="customTextMessage"
+      generic:guideCard="customGuideCard"
+      generic:queryMessage="customQuery"
+      generic:operateCard="customoperateCard" />
+</view>

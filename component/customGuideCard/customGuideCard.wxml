@@ -1,0 +1,5 @@
+<view class="swiperContentView" style="height: {{height}}px;">
+  <scroll-view class="guideScroll" scroll-x>
+    <view class="guideText" wx:for="{{guideList}}" wx:key="item" bindtap="chooseGuide" data-id="{{index}}" data-content="{{item}}" style="{{guideIndex == index?'background-color: #ccc;':'background-color: #fff;'}}">{{item}}</view>
+  </scroll-view>
+</view>

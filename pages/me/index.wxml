@@ -11,7 +11,7 @@
                         <open-data class="" lang="zh_CN" type="userAvatarUrl"></open-data>
                     </view>
                 </view>
-               <open-data  class="userinfo-nickname"type="userNickName" lang="en" />
+                <open-data class="userinfo-nickname" type="userNickName" lang="en" />
             </block>
         </view>
     </view>
@@ -37,6 +37,17 @@
                 <view class="weui-cell__bd">诗人收藏</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
                     {{poet_count}}
+                </view>
+            </navigator>
+        </view>
+    </view>
+    <view class="divide"></view>
+    <view class="page list">
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="robot/index" class="weui-cell weui-cell_accessem" hover-class="weui-cell_active">
+                <view class="weui-cell__hd"></view>
+                <view class="weui-cell__bd">诗词机器人</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
                 </view>
             </navigator>
         </view>
