@@ -167,3 +167,11 @@ export const GET_HOT_SEARCH = (method, data) => {
 export const GET_SEARCH = (method, data) => {
     return Request(`/wxxcx/search/${data.key}`, data, method);
 };
+
+//-----------------
+//------ 诗词 --
+//-----------------
+
+export const GET_POEM_DATA = (method, data) => {
+    return Request(`/wxxcx/getPoemData`, data, method);
+}
