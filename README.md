@@ -5,6 +5,9 @@
 该小程序的目的是为了大家更方便简洁的学习中国传统古诗文，同时通过这些代码更多的学习使用小程序。
 
 ## 文件目录
+- `apis`
+
+    API接口统一请求文件
 - `component`
 
     此目录是自定义组件部分
@@ -23,7 +26,7 @@
 - `wxSearchView`
 
     此目录为搜索部分的使用的搜索功能模块。
-    
+
     搜索部分是在[天未](https://github.com/mindawei)的[wsSearchView](https://github.com/mindawei/wsSearchView)的基础上进行的改造和优化。
 
 ## 注意事项

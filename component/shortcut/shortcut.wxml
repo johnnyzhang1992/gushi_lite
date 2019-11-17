@@ -2,14 +2,14 @@
 
   <!-- 首页 -->
   <form bindsubmit="_onTargetPage" report-submit="true">
-    <button formType="submit" data-index="0" class="nav-item btn-normal {{ isShow ? 'show_60' : (transparent ? '' : 'hide_80') }}">
+    <button formType="submit" data-index="0" class="nav-item btn-normal {{ isShow ? 'show_60' : (transparent ? '' : 'hide_60') }}">
       <image src="../../images/icon/home.png" class="icon-img" />
     </button>
   </form>
 
   <!-- 分类页 -->
   <form bindsubmit="_onTargetPage" report-submit="true">
-    <button formType="submit" data-index="1" class="nav-item btn-normal {{ isShow ? 'show_40' : (transparent ? '' : 'hide_60') }}">
+    <button formType="submit" data-index="1" class="nav-item btn-normal {{ isShow ? 'show_40' : (transparent ? '' : 'hide_40') }}">
       <image src="../../images/icon/search.png" class="icon-img" />
     </button>
   </form>
