@@ -105,6 +105,7 @@ export const GET_USER_INFO = (method,data) => {
 //-----------------
 //------ 首页 --
 //-----------------
+
 /**
  * 获取一条随机名句
  * @param {String} method
@@ -114,6 +115,11 @@ export const GET_RANDOM_SENTENCE = (method, data) => {
     return Request(`/wxxcx/getRandomSentence`, data, method);
 }
 
+/**
+ * 获取首页列表数据
+ * @param {*} method
+ * @param {*} data
+ */
 export const GET_HOME_DATA = (method, data) => {
     return Request(`/wxxcx/getHomeData`, data, method);
 }
