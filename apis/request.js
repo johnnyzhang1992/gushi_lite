@@ -86,29 +86,36 @@ export const BACKURL = ()=>{
 
 /**
  * 创建新用户
- * @param {*} method 
- * @param {*} data 
+ * @param {*} method
+ * @param {*} data
  */
-export const CREATE_USER = (method, data) => { 
+export const CREATE_USER = (method, data) => {
     return Request('/wxxcx/userCrate',data,method)
 }
 
 /**
  * 获取用户的基本信息
- * @param {*} method 
- * @param {*} data 
+ * @param {*} method
+ * @param {*} data
  */
-export const GET_USER_INFO = (method,data) => { 
+export const GET_USER_INFO = (method,data) => {
     return Request(`/wxxcx/getUserInfo/${data.user_id}`,data,method)
 }
 
+//-----------------
+//------ 首页 --
+//-----------------
 /**
  * 获取一条随机名句
- * @param {String} method 
- * @param {Object} data 
+ * @param {String} method
+ * @param {Object} data
  */
-export const GET_RANDOM_SENTENCE = (method, data) => { 
+export const GET_RANDOM_SENTENCE = (method, data) => {
     return Request(`/wxxcx/getRandomSentence`, data, method);
+}
+
+export const GET_HOME_DATA = (method, data) => {
+    return Request(`/wxxcx/getHomeData`, data, method);
 }
 
 //-----------------
