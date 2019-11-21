@@ -93,6 +93,7 @@ Page({
                     wx.hideLoading();
                     wx.hideNavigationBarLoading();
                 } else {
+                    wx.hideNavigationBarLoading();
                     http.loadFailL();
                 }
             })

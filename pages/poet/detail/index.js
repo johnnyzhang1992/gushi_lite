@@ -160,7 +160,8 @@ Page({
         let that = this;
         wx.showNavigationBarLoading();
         current_page++;
-        if(current_page>last_page){
+        if (current_page > last_page) {
+            wx.hideNavigationBarLoading();
             return false;
         }
         that.getPoetData(current_page);
