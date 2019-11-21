@@ -20,7 +20,7 @@
         "pages/sentence/detail/index",
         "pages/me/sentence/index",
         "pages/sentence/list/index",
-        "pages/me/robot/index"
+        "pages/robot/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

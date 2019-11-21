@@ -12,20 +12,24 @@
         </view>
         <image class="h-boat boat-img" src="../images/boat.png" animation="{{animationData}}"></image>
     </view>
-    <view class="divide"></view>
+    <!-- <view class="divide"></view> -->
     <!-- nav list -->
     <view class="weui-flex nav-list">
         <navigator url="poem/index" hover-class="navigator-hover" class="weui-flex__item nav-item">
             <image class="" src="../images/icon/poem.png"></image>
-            诗词
+            <view class="nav-item-text">诗词文言</view>
         </navigator>
         <navigator url="sentence/index" hover-class="navigator-hover" class="weui-flex__item nav-item">
             <image class="" src="../images/icon/sentence.png"></image>
-            名句
+            <view class="nav-item-text">热门名句</view>
         </navigator>
         <navigator url="poet/index" hover-class="navigator-hover" class="weui-flex__item nav-item">
             <image class="" src="../images/icon/poet.png"></image>
-            诗人
+            <view class="nav-item-text">历朝诗人</view>
+        </navigator>
+        <navigator url="robot/index" hover-class="navigator-hover" class="weui-flex__item nav-item">
+            <image class="" src="../images/icon/robot.png"></image>
+            <view class="nav-item-text">智能助手</view>
         </navigator>
     </view>
     <view class="divide"></view>
