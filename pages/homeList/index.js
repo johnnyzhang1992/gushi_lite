@@ -34,9 +34,6 @@ Page({
 		GET_HOME_DATA("GET", data)
 			.then(res => {
 				if (res.data && res.succeeded) {
-					if (!app.globalData.hot) {
-						app.globalData.hot = res.data.hot[0];
-					}
 					that.setData({
 						poems:
 							page > 1
