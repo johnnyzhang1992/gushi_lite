@@ -1,5 +1,4 @@
 // pages/poem/index.js
-const app = getApp();
 import { GET_POEM_DATA, LOADFAIL } from "../../apis/request";
 let current_page = 1;
 let last_page = 1;
@@ -60,18 +59,17 @@ Page({
 	// 获取诗词数据
 	getPoemData: function(type, keyWord, _type, page) {
 		let that = this;
-		return new Promise((resolve, reject) => {
-			// resolve(Object.assign(res.data, {succeeded: true})); //成功失败都resolve，并通过succeeded字段区分
-			let data = {
-				page: page ? page : 1,
-				type: _type ? _type : "全部",
-				_type: type ? type : null,
-				keyWord: keyWord ? keyWord : null,
-				dynasty: that.data.dynasty[that.data.d_index]
-					? that.data.dynasty[that.data.d_index]
-					: "全部"
-			};
-			GET_POEM_DATA("GET", data).then(res => {
+		let data = {
+			page: page ? page : 1,
+			type: _type ? _type : "全部",
+			_type: type ? type : null,
+			keyWord: keyWord ? keyWord : null,
+			dynasty: that.data.dynasty[that.data.d_index]
+				? that.data.dynasty[that.data.d_index]
+				: "全部"
+		};
+		GET_POEM_DATA("GET", data)
+			.then(res => {
 				if (res.data && res.succeeded) {
 					that.setData({
 						is_search: keyWord ? true : false,
@@ -86,12 +84,15 @@ Page({
 					current_page = res.data.poems.current_page;
 					last_page = res.data.poems.last_page;
 					wx.hideLoading();
-					resolve(Object.assign(res.data, { succeeded: true })); //成功失败都resolve，并通过succeeded字段区分
+					wx.hideNavigationBarLoading();
 				} else {
-					reject(Object.assign(res.data, { succeeded: false })); //成功失败都resolve，并通过succeeded字段区分
+					LOADFAIL("加载数据失败，请下拉重试。");
 				}
+			})
+			.catch(error => {
+				console.log(error);
+				LOADFAIL();
 			});
-		});
 	},
 	// 跳转到搜索页面
 	ngToSearch: function() {
@@ -117,19 +118,7 @@ Page({
 		wx.showLoading({
 			title: "加载中"
 		});
-		that
-			.getPoemData(options.type, options.keyWord)
-			.then(res => {
-				if (res && res.succeeded) {
-					wx.hideNavigationBarLoading();
-				} else {
-					LOADFAIL("加载数据失败，请下拉重试。");
-				}
-			})
-			.catch(error => {
-				console.log(error);
-				LOADFAIL();
-			});
+		that.getPoemData(options.type, options.keyWord);
 	},
 	// 检测变化
 	filterPoem: function(e) {
@@ -152,24 +141,12 @@ Page({
 				that.data.types[that.data.t_index]
 		});
 		wx.showNavigationBarLoading();
-		that
-			.getPoemData(
-				that.data._type,
-				that.data.keyWord,
-				that.data.types[that.data.t_index],
-				1
-			)
-			.then(res => {
-				if (res && res.succeeded) {
-					wx.hideNavigationBarLoading();
-				} else {
-					LOADFAIL("加载数据失败，请下拉重试。");
-				}
-			})
-			.catch(error => {
-				console.log(error);
-				LOADFAIL();
-			});
+		that.getPoemData(
+			that.data._type,
+			that.data.keyWord,
+			that.data.types[that.data.t_index],
+			1
+		);
 	},
 
 	/**
@@ -189,24 +166,12 @@ Page({
 			wx.hideNavigationBarLoading();
 			return false;
 		}
-		that
-			.getPoemData(
-				that.data._type,
-				that.data._keyWord,
-				that.data.types[that.data.t_index],
-				current_page + 1
-			)
-			.then(res => {
-				if (res && res.succeeded) {
-					wx.hideNavigationBarLoading();
-				} else {
-					LOADFAIL("加载数据失败，请下拉重试。");
-				}
-			})
-			.catch(error => {
-				console.log(error);
-				LOADFAIL();
-			});
+		that.getPoemData(
+			that.data._type,
+			that.data._keyWord,
+			that.data.types[that.data.t_index],
+			current_page + 1
+		);
 	},
 	/**
 	 * 用户点击右上角分享
