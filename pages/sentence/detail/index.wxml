@@ -1,26 +1,17 @@
 <!--pages/sentence/detail/index.wxml-->
-<view class="page panel">
-    <view class="page__hd" wx-if="{{sentence}}">
-        <view class="sentence-section">
-            <view class="sentence-title">
-                <text decode='true' selectable='true' wx:if="{{sentence.title_arr}}" wx:for="{{sentence.title_arr}}" wx:key="*.this">{{item}}</text>
-            </view>
-            <view class="sentence-origin">
-                <navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover">
-                    <text decode='true' selectable='true'>{{sentence.origin}}</text>
-                </navigator>
-            </view>
-            <!--<view class="sentence-content">-->
-                <!--<searchHighlightTextView-->
-                        <!--class="result-item"-->
-                        <!--datas='{{sentence}}'-->
-                        <!--type="sentence"-->
-                <!--/>-->
-            <!--</view>-->
-            <view class="weui-media-box__info badge-list">
-                <view class="weui-badge"  wx:if="{{types.length>0}}" wx:for="{{types}}" wx:key="unique">{{item}}</view>
-                <view class="weui-badge"  wx:if="{{themes.length>0}}" wx:for="{{themes}}" wx:key="unique">{{item}}</view>
-            </view>
+<view class="panel">
+    <view class="sentence-section" wx-if="{{sentence}}">
+        <view class="sentence-title">
+            <text decode='true' selectable='true' wx:if="{{sentence.title_arr}}" wx:for="{{sentence.title_arr}}" wx:key="*.this">{{item}}</text>
+        </view>
+        <view class="sentence-origin">
+            <navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover">
+                <text decode='true' selectable='true'>{{sentence.origin}}</text>
+            </navigator>
+        </view>
+        <view class="weui-media-box__info badge-list">
+            <view class="weui-badge" wx:if="{{types.length>0}}" wx:for="{{types}}" wx:key="unique">{{item}}</view>
+            <view class="weui-badge" wx:if="{{themes.length>0}}" wx:for="{{themes}}" wx:key="unique">{{item}}</view>
         </view>
     </view>
     <view class="weui-loadmore" wx-if="{{is_loading}}">
@@ -76,6 +67,6 @@
             <view class="save_image not {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="notSaveImage"> 退出</view>
         </view>
     </view>
-         <!-- 快捷导航 -->
+    <!-- 快捷导航 -->
     <shortcut id=""></shortcut>
 </view>

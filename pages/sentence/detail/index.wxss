@@ -1,263 +1,269 @@
 /* pages/poem/detail/index.wxss */
-.page{
-    padding-bottom: 100px;
+.page {
+	padding-bottom: 100px;
 }
-.weui-media-box__title{
-    white-space:initial;
-    font-size: 14px;
-    text-align: center;
-    color:#666;
-    display: block;
-    /* padding: 0 10px; */
+.weui-media-box__title {
+	white-space: initial;
+	font-size: 14px;
+	text-align: center;
+	color: #666;
+	display: block;
+	/* padding: 0 10px; */
 }
-.weui-media-box{
-    padding: 10px 10px;
+.weui-media-box {
+	padding: 10px 10px;
 }
-.poem-content{
-    padding-bottom: 10px;
+.poem-content {
+	padding-bottom: 10px;
 }
-.badge-list{
-    padding-top: 0;
-    text-align: left;
-    padding-left:15px;
-    float: right;
+.badge-list {
+	padding-top: 0;
+	text-align: left;
+	padding-left: 15px;
+	float: right;
 }
-.badge-list .weui-badge{
-    margin-right: 5px;
-    margin-bottom: 5px;
+.badge-list .weui-badge {
+	margin-right: 5px;
+	margin-bottom: 5px;
 }
-.page__hd{
-    padding: 10px 15px 0 15px;
+.page__hd {
+	padding: 10px 15px 0 15px;
 }
-.weui-panel{
-    margin-top: 0;
+.weui-panel {
+	margin-top: 0;
 }
-.weui-panel:before{
-    border-top: none;
+.weui-panel:before {
+	border-top: none;
 }
-.page__title{
-    font-size: 40rpx;
-    color: #333;
-    text-align: center;
+.page__title {
+	font-size: 40rpx;
+	color: #333;
+	text-align: center;
 }
-.page__desc{
-    text-align: center;
+.page__desc {
+	text-align: center;
 }
-.author-name{
-    display:inline-block;
+.author-name {
+	display: inline-block;
 }
-.author-name.active{
-    color:#337ab7;
+.author-name.active {
+	color: #337ab7;
 }
-.title{
-    padding:5px 20px;
-    color:#333;
-    font-size:14px;
+.title {
+	padding: 5px 20px;
+	color: #333;
+	font-size: 14px;
 }
-.poem-bg{
-    padding:10px 15px 0 15px;
-    font-size:13px;
-    color:#999;
-    text-align:justify;
-    display:block;
-    text-indent:2em;
+.poem-bg {
+	padding: 10px 15px 0 15px;
+	font-size: 13px;
+	color: #999;
+	text-align: justify;
+	display: block;
+	text-indent: 2em;
 }
-.page__content{
-    padding-bottom: 0;
+.page__content {
+	padding-bottom: 0;
 }
-.sentence-section{
-    clear:both;
-    overflow:hidden;
+.sentence-section {
+	clear: both;
+	overflow: hidden;
+	padding: 10px 10px;
 }
-.sentence-title{
-    color: #333;
-    width:calc(100% - 32px);
-    writing-mode:vertical-rl;
-    border:1px solid #999;
-    padding: 30px 15px;
+.sentence-title {
+	color: #333;
+	width: 100%;
+	writing-mode: vertical-rl;
+	border: 2px solid #000;
+	/* padding: 30px 15px; */
 }
-.sentence-title text{
-    display: block;
-    font-size: x-large;
-    letter-spacing:3px;
+.sentence-title text {
+	display: block;
+	font-size: 36rpx;
+    letter-spacing: 3px;
+    padding: 30px 5px;
+    border-left: 1px solid #000;
 }
-.sentence-origin{
-    margin-top: 20px;
-    text-align: right;
-    font-size: 15px;
+.sentence-origin {
+	margin-top: 20px;
+	text-align: right;
+	font-size: 15px;
 }
-.sentence-content{
-    font-size: 14px;
-    padding: 0 15px;
+.sentence-content {
+	font-size: 14px;
+	padding: 0 15px;
 }
-.sentence-content .normal{
-    color: #999;
+.sentence-content .normal {
+	color: #999;
 }
-.collect{
-    position: fixed;
-    bottom: 0;
-    left:0;
-    padding:8px 0 8px 15px;
-    font-size:14px;
-    border-top:1px solid #f5f5f5;
-    width:100%;
-    opacity: 0.8;
-    background-color:#d7d6dc;
+.collect {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	padding: 8px 0 8px 15px;
+	font-size: 14px;
+	border-top: 1px solid #f5f5f5;
+	width: 100%;
+	opacity: 0.8;
+	background-color: #d7d6dc;
 }
-.collect.iphoneX_view{
-    bottom: 68rpx;
+.collect.iphoneX_view {
+	bottom: 68rpx;
 }
-.collect-img image{
-    height: 24px;
-    width:24px;
-    vertical-align: bottom
+.collect-img image {
+	height: 24px;
+	width: 24px;
+	vertical-align: bottom;
 }
-.collect-img .text{
-    display: inline-block;
-    line-height: 24px;
-    padding-left: 5px;
+.collect-img .text {
+	display: inline-block;
+	line-height: 24px;
+	padding-left: 5px;
 }
-.collect-img .text.active{
-    color: #337ab7;
+.collect-img .text.active {
+	color: #337ab7;
 }
-.copy{
-    background-color:#337ab7;
-    position:fixed;
-    left: 10px;
-    padding:8px;
-    border-radius:100%;
-    bottom:50px;
+.copy {
+	background-color: #337ab7;
+	position: fixed;
+	left: 10px;
+	padding: 8px;
+	border-radius: 100%;
+	bottom: 50px;
 }
-.copy image{
-    width:22px;
-    height:22px;
-    display:block;
+.copy image {
+	width: 22px;
+	height: 22px;
+	display: block;
 }
-.audio.iphoneX_view,.copy.iphoneX_view,.share.iphoneX_view,.return.iphoneX_view{
-    bottom: 84px;
+.audio.iphoneX_view,
+.copy.iphoneX_view,
+.share.iphoneX_view,
+.return.iphoneX_view {
+	bottom: 84px;
 }
 
-.navigator-hover{
-    background-color: #fff;
-    color: #337ab7;
+.navigator-hover {
+	background-color: #fff;
+	color: #337ab7;
 }
 .weui-cells {
-    font-size: 14px;
-    color: #666;
+	font-size: 14px;
+	color: #666;
 }
 .weui-cell {
-    padding:6px 15px;
+	padding: 6px 15px;
 }
-.list weui-cell_access{
-    font-size: 12px;
+.list weui-cell_access {
+	font-size: 12px;
 }
-.poem-item{
-    /*margin-top: 20px;*/
-    display: block;
+.poem-item {
+	/*margin-top: 20px;*/
+	display: block;
 }
-.poem-item view{
-    width:100%;
-    display: block;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    overflow:hidden;
+.poem-item view {
+	width: 100%;
+	display: block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
-.poem-item .poem-title{
-    color: #333;
-    font-size: 14px;
+.poem-item .poem-title {
+	color: #333;
+	font-size: 14px;
 }
-.poem-item .poem-title.author{
-    font-size: 16px;
-    max-width: 72%;
-
+.poem-item .poem-title.author {
+	font-size: 16px;
+	max-width: 72%;
 }
-.poem-item .poem-title.content{
-    font-size: 13px;
-    color: #999;
-    margin-top: 5px;
+.poem-item .poem-title.content {
+	font-size: 13px;
+	color: #999;
+	margin-top: 5px;
 }
-.poem-item .poem-author{
-    color: #999;
-    font-size: 13px;
-    /* padding: 5px 0; */
-    position:absolute;
-    right:15px;
-    top:10px;
-    display:inline-block;
-    width:auto;
+.poem-item .poem-author {
+	color: #999;
+	font-size: 13px;
+	/* padding: 5px 0; */
+	position: absolute;
+	right: 15px;
+	top: 10px;
+	display: inline-block;
+	width: auto;
 }
-.poem-item .poem-content{
-    font-size: 14px;
-    color: #454545;
+.poem-item .poem-content {
+	font-size: 14px;
+	color: #454545;
 }
 /*
 canvas content
  */
-.canvas-content{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background-color: #000;
-    /*opacity: 0.3;*/
-    z-index: 99;
+.canvas-content {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	/*opacity: 0.3;*/
+	z-index: 99;
 }
-canvas{
-    padding-top: 0;
-    transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    /* display: none; */
+canvas {
+	padding-top: 0;
+	transform-origin: 0 0;
+	-webkit-transform-origin: 0 0;
+	/* display: none; */
 }
-.save_image{
-    position: fixed;
-    bottom: 20px;
-    /* left: 30px; */
-    /* margin-right: -70px; */
-    background: #43ce7b;
-    color: #fff;
-    border-radius:8px;
-    padding: 6px 12px;
-    z-index: 9999
+.save_image {
+	position: fixed;
+	bottom: 20px;
+	/* left: 30px; */
+	/* margin-right: -70px; */
+	background: #43ce7b;
+	color: #fff;
+	border-radius: 8px;
+	padding: 6px 12px;
+	z-index: 9999;
 }
-.save_image:first-child{
-    left: 30px;
+.save_image:first-child {
+	left: 30px;
 }
-.save_image.not{
-    right: 30px;
+.save_image.not {
+	right: 30px;
 }
-.canvas{
-    /*visibility:hidden;*/
-    overflow:hidden;
-    width:100%;
-    height:100%;
-    clear: both;
+.canvas {
+	/*visibility:hidden;*/
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	clear: both;
 }
-.canvas-image{
-    z-index:99;
-    position:absolute;
-    top:15px;
-    left:15px;
+.canvas-image {
+	z-index: 99;
+	position: absolute;
+	top: 15px;
+	left: 15px;
 }
-.canvas-bottom .wechat{
-    position: fixed;
-    bottom: 20px;
-    /*background: #fff;*/
-    /*color: #fff;*/
-    border-radius:8px;
-    padding: 4px 10px;
-    z-index: 9999;
-    left: 40px;
-    border: none;
-    line-height: 0;
+.canvas-bottom .wechat {
+	position: fixed;
+	bottom: 20px;
+	/*background: #fff;*/
+	/*color: #fff;*/
+	border-radius: 8px;
+	padding: 4px 10px;
+	z-index: 9999;
+	left: 40px;
+	border: none;
+	line-height: 0;
 }
-.canvas-bottom image{
-    width: 35px;
-    height: 35px;
+.canvas-bottom image {
+	width: 35px;
+	height: 35px;
 }
-.canvas-bottom .quan{
-    left: 85px;
+.canvas-bottom .quan {
+	left: 85px;
 }
-.iphoneX_view.wechat,.iphoneX_view.save_image{
-    bottom: 68rpx;
+.iphoneX_view.wechat,
+.iphoneX_view.save_image {
+	bottom: 68rpx;
 }
