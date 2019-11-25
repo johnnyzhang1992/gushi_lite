@@ -125,7 +125,7 @@ Page({
 		let that = this;
 		let id = e.currentTarget.dataset.id;
 		let type = e.currentTarget.dataset.type;
-		if (type == "dynasty") {
+		if (type === "dynasty") {
 			this.setData({
 				d_index: id
 			});
@@ -178,7 +178,7 @@ Page({
 	 */
 	onShareAppMessage: function() {
 		return {
-			title: "古诗文",
+			title: "首页 | 古诗文小助手",
 			path: "/pages/poem/index",
 			// imageUrl:'/images/poem.png',
 			success: function(res) {
