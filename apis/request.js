@@ -193,22 +193,27 @@ export const GET_POEM_DETAIL = (method, data) => {
 
 /**
  * 获取小程序码
- * @param {*} method 
- * @param {*} data 
+ * @param {*} method
+ * @param {*} data
  */
 export const GET_WX_QRCODE = (method, data) => {
 	return Request(`/wxxcx/getWXACode/`, data, method);
 };
 
 /**
- * 获取诗词文字转语言
+ * 获取诗词内容
+ * @param {*} method
+ * @param {*} data
+ */
+export const GET_POEM_CONTENT = (method, data) => {
+	return Request(`/wxxcx/getPoemContent/${data.id}`, data, method);
+};
+
+/**
+ * 获取诗词的语音
  * @param {*} method 
  * @param {*} data 
  */
-export const GET_POEM_CONTENT = (method, data) => { 
-    return Request(`/wxxcx/getPoemContent/${data.id}`, data, method);
-}
-
-export const GET_POEM_AUDIO = (method, data) => { 
-    return Request(`/wxxcx/getPoemAudio/${data.id}`,data,method)
-}
+export const GET_POEM_AUDIO = (method, data) => {
+	return Request(`/wxxcx/getPoemAudio/${data.id}`, data, method);
+};
