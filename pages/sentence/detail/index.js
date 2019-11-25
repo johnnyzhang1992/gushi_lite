@@ -541,7 +541,7 @@ Page({
 		let that = this;
 		return {
 			title: that.data.poem.title,
-			path: "/pages/poem/detail/index?id=" + that.data.poem.id,
+			path: "/pages/sentence/detail/index?id=" + that.data.sentence.id,
 			// imageUrl:'/images/poem.png',
 			success: function(res) {
 				// 转发成功

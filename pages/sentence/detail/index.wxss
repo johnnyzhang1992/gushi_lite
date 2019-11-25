@@ -20,7 +20,6 @@
 	padding-top: 0;
 	text-align: left;
 	padding-left: 15px;
-	float: right;
 }
 .badge-list .weui-badge {
 	margin-right: 5px;
@@ -69,25 +68,36 @@
 	clear: both;
 	overflow: hidden;
 	padding: 10px 10px;
+	position: relative;
 }
 .sentence-title {
 	color: #333;
 	width: 100%;
+	font-size: large;
 	writing-mode: vertical-rl;
 	border: 2px solid #000;
 	/* padding: 30px 15px; */
 }
 .sentence-title text {
 	display: block;
-	font-size: 36rpx;
-    letter-spacing: 3px;
-    padding: 30px 5px;
-    border-left: 1px solid #000;
+	letter-spacing: 3px;
+	padding: 60px 5px;
+	border-left: 1px solid #000;
 }
 .sentence-origin {
-	margin-top: 20px;
 	text-align: right;
-	font-size: 15px;
+	writing-mode: vertical-lr;
+	font-size: large;
+	position: absolute;
+	left: 10px;
+	height: calc(100% - 20px);
+}
+.sentence-origin .author {
+    font-size: 0.8em;
+	display: block;
+    text-align: right;
+    padding: 20px 10px;
+    box-sizing: border-box;
 }
 .sentence-content {
 	font-size: 14px;
