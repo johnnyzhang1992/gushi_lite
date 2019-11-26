@@ -231,6 +231,11 @@ export const GET_POET_DATA = (method, data) => {
 	return Request(`/wxxcx/getPoetData?`, data, method);
 };
 
+/**
+ * 诗人详情
+ * @param {*} method 
+ * @param {*} data 
+ */
 export const GET_POET_DETAIL = (method, data) => {
 	return Request(`/wxxcx/getPoetDetailData/${data.id}`, data, method);
 };
