@@ -211,9 +211,26 @@ export const GET_POEM_CONTENT = (method, data) => {
 
 /**
  * 获取诗词的语音
- * @param {*} method 
- * @param {*} data 
+ * @param {*} method
+ * @param {*} data
  */
 export const GET_POEM_AUDIO = (method, data) => {
 	return Request(`/wxxcx/getPoemAudio/${data.id}`, data, method);
+};
+
+//-----------------
+//------ 诗人 --
+//-----------------
+
+/**
+ * 根据条件获取诗人列表
+ * @param {*} method
+ * @param {*} data
+ */
+export const GET_POET_DATA = (method, data) => {
+	return Request(`/wxxcx/getPoetData?`, data, method);
+};
+
+export const GET_POET_DETAIL = (method, data) => {
+	return Request(`/wxxcx/getPoetDetailData/${data.id}`, data, method);
 };

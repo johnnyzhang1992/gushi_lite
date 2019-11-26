@@ -1,6 +1,6 @@
 // pages/poem/poet/index.js
 const app = getApp();
-let http = require("../../utils/http.js");
+import {GET_POET_DATA,LOADFAIL } from '../../apis/request'
 let current_page = 1;
 let last_page = 1;
 Page({
@@ -10,8 +10,6 @@ Page({
     data: {
         motto: "古诗文小助手",
         poets: [],
-        current_page: 1,
-        last_page: 1,
         dynasty: [
             "全部",
             "先秦",
@@ -64,23 +62,20 @@ Page({
     // 获取诗人列表
     getPoetData: function(d_index, page, keyWord) {
         let that = this;
-        let _url = "";
-        if (keyWord) {
-            _url = app.globalData.url + "/wxxcx/getPoetData?keyWord=" + keyWord;
-        } else {
-            _url = app.globalData.url + "/wxxcx/getPoetData";
-        }
         let data = {
             dynasty: that.data.dynasty[d_index ? d_index : 0],
             page: page
         };
+        if (keyWord) {
+            data = {
+                ...data,
+                keyWord: keyWord
+            }
+        }
         current_page = page;
-        http.request(_url, data)
+        GET_POET_DATA('GET',data)
             .then(res => {
                 if (res.data && res.succeeded) {
-                    console.log("----------success------------");
-                    // wx.setStorageSync('user',res.data);
-                    // console.log(res.data);
                     that.setData({
                         poets:
                             current_page > 1
@@ -94,12 +89,12 @@ Page({
                     wx.hideNavigationBarLoading();
                 } else {
                     wx.hideNavigationBarLoading();
-                    http.loadFailL();
+                    LOADFAIL();
                 }
             })
             .catch(error => {
                 console.log(error);
-                http.loadFailL();
+                LOADFAIL();
             });
     },
     /**
@@ -140,26 +135,6 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {},
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {},
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {},
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function() {},
-
-    /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
@@ -190,7 +165,6 @@ Page({
         return {
             title: "古代诗人一览",
             path: "/pages/poet/index",
-            // imageUrl:'/images/poem.png',
             success: function(res) {
                 // 转发成功
                 console.log("转发成功！");
