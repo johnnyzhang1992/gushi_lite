@@ -1,9 +1,14 @@
 // pages/sentence/detail/index.js
 const app = getApp();
+import {
+	GET_SENTEMCE_DETAIL,
+	UPDATE_USER_COLLECT,
+	GET_WX_QRCODE,
+	LOADFAIL
+} from "../../../apis/request";
 let until = require("../../../utils/util");
 const canvas = require("../../../utils/canvas");
 let authLogin = require("../../../utils/authLogin");
-let http = require("../../../utils/http.js");
 let findTimeOut = null;
 let bg_image = "";
 let filePath = "";
@@ -81,55 +86,59 @@ Page({
 	// 获取诗词详情
 	getSentenceDetail: function(sentence_id, user_id) {
 		let that = this;
-		return new Promise((resolve, reject) => {
-			//结果以Promise形式返回
-			http
-				.request(
-					app.globalData.url + "/wxxcx/getSentenceDetail/" + sentence_id,
-					{ user_id: user_id }
-				)
-				.then(res => {
-					if (res.data && res.succeeded) {
-						console.log("----------success------------");
-						// console.log(res.data);
-						if (res.data.sentence) {
-							res.data.sentence.title_arr = that.splitSentence(
-								res.data.sentence.title
-							);
-						}
-						that.setData({
-							sentence: res.data.sentence,
-							author: res.data.author,
-							poem: res.data.poem,
-							collect_status: res.data.sentence.collect_status,
-							is_loading: false,
-							types:
-								res.data.sentence.type && res.data.sentence.type != ""
-									? res.data.sentence.type.split(",")
-									: [],
-							themes:
-								res.data.sentence.theme && res.data.sentence.theme != ""
-									? res.data.sentence.theme.split(",")
-									: []
-						});
-						bg_image = res.data.bg_image;
-						wx.setNavigationBarTitle({
-							title: res.data.sentence.origin
-						});
-						resolve(Object.assign(res.data, { succeeded: true })); //成功失败都resolve，并通过succeeded字段区分
-					} else {
-						reject(Object.assign(res, { succeeded: false })); //成功失败都resolve，并通过succeeded字段区分
+		const data = {
+			id: sentence_id,
+			user_id
+		};
+		//结果以Promise形式返回
+		GET_SENTEMCE_DETAIL("GET", data)
+			.then(res => {
+				if (res.data && res.succeeded) {
+					if (res.data.sentence) {
+						res.data.sentence.title_arr = that.splitSentence(
+							res.data.sentence.title
+						);
 					}
-				});
-		});
+					that.setData({
+						sentence: res.data.sentence,
+						author: res.data.author,
+						poem: res.data.poem,
+						collect_status: res.data.sentence.collect_status,
+						is_loading: false,
+						types:
+							res.data.sentence.type && res.data.sentence.type != ""
+								? res.data.sentence.type.split(",")
+								: [],
+						themes:
+							res.data.sentence.theme && res.data.sentence.theme != ""
+								? res.data.sentence.theme.split(",")
+								: []
+					});
+					bg_image = res.data.bg_image;
+					wx.setNavigationBarTitle({
+						title: res.data.sentence.origin
+					});
+				} else {
+					LOADFAIL();
+				}
+				wx.hideLoading();
+				wx.stopPullDownRefresh();
+				that.getCodeImage("sentence", sentence_id);
+			})
+			.catch(err => {
+				console.log(err);
+				LOADFAIL();
+			});
 	},
 	// 拆分词句
 	splitSentence: function(sentence) {
 		// 替代特殊符号 。。
-		let pattern = new RegExp("[。.、!]", "g");
+		let pattern = new RegExp("[。，.、!！]", "g");
 		sentence = sentence.replace(/，/g, ",");
 		sentence = sentence.replace(pattern, ",");
-        return sentence.split(",").filter((item) => { return item});
+		return sentence.split(",").filter(item => {
+			return item;
+		});
 	},
 	// context.font="italic small-caps bold 12px arial";
 	// canvas 画图
@@ -312,7 +321,7 @@ Page({
 				})
 				.catch(error => {
 					console.log(error);
-					http.loadFailL();
+					LOADFAIL()
 				});
 		}
 	},
@@ -355,17 +364,14 @@ Page({
 	getCodeImage: function(type, id) {
 		let _type = type ? type : "sentence";
 		let path = "";
-		if (_type == "sentence") {
-			path = "/pages/sentence/detail/index?id=" + id;
-		}
 		let data = {
-			type: type,
+			type: _type,
 			target_id: id,
 			path: path,
-			width: 300
+			width: 300,
+			id: id
 		};
-		http
-			.request(app.globalData.url + "/wxxcx/getWXACode/", data)
+		GET_WX_QRCODE('GET',data)
 			.then(res => {
 				if (res.data && res.succeeded) {
 					// 下载小程序码都本地
@@ -376,12 +382,12 @@ Page({
 						}
 					});
 				} else {
-					http.loadFailL();
+					LOADFAIL();
 				}
 			})
 			.catch(error => {
 				console.log(error);
-				http.loadFailL();
+				LOADFAIL();
 			});
 	},
 	/**
@@ -410,42 +416,24 @@ Page({
 				});
 			}
 		});
-		that
-			.getSentenceDetail(options.id, that.data.user_id)
-			.then(res => {
-				if (res && res.succeeded) {
-					wx.hideLoading();
-					that.getCodeImage("sentence", options.id);
-				}
-			})
-			.catch(error => {
-				console.log(error);
-				http.loadFailL();
-			});
+		that.getSentenceDetail(options.id, that.data.user_id);
 	},
 	// 更新收藏情况
 	updateCollect: function() {
 		let that = this;
+		const data = {
+			id: that.data.sentence.id,
+			type: 'sentence',
+			user_id: that.data.user_id,
+		 }
 		if (that.data.user_id < 1) {
-			// https.userLogin(that.data.poem.id);
 			authLogin.authLogin(
 				"/pages/poem/detail/index?id=" + that.data.sentence.id,
 				"nor",
 				app
 			);
 		} else {
-			let data = {
-				user_id: that.data.user_id,
-				wx_token: wx.getStorageSync("wx_token")
-			};
-			http
-				.request(
-					app.globalData.url +
-						"/wxxcx/" +
-						that.data.sentence.id +
-						"/collect/sentence",
-					data
-				)
+			UPDATE_USER_COLLECT('GET',data)
 				.then(res => {
 					if (res.data && res.succeeded) {
 						that.setData({
@@ -459,7 +447,7 @@ Page({
 				})
 				.catch(error => {
 					console.log(error);
-					http.loadFailL();
+					LOADFAIL();
 				});
 		}
 	},
@@ -521,18 +509,7 @@ Page({
 		that.setData({
 			is_loading: true
 		});
-		that
-			.getSentenceDetail(that.data.sentence.id, that.data.user_id)
-			.then(res => {
-				if (res && res.succeeded) {
-					wx.hideLoading();
-					wx.stopPullDownRefresh();
-				}
-			})
-			.catch(error => {
-				console.log(error);
-				http.loadFailL();
-			});
+		that.getSentenceDetail(that.data.sentence.id, that.data.user_id);
 	},
 	/**
 	 * 用户点击右上角分享

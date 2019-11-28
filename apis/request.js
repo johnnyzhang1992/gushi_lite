@@ -94,6 +94,15 @@ export const CREATE_USER = (method, data) => {
 };
 
 /**
+ * 获取小程序码
+ * @param {*} method
+ * @param {*} data
+ */
+export const GET_WX_QRCODE = (method, data) => {
+	return Request(`/wxxcx/getWXACode/`, data, method);
+};
+
+/**
  * 获取用户的基本信息
  * @param {*} method
  * @param {*} data
@@ -192,15 +201,6 @@ export const GET_POEM_DETAIL = (method, data) => {
 };
 
 /**
- * 获取小程序码
- * @param {*} method
- * @param {*} data
- */
-export const GET_WX_QRCODE = (method, data) => {
-	return Request(`/wxxcx/getWXACode/`, data, method);
-};
-
-/**
  * 获取诗词内容
  * @param {*} method
  * @param {*} data
@@ -233,9 +233,31 @@ export const GET_POET_DATA = (method, data) => {
 
 /**
  * 诗人详情
- * @param {*} method 
- * @param {*} data 
+ * @param {*} method
+ * @param {*} data
  */
 export const GET_POET_DETAIL = (method, data) => {
 	return Request(`/wxxcx/getPoetDetailData/${data.id}`, data, method);
+};
+
+//-----------------
+//------ 名句 --
+//-----------------
+
+/**
+ * 根据条件获取名句的列表
+ * @param {*} method
+ * @param {*} data
+ */
+export const GET_SENTEMCE_DATA = (method, data) => {
+	return Request(`/wxxcx/getSentenceData`, data, method);
+};
+
+/**
+ * 获取名句详情
+ * @param {*} method 
+ * @param {*} data 
+ */
+export const GET_SENTEMCE_DETAIL = (method, data) => {
+	return Request(`/wxxcx/getSentenceDetail/${data.id}`, data, method);
 };
