@@ -1,7 +1,6 @@
 {
     "pages": [
         "pages/index",
-        "pages/logs/logs",
         "pages/poem/index",
         "pages/homeList/index",
         "pages/poem/detail/index",
