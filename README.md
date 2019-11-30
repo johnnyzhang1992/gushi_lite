@@ -5,6 +5,7 @@
 该小程序的目的是为了大家更方便简洁的学习中国传统古诗文，同时通过这些代码更多的学习使用小程序。
 
 ## 文件目录
+
 - `apis`
 
     API接口统一请求文件
@@ -30,10 +31,11 @@
     搜索部分是在[天未](https://github.com/mindawei)的[wsSearchView](https://github.com/mindawei/wsSearchView)的基础上进行的改造和优化。
 
 ## 注意事项
+
 - 请求返回的收据尽量简洁
 - 使用定时器时，当退出当前页面时应该注销（onHide,onUnload）
 - 没有在 wxml 里面使用到的数据尽量不要放到 page.data 里面
 
 ## 小程序二维码
 
-![古诗文小助手](https://github.com/johnnyzhang1992/gushi_lite/blob/master/images/xcx.jpg)
+![古诗文小助手](./images/xcx.jpg)
