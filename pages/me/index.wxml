@@ -66,13 +66,13 @@
     <!-- 用户和搜索数量，管理员可见 -->
     <view class="page list" wx-if='{{user_id == 10}}'>
         <view class="weui-cells weui-cells_after-title">
-            <navigator url="user/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__hd"></view>
                 <view class="weui-cell__bd">用户数量(新增{{u_t_count}})</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
                     {{u_count}}
                 </view>
-            </navigator>
+            </view>
             <navigator url="search/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__hd"></view>
                 <view class="weui-cell__bd">今日搜索</view>

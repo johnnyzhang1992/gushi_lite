@@ -1,8 +1,0 @@
-.weui-article__p {
-    font-size: 12px;
-    text-align: justify;
-    text-indent: 2em;
-}
-.page__hd{
-    padding: 20px 20px 0 20px;
-}

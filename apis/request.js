@@ -111,6 +111,24 @@ export const GET_USER_INFO = (method, data) => {
 	return Request(`/wxxcx/getUserInfo/${data.user_id}`, data, method);
 };
 
+/**
+ * 获取搜索列表
+ * @param {*} method 
+ * @param {*} data 
+ */
+export const GET_SEARCH_LIST = (method, data) => { 
+	return Request(`/wxxcx/search_list`, data, method);
+}
+
+/**
+ * 更新搜索状态（删除数据库搜索记录）
+ * @param {*} method 
+ * @param {*} data 
+ */
+export const UPDATE_SEARCH_STATE = (method, data) => { 
+	return Request(`/wxxcx/search/${data.id}/update`, data, method);	
+}
+
 //-----------------
 //------ 首页 --
 //-----------------
