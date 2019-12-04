@@ -14,9 +14,9 @@
           <view class="weui-half-screen-dialog__title"><slot name="title"></slot></view>
         </block>
       </view>
-      <view class="weui-half-screen-dialog__hd__side">
+      <!-- <view class="weui-half-screen-dialog__hd__side">
         <view class="weui-icon-btn weui-icon-btn_more">更多</view>
-      </view>
+      </view> -->
     </view>
     <view class="weui-half-screen-dialog__bd">
       <block wx:if="{{title}}">
@@ -35,7 +35,6 @@
           data-index="{{index}}" 
           bindtap="buttonTap"
         >{{item.text}}</button>
-        <!-- <view wx:for="{{buttons}}" class="weui-dialog__btn {{}} {{item.extClass}}" ></view> -->
       </block>
       <slot name="footer" wx:else></slot>
     </view>

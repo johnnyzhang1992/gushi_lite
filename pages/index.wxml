@@ -37,7 +37,7 @@
     <view class="section filter-section">
         <view class="filter-title">选集</view>
         <view class="filter-list">
-            <view class="filter-item" wx:for="{{categories}}" wx:for-item="category" data-code="{{category.code}}" data-type="category" bindtap="pageRedirectTo" wx:key="{{category.code}}">
+            <view class="filter-item" wx:for="{{categories}}" wx:for-item="category" data-code="{{category.code}}" data-type="category" bindtap="pageRedirectTo" wx:key="code">
                 <text>{{category.name}}</text>
                 <text class="profile">{{category.profile}}</text>
             </view>
@@ -47,7 +47,7 @@
     <view class="section filter-section">
         <view class="filter-title">课本</view>
         <view class="filter-list">
-            <view class="filter-item" wx:for="{{books}}" wx:for-item="book" data-code="{{book.code}}" data-type="book" bindtap="pageRedirectTo" wx:key="{{book.code}}">
+            <view class="filter-item" wx:for="{{books}}" wx:for-item="book" data-code="{{book.code}}" data-type="book" bindtap="pageRedirectTo" wx:key="code">
                 <text>{{book.name}}</text>
                 <text class="profile">{{book.profile}}</text>
             </view>

@@ -8,7 +8,7 @@
                 <view id="{{item.name}}"  class="filter-item" data-theme="{{_theme.theme_name}}" data-type="{{item}}" wx:for="{{_theme.types}}"
                       data-id="{{index}}"
                       style="background:{{colors[index]}}"
-                      wx:key="{{item}}"
+                      wx:key="{{index}}"
                       bindtap="getStences"
                       >
                       {{item}}

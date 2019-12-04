@@ -33,7 +33,19 @@ Page({
 		is_show: "visible",
 		is_load: false,
 		show_canvas: false,
-		is_ipx: app.globalData.isIpx
+		is_ipx: app.globalData.isIpx,
+		dialogShow: false,
+	},
+	dialogSave: function(params) {
+		this.setData({
+			dialogShow: false
+		})
+	},
+	dialogCancel: function() { 
+		this.setData({
+			dialogShow: false,
+			show_canvas: false
+		})
 	},
 	// 获取用户id
 	getUserId: function() {
@@ -156,13 +168,21 @@ Page({
 		let font_size = 18 * pixelRatio + "px";
 		ctx.font = "normal normal normal " + font_size + " Microsoft YaHei";
 		// 背景图
-		ctx.drawImage(
-			filePath,
+		// ctx.drawImage(
+		// 	filePath,
+		// 	0,
+		// 	0,
+		// 	winWidth * pixelRatio,
+		// 	winHeight * pixelRatio
+		// );
+		canvas.drawRect(
+			ctx,
 			0,
 			0,
 			winWidth * pixelRatio,
-			winHeight * pixelRatio
-		);
+			winHeight * pixelRatio,
+			'#fff'
+		)
 		// 左上角文字框
 		canvas.drawRect(
 			ctx,
@@ -303,7 +323,8 @@ Page({
 		console.log("---click---me");
 		let that = this;
 		that.setData({
-			show_canvas: true
+			show_canvas: true,
+			dialogShow: true
 		});
 		if (!that.data.canvas_img) {
 			wx.showLoading({
