@@ -28,24 +28,24 @@ Page({
 		is_loading: true,
 		animationData: {},
 		filePath: null,
-		pixelRatio: 1,
+		DPR: 1,
 		canvas_img: null,
 		is_show: "visible",
 		is_load: false,
 		show_canvas: false,
 		is_ipx: app.globalData.isIpx,
-		dialogShow: false,
+		dialogShow: false
 	},
 	dialogSave: function(params) {
 		this.setData({
 			dialogShow: false
-		})
+		});
 	},
-	dialogCancel: function() { 
+	dialogCancel: function() {
 		this.setData({
 			dialogShow: false,
 			show_canvas: false
-		})
+		});
 	},
 	// 获取用户id
 	getUserId: function() {
@@ -154,141 +154,88 @@ Page({
 	},
 	// context.font="italic small-caps bold 12px arial";
 	// canvas 画图
-	drawImage: function(file_path) {
+	drawImage: function() {
 		let that = this;
-		let pixelRatio = that.data.pixelRatio;
+		let DPR = that.data.DPR;
 		let winWidth = that.data.winWidth;
 		let winHeight = that.data.winHeight;
-		let filePath = file_path ? file_path : filePath;
-		let date = until.formatDate();
-		const scale = 1 / pixelRatio;
+		const scale = 1 / DPR;
 		const ctx = wx.createCanvasContext("myCanvas");
 		// 全局设置
 		// ctx.setGlobalAlpha(0.8);
-		let font_size = 18 * pixelRatio + "px";
+		let font_size = 18 * DPR + "px";
 		ctx.font = "normal normal normal " + font_size + " Microsoft YaHei";
-		// 背景图
-		// ctx.drawImage(
-		// 	filePath,
-		// 	0,
-		// 	0,
-		// 	winWidth * pixelRatio,
-		// 	winHeight * pixelRatio
-		// );
-		canvas.drawRect(
-			ctx,
-			0,
-			0,
-			winWidth * pixelRatio,
-			winHeight * pixelRatio,
-			'#fff'
-		)
-		// 左上角文字框
-		canvas.drawRect(
-			ctx,
-			20 * pixelRatio,
-			0,
-			80 * pixelRatio,
-			50 * pixelRatio,
-			"rgba(0,0,0,0.4)"
-		);
-		// 日期
-		font_size = 16 * pixelRatio + "px";
-		canvas.drawText(
-			ctx,
-			"戊戌年",
-			60 * pixelRatio,
-			20 * pixelRatio,
-			"center",
-			"#fff",
-			60 * pixelRatio,
-			"normal normal normal " + font_size + " sans-serif"
-		);
-		canvas.drawText(
-			ctx,
-			date[1] + "-" + date[2],
-			60 * pixelRatio,
-			40 * pixelRatio,
-			"center",
-			"#fff",
-			60 * pixelRatio,
-			"normal normal normal " + font_size + " sans-serif"
-		);
+		// 画布底图
+		canvas.drawRect(ctx, 0, 0, winWidth * DPR, winHeight * DPR, "#fff");
 		// 正文
-		font_size = 14 * pixelRatio + "px";
+		font_size = 14 * DPR + "px";
 		console.log("normal normal normal " + font_size + ' "Microsoft YaHei""');
 		// 诗词内容
 		let text_y = 40 + 20 + 15;
-		// 底部白框
-		canvas.drawRect(
-			ctx,
-			0,
-			(winHeight - 145 - text_y / 2) * pixelRatio,
-			winWidth * pixelRatio,
-			winHeight * pixelRatio,
-			"rgba(255,255,255,0.8)"
-		);
-		// 正文框
-		canvas.drawRect(
-			ctx,
-			20 * pixelRatio,
-			(winHeight - 140 - text_y) * pixelRatio,
-			(winWidth - 40) * pixelRatio,
-			text_y * pixelRatio,
-			"rgba(255,255,255,0.9)"
-		);
 		// 标题
-		font_size = 18 * pixelRatio + "px";
-		canvas.drawText(
-			ctx,
-			that.data.sentence.title,
-			(winWidth * pixelRatio) / 2,
-			(winHeight - 110 - text_y) * pixelRatio,
-			"center",
-			"#333",
-			(winWidth - 80) * pixelRatio,
-			"normal normal bold " + font_size + " sans-serif"
-		);
+		font_size = 26 * DPR + "px";
+		const sentenceArr = this.splitSentence(that.data.sentence.title);
+		let textX = winWidth * 0.85;
+		sentenceArr.forEach(item => {
+			canvas.drawTextVertical(
+				ctx,
+				item,
+				textX * DPR,
+				(winHeight * 0.3 - text_y) * DPR,
+				"center",
+				"#333",
+				"normal normal normal " + font_size + " sans-serif"
+			);
+			textX -= 50;
+		});
+
+		// canvas.drawText(
+		// 	ctx,
+		// 	that.data.sentence.title,
+		// 	(winWidth * DPR) / 2,
+		// 	(winHeight - 110 - text_y) * DPR,
+		// 	"center",
+		// 	"#333",
+		// 	(winWidth - 80) * DPR,
+		// 	"normal normal bold " + font_size + " sans-serif"
+		// );
+
 		// 作者
-		font_size = 14 * pixelRatio + "px";
-		let author = that.data.poem.author + " | " + that.data.poem.dynasty;
-		canvas.drawText(
+		font_size = 22 * DPR + "px";
+		let author = that.data.poem.author;
+		canvas.drawTextVertical(
 			ctx,
 			author,
-			(winWidth * pixelRatio) / 2,
-			(winHeight - 85 - text_y) * pixelRatio,
-			"center",
-			"#808080",
-			(winWidth - 90) * pixelRatio,
-			"normal normal bold " + font_size + " sans-serif"
+			winWidth*0.15 * DPR,
+			(winHeight * 0.3 - text_y) * DPR,
+			"left",
+			"#333",
+			"normal normal normal " + font_size + " sans-serif"
 		);
-		// 二维码左侧文字
-		// ctx.font = 15*pixelRatio+'px';
-		ctx.fillStyle = "#333";
-		ctx.setTextAlign("center");
-		ctx.fillText(
-			"更多古诗词内容",
-			((winWidth - 130) / 2) * pixelRatio,
-			(winHeight - 55) * pixelRatio
-		);
-		ctx.fillText(
-			"长按二维码进入",
-			((winWidth - 130) / 2) * pixelRatio,
-			(winHeight - 35) * pixelRatio
-		);
+		// canvas.drawText(
+		// 	ctx,
+		// 	author,
+		// 	(winWidth * DPR) / 2,
+		// 	(winHeight - 85 - text_y) * DPR,
+		// 	"center",
+		// 	"#808080",
+		// 	(winWidth - 90) * DPR,
+		// 	"normal normal bold " + font_size + " sans-serif"
+		// );
 		// 二维码
 		let codePath = codePath ? codePath : "/images/xcx1.jpg";
-		let img_width = 30;
-		let img_x = winWidth - 135;
-		let img_y = winHeight - 80;
+
+		let img_width = 30; // 半径
+		let img_x = (winWidth - 60) / 2; // 左上角横坐标
+		let img_y = winHeight - 80; // 左上角纵坐标
 		canvas.drawCircleImage(
 			ctx,
-			(img_width + 5) * pixelRatio,
-			img_width * 2 * pixelRatio,
-			(img_x + 30) * pixelRatio,
-			(img_y + 30) * pixelRatio,
-			img_x * pixelRatio,
-			img_y * pixelRatio,
+			(img_width + 5) * DPR,
+			img_width * 2 * DPR,
+			(img_x + 30) * DPR,
+			(img_y + 30) * DPR,
+			img_x * DPR,
+			img_y * DPR,
 			codePath
 		);
 		// 缩放
@@ -299,8 +246,8 @@ Page({
 			wx.canvasToTempFilePath({
 				x: 0,
 				y: 0,
-				width: winWidth * pixelRatio,
-				height: winHeight * pixelRatio,
+				width: winWidth * DPR,
+				height: winHeight * DPR,
 				destWidth: winWidth * 2,
 				destHeight: winHeight * 2,
 				canvasId: "myCanvas",
@@ -330,20 +277,21 @@ Page({
 			wx.showLoading({
 				title: "图片生成中..."
 			});
-			until
-				.downImage(bg_image)
-				.then(res => {
-					console.log("背景图片下载完成---");
-					if (res && res.succeeded) {
-						filePath = res.tempFilePath;
-						console.log("canvas 画图中...");
-						that.drawImage(res.tempFilePath);
-					}
-				})
-				.catch(error => {
-					console.log(error);
-					LOADFAIL()
-				});
+			that.drawImage();
+			// until
+			// 	.downImage(bg_image)
+			// 	.then(res => {
+			// 		console.log("背景图片下载完成---");
+			// 		if (res && res.succeeded) {
+			// 			filePath = res.tempFilePath;
+			// 			console.log("canvas 画图中...");
+
+			// 		}
+			// 	})
+			// 	.catch(error => {
+			// 		console.log(error);
+			// 		LOADFAIL()
+			// 	});
 		}
 	},
 	// 保存图片到本地
@@ -392,7 +340,7 @@ Page({
 			width: 300,
 			id: id
 		};
-		GET_WX_QRCODE('GET',data)
+		GET_WX_QRCODE("GET", data)
 			.then(res => {
 				if (res.data && res.succeeded) {
 					// 下载小程序码都本地
@@ -431,7 +379,7 @@ Page({
 				// console.log(calc)
 				that.setData({
 					winHeight1: calc,
-					pixelRatio: res.pixelRatio,
+					DPR: res.devicePixelRatio,
 					winHeight: clientHeight,
 					winWidth: clientWidth
 				});
@@ -444,9 +392,9 @@ Page({
 		let that = this;
 		const data = {
 			id: that.data.sentence.id,
-			type: 'sentence',
-			user_id: that.data.user_id,
-		 }
+			type: "sentence",
+			user_id: that.data.user_id
+		};
 		if (that.data.user_id < 1) {
 			authLogin.authLogin(
 				"/pages/poem/detail/index?id=" + that.data.sentence.id,
@@ -454,7 +402,7 @@ Page({
 				app
 			);
 		} else {
-			UPDATE_USER_COLLECT('GET',data)
+			UPDATE_USER_COLLECT("GET", data)
 				.then(res => {
 					if (res.data && res.succeeded) {
 						that.setData({
