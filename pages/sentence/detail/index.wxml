@@ -1,85 +1,95 @@
 <!--pages/sentence/detail/index.wxml-->
 <view class="panel">
-    <view class="sentence-section" wx-if="{{sentence}}">
-        <view class="sentence-title">
-            <text class="content" decode='true' selectable='true' wx:if="{{sentence.title_arr}}"
+	<view class="sentence-section" wx-if="{{sentence}}">
+		<view class="sentence-title">
+			<text class="content" decode='true' selectable='true' wx:if="{{sentence.title_arr}}"
                 wx:for="{{sentence.title_arr}}" wx:key="index">{{item}}</text>
-        </view>
-        <view class="sentence-origin">
-            <text class="author" decode='true' selectable='true'>{{author.author_name}}</text> 
-        </view>
-    </view>
-    <view class="weui-media-box__info badge-list">
-        <view class="weui-badge" wx:if="{{types.length>0}}" wx:for="{{types}}" wx:key="unique">{{item}}</view>
-        <view class="weui-badge" wx:if="{{themes.length>0}}" wx:for="{{themes}}" wx:key="unique">{{item}}</view>
-    </view>
-    <view class="weui-loadmore" wx-if="{{is_loading}}">
-        <view class="weui-loading"></view>
-        <view class="weui-loadmore__tips"> 正在加载</view>
-    </view>
-    <!--诗词内容-->
-    <view class="page__bd page__content" wx:if="{{poem}}">
-        <official-account></official-account>
-        <navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover"
-            class="weui-cell poem-item">
-            <view class="poem-title author">{{poem.title}}</view>
-            <view class="poem-author">{{'['+poem.dynasty+'] '+poem.author}}</view>
-            <view class="poem-title content">{{poem.content}}</view>
-        </navigator>
-    </view>
-    <!--button list-->
-    <button class="share {{is_ipx ? 'iphoneX_view' : ''}}" bindtap='canvasToImage' animation="{{animationData}}">
-        <image src='../../../images/icon/share.png'></image>
-    </button>
-    <button class="copy {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="copy">
-        <image src='../../../images/icon/copy.png'></image>
-    </button>
-    <view class="collect {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="updateCollect">
-        <view class="collect-img" wx:if="{{!collect_status}}">
-            <image src="../../../images/icon/collect.png"></image>
-            <view class="text">收藏</view>
-        </view>
-        <view class="collect-img" wx:if="{{collect_status}}">
-            <image src="../../../images/icon/collect_active.png"></image>
-            <view class="text">已收藏</view>
-        </view>
-    </view>
-    <!-- canvas part-->
-    <view class="canvas-content" wx-if="{{show_canvas}}">
-        <view class="canvas" style="visibility:hidden" wx-if="{{!is_load}}">
-            <canvas canvas-id="myCanvas"
-                style="width:{{winWidth*DPR}}px;height:{{winHeight*DPR}}px;transform:scale({{1/DPR}},{{1/DPR}});-webkit-transform:scale({{1/DPR}},{{1/DPR}});visibility:hidden"></canvas>
-        </view>
-        <view class="canvas-image" style="width:{{(winWidth-30)*0.85}}px;height:{{(winHeight-100)*0.85}}px;left:{{(winWidth - (winWidth-30)*0.85)/2}}px">
-            <image src="{{canvas_img}}" style="width:100%;height:100%;" mode="aspectFit"></image>
-        </view>
-    </view>
-    <!-- 快捷导航 -->
-    <shortcut id=""></shortcut>
-    <mp-halfScreenDialog 
-        bindbuttontap="buttontap"
-        show="{{dialogShow}}"
-        maskClosable="{{false}}" 
-        closabled="{{false}}"
-        desc="辅助描述内容，可根据实际需要安排"
-        tips="辅助提示内容，可根据实际需要安排"
-        buttons="{{buttons}}"
-    >
-        <view slot="title" class="dialogContent">
-            <view class="btn">样式1</view>    
-            <view class="btn">样式2</view>    
-            <view class="btn">样式3</view>    
-            <view class="btn">样式4</view>    
-            <view class="btn">样式5</view>    
-        </view>
-        <view slot="footer" class="dialogFooter">
-            <view class="left btn" bindtap="saveImage">保存</view>
-            <view class="left btn">
-                <button class="wechat {{is_ipx ? 'iphoneX_view' : ''}}" open-type="share" plain='true'>
-                    分享
-                </button>
-            </view>
-            <view class="right btn" bindtap="dialogCancel">取消</view>
-        </view>
-    </mp-halfScreenDialog>
+		</view>
+		<view class="sentence-origin">
+			<text class="author" decode='true' selectable='true'>{{author.author_name}}</text>
+		</view>
+	</view>
+	<view class="weui-media-box__info badge-list">
+		<view
+		 class="weui-badge"
+		 wx:if="{{types.length>0}}"
+		 wx:for="{{types}}"
+		 wx:key="unique"
+		>{{item}}
+		</view>
+		<view
+		 class="weui-badge"
+		 wx:if="{{themes.length>0}}"
+		 wx:for="{{themes}}"
+		 wx:key="unique"
+		>{{item}}
+		</view>
+	</view>
+	<view class="weui-loadmore" wx-if="{{is_loading}}">
+		<view class="weui-loading" />
+		<view class="weui-loadmore__tips"> 正在加载</view>
+	</view>
+	<!--诗词内容-->
+	<view class="page__bd page__content" wx:if="{{poem}}">
+		<official-account/>
+		<navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
+			<view class="poem-title author">{{poem.title}}</view>
+			<view class="poem-author">{{'['+poem.dynasty+'] '+poem.author}}</view>
+			<view class="poem-title content">{{poem.content}}</view>
+		</navigator>
+	</view>
+	<!--button list-->
+	<button class="share {{is_ipx ? 'iphoneX_view' : ''}}" bindtap='canvasToImage' animation="{{animationData}}">
+		<image src='../../../images/icon/share.png' />
+	</button>
+	<button class="copy {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="copy">
+		<image src='../../../images/icon/copy.png' />
+	</button>
+	<view class="collect {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="updateCollect">
+		<view class="collect-img" wx:if="{{!collect_status}}">
+			<image src="../../../images/icon/collect.png" />
+			<view class="text">收藏</view>
+		</view>
+		<view class="collect-img" wx:if="{{collect_status}}">
+			<image src="../../../images/icon/collect_active.png" />
+			<view class="text">已收藏</view>
+		</view>
+	</view>
+	<!-- canvas part-->
+	<view class="canvas-content" wx-if="{{show_canvas}}">
+		<view class="canvas" style="visibility:hidden" wx-if="{{!is_load}}">
+			<canvas canvas-id="myCanvas" style="width:{{winWidth*DPR}}px;height:{{winHeight*DPR}}px;transform:scale({{1/DPR}},{{1/DPR}});-webkit-transform:scale({{1/DPR}},{{1/DPR}});visibility:hidden" />
+		</view>
+		<view class="canvas-image" style="width:{{(winWidth-30)*0.85}}px;height:{{(winHeight-100)*0.85}}px;left:{{(winWidth - (winWidth-30)*0.85)/2}}px">
+			<image src="{{canvas_img}}" style="width:100%;height:100%;" mode="aspectFit" />
+		</view>
+	</view>
+	<!-- 快捷导航 -->
+	<shortcut id="" />
+	<mp-halfScreenDialog
+	 bindbuttontap="buttontap"
+	 show="{{dialogShow}}"
+	 maskClosable="{{false}}"
+	 closabled="{{false}}"
+	 desc="辅助描述内容，可根据实际需要安排"
+	 tips="辅助提示内容，可根据实际需要安排"
+	 buttons="{{buttons}}"
+	>
+		<view slot="title" class="dialogContent">
+			<view class="btn">样式1</view>
+			<view class="btn">样式2</view>
+			<view class="btn">样式3</view>
+			<view class="btn">样式4</view>
+			<view class="btn">样式5</view>
+		</view>
+		<view slot="footer" class="dialogFooter">
+			<view class="left btn" bindtap="saveImage">保存</view>
+			<view class="left btn">
+				<button class="wechat {{is_ipx ? 'iphoneX_view' : ''}}" open-type="share" plain='true'>
+					分享
+				</button>
+			</view>
+			<view class="right btn" bindtap="dialogCancel">取消</view>
+		</view>
+	</mp-halfScreenDialog>
 </view>
