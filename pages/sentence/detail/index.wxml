@@ -71,8 +71,6 @@
 	 show="{{dialogShow}}"
 	 maskClosable="{{false}}"
 	 closabled="{{false}}"
-	 desc="辅助描述内容，可根据实际需要安排"
-	 tips="辅助提示内容，可根据实际需要安排"
 	 buttons="{{buttons}}"
 	>
 		<view slot="title" class="dialogContent">
