@@ -1,6 +1,9 @@
 /* pages/poem/detail/index.wxss */
-.page {
-	padding-bottom: 100px;
+page,.panel{
+	background-color: #f5f5f5;
+}
+.panel{
+	padding-bottom: 40px;
 }
 .weui-media-box__title {
 	white-space: initial;
@@ -67,22 +70,23 @@
 .sentence-section {
 	clear: both;
 	overflow: hidden;
-	padding: 10px 10px;
+	min-height: 60Vh;
+	margin: 8% 6%;
 	position: relative;
+	background-color: #fff;
 }
 .sentence-title {
 	color: #333;
 	width: 100%;
-	font-size: large;
+	font-size: x-large;
 	writing-mode: vertical-rl;
-	border: 2px solid #000;
-	/* padding: 30px 15px; */
+	padding: 0 15px;
+	box-sizing: border-box;
 }
 .sentence-title text {
 	display: block;
 	letter-spacing: 3px;
 	padding: 60px 5px;
-	border-left: 1px solid #000;
 }
 .sentence-origin {
 	text-align: right;

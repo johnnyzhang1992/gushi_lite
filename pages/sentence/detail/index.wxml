@@ -9,7 +9,7 @@
 			<text class="author" decode='true' selectable='true'>{{author.author_name}}</text>
 		</view>
 	</view>
-	<view class="weui-media-box__info badge-list">
+	<!-- <view class="weui-media-box__info badge-list">
 		<view
 		 class="weui-badge"
 		 wx:if="{{types.length>0}}"
@@ -24,7 +24,7 @@
 		 wx:key="unique"
 		>{{item}}
 		</view>
-	</view>
+	</view> -->
 	<view class="weui-loadmore" wx-if="{{is_loading}}">
 		<view class="weui-loading" />
 		<view class="weui-loadmore__tips"> 正在加载</view>
@@ -91,3 +91,4 @@
 		</view>
 	</mp-halfScreenDialog>
 </view>
+

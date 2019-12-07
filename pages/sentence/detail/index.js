@@ -158,7 +158,7 @@ Page({
 		let that = this;
 		let DPR = that.data.DPR;
 		let winWidth = that.data.winWidth;
-		let winHeight = that.data.winHeight;
+		let winHeight = that.data.winWidth/0.75;
 		const scale = 1 / DPR;
 		const ctx = wx.createCanvasContext("myCanvas");
 		// 全局设置
@@ -168,12 +168,7 @@ Page({
 		// 画布底图
 		canvas.drawRect(ctx, 0, 0, winWidth * DPR, winHeight * DPR, "#fff");
 		// 正文
-		font_size = 14 * DPR + "px";
-		console.log("normal normal normal " + font_size + ' "Microsoft YaHei""');
-		// 诗词内容
-		let text_y = 40 + 20 + 15;
-		// 标题
-		font_size = 26 * DPR + "px";
+		font_size = 22 * DPR;
 		const sentenceArr = this.splitSentence(that.data.sentence.title);
 		let textX = winWidth * 0.85;
 		sentenceArr.forEach(item => {
@@ -181,19 +176,19 @@ Page({
 				ctx,
 				item,
 				textX * DPR,
-				(winHeight * 0.3 - text_y) * DPR,
+				(winHeight * 0.15) * DPR,
 				"center",
 				"#333",
-				"normal normal normal " + font_size + " sans-serif"
+				font_size
 			);
-			textX -= 50;
+			textX -= 40;
 		});
 
 		// canvas.drawText(
 		// 	ctx,
 		// 	that.data.sentence.title,
 		// 	(winWidth * DPR) / 2,
-		// 	(winHeight - 110 - text_y) * DPR,
+		// 	(winHeight - 110) * DPR,
 		// 	"center",
 		// 	"#333",
 		// 	(winWidth - 80) * DPR,
@@ -201,16 +196,16 @@ Page({
 		// );
 
 		// 作者
-		font_size = 22 * DPR + "px";
+		font_size = 18 * DPR;
 		let author = that.data.poem.author;
 		canvas.drawTextVertical(
 			ctx,
 			author,
-			winWidth*0.15 * DPR,
-			(winHeight * 0.3 - text_y) * DPR,
+			winWidth*0.12 * DPR,
+			(winHeight * 0.85-18*3) * DPR,
 			"left",
 			"#333",
-			"normal normal normal " + font_size + " sans-serif"
+			font_size
 		);
 		// canvas.drawText(
 		// 	ctx,
@@ -222,22 +217,23 @@ Page({
 		// 	(winWidth - 90) * DPR,
 		// 	"normal normal bold " + font_size + " sans-serif"
 		// );
-		// 二维码
-		let codePath = codePath ? codePath : "/images/xcx1.jpg";
 
-		let img_width = 30; // 半径
-		let img_x = (winWidth - 60) / 2; // 左上角横坐标
-		let img_y = winHeight - 80; // 左上角纵坐标
-		canvas.drawCircleImage(
-			ctx,
-			(img_width + 5) * DPR,
-			img_width * 2 * DPR,
-			(img_x + 30) * DPR,
-			(img_y + 30) * DPR,
-			img_x * DPR,
-			img_y * DPR,
-			codePath
-		);
+		// 二维码
+		// let codePath = codePath ? codePath : "/images/xcx1.jpg";
+
+		// let img_width = 30; // 半径
+		// let img_x = (winWidth - 60) / 2; // 左上角横坐标
+		// let img_y = winHeight - 80; // 左上角纵坐标
+		// canvas.drawCircleImage(
+		// 	ctx,
+		// 	(img_width + 5) * DPR,
+		// 	img_width * 2 * DPR,
+		// 	(img_x + 30) * DPR,
+		// 	(img_y + 30) * DPR,
+		// 	img_x * DPR,
+		// 	img_y * DPR,
+		// 	codePath
+		// );
 		// 缩放
 		ctx.scale(scale, scale);
 		// 画图
@@ -308,15 +304,10 @@ Page({
 				console.log("图片保存完成");
 				wx.hideLoading();
 				wx.showToast({
-					title: "成功保存到系统相册",
-					icon: "none",
+					title: "已保存成功",
+					icon: "success",
 					duration: 2000
 				});
-				setTimeout(() => {
-					that.setData({
-						show_canvas: false
-					});
-				}, 2000);
 			},
 			fail: res => {
 				console.log(res);

@@ -59,19 +59,19 @@ const drawText = function(ctx, text, x, y, align, color, width, font) {
 //纵向排版文字
 /**
  *
- * @param {*} ctx
- * @param {*} text
- * @param {*} x
- * @param {*} y
- * @param {*} align
+ * @param {Object} ctx
+ * @param {String} text
+ * @param {String} x
+ * @param {Number} y
+ * @param {String} align
  * @param {*} color
- * @param {*} width
- * @param {*} font
+ * @param {Number} width
+ * @param {Number} fontSize 字体大小
  */
-const drawTextVertical = function(ctx, text, x, y, align, color, font) {
-	if (font) {
-		ctx.font = font;
-	}
+const drawTextVertical = function(ctx, text, x, y, align, color, fontSize) {
+    if (fontSize) {
+        ctx.setFontSize(fontSize);
+    }
 	ctx.fillStyle = color;
 	ctx.setTextAlign(align);
     var arrText = text.split("");
@@ -79,7 +79,7 @@ const drawTextVertical = function(ctx, text, x, y, align, color, font) {
         // return 26;
         const metrics = ctx.measureText(letter);
         const width = metrics.width;
-        return width+30;
+        return width+20;
       });
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
