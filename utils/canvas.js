@@ -48,9 +48,9 @@ const drawRect = function(ctx, x, y, width, height, color) {
 	ctx.fill();
 };
 // 文字
-const drawText = function(ctx, text, x, y, align, color, width, font) {
-	if (font) {
-		ctx.font = font;
+const drawText = function(ctx, text, x, y, align, color, width, fontSize) {
+	if (fontSize) {
+        ctx.setFontSize(fontSize);
 	}
 	ctx.fillStyle = color;
 	ctx.setTextAlign(align);

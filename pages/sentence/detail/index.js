@@ -135,7 +135,7 @@ Page({
 				}
 				wx.hideLoading();
 				wx.stopPullDownRefresh();
-				that.getCodeImage("sentence", sentence_id);
+				// that.getCodeImage("sentence", sentence_id);
 			})
 			.catch(err => {
 				console.log(err);
@@ -163,12 +163,12 @@ Page({
 		const ctx = wx.createCanvasContext("myCanvas");
 		// 全局设置
 		// ctx.setGlobalAlpha(0.8);
-		let font_size = 18 * DPR + "px";
-		ctx.font = "normal normal normal " + font_size + " Microsoft YaHei";
+		let fontSize = 18 * DPR;
+		ctx.setFontSize(fontSize)
 		// 画布底图
 		canvas.drawRect(ctx, 0, 0, winWidth * DPR, winHeight * DPR, "#fff");
 		// 正文
-		font_size = 22 * DPR;
+		fontSize = 22 * DPR;
 		const sentenceArr = this.splitSentence(that.data.sentence.title);
 		let textX = winWidth * 0.85;
 		sentenceArr.forEach(item => {
@@ -179,7 +179,7 @@ Page({
 				(winHeight * 0.15) * DPR,
 				"center",
 				"#333",
-				font_size
+				fontSize
 			);
 			textX -= 40;
 		});
@@ -192,11 +192,11 @@ Page({
 		// 	"center",
 		// 	"#333",
 		// 	(winWidth - 80) * DPR,
-		// 	"normal normal bold " + font_size + " sans-serif"
+		// 	fontSize
 		// );
 
 		// 作者
-		font_size = 18 * DPR;
+		fontSize = 18 * DPR;
 		let author = that.data.poem.author;
 		canvas.drawTextVertical(
 			ctx,
@@ -205,7 +205,7 @@ Page({
 			(winHeight * 0.85-18*3) * DPR,
 			"left",
 			"#333",
-			font_size
+			fontSize
 		);
 		// canvas.drawText(
 		// 	ctx,
@@ -215,7 +215,7 @@ Page({
 		// 	"center",
 		// 	"#808080",
 		// 	(winWidth - 90) * DPR,
-		// 	"normal normal bold " + font_size + " sans-serif"
+		// 	fontSize
 		// );
 
 		// 二维码
@@ -292,7 +292,6 @@ Page({
 	},
 	// 保存图片到本地
 	saveImage: function() {
-		let that = this;
 		let file_path = this.data.canvas_img;
 		wx.showLoading({
 			title: "正在保存图片..."
