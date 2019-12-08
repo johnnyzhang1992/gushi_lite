@@ -22,6 +22,6 @@ page {
     color: #333;
 }
 .top-section .profile {
-    color: #999;
+    color: #888;
     font-size: 0.7em;
 }

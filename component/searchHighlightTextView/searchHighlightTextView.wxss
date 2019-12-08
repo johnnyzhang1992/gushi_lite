@@ -19,5 +19,5 @@
   color: #333;
 }
 .poem-title .normal {
-  color: #999;
+  color: #888;
 }

@@ -46,7 +46,7 @@
     font-size: 14px;
 }
 .poem-item .poem-author{
-    color: #999;
+    color: #888;
     font-size: 12px;
     float: right;
     max-width: 72%;
@@ -58,7 +58,7 @@
     color: #454545;
 }
 .poem-item .collect{
-  color:#999;
+  color:#888;
   font-size:12px;
   padding-top:5px;
 }

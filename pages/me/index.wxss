@@ -97,7 +97,7 @@
 }
 
 .poem-item .poem-author {
-  color: #999;
+  color: #888;
   font-size: 12px;
   /* padding: 5px 0; */
   display: inline-block;

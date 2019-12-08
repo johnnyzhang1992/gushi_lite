@@ -59,7 +59,7 @@ page,.panel{
 .poem-bg {
 	padding: 10px 15px 0 15px;
 	font-size: 13px;
-	color: #999;
+	color: #888;
 	text-align: justify;
 	display: block;
 	text-indent: 2em;
@@ -67,48 +67,21 @@ page,.panel{
 .page__content {
 	padding-bottom: 0;
 }
-.sentence-section {
-	clear: both;
-	overflow: hidden;
-	min-height: 60Vh;
-	margin: 8% 6%;
-	position: relative;
-	background-color: #fff;
-}
-.sentence-title {
-	color: #333;
-	width: 100%;
-	font-size: x-large;
-	writing-mode: vertical-rl;
-	padding: 0 15px;
-	box-sizing: border-box;
-}
-.sentence-title text {
-	display: block;
-	letter-spacing: 3px;
-	padding: 60px 5px;
-}
-.sentence-origin {
+/* top section */
+.top-section{
+	margin: 15px 6% 0 6%;
 	text-align: right;
-	writing-mode: vertical-lr;
-	font-size: large;
-	position: absolute;
-	left: 10px;
-	height: calc(100% - 20px);
 }
-.sentence-origin .author {
-    font-size: 0.8em;
+.top-section image{
+	width: 22px;
+	height: 22px;
 	display: block;
-    text-align: right;
-    padding: 20px 10px;
-    box-sizing: border-box;
 }
-.sentence-content {
-	font-size: 14px;
-	padding: 0 15px;
-}
-.sentence-content .normal {
-	color: #999;
+.top-btn,.top-collect{
+	display: inline-block;
+	padding: 6px 12px;
+	background-color: #337ab7;
+	margin-left: 10px;
 }
 .collect {
 	position: fixed;
@@ -130,7 +103,7 @@ page,.panel{
 	vertical-align: bottom;
 }
 .collect-img .text {
-	display: inline-block;
+	display: none;
 	line-height: 24px;
 	padding-left: 5px;
 }
@@ -150,13 +123,51 @@ page,.panel{
 	height: 22px;
 	display: block;
 }
-.audio.iphoneX_view,
-.copy.iphoneX_view,
-.share.iphoneX_view,
-.return.iphoneX_view {
-	bottom: 84px;
-}
 
+.sentence-section {
+	clear: both;
+	overflow: hidden;
+	min-height: 60Vh;
+	margin: 4% 6% 8% 6%;
+	position: relative;
+	background-color: #fff;
+	font-family: SimSun, FangSong, STSong, STZhongsong, LiSu, KaiTi, "Microsoft YaHei";
+}
+.sentence-title {
+	color: #333;
+	width: 100%;
+	font-size: x-large;
+	writing-mode: vertical-rl;
+	padding: 0 15px;
+	box-sizing: border-box;
+}
+.sentence-title text {
+	display: block;
+	letter-spacing: 3px;
+	padding: 60px 0;
+}
+.sentence-origin {
+	text-align: right;
+	writing-mode: vertical-lr;
+	font-size: large;
+	position: absolute;
+	left: 10px;
+	height: calc(100% - 20px);
+}
+.sentence-origin .author {
+    font-size: 0.8em;
+	display: block;
+    text-align: right;
+    padding: 20px 10px;
+    box-sizing: border-box;
+}
+.sentence-content {
+	font-size: 14px;
+	padding: 0 15px;
+}
+.sentence-content .normal {
+	color: #888;
+}
 .navigator-hover {
 	background-color: #fff;
 	color: #337ab7;
@@ -192,11 +203,11 @@ page,.panel{
 }
 .poem-item .poem-title.content {
 	font-size: 13px;
-	color: #999;
+	color: #888;
 	margin-top: 5px;
 }
 .poem-item .poem-author {
-	color: #999;
+	color: #888;
 	font-size: 13px;
 	/* padding: 5px 0; */
 	position: absolute;
@@ -227,23 +238,6 @@ canvas {
 	transform-origin: 0 0;
 	-webkit-transform-origin: 0 0;
 	/* display: none; */
-}
-.save_image {
-	position: fixed;
-	bottom: 20px;
-	/* left: 30px; */
-	/* margin-right: -70px; */
-	background: #43ce7b;
-	color: #fff;
-	border-radius: 8px;
-	padding: 6px 12px;
-	z-index: 9999;
-}
-.save_image:first-child {
-	left: 30px;
-}
-.save_image.not {
-	right: 30px;
 }
 .canvas {
 	/*visibility:hidden;*/

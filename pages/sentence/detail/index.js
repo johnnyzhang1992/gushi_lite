@@ -145,7 +145,7 @@ Page({
 	// 拆分词句
 	splitSentence: function(sentence) {
 		// 替代特殊符号 。。
-		let pattern = new RegExp("[。，.、!！]", "g");
+		let pattern = new RegExp("[。，.、!！?？]", "g");
 		sentence = sentence.replace(/，/g, ",");
 		sentence = sentence.replace(pattern, ",");
 		return sentence.split(",").filter(item => {
@@ -181,7 +181,7 @@ Page({
 				"#333",
 				fontSize
 			);
-			textX -= 40;
+			textX -= 35 ;
 		});
 
 		// canvas.drawText(
@@ -398,6 +398,19 @@ Page({
 						that.setData({
 							collect_status: res.data.status
 						});
+						if (res.data.status) {
+							wx.showToast({
+								title: "收藏成功",
+								icon: "success",
+								duration: 2000
+							});
+						} else { 
+							wx.showToast({
+								title: "取消收藏成功",
+								icon: "success",
+								duration: 2000
+							});
+						}
 					} else {
 						that.setData({
 							collect_status: res.data.status

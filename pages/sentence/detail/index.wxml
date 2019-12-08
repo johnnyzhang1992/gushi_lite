@@ -1,5 +1,22 @@
 <!--pages/sentence/detail/index.wxml-->
 <view class="panel">
+	<view class="top-section">
+        <!--button list-->
+        <button class="top-collect" bindtap="updateCollect">
+			<view class="collect-img" wx:if="{{!collect_status}}">
+				<image src="../../../images/icon/like.png" />
+			</view>
+			<view class="collect-img" wx:if="{{collect_status}}">
+				<image src="../../../images/icon/liked.png" />
+			</view>
+		</button>
+        <button class="top-copy top-btn" bindtap="copy">
+			<image src='../../../images/icon/copy.png' />
+		</button>
+		<button class="top-share top-btn" bindtap='canvasToImage' animation="{{animationData}}">
+			<image src='../../../images/icon/share.png' />
+		</button>
+	</view>
 	<view class="sentence-section" wx-if="{{sentence}}">
 		<view class="sentence-title">
 			<text class="content" decode='true' selectable='true' wx:if="{{sentence.title_arr}}"
@@ -9,22 +26,6 @@
 			<text class="author" decode='true' selectable='true'>{{author.author_name}}</text>
 		</view>
 	</view>
-	<!-- <view class="weui-media-box__info badge-list">
-		<view
-		 class="weui-badge"
-		 wx:if="{{types.length>0}}"
-		 wx:for="{{types}}"
-		 wx:key="unique"
-		>{{item}}
-		</view>
-		<view
-		 class="weui-badge"
-		 wx:if="{{themes.length>0}}"
-		 wx:for="{{themes}}"
-		 wx:key="unique"
-		>{{item}}
-		</view>
-	</view> -->
 	<view class="weui-loadmore" wx-if="{{is_loading}}">
 		<view class="weui-loading" />
 		<view class="weui-loadmore__tips"> 正在加载</view>
@@ -37,23 +38,6 @@
 			<view class="poem-author">{{'['+poem.dynasty+'] '+poem.author}}</view>
 			<view class="poem-title content">{{poem.content}}</view>
 		</navigator>
-	</view>
-	<!--button list-->
-	<button class="share {{is_ipx ? 'iphoneX_view' : ''}}" bindtap='canvasToImage' animation="{{animationData}}">
-		<image src='../../../images/icon/share.png' />
-	</button>
-	<button class="copy {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="copy">
-		<image src='../../../images/icon/copy.png' />
-	</button>
-	<view class="collect {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="updateCollect">
-		<view class="collect-img" wx:if="{{!collect_status}}">
-			<image src="../../../images/icon/collect.png" />
-			<view class="text">收藏</view>
-		</view>
-		<view class="collect-img" wx:if="{{collect_status}}">
-			<image src="../../../images/icon/collect_active.png" />
-			<view class="text">已收藏</view>
-		</view>
 	</view>
 	<!-- canvas part-->
 	<view class="canvas-content" wx-if="{{show_canvas}}">

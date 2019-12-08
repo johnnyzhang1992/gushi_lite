@@ -11,9 +11,6 @@ button{
 audio{
   text-align:left;
 }
-.audio-buttons{
-  /* margin-top: 10px; */
-}
 .weui-media-box__title{
   white-space:initial;
   font-size: 12px;
@@ -29,7 +26,7 @@ audio{
 }
 .xu{
   margin-bottom: 10px;
-  color: #999;
+  color: #888;
   text-align: justify;
   text-indent: 2em;
 }

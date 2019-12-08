@@ -50,7 +50,7 @@
 }
 .poem-item .poem-title.content{
     font-size: 28rpx;
-    color: #999;
+    color: #888;
     margin-top: 5px;
     text-overflow:ellipsis;
     white-space:nowrap;
@@ -58,7 +58,7 @@
 }
 
 .poem-item .poem-author{
-    color: #999;
+    color: #888;
     font-size: 13px;
     position:absolute;
     right:0;

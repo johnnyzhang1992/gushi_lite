@@ -22,7 +22,7 @@
 
 .xu {
   margin-bottom: 10px;
-  color: #999;
+  color: #888;
   text-align: center;
   text-indent: 2em;
   font-size: 30rpx;
@@ -83,7 +83,7 @@
 .poem-bg {
   padding: 10px 15px 0 15px;
   font-size: 13px;
-  color: #999;
+  color: #888;
   text-align: justify;
   display: block;
   text-indent: 2em;
