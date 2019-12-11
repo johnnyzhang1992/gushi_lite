@@ -128,7 +128,7 @@ page,.panel{
 	clear: both;
 	overflow: hidden;
 	min-height: 60Vh;
-	margin: 4% 6% 8% 6%;
+	margin: 2% 6% 8% 6%;
 	position: relative;
 	background-color: #fff;
 	font-family: SimSun, FangSong, STSong, STZhongsong, LiSu, KaiTi, "Microsoft YaHei";

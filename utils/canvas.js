@@ -24,7 +24,7 @@ const findBreakPoint = function(text, width, context) {
 const breakLinesForCanvas = function(context, text, width, font) {
 	let result = [];
 	if (font) {
-		context.font = font;
+		context.setFontSize(font);
 	}
 	let textArray = text.split("\r\n");
 	for (let i = 0; i < textArray.length; i++) {
@@ -64,7 +64,7 @@ const drawText = function(ctx, text, x, y, align, color, width, fontSize) {
  * @param {String} x
  * @param {Number} y
  * @param {String} align
- * @param {*} color
+ * @param {String} color
  * @param {Number} width
  * @param {Number} fontSize 字体大小
  */
@@ -109,14 +109,14 @@ const drawTextVertical = function(ctx, text, x, y, align, color, fontSize) {
 // 圆形图片
 /**
  *
- * @param {*} ctx
- * @param {半径} c_width
- * @param {图片宽度} img_width
- * @param {圆心横坐标} x
- * @param {圆心纵坐标} y
- * @param {左上方横坐标} x1
- * @param {左上方纵坐标} y1
- * @param {图片地址} img_url
+ * @param {Object} ctx
+ * @param {Number} c_width 半径
+ * @param {Number} img_width 图片宽度
+ * @param {Number} x 圆心横坐标
+ * @param {Number} y 圆心纵坐标
+ * @param {Number} x1 左上方横坐标
+ * @param {Number} y1 左上方纵坐标
+ * @param {String} img_url 图片地址
  */
 const drawCircleImage = function(
 	ctx,
