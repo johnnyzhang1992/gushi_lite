@@ -231,17 +231,35 @@ Page({
 		let winHeight = that.data.winHeight;
 		const scale = 1 / pixelRatio;
 		const ctx = wx.createCanvasContext("myCanvas");
+		console.log(ctx);
 		// 全局设置
 		// ctx.setGlobalAlpha(0.8);
 		let font_size = 16 * pixelRatio;
 		ctx.setFontSize(font_size);
 		// 计算画布高度
-		let canvasHeight = 80;
+		let canvasHeight = 200;
 		// 计算标题高度
-		ctx.font=`normal normal normal ${font_size}px/${font_size+20 * pixelRatio}px FangSong, STSong, STZhongsong, LiSu, KaiTi, "Microsoft YaHei"`;
+		ctx.font = `normal normal normal ${font_size}px/${font_size +
+			20 * pixelRatio}px FangSong, STSong, STZhongsong,"Microsoft YaHei"`;
 		// measureText
 		// 计算作者朝代+高度
 		// 计算正文
+		// 正文
+		let result = [];
+		font_size = 16 * pixelRatio;
+		content.forEach(item => {
+			const itemArr = canvas.breakLinesForCanvas(
+				ctx,
+				poemType === "诗" ? item : "    " + item,
+				winWidth * 0.8 * pixelRatio,
+				font_size
+			);
+			result.push(itemArr);
+		});
+		result.forEach(item => { 
+			canvasHeight = canvasHeight + (Array.isArray(item) ? item.length * 28: 28);
+
+		})
 		// 计算二维码高度
 
 		// 画布背景
@@ -250,33 +268,14 @@ Page({
 			0,
 			0,
 			winWidth * pixelRatio,
-			winHeight * pixelRatio,
+			canvasHeight * pixelRatio,
 			"#fff"
 		);
-		// 正文
-		let result = [];
-		font_size = 16 * pixelRatio;
-		content.forEach((item, index) => {
-			result.push(
-				canvas.breakLinesForCanvas(
-					ctx,
-					poemType ==='诗' ? item : '    '+item,
-					(winWidth*0.85) * pixelRatio,
-					font_size
-				)
-			);
-		});
+
 		// 诗词内容
-		let text_y = winHeight*0.15;
-		let line_number = 0;
-		result.forEach(item => {
-			if (line_number < 13) {
-				item.map(_item => {
-					line_number = line_number + 1;
-				});
-			}
-		});
-		
+		let text_y = 40 * pixelRatio;
+		let line_number = result.length;
+
 		// 标题
 		font_size = 18 * pixelRatio;
 		canvas.drawText(
@@ -306,37 +305,25 @@ Page({
 		text_y = text_y + 40;
 		// 古诗词正文
 		line_number = 0;
+		console.log(result);
 		result.forEach(item => {
-			if (line_number < 13) {
-				item.forEach((_item, index) => {
-					line_number = line_number + 1;
-					if (index < item.length - 1 || item.length < 2) {
-						canvas.drawText(
-							ctx,
-							_item,
-							poemType ==='诗' ? (winWidth / 2) * pixelRatio : winWidth*0.075*pixelRatio,
-							(text_y) * pixelRatio,
-							poemType ==='诗' ? "center": 'left',
-							"#333",
-							(winWidth*0.85) * pixelRatio,
-							font_size
-						);
-					} else {
-						canvas.drawText(
-							ctx,
-							_item,
-							poemType ==='诗' ? (winWidth / 2) * pixelRatio : winWidth*0.075*pixelRatio,
-							(text_y) * pixelRatio,
-							poemType ==='诗' ? "center": 'left',
-							"#333",
-							(winWidth*0.85) * pixelRatio,
-							font_size
-						);
-					}
-					text_y = text_y+ 24;
-				});
-				text_y = text_y + 26;
-			}
+			item.forEach(_item => {
+				line_number = line_number + 1;
+				canvas.drawText(
+					ctx,
+					_item,
+					poemType === "诗"
+						? (winWidth / 2) * pixelRatio
+						: winWidth * 0.1 * pixelRatio,
+					text_y * pixelRatio,
+					poemType === "诗" ? "center" : "left",
+					"#333",
+					winWidth * 0.8 * pixelRatio,
+					font_size
+				);
+
+				text_y = text_y + 24;
+			});
 		});
 		// 二维码
 		// let codePath = codePath ? codePath : "/images/xcx1.jpg";
