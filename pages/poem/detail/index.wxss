@@ -326,7 +326,10 @@ canvas {
   z-index: 99;
   position: absolute;
   top: 15px;
-  left: 15px;
+  left: 12.5%;
+  width: 75%;
+  height: 75%;
+  overflow: hidden;
 }
 
 .canvas-bottom .wechat {
