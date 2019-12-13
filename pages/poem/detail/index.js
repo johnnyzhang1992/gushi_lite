@@ -51,21 +51,6 @@ Page({
 			url: "/pages/index"
 		});
 	},
-	// new find
-	addNew: function() {
-		let that = this;
-		if (that.data.user_id < 1) {
-			authLogin.authLogin(
-				"/pages/poem/detail/index?id=" + that.data.poem.id,
-				"nor",
-				app
-			);
-		} else {
-			wx.navigateTo({
-				url: "/pages/find/new/index?type=poem&id=" + that.data.poem.id
-			});
-		}
-	},
 	// 滚动切换标签样式
 	switchTab: function(e) {
 		this.setData(
@@ -133,7 +118,7 @@ Page({
 				this.data.poem.title
 		});
 	},
-	// 跳转到音频页面
+	// 复制诗词内容
 	copy: function() {
 		let poem = this.data.poem;
 		let _data =
@@ -220,8 +205,6 @@ Page({
 				LOADFAIL();
 			});
 	},
-
-	// context.font="italic small-caps bold 12px arial";
 	// canvas 画图
 	drawImage: function() {
 		let that = this;
@@ -437,6 +420,7 @@ Page({
 			}
 		});
 	},
+	// 隐藏canvas画布
 	notSaveImage: function() {
 		this.setData({
 			show_canvas: false
@@ -525,9 +509,7 @@ Page({
 							collect_status: res.data.status
 						});
 					} else {
-						that.setData({
-							collect_status: res.data.status
-						});
+						LOADFAIL('更新状态失败，请重试');
 					}
 				})
 				.catch(error => {
