@@ -34,7 +34,8 @@ Page({
 		is_load: false,
 		show_canvas: false,
 		is_ipx: app.globalData.isIpx,
-		dialogShow: false
+		dialogShow: false,
+		add_qrcode: true
 	},
 	dialogSave: function(params) {
 		this.setData({

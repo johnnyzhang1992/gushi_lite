@@ -101,19 +101,30 @@
         <view class="canvas-image">
             <image src="{{canvas_img}}" style="width:100%;height:100%;" mode="aspectFit"></image>
         </view>
-        <view class="canvas-bottom" wx-if="{{is_load}}">
-            <button class="wechat {{is_ipx ? 'iphoneX_view' : ''}}" open-type="share" plain='true'>
-                <image src="../../../images/wechat.png"></image>
-            </button>
-            <view class="wechat quan {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="saveImage">
-                <image src="../../../images/wechat_1.png"></image>
-            </view>
-            <!-- <view class="save_image" bindtap="saveImage"> 保存图片到本地</view> -->
-            <view class="save_image not {{is_ipx ? 'iphoneX_view' : ''}}" bindtap="notSaveImage">
-                退出
-            </view>
-        </view>
     </view>
     <!-- 快捷导航 -->
     <shortcut id=""></shortcut>
+    <mp-halfScreenDialog
+	 bindbuttontap="buttontap"
+	 show="{{dialogShow}}"
+	 maskClosable="{{false}}"
+	 closabled="{{false}}"
+	 buttons="{{buttons}}"
+	>
+		<view slot="title" class="dialogContent">
+			<view class="label">添加</view>
+			<view class="qrcode add">
+				<image src="../../../images/icon/qrcode.png" />
+			</view>
+		</view>
+		<view slot="footer" class="dialogFooter">
+			<view class="left btn" bindtap="saveImage">保存</view>
+			<view class="left btn">
+				<button class="wechat {{is_ipx ? 'iphoneX_view' : ''}}" open-type="share" plain='true'>
+					分享
+				</button>
+			</view>
+			<view class="right btn" bindtap="dialogCancel">取消</view>
+		</view>
+	</mp-halfScreenDialog>
 </view>

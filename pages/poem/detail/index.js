@@ -35,7 +35,9 @@ Page({
 		is_show: "visible",
 		is_load: false,
 		show_canvas: false,
-		is_ipx: app.globalData.isIpx
+		is_ipx: app.globalData.isIpx,
+		dialogShow: false,
+		add_qrcode: true
 	},
 	// 获取用户id
 	getUserId: function() {
@@ -205,8 +207,19 @@ Page({
 				LOADFAIL();
 			});
 	},
+	dialogSave: function(params) {
+		this.setData({
+			dialogShow: false
+		});
+	},
+	dialogCancel: function() {
+		this.setData({
+			dialogShow: false,
+			show_canvas: false
+		});
+	},
 	// canvas 画图
-	drawImage: function() {
+	drawImage: function(add_qrcode) {
 		let that = this;
 		let content = that.data.content.content;
 		let poemType = that.data.poem.type;
@@ -222,6 +235,9 @@ Page({
 			20 * pixelRatio}px FangSong, STSong, STZhongsong,"Microsoft YaHei"`;
 		// 计算画布高度
 		let canvasHeight = 130;
+		if (add_qrcode) { 
+			canvasHeight += 60;
+		}
 		// 计算标题高度
 		let titleArr = [];
 		titleArr = canvas.breakLinesForCanvas(
@@ -321,20 +337,20 @@ Page({
 			}
 		});
 		// 二维码
-		// let codePath = codePath ? codePath : "/images/xcx1.jpg";
-		// let img_width = 30;
-		// let img_x = winWidth - 135;
-		// let img_y = winHeight - 80;
-		// canvas.drawCircleImage(
-		// 	ctx,
-		// 	(img_width + 5) * pixelRatio,
-		// 	img_width * 2 * pixelRatio,
-		// 	(img_x + 30) * pixelRatio,
-		// 	(img_y + 30) * pixelRatio,
-		// 	img_x * pixelRatio,
-		// 	img_y * pixelRatio,
-		// 	codePath
-		// );
+		let codePath = codePath ? codePath : "/images/xcx1.jpg";
+		let img_width = 30;
+		let img_x = winWidth/2;
+		let img_y = text_y+15
+		canvas.drawCircleImage(
+			ctx,
+			(img_width + 5) * pixelRatio,
+			img_width * 2 * pixelRatio,
+			img_x * pixelRatio,
+			(img_y+15) * pixelRatio,
+			(img_x-20) * pixelRatio,
+			(img_y-20) * pixelRatio,
+			codePath
+		);
 		// 缩放
 		ctx.scale(scale, scale);
 		// 画图
@@ -367,27 +383,14 @@ Page({
 		console.log("---click---me");
 		let that = this;
 		that.setData({
-			show_canvas: true
+			show_canvas: true,
+			dialogShow: true
 		});
 		if (!that.data.canvas_img) {
 			wx.showLoading({
 				title: "图片生成中..."
 			});
-			that.drawImage();
-			// until
-			// 	.downImage(bg_image)
-			// 	.then(res => {
-			// 		console.log("背景图片下载完成---");
-			// 		if (res && res.succeeded) {
-			// 			filePath = res.tempFilePath;
-			// 			console.log("canvas 画图中...");
-			// 			that.drawImage(res.tempFilePath);
-			// 		}
-			// 	})
-			// 	.catch(error => {
-			// 		console.log(error);
-			// 		LOADFAIL();
-			// 	});
+			that.drawImage(true);
 		}
 	},
 	// 保存图片到本地
@@ -410,7 +413,8 @@ Page({
 				});
 				setTimeout(() => {
 					that.setData({
-						show_canvas: false
+						show_canvas: false,
+						dialogShow: false
 					});
 				}, 2000);
 			},
