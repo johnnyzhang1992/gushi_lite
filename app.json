@@ -53,7 +53,7 @@
     },
     "plugins": {
         "wechatBot": {
-            "version": "1.1.7",
+            "version": "1.1.10",
             "provider": "wx8c631f7e9f2465e1"
         },
         "WechatSI": {

@@ -37,7 +37,7 @@ Page({
 		show_canvas: false,
 		is_ipx: app.globalData.isIpx,
 		dialogShow: false,
-		add_qrcode: true
+		add_qrcode: false
 	},
 	// 获取用户id
 	getUserId: function() {
@@ -199,15 +199,13 @@ Page({
 			})
 			.then(() => {
 				that.renderTagList();
-				// 获取小程序码
-				// that.getCodeImage("poem", poem_id);
 			})
 			.catch(err => {
 				console.log(err);
 				LOADFAIL();
 			});
 	},
-	dialogSave: function(params) {
+	dialogSave: function() {
 		this.setData({
 			dialogShow: false
 		});
@@ -218,6 +216,30 @@ Page({
 			show_canvas: false
 		});
 	},
+	addQrcode: function() {
+		const { add_qrcode } = this.data;
+		if (add_qrcode) {
+			this.setData(
+				{
+					add_qrcode: false,
+					is_load: false
+				},
+				() => {
+					this.drawImage();
+				}
+			);
+		} else {
+			this.setData(
+				{
+					add_qrcode: true,
+					is_load: false
+				},
+				() => {
+					this.drawImage(true);
+				}
+			);
+		}
+	},
 	// canvas 画图
 	drawImage: function(add_qrcode) {
 		let that = this;
@@ -226,7 +248,7 @@ Page({
 		let pixelRatio = that.data.pixelRatio;
 		let winWidth = that.data.winWidth;
 		const scale = 1 / pixelRatio;
-		const ctx = wx.createCanvasContext("myCanvas");
+		const ctx = wx.createCanvasContext(add_qrcode ? "myCanvas1" : "myCanvas");
 		// 全局设置
 		// ctx.setGlobalAlpha(0.8);
 		let font_size = 16 * pixelRatio;
@@ -234,9 +256,9 @@ Page({
 		ctx.font = `normal normal normal ${font_size}px/${font_size +
 			20 * pixelRatio}px FangSong, STSong, STZhongsong,"Microsoft YaHei"`;
 		// 计算画布高度
-		let canvasHeight = 130;
-		if (add_qrcode) { 
-			canvasHeight += 60;
+		let canvasHeight = 140;
+		if (add_qrcode) {
+			canvasHeight += 90;
 		}
 		// 计算标题高度
 		let titleArr = [];
@@ -270,7 +292,9 @@ Page({
 		// 计算二维码高度
 		that.setData({
 			canvasHeight: canvasHeight
-		})
+		});
+		// 清空画板
+		ctx.clearRect(0, 0, winWidth * pixelRatio, canvasHeight * pixelRatio);
 		// 画布背景
 		canvas.drawRect(
 			ctx,
@@ -337,22 +361,38 @@ Page({
 			}
 		});
 		// 二维码
-		let codePath = codePath ? codePath : "/images/xcx1.jpg";
-		let img_width = 30;
-		let img_x = winWidth/2;
-		let img_y = text_y+15
-		canvas.drawCircleImage(
-			ctx,
-			(img_width + 5) * pixelRatio,
-			img_width * 2 * pixelRatio,
-			img_x * pixelRatio,
-			(img_y+15) * pixelRatio,
-			(img_x-20) * pixelRatio,
-			(img_y-20) * pixelRatio,
-			codePath
-		);
+		if (add_qrcode) {
+			font_size = 10 * pixelRatio;
+			let _codePath = codePath ? codePath : "/images/xcx1.jpg";
+			let img_width = 60;
+			let img_x = winWidth / 2;
+			let img_y = text_y;
+			canvas.drawCircleImage(
+				ctx,
+				(img_width / 2 + 5) * pixelRatio,
+				img_width * pixelRatio,
+				img_x * pixelRatio,
+				(img_y + img_width / 2 + 5) * pixelRatio,
+				(img_x - img_width / 2) * pixelRatio,
+				(img_y + 5) * pixelRatio,
+				_codePath
+			);
+			text_y += 80;
+			canvas.drawText(
+				ctx,
+				"古诗文小助手",
+				(winWidth / 2) * pixelRatio,
+				text_y * pixelRatio,
+				"center",
+				"#333",
+				winWidth * 0.8 * pixelRatio,
+				font_size
+			);
+		}
+
 		// 缩放
 		ctx.scale(scale, scale);
+		console.log("---huatu" + add_qrcode);
 		// 画图
 		ctx.draw(true, () => {
 			console.log("画图结束，生成临时图...");
@@ -363,12 +403,11 @@ Page({
 				height: canvasHeight * pixelRatio,
 				destWidth: winWidth * pixelRatio,
 				destHeight: canvasHeight * pixelRatio,
-				canvasId: "myCanvas",
+				canvasId: add_qrcode ? "myCanvas1" : "myCanvas",
 				success(res) {
 					console.log(res);
 					that.setData({
-						is_show: "hidden",
-						show_canvas: "visible",
+						show_canvas: true,
 						canvas_img: res.tempFilePath,
 						is_load: true
 					});
@@ -382,6 +421,9 @@ Page({
 	canvasToImage: function() {
 		console.log("---click---me");
 		let that = this;
+		const { poem } = that.data;
+		// 获取小程序码
+		that.getCodeImage("poem", poem.id);
 		that.setData({
 			show_canvas: true,
 			dialogShow: true
@@ -390,7 +432,7 @@ Page({
 			wx.showLoading({
 				title: "图片生成中..."
 			});
-			that.drawImage(true);
+			that.drawImage();
 		}
 	},
 	// 保存图片到本地
@@ -448,9 +490,11 @@ Page({
 				if (res.data && res.succeeded) {
 					// 下载小程序码都本地
 					until.downImage(res.data.file_name).then(res1 => {
+						console.log(res1);
 						if (res1 && res1.succeeded) {
 							codePath = res1.tempFilePath;
 						}
+						console.log(codePath);
 					});
 				} else {
 					LOADFAIL();
@@ -513,7 +557,7 @@ Page({
 							collect_status: res.data.status
 						});
 					} else {
-						LOADFAIL('更新状态失败，请重试');
+						LOADFAIL("更新状态失败，请重试");
 					}
 				})
 				.catch(error => {
