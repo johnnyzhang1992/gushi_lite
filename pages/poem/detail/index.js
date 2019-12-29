@@ -32,6 +32,7 @@ Page({
 		animation: {},
 		pixelRatio: 1,
 		canvas_img: null,
+		qr_canvas_img: null,
 		is_show: "visible",
 		is_load: false,
 		show_canvas: false,
@@ -243,6 +244,23 @@ Page({
 	// canvas 画图
 	drawImage: function(add_qrcode) {
 		let that = this;
+		const { canvas_img, qr_canvas_img } = that.data;
+		if (add_qrcode && qr_canvas_img) {
+			that.setData({
+				show_canvas: true,
+				is_load: true
+			});
+			wx.hideLoading();
+			return false
+		} else if (!add_qrcode && canvas_img) { 
+			that.setData({
+				show_canvas: true,
+				is_load: true
+			});
+			wx.hideLoading();
+			return false
+		}
+		
 		let content = that.data.content.content;
 		let poemType = that.data.poem.type;
 		let pixelRatio = that.data.pixelRatio;
@@ -394,7 +412,7 @@ Page({
 		ctx.scale(scale, scale);
 		console.log("---huatu" + add_qrcode);
 		// 画图
-		ctx.draw(true, () => {
+		ctx.draw(false, () => {
 			console.log("画图结束，生成临时图...");
 			wx.canvasToTempFilePath({
 				x: 0,
@@ -406,11 +424,20 @@ Page({
 				canvasId: add_qrcode ? "myCanvas1" : "myCanvas",
 				success(res) {
 					console.log(res);
-					that.setData({
-						show_canvas: true,
-						canvas_img: res.tempFilePath,
-						is_load: true
-					});
+					if (add_qrcode) {
+						that.setData({
+							show_canvas: true,
+							qr_canvas_img: res.tempFilePath,
+							is_load: true
+						});
+					} else { 
+						that.setData({
+							show_canvas: true,
+							canvas_img: res.tempFilePath,
+							is_load: true
+						});
+					}
+					
 					wx.hideLoading();
 					console.log(res.tempFilePath);
 				}
@@ -490,7 +517,6 @@ Page({
 				if (res.data && res.succeeded) {
 					// 下载小程序码都本地
 					until.downImage(res.data.file_name).then(res1 => {
-						console.log(res1);
 						if (res1 && res1.succeeded) {
 							codePath = res1.tempFilePath;
 						}
