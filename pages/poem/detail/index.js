@@ -465,7 +465,8 @@ Page({
 	// 保存图片到本地
 	saveImage: function() {
 		let that = this;
-		let file_path = this.data.canvas_img;
+		const { add_qrcode,qr_canvas_img,canvas_img } = that.data;
+		let file_path = add_qrcode ? qr_canvas_img : canvas_img;
 		wx.showLoading({
 			title: "正在保存图片..."
 		});
