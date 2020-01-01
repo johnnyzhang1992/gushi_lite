@@ -206,17 +206,20 @@ Page({
 				LOADFAIL();
 			});
 	},
+	// 点击弹窗保存按钮
 	dialogSave: function() {
 		this.setData({
 			dialogShow: false
 		});
 	},
+	// 点击弹窗取消按钮
 	dialogCancel: function() {
 		this.setData({
 			dialogShow: false,
 			show_canvas: false
 		});
 	},
+	// 添加二维码
 	addQrcode: function() {
 		const { add_qrcode } = this.data;
 		if (add_qrcode) {
@@ -446,7 +449,6 @@ Page({
 	},
 	// canvas 生成临时图
 	canvasToImage: function() {
-		console.log("---click---me");
 		let that = this;
 		const { poem } = that.data;
 		// 获取小程序码
@@ -521,7 +523,6 @@ Page({
 						if (res1 && res1.succeeded) {
 							codePath = res1.tempFilePath;
 						}
-						console.log(codePath);
 					});
 				} else {
 					LOADFAIL();

@@ -100,7 +100,7 @@
             <canvas canvas-id="myCanvas1" style="width:{{winWidth*pixelRatio}}px;height:{{canvasHeight*pixelRatio}}px;transform:scale({{1/pixelRatio}},{{1/pixelRatio}});-webkit-transform:scale({{1/pixelRatio}},{{1/pixelRatio}});visibility:hidden;z-index:1"></canvas>
         </view>
         <view class="canvas-image">
-            <image src="{{add_qrcode ? qr_canvas_img : canvas_img}}" style="width:100%;height:100%;" mode="aspectFit"></image>
+            <image src="{{add_qrcode ? qr_canvas_img : canvas_img}}" style="width:100%;height:100%;" mode="aspectFit" wx:if="{{qr_canvas_img || canvas_img}}"></image>
         </view>
     </view>
     <!-- 快捷导航 -->
