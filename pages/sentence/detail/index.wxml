@@ -1,8 +1,8 @@
 <!--pages/sentence/detail/index.wxml-->
 <view class="panel">
 	<view class="top-section">
-        <!--button list-->
-        <button class="top-collect" bindtap="updateCollect">
+		<!--button list-->
+		<button class="top-collect" bindtap="updateCollect">
 			<view class="collect-img" wx:if="{{!collect_status}}">
 				<image src="../../../images/icon/like.png" />
 			</view>
@@ -10,7 +10,7 @@
 				<image src="../../../images/icon/liked.png" />
 			</view>
 		</button>
-        <button class="top-copy top-btn" bindtap="copy">
+		<button class="top-copy top-btn" bindtap="copy">
 			<image src='../../../images/icon/copy.png' />
 		</button>
 		<button class="top-share top-btn" bindtap='canvasToImage' animation="{{animationData}}">
@@ -39,14 +39,19 @@
 			<view class="poem-title content">{{poem.content}}</view>
 		</navigator>
 	</view>
-	<ad unit-id="adunit-5ad8ebe5f5a359ab" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad>
 	<!-- canvas part-->
 	<view class="canvas-content" wx-if="{{show_canvas}}">
 		<view class="canvas" style="visibility:hidden" wx-if="{{!is_load}}">
 			<canvas canvas-id="myCanvas" style="width:{{winWidth*DPR}}px;height:{{winHeight*DPR}}px;transform:scale({{1/DPR}},{{1/DPR}});-webkit-transform:scale({{1/DPR}},{{1/DPR}});visibility:hidden" />
+			<canvas canvas-id="myCanvas1" style="width:{{winWidth*DPR}}px;height:{{winHeight*DPR}}px;transform:scale({{1/DPR}},{{1/DPR}});-webkit-transform:scale({{1/DPR}},{{1/DPR}});visibility:hidden" />
 		</view>
 		<view class="canvas-image" style="width:{{(winWidth-30)*0.85}}px;height:{{(winHeight-100)*0.85}}px;left:{{(winWidth - (winWidth-30)*0.85)/2}}px">
-			<image src="{{canvas_img}}" style="width:100%;height:100%;" mode="aspectFit" />
+			<image
+			 src="{{add_qrcode ? qr_canvas_img : canvas_img}}"
+			 style="width:100%;height:100%;"
+			 mode="aspectFit"
+			 wx:if="{{qr_canvas_img || canvas_img}}"
+			/>
 		</view>
 	</view>
 	<!-- 快捷导航 -->
@@ -60,7 +65,7 @@
 	>
 		<view slot="title" class="dialogContent">
 			<view class="label">添加</view>
-			<view class="qrcode add">
+			<view class="qrcode {{add_qrcode ? 'add' :''}}" bindtap="addQrcode">
 				<image src="../../../images/icon/qrcode.png" />
 			</view>
 		</view>

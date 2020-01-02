@@ -10,8 +10,6 @@ let until = require("../../../utils/util");
 const canvas = require("../../../utils/canvas");
 let authLogin = require("../../../utils/authLogin");
 let findTimeOut = null;
-let bg_image = "";
-let filePath = "";
 let codePath = "";
 Page({
 	/**
@@ -30,23 +28,13 @@ Page({
 		filePath: null,
 		DPR: 1,
 		canvas_img: null,
+		qr_canvas_img: null,
 		is_show: "visible",
 		is_load: false,
 		show_canvas: false,
 		is_ipx: app.globalData.isIpx,
 		dialogShow: false,
-		add_qrcode: true
-	},
-	dialogSave: function(params) {
-		this.setData({
-			dialogShow: false
-		});
-	},
-	dialogCancel: function() {
-		this.setData({
-			dialogShow: false,
-			show_canvas: false
-		});
+		add_qrcode: false
 	},
 	// 获取用户id
 	getUserId: function() {
@@ -127,7 +115,6 @@ Page({
 								? res.data.sentence.theme.split(",")
 								: []
 					});
-					bg_image = res.data.bg_image;
 					wx.setNavigationBarTitle({
 						title: res.data.sentence.origin
 					});
@@ -153,19 +140,53 @@ Page({
 			return item;
 		});
 	},
+	// 点击弹窗取消按钮
+	dialogCancel: function() {
+		this.setData({
+			dialogShow: false,
+			show_canvas: false
+		});
+	},
+	// 添加二维码
+	addQrcode: function() {
+		const { add_qrcode } = this.data;
+		if (add_qrcode) {
+			this.setData(
+				{
+					add_qrcode: false,
+					is_load: false
+				},
+				() => {
+					this.drawImage();
+				}
+			);
+		} else {
+			this.setData(
+				{
+					add_qrcode: true,
+					is_load: false
+				},
+				() => {
+					this.drawImage(true);
+				}
+			);
+		}
+	},
 	// context.font="italic small-caps bold 12px arial";
 	// canvas 画图
-	drawImage: function() {
+	drawImage: function(add_qrcode) {
 		let that = this;
 		let DPR = that.data.DPR;
 		let winWidth = that.data.winWidth;
-		let winHeight = that.data.winWidth/0.75;
+		let winHeight = that.data.winWidth / 0.75;
 		const scale = 1 / DPR;
-		const ctx = wx.createCanvasContext("myCanvas");
+		const ctx = wx.createCanvasContext(add_qrcode ? "myCanvas1" : "myCanvas");
 		// 全局设置
 		// ctx.setGlobalAlpha(0.8);
 		let fontSize = 18 * DPR;
-		ctx.setFontSize(fontSize)
+		ctx.setFontSize(fontSize);
+		// 清空画板
+		ctx.clearRect(0, 0, winWidth * DPR, winHeight * DPR);
 		// 画布底图
 		canvas.drawRect(ctx, 0, 0, winWidth * DPR, winHeight * DPR, "#fff");
 		// 正文
@@ -177,24 +198,13 @@ Page({
 				ctx,
 				item,
 				textX * DPR,
-				(winHeight * 0.15) * DPR,
+				winHeight * 0.15 * DPR,
 				"center",
 				"#333",
 				fontSize
 			);
-			textX -= 35 ;
+			textX -= 35;
 		});
-
-		// canvas.drawText(
-		// 	ctx,
-		// 	that.data.sentence.title,
-		// 	(winWidth * DPR) / 2,
-		// 	(winHeight - 110) * DPR,
-		// 	"center",
-		// 	"#333",
-		// 	(winWidth - 80) * DPR,
-		// 	fontSize
-		// );
 
 		// 作者
 		fontSize = 18 * DPR;
@@ -202,39 +212,32 @@ Page({
 		canvas.drawTextVertical(
 			ctx,
 			author,
-			winWidth*0.12 * DPR,
-			(winHeight * 0.85-18*3) * DPR,
+			winWidth * 0.12 * DPR,
+			(winHeight * 0.85 - 18 * 3) * DPR,
 			"left",
 			"#333",
 			fontSize
 		);
-		// canvas.drawText(
-		// 	ctx,
-		// 	author,
-		// 	(winWidth * DPR) / 2,
-		// 	(winHeight - 85 - text_y) * DPR,
-		// 	"center",
-		// 	"#808080",
-		// 	(winWidth - 90) * DPR,
-		// 	fontSize
-		// );
 
 		// 二维码
-		// let codePath = codePath ? codePath : "/images/xcx1.jpg";
+		if (add_qrcode) {
+			let _codePath = codePath ? codePath : "/images/xcx1.jpg";
 
-		// let img_width = 30; // 半径
-		// let img_x = (winWidth - 60) / 2; // 左上角横坐标
-		// let img_y = winHeight - 80; // 左上角纵坐标
-		// canvas.drawCircleImage(
-		// 	ctx,
-		// 	(img_width + 5) * DPR,
-		// 	img_width * 2 * DPR,
-		// 	(img_x + 30) * DPR,
-		// 	(img_y + 30) * DPR,
-		// 	img_x * DPR,
-		// 	img_y * DPR,
-		// 	codePath
-		// );
+			let img_width = 30; // 半径
+			let img_x = winWidth - 60 - 15; // 左上角横坐标
+			let img_y = winHeight - 80; // 左上角纵坐标
+			canvas.drawCircleImage(
+				ctx,
+				(img_width + 5) * DPR,
+				img_width * 2 * DPR,
+				(img_x + 30) * DPR,
+				(img_y + 30) * DPR,
+				img_x * DPR,
+				img_y * DPR,
+				_codePath
+			);
+		}
+
 		// 缩放
 		ctx.scale(scale, scale);
 		// 画图
@@ -247,15 +250,22 @@ Page({
 				height: winHeight * DPR,
 				destWidth: winWidth * 2,
 				destHeight: winHeight * 2,
-				canvasId: "myCanvas",
+				canvasId: add_qrcode ? "myCanvas1" : "myCanvas",
 				success(res) {
 					console.log(res);
-					that.setData({
-						is_show: "hidden",
-						show_canvas: "visible",
-						canvas_img: res.tempFilePath,
-						is_load: true
-					});
+					if (add_qrcode) {
+						that.setData({
+							show_canvas: true,
+							qr_canvas_img: res.tempFilePath,
+							is_load: true
+						});
+					} else {
+						that.setData({
+							show_canvas: true,
+							canvas_img: res.tempFilePath,
+							is_load: true
+						});
+					}
 					wx.hideLoading();
 					console.log(res.tempFilePath);
 				}
@@ -270,33 +280,21 @@ Page({
 			show_canvas: true,
 			dialogShow: true
 		});
+		that.getCodeImage("sentence", that.data.sentence.id);
 		if (!that.data.canvas_img) {
 			wx.showLoading({
 				title: "图片生成中..."
 			});
 			that.drawImage();
-			// until
-			// 	.downImage(bg_image)
-			// 	.then(res => {
-			// 		console.log("背景图片下载完成---");
-			// 		if (res && res.succeeded) {
-			// 			filePath = res.tempFilePath;
-			// 			console.log("canvas 画图中...");
-
-			// 		}
-			// 	})
-			// 	.catch(error => {
-			// 		console.log(error);
-			// 		LOADFAIL()
-			// 	});
 		}
 	},
 	// 保存图片到本地
 	saveImage: function() {
-		let file_path = this.data.canvas_img;
 		wx.showLoading({
 			title: "正在保存图片..."
 		});
+		const { add_qrcode, qr_canvas_img, canvas_img } = this.data;
+		let file_path = add_qrcode ? qr_canvas_img : canvas_img;
 		wx.saveImageToPhotosAlbum({
 			filePath: file_path,
 			success(res) {
@@ -405,7 +403,7 @@ Page({
 								icon: "success",
 								duration: 2000
 							});
-						} else { 
+						} else {
 							wx.showToast({
 								title: "取消收藏成功",
 								icon: "success",

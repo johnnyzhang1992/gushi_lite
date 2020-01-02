@@ -206,12 +206,6 @@ Page({
 				LOADFAIL();
 			});
 	},
-	// 点击弹窗保存按钮
-	dialogSave: function() {
-		this.setData({
-			dialogShow: false
-		});
-	},
 	// 点击弹窗取消按钮
 	dialogCancel: function() {
 		this.setData({
