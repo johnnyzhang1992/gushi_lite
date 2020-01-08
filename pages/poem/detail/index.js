@@ -268,12 +268,12 @@ Page({
 		// ctx.setGlobalAlpha(0.8);
 		let font_size = 16 * pixelRatio;
 		ctx.setFontSize(font_size);
-		ctx.font = `normal normal normal ${font_size}px/${font_size +
-			20 * pixelRatio}px FangSong, STSong, STZhongsong,"Microsoft YaHei"`;
+		// ctx.font = `normal normal normal ${font_size}px/${font_size +
+		// 	18 * pixelRatio}px FangSong, STSong, STZhongsong,"Microsoft YaHei"`;
 		// 计算画布高度
 		let canvasHeight = 140;
 		if (add_qrcode) {
-			canvasHeight += 90;
+			canvasHeight += 70;
 		}
 		// 计算标题高度
 		let titleArr = [];
@@ -286,13 +286,12 @@ Page({
 		canvasHeight += titleArr.length * 18;
 		// 计算正文
 		let result = [];
-		font_size = 16 * pixelRatio;
 		content.forEach(item => {
 			const itemArr = canvas.breakLinesForCanvas(
 				ctx,
 				poemType === "诗" ? item : "    " + item,
 				winWidth * 0.8 * pixelRatio,
-				font_size
+				16 * pixelRatio
 			);
 			result.push(itemArr);
 		});
@@ -300,16 +299,16 @@ Page({
 			canvasHeight =
 				canvasHeight + (Array.isArray(item) ? item.length * 28 : 28);
 			if (poemType !== "诗") {
-				canvasHeight += 20;
+				canvasHeight += 10;
 			}
 		});
-		canvasHeight -= 20;
+		console.log(winWidth,canvasHeight)
 		// 计算二维码高度
 		that.setData({
 			canvasHeight: canvasHeight
 		});
 		// 清空画板
-		ctx.clearRect(0, 0, winWidth * pixelRatio, canvasHeight * pixelRatio);
+		// ctx.clearRect(0, 0, winWidth * pixelRatio, canvasHeight * pixelRatio);
 		// 画布背景
 		canvas.drawRect(
 			ctx,
@@ -321,9 +320,7 @@ Page({
 		);
 		// 诗词内容
 		let text_y = 30 * pixelRatio;
-		let line_number = result.length;
 		// 标题
-		font_size = 18 * pixelRatio;
 		titleArr.forEach(item => {
 			canvas.drawText(
 				ctx,
@@ -339,7 +336,6 @@ Page({
 		});
 		text_y += 20;
 		// 作者
-		font_size = 16 * pixelRatio;
 		let author = `[${that.data.poem.dynasty}] ${that.data.poem.author}`;
 		canvas.drawText(
 			ctx,
@@ -353,10 +349,8 @@ Page({
 		);
 		text_y = text_y + 40;
 		// 古诗词正文
-		line_number = 0;
-		result.forEach(item => {
+		result.forEach((item,index) => {
 			item.forEach(_item => {
-				line_number = line_number + 1;
 				canvas.drawText(
 					ctx,
 					_item,
@@ -371,15 +365,16 @@ Page({
 				);
 				text_y = text_y + 24;
 			});
-			if (poemType !== "诗") {
-				text_y += 20;
+			if (poemType !== "诗" && index<result.length) {
+				text_y += 10;
 			}
 		});
 		// 二维码
 		if (add_qrcode) {
 			font_size = 10 * pixelRatio;
+			ctx.setFontSize(font_size)
 			let _codePath = codePath ? codePath : "/images/xcx1.jpg";
-			let img_width = 60;
+			let img_width = 50;
 			let img_x = winWidth / 2;
 			let img_y = text_y;
 			canvas.drawCircleImage(
@@ -392,7 +387,7 @@ Page({
 				(img_y + 5) * pixelRatio,
 				_codePath
 			);
-			text_y += 80;
+			text_y += 70;
 			canvas.drawText(
 				ctx,
 				"古诗文小助手",

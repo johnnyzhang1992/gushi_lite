@@ -47,7 +47,7 @@
 		</view>
 		<view class="canvas-image" style="width:{{(winWidth-30)*0.85}}px;height:{{(winHeight-100)*0.85}}px;left:{{(winWidth - (winWidth-30)*0.85)/2}}px">
 			<image
-			 src="{{add_qrcode ? qr_canvas_img : canvas_img}}"
+			 src="{{add_qrcode && qr_canvas_img ? qr_canvas_img : canvas_img}}"
 			 style="width:100%;height:100%;"
 			 mode="aspectFit"
 			 wx:if="{{qr_canvas_img || canvas_img}}"
