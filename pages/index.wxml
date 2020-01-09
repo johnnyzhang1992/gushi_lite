@@ -27,9 +27,9 @@
             <image class="" src="../images/icon/poet.png"></image>
             <view class="nav-item-text">历朝诗人</view>
         </navigator>
-        <navigator url="robot/index" hover-class="navigator-hover" class="weui-flex__item nav-item">
-            <image class="" src="../images/icon/robot.png"></image>
-            <view class="nav-item-text">智能助手</view>
+        <navigator url="/pages/search/index" open-type="switchTab" hover-class="navigator-hover" class="weui-flex__item nav-item">
+            <image class="" src="../images/icon/find_active.png"></image>
+            <view class="nav-item-text">搜索</view>
         </navigator>
     </view>
     <view class="divide"></view>

@@ -1,8 +1,0 @@
-<view class="container">
-  <view class="answer" >
-    <image class="answerimage" src="https://res.wx.qq.com/mmspraiweb_node/dist/static/openaiplugin/img/answerImage.png"></image>
-    <view class="leftView">
-      <text selectable="{{true}}">{{msg.content}}</text>
-    </view>
-  </view>
-</view>

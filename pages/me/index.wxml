@@ -49,16 +49,6 @@
 	<view class="divide" />
 	<view class="page list">
 		<view class="weui-cells weui-cells_after-title">
-			<navigator url="/pages/robot/index" class="weui-cell weui-cell_accessem" hover-class="weui-cell_active">
-				<view class="weui-cell__hd" />
-				<view class="weui-cell__bd">诗词智能助手</view>
-				<view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px" />
-			</navigator>
-		</view>
-	</view>
-	<view class="divide" />
-	<view class="page list">
-		<view class="weui-cells weui-cells_after-title">
 			<view class="weui-cell weui-cell_access" bindtap="zanShang">
 				<view class="weui-cell__hd" />
 				<view class="weui-cell__bd">给程序员小哥哥赞赏</view>

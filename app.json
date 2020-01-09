@@ -16,8 +16,7 @@
         "pages/me/search/index",
         "pages/sentence/detail/index",
         "pages/me/sentence/index",
-        "pages/sentence/list/index",
-        "pages/robot/index"
+        "pages/sentence/list/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -52,14 +51,7 @@
         ]
     },
     "plugins": {
-        "wechatBot": {
-            "version": "1.1.12",
-            "provider": "wx8c631f7e9f2465e1"
-        },
-        "WechatSI": {
-            "version": "0.3.3",
-            "provider": "wx069ba97219f66d99"
-        }
+
     },
     "requiredBackgroundModes": [
         "audio"

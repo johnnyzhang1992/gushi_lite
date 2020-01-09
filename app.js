@@ -1,7 +1,6 @@
 //app.js
 // 百度小程序统计
 const mtjwxsdk = require("./utils/mtj-wx-sdk.js");
-var plugin = requirePlugin("wechatBot");
 const tabBarLinks = [
     "/pages/index",
     "/pages/search/index",
@@ -97,24 +96,6 @@ App({
             });
         });
         // 版本更新部分结束------
-
-        // 微信机器人初始化---
-        plugin.init({
-          appid: "GhqqPBmJ1dREWp3DIlkhoodlXMQd4j", //小程序示例账户，仅供学习和参考
-          openid: '', //用户的openid，非必填，建议传递该参数
-          guideList: ["李白简介","窈窕淑女一下句","小石潭记全文","大小李杜都指谁"],
-          textToSpeech: false, //默认为ture打开状态
-          welcome: "hello, 你可以问我关于古诗词的问题呦😁",
-          background: "rgba(247,251,252,1)",
-          guideCardHeight: 50,
-          operateCardHeight: 120,
-          history: true,
-          historySize: 60,
-        //   navHeight: this.data.statusBarHeight,
-          navHeight: 0,
-          success: () => {}, //非必填
-          fail: error => {} //非必填
-        });
     },
     // 如果找不到页面就跳转到首页
     onPageNotFound(res) {
