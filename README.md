@@ -30,11 +30,31 @@
 
     搜索部分是在[天未](https://github.com/mindawei)的[wsSearchView](https://github.com/mindawei/wsSearchView)的基础上进行的改造和优化。
 
+## 作者
+
+👤 **johnnyzhang1992**
+
+* Website: https://johnnyzhang.cn
+* Github: [@johnnyzhang1992](https://github.com/johnnyzhang1992)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+##  License
+
+Copyright © 2019 [johnnyzhang1992](https://github.com/johnnyzhang1992).<br />
+
+***
 ## 注意事项
 
 - API请求返回的数据尽量简洁
 - 使用定时器时，当退出当前页面时应该注销（onHide,onUnload）
 - 没有在 wxml 里面使用到的数据尽量不要放到 page.data 里面
+
+## API 使用指南
+- API Get 类的方法可以正常使用，POST类的请求需要用户openid不建议使用（例如：收藏以及个人中心相关接口。
+- 用户创建失败的问题。创建用户的逻辑涉及后端解密(和项目的appid有关,不同的项目appid不同)，会导致解密失败，从而导致用户创建失败。
 
 ## 小程序二维码
 
