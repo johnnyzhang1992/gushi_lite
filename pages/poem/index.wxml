@@ -9,7 +9,7 @@
                       data-id="{{index}}"
                       data-type="type"
                       style="background:{{colors[index]}}"
-                      wx:key="{{item}}">{{item}}
+                      wx:key="*this">{{item}}
                 </view>
             </scroll-view>
         </view>
@@ -20,7 +20,7 @@
                       data-id="{{index}}"
                       data-type="dynasty"
                       style="background:{{colors[index]}}"
-                      wx:key="{{item}}">{{item}}
+                      wx:key="*this">{{item}}
                 </view>
             </scroll-view>
         </view>
@@ -42,7 +42,7 @@
                     datas="{{item}}"
                     isSearch="{{isSearch}}"
                     wx:for="{{poems}}"
-                    wx:key="{{item.id}}"
+                    wx:key="id"
             />
         </view>
     </view>

@@ -3,7 +3,7 @@
     <view class="page list">
         <view class="page__bd">
             <view class="weui-cells__title">{{p_total}} 收藏</view>
-            <mp-slideview buttons="{{slideButtons}}" bindbuttontap="updateCollectPoem" data-id="{{item.like_id}}" wx:for="{{poems}}" wx:key="{{item.id}}">
+            <mp-slideview buttons="{{slideButtons}}" bindbuttontap="updateCollectPoem" data-id="{{item.like_id}}" wx:for="{{poems}}" wx:key="id">
                 <navigator url="/pages/poem/detail/index?id={{item.poem_id}}" hover-class="navigator-hover" class="weui-cell poem-item">
                     <view class="poem-title">
                         {{item.title}}

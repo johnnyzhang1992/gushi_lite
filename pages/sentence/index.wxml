@@ -18,7 +18,7 @@
 				 wx:for="{{_theme.types}}"
 				 data-id="{{index}}"
 				 style="background:{{colors[index]}}"
-				 wx:key="{{index}}"
+				 wx:key="*this"
 				 bindtap="getStences"
 				>
 					{{item}}
