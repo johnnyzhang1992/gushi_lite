@@ -12,34 +12,34 @@ Page({
 		name: "",
 		profile: "",
 		poems: [],
-		show_load: true
+		show_load: true,
 	},
 
 	// 获取首页数据
-	getHomeData: function(name, type) {
+	getHomeData: function (name, type) {
 		let that = this;
 		let data = null;
 		let page = 1;
-		if (type && type == "more") {
+		if (type && type === "more") {
 			if (last_page < current_page) {
 				return false;
 			}
 			page = current_page + 1;
-			data = { page: page, name: name };
 		}
+		data = { page: page, name: name };
 		that.setData({
-			show_load: true
+			show_load: true,
 		});
 		wx.showNavigationBarLoading();
 		GET_HOME_DATA("GET", data)
-			.then(res => {
+			.then((res) => {
 				if (res.data && res.succeeded) {
 					that.setData({
 						poems:
 							page > 1
 								? [...that.data.poems, ...res.data.poems.data]
 								: res.data.poems.data,
-						show_load: false
+						show_load: false,
 					});
 					current_page = res.data.poems.current_page;
 					last_page = res.data.poems.last_page;
@@ -50,7 +50,7 @@ Page({
 				wx.hideLoading();
 				wx.hideNavigationBarLoading();
 			})
-			.catch(error => {
+			.catch((error) => {
 				console.log(error);
 				wx.stopPullDownRefresh();
 				LOADFAIL();
@@ -59,18 +59,18 @@ Page({
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function(options) {
+	onLoad: function (options) {
 		const { code, name, profile } = options;
 		wx.showLoading({
-			title: "加载中"
+			title: "加载中",
 		});
 		wx.setNavigationBarTitle({
-			title: name
+			title: name,
 		});
 		this.setData({
 			code,
 			name,
-			profile
+			profile,
 		});
 		this.getHomeData(code);
 	},
@@ -78,7 +78,7 @@ Page({
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
-	onPullDownRefresh: function() {
+	onPullDownRefresh: function () {
 		current_page = 1;
 		this.getHomeData(this.data.code);
 	},
@@ -87,25 +87,25 @@ Page({
 	 * 页面上拉触底事件的处理函数
 	 */
 	// 滚动到底部
-	onReachBottom: function() {
+	onReachBottom: function () {
 		this.getHomeData(this.data.code, "more");
 	},
 
 	/**
 	 * 用户点击右上角分享
 	 */
-	onShareAppMessage: function() {
+	onShareAppMessage: function () {
 		return {
 			title: this.data.name,
 			path: "/pages/homeList/index",
 			// imageUrl:'/images/poem.png',
-			success: function(res) {
+			success: function (res) {
 				// 转发成功
 				console.log("转发成功！");
 			},
-			fail: function(res) {
+			fail: function (res) {
 				// 转发失败
-			}
+			},
 		};
-	}
+	},
 });

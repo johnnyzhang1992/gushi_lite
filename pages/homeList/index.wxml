@@ -7,7 +7,7 @@
     <!-- poem list -->
     <view class="page list">
         <view class="page__bd">
-            <poemItemView datas="{{item}}" isSearch="{{false}}" wx:for="{{poems}}" wx:key="{{item.id}}" />
+            <poemItemView datas="{{item}}" isSearch="{{false}}" wx:for="{{poems}}" wx:key="id" />
         </view>
     </view>
     <view class="weui-loadmore" wx-if="{{show_load}}">

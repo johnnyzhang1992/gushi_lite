@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "poemItemView": "../component/poemItemView/poemItemView"
+    "poemItemView": "../../component/poemItemView/poemItemView"
   },
   "navigationBarTitleText": "古诗文小助手"
 }

@@ -113,20 +113,20 @@ export const GET_USER_INFO = (method, data) => {
 
 /**
  * 获取搜索列表
- * @param {*} method 
- * @param {*} data 
+ * @param {*} method
+ * @param {*} data
  */
-export const GET_SEARCH_LIST = (method, data) => { 
+export const GET_SEARCH_LIST = (method, data) => {
 	return Request(`/wxxcx/search_list`, data, method);
 }
 
 /**
  * 更新搜索状态（删除数据库搜索记录）
- * @param {*} method 
- * @param {*} data 
+ * @param {*} method
+ * @param {*} data
  */
-export const UPDATE_SEARCH_STATE = (method, data) => { 
-	return Request(`/wxxcx/search/${data.id}/update`, data, method);	
+export const UPDATE_SEARCH_STATE = (method, data) => {
+	return Request(`/wxxcx/search/${data.id}/update`, data, method);
 }
 
 //-----------------
@@ -273,8 +273,8 @@ export const GET_SENTEMCE_DATA = (method, data) => {
 
 /**
  * 获取名句详情
- * @param {*} method 
- * @param {*} data 
+ * @param {*} method
+ * @param {*} data
  */
 export const GET_SENTEMCE_DETAIL = (method, data) => {
 	return Request(`/wxxcx/getSentenceDetail/${data.id}`, data, method);
