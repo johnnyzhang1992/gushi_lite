@@ -50,7 +50,7 @@ Page({
 						});
 					}
 					that.setData({
-						poems: [...that.data.poems, ...poems.data],
+						poems: current_page >1 ? [...that.data.poems, ...poems.data] : poems.data,
 						total: poems.total
 					});
 					current_page = poems.current_page;
@@ -95,8 +95,7 @@ Page({
 	 */
 	onPullDownRefresh: function() {
 		wx.showNavigationBarLoading();
-		let page = 1;
-		this.getSentenceData(page);
+		this.getSentenceData(1);
 	},
 
 	/**

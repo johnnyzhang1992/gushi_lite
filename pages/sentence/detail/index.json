@@ -1,7 +1,6 @@
 {
   "usingComponents": {
-    "searchHighlightTextView": "../../../component/searchHighlightTextView/searchHighlightTextView",
-    "shortcut": "../../../component/shortcut/shortcut",
-    "mp-halfScreenDialog": "../../../component/half-screen-dialog/half-screen-dialog"
+    "shortcut": "../../../../component/shortcut/shortcut",
+    "mp-halfScreenDialog": "../../../../component/half-screen-dialog/half-screen-dialog"
   }
 }

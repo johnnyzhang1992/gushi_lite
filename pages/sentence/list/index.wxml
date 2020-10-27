@@ -15,7 +15,7 @@
 			 hover-class="navigator-hover"
 			 class="poem-item"
 			 wx:for="{{poems}}"
-			 wx:key="{{item.id}}"
+			 wx:key="id"
 			>
 				<view wx:if="{{isSearch}}">
 					<view class="search-result-item">
