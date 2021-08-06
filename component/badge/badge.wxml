@@ -1,3 +1,0 @@
-<view class="weui-badge {{extClass}} {{!content ? 'weui-badge_dot' : ''}}">
-    <text>{{content}}</text>
-</view>

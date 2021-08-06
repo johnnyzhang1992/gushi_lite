@@ -1,5 +1,5 @@
 /* component/searchHilightTextView.wxss */
-.highTextView text {
+.highTextView .text {
   height: 40rpx;
   font-size: 36rpx;
   font-weight: normal;

@@ -24,7 +24,7 @@
 .poem-item{
     display: block;
 }
-.poem-item >view{
+.poem-item .page_top,.poem-item .item-search,.poem-item .badge-list{
     width:100%;
     display: block;
     text-overflow:ellipsis;

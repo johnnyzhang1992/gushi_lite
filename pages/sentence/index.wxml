@@ -21,7 +21,7 @@
 				 wx:key="*this"
 				 bindtap="getStences"
 				>
-					{{item}}
+					<text>{{item}}</text>
 				</view>
 			</view>
 		</view>
