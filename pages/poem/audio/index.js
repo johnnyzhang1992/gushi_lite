@@ -2,7 +2,7 @@
 import {
 	GET_POEM_AUDIO,
 	GET_POEM_CONTENT,
-	LOADFAIL
+	LOADFAIL,
 } from "../../../apis/request";
 let audioCtx = null;
 Page({
@@ -15,46 +15,46 @@ Page({
 		audio: null,
 		poem: null,
 		content: null,
-		_audio: null
+		_audio: null,
 	},
 	// play
-	audioPlay: function() {
+	audioPlay: function () {
 		audioCtx.play();
 	},
 	// pause
-	audioPause: function() {
+	audioPause: function () {
 		audioCtx.pause();
 	},
 	// seek
-	audio14: function() {
+	audio14: function () {
 		audioCtx.seek(14);
 	},
 	// start again
-	audioStart: function() {
+	audioStart: function () {
 		audioCtx.seek(0);
 		audioCtx.play();
 	},
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function(options) {
+	onLoad: function (options) {
 		let that = this;
 		wx.showLoading({
-			title: "加载中"
+			title: "加载中",
 		});
 		wx.setNavigationBarTitle({
-			title: options.title
+			title: options.title,
 		});
 		that.setData({
 			title: options.title,
-			id: options.id
+			id: options.id,
 		});
 		GET_POEM_CONTENT("GET", { id: options.id })
-			.then(res => {
+			.then((res) => {
 				if (res.data && res.succeeded) {
 					that.setData({
 						poem: res.data.poem,
-						content: JSON.parse(res.data.poem.content)
+						content: JSON.parse(res.data.poem.content),
 					});
 					wx.hideLoading();
 				} else {
@@ -64,7 +64,7 @@ Page({
 			.then(() => {
 				this.loadAudio();
 			})
-			.catch(error => {
+			.catch((error) => {
 				console.log(error);
 				LOADFAIL();
 			});
@@ -72,14 +72,15 @@ Page({
 	/**
 	 * 加载音频
 	 */
-	loadAudio: function() {
+	loadAudio: function () {
 		let that = this;
+		audioCtx = null;
 		// 加载音频
 		GET_POEM_AUDIO("GET", { id: that.data.id })
-			.then(res => {
+			.then((res) => {
 				if (res.data && res.succeeded) {
 					that.setData({
-						_audio: res.data
+						_audio: res.data,
 					});
 					audioCtx = wx.createInnerAudioContext("myAudio");
 					audioCtx.src = res.data.src;
@@ -88,7 +89,7 @@ Page({
 					audioCtx.onPlay(() => {
 						console.log("开始播放");
 					});
-					audioCtx.onError(res => {
+					audioCtx.onError((res) => {
 						console.log(res.errMsg);
 						console.log(res.errCode);
 					});
@@ -97,7 +98,7 @@ Page({
 					LOADFAIL("音频加载失败！");
 				}
 			})
-			.catch(error => {
+			.catch((error) => {
 				console.log(error);
 				LOADFAIL();
 			});
@@ -105,39 +106,43 @@ Page({
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
-	onReady: function() {},
+	onReady: function () {},
 
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
-	onShow: function() {},
+	onShow: function () {},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
-	onHide: function() {
-		audioCtx.stop();
+	onHide: function () {
+		if (audioCtx && audioCtx.stop) {
+			audioCtx.stop();
+		}
 	},
 
 	/**
 	 * 生命周期函数--监听页面卸载
 	 */
-	onUnload: function() {
-		audioCtx.destroy();
+	onUnload: function () {
+		if (audioCtx && audioCtx.stop) {
+			audioCtx.stop();
+		}
 	},
 
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
-	onPullDownRefresh: function() {},
+	onPullDownRefresh: function () {},
 
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
-	onReachBottom: function() {},
+	onReachBottom: function () {},
 
 	/**
 	 * 用户点击右上角分享
 	 */
-	onShareAppMessage: function() {}
+	onShareAppMessage: function () {},
 });
