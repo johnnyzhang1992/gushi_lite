@@ -2,11 +2,8 @@
 import {
 	GET_POEM_DETAIL,
 	UPDATE_USER_COLLECT,
-	GET_WX_QRCODE,
 	LOADFAIL,
 } from "../../../apis/request";
-import until from "../../../utils/util";
-const canvas = require("../../../utils/canvas");
 let authLogin = require("../../../utils/authLogin");
 const app = getApp();
 let poem_detail = {};
