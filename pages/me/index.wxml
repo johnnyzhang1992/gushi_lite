@@ -2,14 +2,21 @@
 <view class="container">
 	<view class="user-header">
 		<view class="userinfo">
-			<button
-			 class="login-btn"
-			 wx:if="{{!hasUserInfo && canIUse}}"
-			 open-type="getUserInfo"
-			 bindgetuserinfo="bindGetUserInfo"
-			>
-				马上登录
-			</button>
+			<block wx:if="{{!hasUserInfo}}">
+				<button
+			 		class="login-btn"
+			 		wx:if="{{ !canIUseGetUserProfile}}"
+			 		open-type="getUserInfo"
+			 		bindgetuserinfo="bindGetUserInfo"
+				>
+					马上登录
+				</button>
+				<button
+				  	class="login-btn"
+					wx:else
+					bindtap="getUserProfile"
+				>马上登录</button>
+			</block>
 			<block wx:else="">
 				<view class="userinfo-avatar-view">
 					<view class="userinfo-avatar">
