@@ -86,8 +86,8 @@ export const BACKURL = () => {
 
 /**
  * 创建新用户
- * @param {*} method
- * @param {*} data
+ * @param {String} method POST
+ * @param {Object} data {}
  */
 export const CREATE_USER = (method, data) => {
 	return Request("/wxxcx/userCrate", data, method);
@@ -95,8 +95,8 @@ export const CREATE_USER = (method, data) => {
 
 /**
  * 获取小程序码
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_WX_QRCODE = (method, data) => {
 	return Request(`/wxxcx/getWXACode/`, data, method);
@@ -104,8 +104,8 @@ export const GET_WX_QRCODE = (method, data) => {
 
 /**
  * 获取用户的基本信息
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_USER_INFO = (method, data) => {
 	return Request(`/wxxcx/getUserInfo/${data.user_id}`, data, method);
@@ -113,8 +113,8 @@ export const GET_USER_INFO = (method, data) => {
 
 /**
  * 获取搜索列表
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_SEARCH_LIST = (method, data) => {
 	return Request(`/wxxcx/search_list`, data, method);
@@ -122,8 +122,8 @@ export const GET_SEARCH_LIST = (method, data) => {
 
 /**
  * 更新搜索状态（删除数据库搜索记录）
- * @param {*} method
- * @param {*} data
+ * @param {String} method POST
+ * @param {Object} data {}
  */
 export const UPDATE_SEARCH_STATE = (method, data) => {
 	return Request(`/wxxcx/search/${data.id}/update`, data, method);
@@ -135,7 +135,7 @@ export const UPDATE_SEARCH_STATE = (method, data) => {
 
 /**
  * 获取一条随机名句
- * @param {String} method
+ * @param {String} method GET
  * @param {Object} data
  */
 export const GET_RANDOM_SENTENCE = (method, data) => {
@@ -144,8 +144,8 @@ export const GET_RANDOM_SENTENCE = (method, data) => {
 
 /**
  * 获取首页列表数据
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_HOME_DATA = (method, data) => {
 	return Request(`/wxxcx/getHomeData`, data, method);
@@ -157,7 +157,7 @@ export const GET_HOME_DATA = (method, data) => {
 
 /**
  * 获取我的收藏信息(诗词、名句、诗人)
- * @param {String} method
+ * @param {String} method GET
  * @param {Object} data
  */
 export const GET_USER_COLLECT = (method, data) => {
@@ -166,7 +166,7 @@ export const GET_USER_COLLECT = (method, data) => {
 
 /**
  * 更新收藏状态
- * @param {String} method
+ * @param {String} method POST
  * @param {Object} data
  * @param {poem,sentence,author} type
  */
@@ -180,8 +180,8 @@ export const UPDATE_USER_COLLECT = (method, data) => {
 
 /**
  * 获取搜索热词
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_HOT_SEARCH = (method, data) => {
 	return Request(`/wxxcx/getsHotSearch`, data, method);
@@ -189,8 +189,8 @@ export const GET_HOT_SEARCH = (method, data) => {
 
 /**
  * 根据关键字搜索
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_SEARCH = (method, data) => {
 	return Request(`/wxxcx/search/${data.key}`, data, method);
@@ -202,8 +202,8 @@ export const GET_SEARCH = (method, data) => {
 
 /**
  * 根据条件获取诗词列表
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_POEM_DATA = (method, data) => {
 	return Request(`/wxxcx/getPoemData`, data, method);
@@ -211,8 +211,8 @@ export const GET_POEM_DATA = (method, data) => {
 
 /**
  * 获取诗词详情
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_POEM_DETAIL = (method, data) => {
 	return Request(`/wxxcx/poem/${data.id}`, data, method);
@@ -220,8 +220,8 @@ export const GET_POEM_DETAIL = (method, data) => {
 
 /**
  * 获取诗词内容
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_POEM_CONTENT = (method, data) => {
 	return Request(`/wxxcx/getPoemContent/${data.id}`, data, method);
@@ -229,8 +229,8 @@ export const GET_POEM_CONTENT = (method, data) => {
 
 /**
  * 获取诗词的语音
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_POEM_AUDIO = (method, data) => {
 	return Request(`/wxxcx/getPoemAudio/${data.id}`, data, method);
@@ -242,8 +242,8 @@ export const GET_POEM_AUDIO = (method, data) => {
 
 /**
  * 根据条件获取诗人列表
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_POET_DATA = (method, data) => {
 	return Request(`/wxxcx/getPoetData?`, data, method);
@@ -251,8 +251,8 @@ export const GET_POET_DATA = (method, data) => {
 
 /**
  * 诗人详情
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_POET_DETAIL = (method, data) => {
 	return Request(`/wxxcx/getPoetDetailData/${data.id}`, data, method);
@@ -264,8 +264,8 @@ export const GET_POET_DETAIL = (method, data) => {
 
 /**
  * 根据条件获取名句的列表
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_SENTEMCE_DATA = (method, data) => {
 	return Request(`/wxxcx/getSentenceData`, data, method);
@@ -273,8 +273,8 @@ export const GET_SENTEMCE_DATA = (method, data) => {
 
 /**
  * 获取名句详情
- * @param {*} method
- * @param {*} data
+ * @param {String} method GET
+ * @param {Object} data {}
  */
 export const GET_SENTEMCE_DETAIL = (method, data) => {
 	return Request(`/wxxcx/getSentenceDetail/${data.id}`, data, method);
