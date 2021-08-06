@@ -25,7 +25,7 @@ Page({
 			"元代",
 			"明代",
 			"清代",
-			"近代"
+			"近代",
 		],
 		d_index: 0,
 		t_index: 0,
@@ -53,11 +53,12 @@ Page({
 			"#0f1423",
 			"#f03752",
 			"#4f383e",
-			"#ccccd6"
-		]
+			"#ccccd6",
+		],
 	},
+
 	// 获取诗词数据
-	getPoemData: function(type, keyWord, _type, page) {
+	getPoemData: function (type, keyWord, _type, page) {
 		let that = this;
 		let data = {
 			page: page ? page : 1,
@@ -66,10 +67,10 @@ Page({
 			keyWord: keyWord ? keyWord : null,
 			dynasty: that.data.dynasty[that.data.d_index]
 				? that.data.dynasty[that.data.d_index]
-				: "全部"
+				: "全部",
 		};
 		GET_POEM_DATA("GET", data)
-			.then(res => {
+			.then((res) => {
 				if (res.data && res.succeeded) {
 					that.setData({
 						is_search: keyWord ? true : false,
@@ -79,7 +80,7 @@ Page({
 								: res.data.poems.data,
 						total: res.data.poems.total,
 						_type: type ? type : null,
-						_keyWord: keyWord ? keyWord : null
+						_keyWord: keyWord ? keyWord : null,
 					});
 					current_page = res.data.poems.current_page;
 					last_page = res.data.poems.last_page;
@@ -89,77 +90,72 @@ Page({
 					LOADFAIL("加载数据失败，请下拉重试。");
 				}
 			})
-			.catch(error => {
+			.catch((error) => {
 				console.log(error);
 				LOADFAIL();
 			});
 	},
+
 	// 跳转到搜索页面
-	ngToSearch: function() {
+	ngToSearch: function () {
 		wx.switchTab({
-			url: "/pages/search/index"
+			url: "/pages/search/index",
 		});
 	},
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function(options) {
+	onLoad: function (options) {
 		let that = this;
 		if (options.type) {
 			wx.setNavigationBarTitle({
-				title: options.keyWord
+				title: options.keyWord,
 			});
 			that.setData({
 				_type: options.type,
 				_keyWord: options.keyWord,
-				isSearch: !!options.type
+				isSearch: !!options.type,
 			});
 		}
 		wx.showLoading({
-			title: "加载中"
+			title: "加载中",
 		});
 		that.getPoemData(options.type, options.keyWord);
 	},
-	// 检测变化
-	filterPoem: function(e) {
+
+	// 检测诗词类别选择
+	filterPoem: function (e) {
 		let that = this;
-		let id = e.currentTarget.dataset.id;
-		let type = e.currentTarget.dataset.type;
+		const { dynasty, d_index, t_index, _type, keyWord, types } = this.data;
+		const { id, type } = e.currentTarget.dataset;
 		if (type === "dynasty") {
 			this.setData({
-				d_index: id
+				d_index: id,
 			});
 		} else {
 			that.setData({
-				t_index: id
+				t_index: id,
 			});
 		}
 		wx.setNavigationBarTitle({
-			title:
-				that.data.dynasty[that.data.d_index] +
-				" | " +
-				that.data.types[that.data.t_index]
+			title: dynasty[d_index] + " | " + types[t_index],
 		});
 		wx.showNavigationBarLoading();
-		that.getPoemData(
-			that.data._type,
-			that.data.keyWord,
-			that.data.types[that.data.t_index],
-			1
-		);
+		that.getPoemData(_type, keyWord, types[t_index], 1);
 	},
 
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
-	onPullDownRefresh: function() {
+	onPullDownRefresh: function () {
 		wx.stopPullDownRefresh();
 	},
 
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
-	onReachBottom: function() {
+	onReachBottom: function () {
 		let that = this;
 		wx.showNavigationBarLoading();
 		if (current_page > last_page) {
@@ -173,21 +169,22 @@ Page({
 			current_page + 1
 		);
 	},
+
 	/**
 	 * 用户点击右上角分享
 	 */
-	onShareAppMessage: function() {
+	onShareAppMessage: function () {
 		return {
 			title: "首页 | 古诗文小助手",
 			path: "/pages/poem/index",
 			// imageUrl:'/images/poem.png',
-			success: function(res) {
+			success: function (res) {
 				// 转发成功
 				console.log("转发成功！");
 			},
-			fail: function(res) {
+			fail: function (res) {
 				// 转发失败
-			}
+			},
 		};
-	}
+	},
 });

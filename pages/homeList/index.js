@@ -1,5 +1,4 @@
 // pages/poem/list/index.js
-const app = getApp();
 import { GET_HOME_DATA, LOADFAIL } from "../../apis/request";
 let current_page = 1;
 let last_page = 1;
@@ -56,6 +55,7 @@ Page({
 				LOADFAIL();
 			});
 	},
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
