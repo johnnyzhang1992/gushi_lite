@@ -14,7 +14,7 @@ audio{
 .weui-media-box__title{
   white-space:initial;
   font-size: 12px;
-  text-align: left;
+  text-align: center;
   color:#666;
   display: block;
   /* padding: 0 10px; */

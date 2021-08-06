@@ -13,9 +13,6 @@
 		<button class="top-copy top-btn" bindtap="copy">
 			<image src='../../../images/icon/copy.png' />
 		</button>
-		<button class="top-share top-btn" bindtap='canvasToImage' animation="{{animationData}}">
-			<image src='../../../images/icon/share.png' />
-		</button>
 	</view>
 	<view class="sentence-section" wx-if="{{sentence}}">
 		<view class="sentence-title">
@@ -39,45 +36,7 @@
 			<view class="poem-title content">{{poem.content}}</view>
 		</navigator>
 	</view>
-	<!-- canvas part-->
-	<view class="canvas-content" wx-if="{{show_canvas}}">
-		<view class="canvas" style="visibility:hidden" wx-if="{{!is_load}}">
-			<canvas canvas-id="myCanvas" style="width:{{winWidth*DPR}}px;height:{{winHeight*DPR}}px;transform:scale({{1/DPR}},{{1/DPR}});-webkit-transform:scale({{1/DPR}},{{1/DPR}});visibility:hidden" />
-			<canvas canvas-id="myCanvas1" style="width:{{winWidth*DPR}}px;height:{{winHeight*DPR}}px;transform:scale({{1/DPR}},{{1/DPR}});-webkit-transform:scale({{1/DPR}},{{1/DPR}});visibility:hidden" />
-		</view>
-		<view class="canvas-image" style="width:{{(winWidth-30)*0.85}}px;height:{{(winHeight-100)*0.85}}px;left:{{(winWidth - (winWidth-30)*0.85)/2}}px">
-			<image
-			 src="{{add_qrcode && qr_canvas_img ? qr_canvas_img : canvas_img}}"
-			 style="width:100%;height:100%;"
-			 mode="aspectFit"
-			 wx:if="{{qr_canvas_img || canvas_img}}"
-			/>
-		</view>
-	</view>
 	<!-- 快捷导航 -->
 	<shortcut id="" />
-	<mp-halfScreenDialog
-	 bindbuttontap="buttontap"
-	 show="{{dialogShow}}"
-	 maskClosable="{{false}}"
-	 closabled="{{false}}"
-	 buttons="{{buttons}}"
-	>
-		<view slot="title" class="dialogContent">
-			<view class="label">添加</view>
-			<view class="qrcode {{add_qrcode ? 'add' :''}}" bindtap="addQrcode">
-				<image src="../../../images/icon/qrcode.png" />
-			</view>
-		</view>
-		<view slot="footer" class="dialogFooter">
-			<view class="left btn" bindtap="saveImage">保存</view>
-			<view class="left btn">
-				<button class="wechat {{is_ipx ? 'iphoneX_view' : ''}}" open-type="share" plain='true'>
-					分享
-				</button>
-			</view>
-			<view class="right btn" bindtap="dialogCancel">取消</view>
-		</view>
-	</mp-halfScreenDialog>
 </view>
 

@@ -18,22 +18,13 @@ Page({
 		content: null,
 		tags: [],
 		winHeight: "", //窗口高度
-		canvasHeight: 0,
 		currentTab: 0, //预设当前项的值
 		scrollLeft: 0, //tab标题的滚动条位置
 		tab_lists: null,
 		collect_status: false,
 		is_loading: true,
 		animation: {},
-		pixelRatio: 1,
-		canvas_img: null,
-		qr_canvas_img: null,
-		is_show: "visible",
 		is_load: false,
-		show_canvas: false,
-		is_ipx: app.globalData.isIpx,
-		dialogShow: false,
-		add_qrcode: false,
 	},
 	// 获取用户id
 	getUserId: function () {
@@ -200,13 +191,6 @@ Page({
 				LOADFAIL();
 			});
 	},
-	// 点击弹窗取消按钮
-	dialogCancel: function () {
-		this.setData({
-			dialogShow: false,
-			show_canvas: false,
-		});
-	},
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
@@ -226,9 +210,7 @@ Page({
 				let calc = clientHeight * rpxR - 180;
 				// console.log(calc)
 				that.setData({
-					winHeight1: calc,
-					winHeight: clientHeight,
-					winWidth: clientWidth,
+					winHeight1: calc
 				});
 			},
 		});
