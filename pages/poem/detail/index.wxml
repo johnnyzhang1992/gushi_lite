@@ -1,13 +1,16 @@
 <!-- pages/poem/detail/index.wxml -->
 <view class="page panel">
 	<view class="page__hd" wx-if="{{poem}}">
+		<!-- 诗词标题 -->
 		<view class="page__title">{{poem.title}}</view>
+		<!-- 诗人名字以及朝代等信息 -->
 		<view class="page__desc" wx:if='{{ poem.author_id>0}}'>
 			<text>{{(author.dynasty ? author.dynasty : poem.dynasty)}}</text>
 			<navigator url='../../poet/detail/index?id={{poem.author_id}}' class="author-name active">
 				{{'「'+(author.author_name ? author.author_name : poem.author+'」')}}
 			</navigator>
 		</view>
+		<!-- 无诗人信息，处理 -->
 		<view class="page__desc" wx:if='{{ poem.author_id<0}}'>
 			{{(author.dynasty ? author.dynasty : poem.dynasty)}}
 			<view class="author-name">
@@ -28,8 +31,9 @@
 					<view class="weui-media-box__desc xu" wx:if="{{content.xu}}">
 						{{content.xu}}
 					</view>
-					<text decode='true' selectable='true' class="weui-media-box__title {{item.length>17 ? 'wyw': ''}}" wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type =="诗"}}'>{{item}}</text>
-					<text decode='true' selectable='true' class="weui-media-box__title {{item.length>17 ? 'wyw': ''}}" wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique" wx:if='{{poem.type !="诗"}}'>{{item}}</text>
+					<!-- 渲染诗词内容-->
+					<text decode='true' selectable='true' class="weui-media-box__title {{item.length>17 ? 'wyw': ''}}" wx:if="{{content.content.length>0}}" wx:for="{{content.content}}" wx:key="unique">{{item}}</text>
+					<!-- 标签列表 -->
 					<view class="weui-media-box__info badge-list" wx:if="{{tags.length>0}}">
 						<view
 						 class="weui-badge"
@@ -37,7 +41,7 @@
 						 wx:key="unique"
 						 wx:if="{{item.length>0}}"
 						>
-							{{item}}
+							<text>{{item}}</text>
 						</view>
 					</view>
 				</view>
@@ -49,16 +53,16 @@
 	<!-- 诗词注释翻译等 -->
 	<scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
 		<view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">
-			注释
+			<text>注释</text>
 		</view>
 		<view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">
-			翻译
+			<text>翻译</text>
 		</view>
 		<view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">
-			赏析
+			<text>赏析</text>
 		</view>
 		<view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">
-			创作背景
+			<text>创作背景</text>
 		</view>
 		<!-- <view class="tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="swichNav">其它</view> -->
 	</scroll-view>

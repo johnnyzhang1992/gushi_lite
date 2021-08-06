@@ -8,53 +8,61 @@
 
 - `apis`
 
-    API接口统一请求文件
+  API 接口统一请求文件
+
 - `component`
 
-    此目录是自定义组件部分
+  此目录是自定义组件部分
+
 - `images`
 
-    此目录下是小程序所用的一些图标，可以的话可以改为雪碧图。
+  此目录下是小程序所用的一些图标，可以的话可以改为雪碧图。
+
 - `pages`
 
-    此目录下为小程序主要内容，各页面View 和 js 文件
+  此目录下为小程序主要内容，各页面 View 和 js 文件
+
 - `style`
 
-    样式表，使用微信官方的[WeUi](https://weui.io)
+  样式表，使用微信官方的[WeUi](https://weui.io)
+
 - `utils`
 
-    自己封装的一些工具
+  自己封装的一些工具
+
 - `wxSearchView`
 
-    此目录为搜索部分的使用的搜索功能模块。
+  此目录为搜索部分的使用的搜索功能模块。
 
-    搜索部分是在[天未](https://github.com/mindawei)的[wsSearchView](https://github.com/mindawei/wsSearchView)的基础上进行的改造和优化。
+  搜索部分是在[天未](https://github.com/mindawei)的[wsSearchView](https://github.com/mindawei/wsSearchView)的基础上进行的改造和优化。
 
 ## 作者
 
 👤 **johnnyzhang1992**
 
-* Website: https://johnnyzhang.cn
-* Github: [@johnnyzhang1992](https://github.com/johnnyzhang1992)
+- Website: [johnnyzhang.cn](https://johnnyzhang.cn)
+- Github: [@johnnyzhang1992](https://github.com/johnnyzhang1992)
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
 
-##  License
+## License
 
-Copyright © 2019 [johnnyzhang1992](https://github.com/johnnyzhang1992).<br />
+Copyright © 2019 [johnnyzhang1992](https://github.com/johnnyzhang1992).
 
-***
+---
+
 ## 注意事项
 
-- API请求返回的数据尽量简洁
+- API 请求返回的数据尽量简洁
 - 使用定时器时，当退出当前页面时应该注销（onHide,onUnload）
 - 没有在 wxml 里面使用到的数据尽量不要放到 page.data 里面
 
 ## API 使用指南
-- API Get 类的方法可以正常使用，POST类的请求需要用户openid不建议使用（例如：收藏以及个人中心相关接口。
-- 用户创建失败的问题。创建用户的逻辑涉及后端解密(和项目的appid有关,不同的项目appid不同)，会导致解密失败，从而导致用户创建失败。
+
+- API Get 类的方法可以正常使用，POST 类的请求需要用户 openid 不建议使用（例如：收藏以及个人中心相关接口。
+- 用户创建失败的问题。创建用户的逻辑涉及后端解密(和项目的 appid 有关,不同的项目 appid 不同)，会导致解密失败，从而导致用户创建失败。
 
 ## 小程序二维码
 
