@@ -132,9 +132,9 @@ App({
         }
     },
     globalData: {
-        userInfo: null,
+        userInfo: null, // 用户信息
         code: null,
-        systemInfo: null,
+        systemInfo: null, // 手机系统配置信息
         user: null,
         hot: null,
         domain: "https://xuegushi.cn/wxxcx",
