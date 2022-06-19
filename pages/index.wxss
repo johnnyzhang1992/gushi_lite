@@ -14,7 +14,7 @@ page {
 .home-header {
 	width: 100%;
 	min-height: 175px;
-	background: url("https://xuegushi.cn/static/wx/h_bg.jpg") center center
+	background: url("https://gushi.johnnyzhang.cn/static/wx/h_bg.jpg") center center
 		no-repeat;
 	background-size: cover;
 	overflow-x: hidden;

@@ -153,7 +153,7 @@ const downImage = (url) => {
 	});
 };
 
-const excludeSpecial = function stripscript(s) {
+const excludeSpecial = (s) => {
 	let pattern = new RegExp(
 		"[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%《》]",
 		"g"
@@ -165,7 +165,7 @@ const excludeSpecial = function stripscript(s) {
 	return rs;
 };
 
-const utils = {
+export default {
 	formatTime,
 	getDateDiff,
 	formatDateToMb,
@@ -173,4 +173,3 @@ const utils = {
 	downImage,
 	excludeSpecial,
 };
-export default utils;

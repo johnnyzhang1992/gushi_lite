@@ -38,7 +38,7 @@ App({
                 this.globalData.code = res.code;
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
                 wx.request({
-                    url: "https://xuegushi.cn/wxxcx/userInfo",
+                    url: "https://gushi.johnnyzhang.cn/wxxcx/userInfo",
                     data: {
                         code: this.globalData.code,
                         systemInfo: this.globalData.systemInfo
@@ -137,8 +137,8 @@ App({
         systemInfo: null, // 手机系统配置信息
         user: null,
         hot: null,
-        domain: "https://xuegushi.cn/wxxcx",
-        url: "https://xuegushi.cn",
+        domain: "https://gushi.johnnyzhang.cn/wxxcx",
+        url: "https://gushi.johnnyzhang.cn",
         backUrl: {}
     }
 });

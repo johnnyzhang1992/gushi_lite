@@ -98,6 +98,7 @@ Page({
 		// 向关联网站发送请求，解密、存储数据
 		CREATE_USER("GET", data)
 			.then((res) => {
+				console.log(res);
 				if (res.data && res.data.user_id) {
 					console.log("----------success------------");
 					wx.setStorageSync("user", res.data);

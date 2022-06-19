@@ -1,6 +1,6 @@
 # 古诗文小助手（微信小程序）
 
-这个是[学古诗](https://xuegushi.cn) 网站的微信小程序。
+这个是[学古诗](https://gushi.johnnyzhang.cn) 网站的微信小程序。
 
 该小程序的目的是为了大家更方便简洁的学习中国传统古诗文，同时通过这些代码更多的学习使用小程序。
 
@@ -40,7 +40,7 @@
 
 👤 **johnnyzhang1992**
 
-- Website: [johnnyzhang.cn](https://johnnyzhang.cn)
+- Website: [johnnyzhang.cn](https://gushi.johnnyzhang.cn)
 - Github: [@johnnyzhang1992](https://github.com/johnnyzhang1992)
 
 ## Show your support

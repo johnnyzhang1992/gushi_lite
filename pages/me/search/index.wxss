@@ -43,13 +43,15 @@
 .poem-item .poem-title{
     color: #333;
     font-size: 14px;
+    display: flex;
 }
 .poem-item .poem-author{
     color: #888;
-    font-size: 12px;
+    /* font-size: 12px; */
     /* padding: 5px 0; */
     display: inline-block;
     text-align: right;
+    margin-left: 6px;
 }
 .poem-item .poem-content{
     font-size: 14px;
