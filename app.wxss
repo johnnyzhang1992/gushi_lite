@@ -3,11 +3,12 @@
 page {
     color: #1a1a1a;
     font-size: 36rpx;
-    font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
     /* color: #666; */
     letter-spacing: 0.5px;
      background: #fff;
     -webkit-tap-highlight-color: rgba(26,26,26,0);
+    font-family:  PingFangSC-Light, PingFang S;
+	padding-bottom: env(safe-area-inset-bottom);
 }
 .container{
     height: 100%;

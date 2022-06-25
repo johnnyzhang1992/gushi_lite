@@ -16,16 +16,16 @@
 
 .wyw {
   text-align: left;
-  text-indent: 2em;
+  /* text-indent: 2em; */
   margin-bottom: 5px;
 }
 
 .xu {
   margin-bottom: 10px;
-  color: #888;
-  text-align: center;
-  text-indent: 2em;
-  font-size: 30rpx;
+  color: #999;
+  text-align: left;
+  /* text-indent: 1em; */
+  font-size: 28rpx;
   text-overflow: normal;
   display: block;
 }
@@ -216,6 +216,7 @@
   width: 100%;
   opacity: 0.8;
   background-color: #d7d6dc;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .collect.iphoneX_view {

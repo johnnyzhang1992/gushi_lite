@@ -4,8 +4,6 @@ import {
 	GET_SENTEMCE_DATA,
 	LOADFAIL,
 } from "../../../apis/request";
-let current_page = 1;
-let last_page = 1;
 Page({
 	/**
 	 * 页面的初始数据
@@ -19,6 +17,8 @@ Page({
 		isSearch: false,
 		_keyWord: ""
 	},
+	current_page: 1,
+	last_page: 1,
 	/**
 	 * 获取名句详情
 	 * @param {*} page
@@ -26,10 +26,11 @@ Page({
 	getSentenceData: function(page) {
 		let that = this;
 		const { theme, type, _keyWord, isSearch } = this.data;
+		const Page = page ? page : 1
 		let data = {
 			theme: theme || "全部",
 			type: type || "全部",
-			page: page ? page : 1
+			page: Page
 		};
 		if (isSearch) {
 			data = {
@@ -50,11 +51,11 @@ Page({
 						});
 					}
 					that.setData({
-						poems: current_page >1 ? [...that.data.poems, ...poems.data] : poems.data,
+						poems: Page>1 ? [...that.data.poems, ...poems.data] : poems.data,
 						total: poems.total
 					});
-					current_page = poems.current_page;
-					last_page = poems.last_page;
+					that.current_page = poems.current_page;
+					this.last_page = poems.last_page;
 					wx.hideLoading();
 					wx.stopPullDownRefresh();
 				} else {
@@ -104,8 +105,8 @@ Page({
 	onReachBottom: function() {
 		wx.showNavigationBarLoading();
 		let that = this;
-		let page = current_page + 1;
-		if (current_page > last_page) {
+		let page = that.current_page + 1;
+		if (this.current_page > this.last_page) {
 			wx.hideNavigationBarLoading();
 			return false;
 		} else {
