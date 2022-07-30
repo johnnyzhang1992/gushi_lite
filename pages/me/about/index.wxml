@@ -2,7 +2,7 @@
 <view class="page">
     <view class="page__hd">
         <view class="page__title">古诗文小助手</view>
-        <!-- <view class="page__desc">关于我们</view> -->
+        <view class="page__desc">网站域名：xuegushi.com</view>
     </view>
     <view class="page__bd">
         <view class="weui-article">
@@ -12,13 +12,13 @@
                 <view class="weui-article__section">
                       <view class="weui-article__h3">1.1 关于</view>  
                     <view class="weui-article__p">
-                       学古诗(xuegushi.cn)是一个关于中国传统文化的网站。网站的侧重点是收集并分类展示古诗文(包括诗词曲赋文言文)以及一些现代诗歌。
+                       学古诗(xuegushi.com)是一个关于中国传统文化的网站。网站的侧重点是收集并分类展示古诗文(包括诗词曲赋文言文)以及一些现代诗歌。
                     </view>
                     <view class="weui-article__p">
                        学古诗收集大量的古诗文并且对其分类，主要通过形式（诗词曲文言文等）、类型（咏物，写景等）、朝代，对其进行分类。
                     </view>
                     <view class="weui-article__p">
-                       网站以及小程序由 "小小梦工场" 个人维护，内容收集自互联网。有问题可以邮箱联系（info@xuegushi.cn）
+                       网站以及小程序由 "小小梦工场" 个人维护，内容收集自互联网。
                     </view>
                 </view>
             </view>

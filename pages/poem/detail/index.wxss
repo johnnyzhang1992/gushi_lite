@@ -250,7 +250,7 @@
   right: 12px;
   padding: 8px;
   border-radius: 100%;
-  bottom: 50px;
+  bottom: 70px;
 }
 
 .audio image {
@@ -265,7 +265,7 @@
   left: 12px;
   padding: 8px;
   border-radius: 100%;
-  bottom: 50px;
+  bottom: 70px;
 }
 
 .copy image {

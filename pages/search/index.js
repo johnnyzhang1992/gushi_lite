@@ -67,6 +67,7 @@ Page({
 			})
 			.catch((error) => {
 				console.log(error);
+				wx.stopPullDownRefresh();
 				LOADFAIL();
 			});
 	},

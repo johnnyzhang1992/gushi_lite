@@ -42,7 +42,7 @@
 					<icon type="clear" bindtap="wxSearchDeleteAll" size="18" />
 				</view>
 				<view class="wxSearchKeyList">
-					<block wx:for="{{wxSearchData.his}}" wx:key='*this'>
+					<block wx:for="{{wxSearchData.his}}" wx:key='index'>
 						<view class="wxSearchKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
 					</block>
 				</view>
@@ -51,7 +51,7 @@
 			<view class="wxSearchKey" style="display:{{wxSearchData.value.length>0 ? 'none':'block'}}">
 				<text wx:if="{{wxSearchData.hotKeys[0]}}" class="wxSearchTitle">大家都在搜什么</text>
 				<view class="wxSearchKeyList">
-					<block wx:for="{{wxSearchData.hotKeys}}" wx:key='*this'>
+					<block wx:for="{{wxSearchData.hotKeys}}" wx:key='index'>
 						<view class="wxSearchKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
 					</block>
 				</view>
@@ -67,7 +67,7 @@
 					 hover-class="navigator-hover"
 					 class="poem-item tag"
 					 wx:for="{{tags}}"
-					 wx:key="*.this"
+					 wx:key="*this"
 					>
 						<view class="poem-title">{{item}}</view>
 					</navigator>

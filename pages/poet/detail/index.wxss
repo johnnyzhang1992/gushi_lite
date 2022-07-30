@@ -106,6 +106,7 @@
   width:100%;
   opacity: 0.8;
   background-color:#fff;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 .collect-img image{
   height: 24px;

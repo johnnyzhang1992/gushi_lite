@@ -6,7 +6,9 @@
     <view class='author_name'>{{poet.author_name}}</view>
     <view class="divide"></view>
     <view class='title'>简介</view>
-    <text class='profile'>{{poet.profile}}</text>
+    <view class='profile'>
+        <text user-select="true">{{poet.profile}}</text>
+    </view>
     <view class="divide"></view>
     <view class="page list">
         <view class="page__bd">
@@ -14,7 +16,9 @@
             <navigator url="/pages/poem/detail/index?id={{item.id}}" hover-class="navigator-hover" class="weui-cell poem-item" wx:for="{{poems}}" wx:key="id">
                 <view class="poem-title author">{{item.title}}</view>
                 <!--<view class="poem-author">{{item.dynasty+' | '+item.author}}</view>-->
-                <view class="poem-title content">{{item.content}}</view>
+                <view class="poem-title content">
+                    <text user-select="true">{{item.content}}</text>
+                </view>
             </navigator>
         </view>
     </view>

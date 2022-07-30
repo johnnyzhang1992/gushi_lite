@@ -16,11 +16,11 @@
 	</view>
 	<view class="sentence-section" wx-if="{{sentence}}">
 		<view class="sentence-title">
-			<text class="content" decode='true' selectable='true' wx:if="{{sentence.title_arr}}"
+			<text class="content" decode='true' user-select='true' wx:if="{{sentence.title_arr}}"
                 wx:for="{{sentence.title_arr}}" wx:key="index">{{item}}</text>
 		</view>
 		<view class="sentence-origin">
-			<text class="author" decode='true' selectable='true'>{{author.author_name}}</text>
+			<text class="author" decode='true' user-select='true'>{{author.author_name}}</text>
 		</view>
 	</view>
 	<view class="weui-loadmore" wx-if="{{is_loading}}">

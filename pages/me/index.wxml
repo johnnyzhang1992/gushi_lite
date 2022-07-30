@@ -94,9 +94,9 @@
 	<view class='weui-footer'>
 		<view class='weui-footer-links'>
 			<navigator url='about/index' class='weui-footer__link'>关于</navigator>
-			<navigator url='log/index' class='weui-footer__link'>版本说明</navigator>
+			<!-- <navigator url='log/index' class='weui-footer__link'>版本说明</navigator> -->
 		</view>
-		<view class='weui-footer__text'>Copyright © 2020 xuegushi.cn</view>
+		<view class='weui-footer__text'>Copyright © 2022 xuegushi.com</view>
 	</view>
 </view>
 

@@ -121,7 +121,7 @@ textarea {
     right: 15px;
     padding: 8px;
     border-radius: 100%;
-    bottom: 50px;
+    bottom: 70px;
 }
 
 .share image, .return image {
@@ -136,7 +136,7 @@ textarea {
     left: 15px;
     padding: 8px;
     border-radius: 100%;
-    bottom: 50px;
+    bottom: 70px;
 }
 
 ad {
