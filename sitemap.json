@@ -1,7 +1,55 @@
 {
-    "desc": "关于本文件的更多信息，请参考文档 https://developers.weixin.qq.com/miniprogram/dev/framework/sitemap.html",
-    "rules": [{
-    "action": "allow",
-    "page": "*"
-    }]
+	"desc": "关于本文件的更多信息，请参考文档 https://developers.weixin.qq.com/miniprogram/dev/framework/sitemap.html",
+	"rules": [
+		{
+			"action": "allow",
+			"page": "pages/index"
+		},
+		{
+			"action": "allow",
+			"page": "pages/poem/index"
+		},
+		{
+			"action": "allow",
+			"page": "pages/sentence/index"
+		},
+		{
+			"action": "allow",
+			"page": "pages/poet/index"
+		},
+		{
+			"action": "allow",
+			"page": "pages/poem/detail/index",
+			"params": ["id"],
+			"matching": "inclusive"
+		},
+		{
+			"action": "allow",
+			"page": "pages/poet/detail/index",
+			"params": ["id"],
+			"matching": "inclusive"
+		},
+		{
+			"action": "allow",
+			"page": "pages/sentence/list/index",
+			"params": ["isSearch", "theme", "type"],
+			"matching": "inclusive"
+		},
+		{
+			"action": "allow",
+			"page": "pages/sentence/detail/index",
+			"params": ["id"],
+			"matching": "inclusive"
+		},
+		{
+			"action": "allow",
+			"page": "pages/homeList/index",
+			"params": ["code", "name", "profile"],
+			"matching": "inclusive"
+		},
+		{
+			"action": "allow",
+			"page": "*"
+		}
+	]
 }
