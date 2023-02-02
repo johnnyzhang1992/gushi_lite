@@ -122,14 +122,10 @@ Page({
 		wx.setClipboardData({
 			data: _data,
 			success: function (res) {
-				wx.getClipboardData({
-					success: function (res) {
-						wx.showToast({
-							title: "诗词复制成功",
-							icon: "success",
-							duration: 2000,
-						});
-					},
+				wx.showToast({
+					title: "诗词复制成功",
+					icon: "success",
+					duration: 2000,
 				});
 			},
 		});
@@ -210,7 +206,7 @@ Page({
 				let calc = clientHeight * rpxR - 180;
 				// console.log(calc)
 				that.setData({
-					winHeight1: calc
+					winHeight1: calc,
 				});
 			},
 		});

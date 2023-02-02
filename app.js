@@ -1,6 +1,4 @@
 //app.js
-// 百度小程序统计
-const mtjwxsdk = require("./utils/mtj-wx-sdk.js");
 const tabBarLinks = [
     "/pages/index",
     "/pages/search/index",
