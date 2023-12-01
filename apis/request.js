@@ -167,7 +167,8 @@ export const GET_USER_COLLECT = (method, data) => {
 /**
  * 更新收藏状态
  * @param {String} method POST
- * @param {Object} data
+ * @param {number} id
+ * @param {number} user_id
  * @param {poem,sentence,author} type
  */
 export const UPDATE_USER_COLLECT = (method, data) => {
