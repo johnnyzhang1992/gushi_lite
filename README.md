@@ -4,7 +4,7 @@
 
 该小程序的目的是为了大家更方便简洁的学习中国传统古诗文，同时通过这些代码更多的学习使用小程序。
 
-> 该项目为微信原生版本，[Taro 重构版](https://github.com/johnnyzhang1992/gushiTaro) 上线后,当前项目将不再维护。
+> 该项目为微信原生版本，[Taro 重构版](https://github.com/johnnyzhang1992/gushiTaro) 已上线,当前项目不再维护（2023-12-04）。
 
 ## 文件目录
 
