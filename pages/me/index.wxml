@@ -63,26 +63,6 @@
 			</view>
 		</view>
 	</view>
-	<view class="divide" />
-	<!-- 用户和搜索数量，管理员可见 -->
-	<view class="page list" wx-if='{{user_id == 10}}'>
-		<view class="weui-cells weui-cells_after-title">
-			<view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-				<view class="weui-cell__hd" />
-				<view class="weui-cell__bd">用户数量(新增{{u_t_count}})</view>
-				<view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
-					{{u_count}}
-				</view>
-			</view>
-			<navigator url="search/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-				<view class="weui-cell__hd" />
-				<view class="weui-cell__bd">今日搜索</view>
-				<view class="weui-cell__ft weui-cell__ft_in-access" style="min-width:48px">
-					{{s_count}}
-				</view>
-			</navigator>
-		</view>
-	</view>
 	<ad unit-id="adunit-bf6445b29863936e" />
 	<!-- <ad
 	 unit-id="adunit-5ad8ebe5f5a359ab"
