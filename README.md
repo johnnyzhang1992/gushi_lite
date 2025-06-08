@@ -69,5 +69,3 @@ Copyright © 2019 [johnnyzhang1992](https://github.com/johnnyzhang1992).
 ## 小程序二维码
 
 ![古诗文小助手](./images/xcx.jpg)
-
-[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
