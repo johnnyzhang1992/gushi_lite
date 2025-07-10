@@ -1,5 +1,8 @@
 # 古诗文小助手（微信小程序）
 
+#### [阿里云折扣优惠券](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=rk77qloy)
+![阿里云折扣优惠券](https://images.gitee.com/uploads/images/2019/0109/114755_88127e0f_744475.jpeg "1000_90.jpg")
+
 这个是[学古诗](https://xuegushi.com) 网站的微信小程序。
 
 该小程序的目的是为了大家更方便简洁的学习中国传统古诗文，同时通过这些代码更多的学习使用小程序。
